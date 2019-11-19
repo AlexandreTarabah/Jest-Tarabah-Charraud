@@ -6,6 +6,7 @@ public enum Color {
 	club("club"),
 	diamond("diamond"),
 	heart("heart");
+	orange("OrangeIsTheNewBlack") ;
 	
 	private String strColor ="";
 	
