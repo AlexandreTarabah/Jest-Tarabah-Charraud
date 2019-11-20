@@ -1,4 +1,4 @@
-package jest_tarabah_charraud_2019_2020_class_diagram;
+package jest_tarabah_charraud_2019_2020;
 
 public enum Color {
 
@@ -6,9 +6,7 @@ public enum Color {
 	club("club"),
 	diamond("diamond"),
 	heart("heart");
-	orange("OrangeIsTheNewBlack") ;
-	blue("ta mere la tchoin de cité")
-	Rouge("bonjour")
+	
 	
 	private String strColor ="";
 	
