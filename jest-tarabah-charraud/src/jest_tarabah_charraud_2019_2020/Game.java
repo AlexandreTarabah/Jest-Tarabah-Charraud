@@ -109,8 +109,8 @@ public static void main(String[] args) {
 	
 	Game newGame=new Game();
 
-	Player marcel = new Player("Alex");
-	Player sophia = new Player("Pelgro");
+	Player alex = new Player("Alex");
+	Player pepe = new Player("Pelgro");
 	
 	newGame.addPlayer(alex);
 	newGame.addPlayer(pepe);

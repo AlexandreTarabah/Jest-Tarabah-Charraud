@@ -14,7 +14,7 @@ public class Player {
    
     private ArrayList<Card> offer;
     
-    private ArrayList<Player> listGamer;
+    private ArrayList<Player> listPlayer;
     
     
     //j'instancie l'objet offre, qui est aussi une collection de carte, dans le constructeur player ici 
