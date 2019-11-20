@@ -13,7 +13,7 @@ public class Player {
 
     public boolean hasHighestFup;
    
-    private HashMap<String, Card> offer;
+    private static HashMap<String, Card> offer;
     
     private ArrayList<Player> listPlayer;
     
@@ -40,11 +40,16 @@ public class Player {
  
  // la c'est la méthode pour 
     public void upsideDown(Card cardfaceup , Card cardfacedown) {
-    	offer.put("FaceUp", cardfaceup);
+    	offer.put(pseudo, cardfaceup);
     	System.out.println(cardfaceup.tostring());
-    	offer.put("FaceDown", cardfacedown);
+    	offer.put(pseudo, cardfacedown);
     	System.out.println(cardfacedown.tostring());
     }
     	
+    public HashMap<String, Card> getOffer (String pseudo)
+    {
+		return Player.offer;
+    	
+    }
 
 }
