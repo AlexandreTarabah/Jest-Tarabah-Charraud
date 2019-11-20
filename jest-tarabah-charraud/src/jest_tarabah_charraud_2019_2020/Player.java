@@ -26,7 +26,8 @@ public class Player {
     }
 
     
-    public void stealCard(Player player, Player offer) {
+    public void stealCard(Player player, Player offer) 
+    {
     	
     	
     	
@@ -44,6 +45,11 @@ public class Player {
     	System.out.println(cardfaceup.tostring());
     	offer.put("FaceDown", cardfacedown);
     	System.out.println(cardfacedown.tostring());
+    }
+    
+    public HashMap getOffer(Player this.pseudo)
+    {
+    	return pseudo.offer ;
     }
     	
 

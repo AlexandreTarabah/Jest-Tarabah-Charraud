@@ -2,14 +2,13 @@ package jest_tarabah_charraud_2019_2020;
 
 
 
-
 public class Card {
 
     private boolean ace;
 
     private boolean faceUp;
 
-     private Color color;
+     private Color color
      
      private Value value;
 
