@@ -14,14 +14,14 @@ public class Player {
 
     public ArrayList listGamer = new ArrayList(); 
    
-    private ArrayList<Card> offer;
+    private HashMap<Card> offer;
     
     
     //j'instancie l'objet offre, qui est aussi une collection de carte, dans le constructeur player ici 
     
     public Player (String pseudo) {
     	this.pseudo=pseudo;
-    	offer = new ArrayList<Card>();
+    	offer = new HashMap<Card>();
     }
 
     
@@ -36,9 +36,9 @@ public class Player {
  
  // la c'est la méthode pour 
     public void PlayerTakeCards(Card card) {
-    	offer.add(card);
+    	offer.put("FaceUp", card);
     	System.out.println(card.tostring());
-    	offer.add(card);
+    	offer.put("FaceDown", card);
     	System.out.println(card.tostring());
     }
     	
