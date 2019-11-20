@@ -1,6 +1,7 @@
 package jest_tarabah_charraud_2019_2020;
 import java.util.Scanner;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 public class Player {
@@ -12,7 +13,7 @@ public class Player {
 
     public boolean hasHighestFup;
    
-    private HashMap<Card> offer;
+    private HashMap<String, Card> offer;
     
     private ArrayList<Player> listPlayer;
     
@@ -21,7 +22,7 @@ public class Player {
     
     public Player (String pseudo) {
     	this.pseudo=pseudo;
-    	offer = new HashMap<Card>();
+    	offer = new HashMap<String, Card>();
     }
 
     
