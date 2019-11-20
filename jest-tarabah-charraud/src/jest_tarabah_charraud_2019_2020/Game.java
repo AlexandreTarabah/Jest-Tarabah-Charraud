@@ -109,7 +109,7 @@ public static void main(String[] args) {
 	
 	Game newGame=new Game();
 	Player marcel = new Player("Alex");
-	Player sophia = new Player("Pepe");
+	Player sophia = new Player("Pelgro");
 	
 	newGame.addPlayer(marcel);
 	newGame.addPlayer(sophia);
