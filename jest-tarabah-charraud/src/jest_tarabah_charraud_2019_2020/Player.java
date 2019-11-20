@@ -36,9 +36,9 @@ public class Player {
  
  // la c'est la méthode pour 
     public void PlayerTakeCards(Card card) {
-    	offer.put("FUp", card);
+    	offer.put("FaceUp", card);
     	System.out.println(card.tostring());
-    	offer.put("FDown", card);
+    	offer.put("FaceDown", card);
     	System.out.println(card.tostring());
     }
     	
