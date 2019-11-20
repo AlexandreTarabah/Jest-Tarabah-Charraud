@@ -108,11 +108,11 @@ public class Game {
 public static void main(String[] args) {
 	
 	Game newGame=new Game();
-	Player marcel = new Player("Marcel");
-	Player sophia = new Player("Sophia");
+	Player alex = new Player("Marcel");
+	Player pepe = new Player("Sophia");
 	
-	newGame.addPlayer(marcel);
-	newGame.addPlayer(sophia);
+	newGame.addPlayer(alex);
+	newGame.addPlayer(pepe);
 	
 	newGame.distribute();
 	System.out.println(newGame);
