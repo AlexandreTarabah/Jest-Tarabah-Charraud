@@ -108,11 +108,16 @@ public class Game {
 public static void main(String[] args) {
 	
 	Game newGame=new Game();
+<<<<<<< HEAD
 	Player marcel = new Player("Alex");
 	Player sophia = new Player("Pelgro");
+=======
+	Player alex = new Player("Marcel");
+	Player pepe = new Player("Sophia");
+>>>>>>> branch 'master' of https://github.com/AlexandreTarabah/Jest-Tarabah-Charraud
 	
-	newGame.addPlayer(marcel);
-	newGame.addPlayer(sophia);
+	newGame.addPlayer(alex);
+	newGame.addPlayer(pepe);
 	
 	newGame.distribute();
 	System.out.println(newGame);
