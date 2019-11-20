@@ -57,7 +57,7 @@ public class Game {
     	Iterator<Player> it =players.iterator();
     	while(it.hasNext()) {
     		Player j= (Player) it.next();
-    		j.PlayerTakeCards(drawdeck.takeCards());
+    		j.upsideDown(drawdeck.takeCards());
     	}
     	
   }

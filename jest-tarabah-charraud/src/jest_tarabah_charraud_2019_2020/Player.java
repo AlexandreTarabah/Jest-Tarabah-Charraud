@@ -26,7 +26,10 @@ public class Player {
     }
 
     
-    public void stealCard(Game p1) {
+    public void stealCard(Player player, Player offer) {
+    	
+    	
+    	
     }
     
     
@@ -36,11 +39,11 @@ public class Player {
     	
  
  // la c'est la méthode pour 
-    public void PlayerTakeCards(Card card) {
-    	offer.put("FaceUp", card);
-    	System.out.println(card.tostring());
-    	offer.put("FaceDown", card);
-    	System.out.println(card.tostring());
+    public void upsideDown(Card cardfaceup , Card cardfacedown) {
+    	offer.put("FaceUp", cardfaceup);
+    	System.out.println(cardfaceup.tostring());
+    	offer.put("FaceDown", cardfacedown);
+    	System.out.println(cardfacedown.tostring());
     }
     	
 
