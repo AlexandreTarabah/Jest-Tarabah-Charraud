@@ -11,10 +11,10 @@ public class Player {
     public boolean isAThief;
 
     public boolean hasHighestFup;
-
-    public ArrayList listGamer = new ArrayList(); 
    
     private HashMap<Card> offer;
+    
+    private ArrayList<Player> listPlayer;
     
     
     //j'instancie l'objet offre, qui est aussi une collection de carte, dans le constructeur player ici 
