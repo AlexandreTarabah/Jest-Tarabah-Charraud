@@ -40,8 +40,12 @@ public class DrawDeck {
     public Card takeCards() {
 		int position = (int) ((int) Math.round(DrawDeck.nbCardDD-1)*Math.random());
 		return drawdeck.remove(position);
-		
-    	
+			
+    }
+    
+    public boolean isEmpty()
+    {
+    	return drawdeck.isEmpty(); 
     }
     
 }

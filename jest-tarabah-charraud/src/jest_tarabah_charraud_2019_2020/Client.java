@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Client {
-    public List<Visitor> interface = new ArrayList<Visitor> ();
+    public List<Visitor> bridge = new ArrayList<Visitor> ();
 
     public List<Jest> jest = new ArrayList<Jest> ();
 

@@ -8,7 +8,7 @@ public class Card {
 
     private boolean faceUp;
 
-     private Color color
+     private Color color ;
      
      private Value value;
 

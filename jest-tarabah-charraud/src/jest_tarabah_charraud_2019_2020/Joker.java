@@ -5,6 +5,11 @@ public class Joker extends Card {
     private boolean IsATrophy;
 
     private int Value;
+    
+    public Joker(Value v, Color c)
+    {
+    	super(v, c) ;
+    }
 
     public void changeValue() {
     }

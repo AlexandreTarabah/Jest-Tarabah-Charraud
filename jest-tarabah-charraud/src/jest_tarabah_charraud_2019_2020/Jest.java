@@ -6,7 +6,7 @@ import java.util.List;
 public class Jest {
     private int nbCardJest;
 
-    public List<Card> card = new ArrayList<Card> ();
+    public List<Card> jestCards = new ArrayList<Card> ();
 
     public void acceptVisitor(Visitor p1) {
     }
