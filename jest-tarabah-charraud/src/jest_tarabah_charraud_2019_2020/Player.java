@@ -33,9 +33,8 @@ public class Player
 	}
 
 
-	public void stealCard(Player player)
+	public void stealCard(Player player, Scanner input)
 	{
-		Scanner input = new Scanner(System.in);
 		System.out.println("Qui sera votre victime ? ");
 		String victime = input.nextLine() ;
 		System.out.println("Quelle carte voulez-vous lui dérober ? ");
