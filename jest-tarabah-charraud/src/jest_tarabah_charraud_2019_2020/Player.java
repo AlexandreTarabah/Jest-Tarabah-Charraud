@@ -65,9 +65,9 @@ public class Player
 		System.out.println("Quelle carte voulez-vous garder cachée?");
 
 		int numC = input.nextInt() ; // demande au joueur de rentrer un numéro entre 1 et 2
-		offer.put("Up", hand[numC-1]); // -1 car le tableau commence à l'indice 0
+		offer.put("Down", hand[numC-1]); // -1 car le tableau commence à l'indice 0
 //		System.out.println(hand[numC-1].getValue().name() + " " + hand[numC-1].getColor().name()); 
-		offer.put("Down", hand[numC%2]); // avec le modulo 2 on obtient la case manquante
+		offer.put("Up", hand[numC%2]); // avec le modulo 2 on obtient la case manquante
 //		System.out.println(hand[numC%2].getValue().name() + " " + hand[numC-1].getColor().name());
 	}
 
