@@ -147,9 +147,9 @@ public class Game {
 		p2.upsideDown(input) ;
 		p3.upsideDown(input) ;
 		
-		p1.stealCard(p1) ;
-		p2.stealCard(p3) ;
-		p3.stealCard(p1) ;
+		p1.stealCard(p1, input) ;
+		p2.stealCard(p2, input) ;
+		p3.stealCard(p3, input) ;
 		
 
 	}
