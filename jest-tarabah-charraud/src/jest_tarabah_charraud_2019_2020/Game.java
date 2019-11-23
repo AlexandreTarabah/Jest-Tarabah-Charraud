@@ -31,11 +31,11 @@ import java.util.Scanner;
 public class Game {
 	protected static int nbPlayer;
 
-	private Card[] trophies = new Card[2] ;
+	private Card[] trophyCards = new Card[2] ;
 
 	private String gameplay;
 
-	private ArrayList<Player> players = new ArrayList<Player>() ;
+	ArrayList<Player> players = new ArrayList<Player>() ;
 
 	private DrawDeck drawdeck;
 
@@ -91,7 +91,7 @@ public class Game {
 		drawdeck.shuffle();
 		for(int i = 0 ; i<2 ; i++)
 		{
-			this.trophies[i] = drawdeck.takeCards() ;
+			trophyCards[i] = drawdeck.takeCards() ;
 		}
 		currentPlay=false;   	
 
@@ -153,7 +153,16 @@ public class Game {
 		
 		p1.stealCard(p1, input) ;
 		p2.stealCard(p2, input) ;
-		p3.stealCard(p3, input) ;
+		p3.stealCard(p3, input) ;	
+		
+		ArrayList<Player> p = newGame.players ;
+
+		for(int i = 0 ; i < p.size() ; i ++)
+		{
+			Jest jest = p.get(i).getJest() ;
+			jest.acceptVisitor(newGame.trophyCards[0].getTrophy()) ;
+			jest.acceptVisitor(newGame.trophyCards[1].getTrophy()) ;
+		}
 		
 
 	}

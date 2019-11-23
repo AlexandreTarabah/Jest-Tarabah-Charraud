@@ -6,9 +6,11 @@ import java.util.List;
 public class Jest {
     private int nbCardJest;
 
-    public List<Card> jestCards = new ArrayList<Card> ();
+    protected List<Card> jestCards = new ArrayList<Card> ();
 
-    public void acceptVisitor(Visitor trophy) {
+    public void acceptVisitor(Trophy trophy) 
+    {
+    	trophy.visitJest(this); 
     }
 
     public void calculateScore() {

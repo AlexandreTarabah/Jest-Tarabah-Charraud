@@ -11,12 +11,13 @@ public class Card {
      private Color color ;
      
      private Value value;
-
      
+     private Trophy trophy ; 
+
+   
    public Card (Value value, Color color) {
 	   this.color=color;
 	   this.value=value;
-	   
     }
    
    
@@ -38,6 +39,11 @@ public class Card {
    
 public void setValue(Value value) {
 	this.value=value;
+}
+
+public Trophy getTrophy()
+{
+	return trophy ;
 }
 
 
