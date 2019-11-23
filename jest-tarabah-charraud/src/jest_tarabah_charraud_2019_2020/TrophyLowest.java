@@ -12,7 +12,7 @@ public class TrophyLowest extends Trophy implements Visitor {
     public void visitJest(Jest jest, Color color) {
     	
     	{
-    		Card highest = null ;
+    		Card lowest = null ;
     		int lowestOrdinal = 5 ;
 
     		Iterator<Card> itJC = jest.jestCards.iterator() ; /* Entrance dans le
@@ -25,7 +25,7 @@ public class TrophyLowest extends Trophy implements Visitor {
     			{
     				if(card.getValue().ordinal() < lowestOrdinal)
     				{
-    					highest = card ; 
+    					lowest = card ; 
     				}
     			}
 
