@@ -8,7 +8,7 @@ public class Jest {
 
     public List<Card> jestCards = new ArrayList<Card> ();
 
-    public void acceptVisitor(Visitor p1) {
+    public void acceptVisitor(Visitor trophy) {
     }
 
     public void calculateScore() {

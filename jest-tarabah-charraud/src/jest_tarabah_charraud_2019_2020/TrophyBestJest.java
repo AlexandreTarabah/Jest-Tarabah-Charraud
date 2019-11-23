@@ -7,7 +7,9 @@ public class TrophyBestJest extends Trophy {
 		// TODO Auto-generated constructor stub
 	}
 
-	public void bestJest() {
+	public void bestJest() 
+	{
+		
     }
 
     public void visitJest(Jest p1) {

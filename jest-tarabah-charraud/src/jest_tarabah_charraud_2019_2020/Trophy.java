@@ -9,7 +9,9 @@ public class Trophy extends Card implements Visitor
 		// TODO Auto-generated constructor stub
 	}
 
-    public void visitJest(Jest p1) {
+    public void visitJest(Jest jest) 
+    {
+    	System.out.println("Visiting Jest") ;
     }
 
 }

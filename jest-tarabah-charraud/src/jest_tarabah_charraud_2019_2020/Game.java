@@ -31,7 +31,7 @@ import java.util.Scanner;
 public class Game {
 	protected static int nbPlayer;
 
-	private String trophy;
+	private Card[] trophies = new Card[2] ;
 
 	private String gameplay;
 
@@ -84,11 +84,15 @@ public class Game {
 
 
 
-	public void InitializeGame() {
+	public void initializeGame() {
 
 		players = new ArrayList<Player>();
 		drawdeck = new DrawDeck();
 		drawdeck.shuffle();
+		for(int i = 0 ; i<2 ; i++)
+		{
+			this.trophies[i] = drawdeck.takeCards() ;
+		}
 		currentPlay=false;   	
 
 
@@ -129,7 +133,7 @@ public class Game {
 
 		Game newGame = new Game();
 
-		newGame.InitializeGame(); 
+		newGame.initializeGame(); 
 
 		Scanner input = new Scanner(System.in) ;
 

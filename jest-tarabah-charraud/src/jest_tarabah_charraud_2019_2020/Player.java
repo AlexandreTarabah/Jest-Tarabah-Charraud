@@ -69,6 +69,11 @@ public class Player
 		offer.put("Up", hand[numC%2]); // avec le modulo 2 on obtient la case manquante
 //		System.out.println(hand[numC%2].getValue().name() + " " + hand[numC-1].getColor().name());
 	}
+	
+	public Jest getJest()
+	{
+		return jest ;
+	}
 
 
 }
