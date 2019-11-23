@@ -4,10 +4,10 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
-public class Player 
+public class Player
 {
 
-	private String pseudo;
+	private static String pseudo;
 
 	private int nump;
 
@@ -16,7 +16,9 @@ public class Player
 	public boolean hasHighestFup;
 
 	private static HashMap<String, Card> offer;
-
+	
+	private static HashMap<String, HashMap<String, Card>> listOffer;
+	
 	private ArrayList<Player> listPlayer;
 
 	private Card[] hand = new Card[2] ;
@@ -29,9 +31,14 @@ public class Player
 	public Player () 
 	{
 		offer = new HashMap<String, Card>();
+		
+		listOffer.put(Player.pseudo, offer);
+		
 		this.jest = jest ;
 	}
 
+	
+	
 
 	public void stealCard(Player player, Scanner input)
 	{
@@ -39,11 +46,13 @@ public class Player
 		String victime = input.nextLine() ;
 		System.out.println("Quelle carte voulez-vous lui dérober ? ");
 		String stolenCard = input.nextLine();
-		jest.jestCards.add(((Map<String, Card>) offer).get(stolenCard)) ; // Map est juste l'interface de HashMap
+		jest.jestCards.add(listOffer.get(victime).get(stolenCard)) ; // Map est juste l'interface de HashMap
 
 	}
 
 
+	
+	
 
 	public void setPseudo(Scanner input) 
 	{
@@ -52,11 +61,15 @@ public class Player
 		this.pseudo = name ;
 	}
 
+	
+	
 	public void setHand(int i, Card card)
 	{
 		this.hand[i] = card ;
 	}
 
+	
+	
 	// la c'est la méthode pour 
 	public void upsideDown(Scanner input) 
 	{
@@ -69,6 +82,8 @@ public class Player
 		offer.put("Up", hand[numC%2]); // avec le modulo 2 on obtient la case manquante
 //		System.out.println(hand[numC%2].getValue().name() + " " + hand[numC-1].getColor().name());
 	}
+	
+	
 	
 	public Jest getJest()
 	{

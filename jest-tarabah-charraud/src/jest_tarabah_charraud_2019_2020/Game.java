@@ -1,5 +1,6 @@
 package jest_tarabah_charraud_2019_2020;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Scanner;
@@ -36,6 +37,7 @@ public class Game {
 	private String gameplay;
 
 	ArrayList<Player> players = new ArrayList<Player>() ;
+
 
 	private DrawDeck drawdeck;
 
@@ -93,11 +95,13 @@ public class Game {
 		{
 			trophyCards[i] = drawdeck.takeCards() ;
 		}
-		currentPlay=false;   	
+		currentPlay=false;   
 
 
 	}
 
+	
+	
 
 
 
@@ -119,6 +123,7 @@ public class Game {
 		if(currentPlay==false) {
 			players.add(p);
 			p.setPseudo(input);
+			
 		}
 	}
 
