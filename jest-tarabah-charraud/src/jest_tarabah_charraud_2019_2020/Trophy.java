@@ -9,9 +9,6 @@ public class Trophy extends Card implements Visitor
 		// TODO Auto-generated constructor stub
 	}
 
-	public void lowest() {
-    }
-
     public void visitJest(Jest p1) {
     }
 
