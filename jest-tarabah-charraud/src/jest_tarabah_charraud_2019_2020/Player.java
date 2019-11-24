@@ -76,7 +76,7 @@ public class Player
 			p1.stealCard(p1, null, input);
 			if(victime==p2.pseudo) {
 				p2.stealCard(p2, null, input);
-				p3.stealCard(p3, null, input);
+				p3.stealCard(p3, null, input); 
 			}else 
 				if(victime==p3.pseudo) {
 					p3.stealCard(p3, null, input);
