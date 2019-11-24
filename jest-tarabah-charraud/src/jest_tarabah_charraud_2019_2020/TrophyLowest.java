@@ -3,8 +3,8 @@ package jest_tarabah_charraud_2019_2020;
 import java.util.Iterator;
 
 public class TrophyLowest extends Trophy implements Visitor {
-	public TrophyLowest(Value value, Color color) {
-		super(value, color);
+	public TrophyLowest() {
+
 		// TODO Auto-generated constructor stub
 	}
 

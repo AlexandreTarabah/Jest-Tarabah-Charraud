@@ -5,8 +5,7 @@ import java.util.Iterator;
 public class TrophyHighest extends Trophy implements Visitor 
 {
 
-	public TrophyHighest(Value value, Color color) {
-		super(value, color);
+	public TrophyHighest() {
 		// TODO Auto-generated constructor stub
 	}
 

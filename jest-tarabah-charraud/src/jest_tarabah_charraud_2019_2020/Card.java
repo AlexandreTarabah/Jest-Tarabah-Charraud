@@ -22,61 +22,61 @@ public class Card {
 		{
 			if(this.value == Value.un)
 			{
-				this.trophy = new TrophyHighest(this.value, Color.club) ;
+				this.trophy = new TrophyHighest() ;
 			}
 			if(this.value == Value.deux)
 			{
-				this.trophy = new TrophyMajority(Value.trois, this.color) ;
+				this.trophy = new TrophyMajority() ;
 			}
 			if(this.value == Value.trois)
 			{
-				this.trophy = new TrophyMajority(Value.deux, this.color) ;
+				this.trophy = new TrophyMajority() ;
 			}
 			if(this.value == Value.quatre)
 			{
-				this.trophy = new TrophyLowest(this.value, Color.club) ;
+				this.trophy = new TrophyLowest() ;
 			}
 		}
 		else if (this.color == Color.club)
 		{
 			if(this.value == Value.un)
 			{
-				this.trophy = new TrophyHighest(this.value, Color.spade) ;
+				this.trophy = new TrophyHighest() ;
 			}
 			if(this.value == Value.deux)
 			{
-				this.trophy = new TrophyLowest(this.value, Color.heart) ;
+				this.trophy = new TrophyLowest() ;
 			}
 			if(this.value == Value.trois)
 			{
-				this.trophy = new TrophyHighest(this.value, Color.heart) ;
+				this.trophy = new TrophyHighest() ;
 			}
 			if(this.value == Value.quatre)
 			{
-				this.trophy = new TrophyLowest(this.value, Color.spade) ;
+				this.trophy = new TrophyLowest() ;
 			}
 		}
 		else if (this.color == Color.heart)
 		{
-				this.trophy = new TrophyJoker(this.value, this.color) ;
+				this.trophy = new TrophyJoker() ;
 		}
 		else if (this.color == Color.diamond)
 		{
 			if(this.value == Value.un)
 			{
-				this.trophy = new TrophyMajority(Value.quatre, this.color) ;
+				this.trophy = new TrophyMajority() ;
 			}
 			if(this.value == Value.deux)
 			{
-				this.trophy = new TrophyHighest(this.value, Color.diamond) ;
+				this.trophy = new TrophyHighest() ;
 			}
 			if(this.value == Value.trois)
 			{
-				this.trophy = new TrophyLowest(this.value, Color.heart) ;
+				this.trophy = new TrophyLowest() ;
 			}
 			if(this.value == Value.quatre)
 			{
-				this.trophy = new TrophyBestJestNoJoke(this.value, this.color) ;
+				this.trophy = new TrophyBestJestNoJoke() ;
 			}
 		}
 

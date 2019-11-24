@@ -3,9 +3,9 @@ package jest_tarabah_charraud_2019_2020;
 
 public class TrophyMajority extends Trophy 
 {
-    public TrophyMajority(Value value, Color color)
+    public TrophyMajority()
     {
-    	super(value, color);
+  
 		// TODO Auto-generated constructor stub
 	}
 

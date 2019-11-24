@@ -2,8 +2,8 @@ package jest_tarabah_charraud_2019_2020;
 
 
 public class TrophyBestJest extends Trophy {
-    public TrophyBestJest(Value value, Color color) {
-		super(value, color);
+    public TrophyBestJest() {
+
 		// TODO Auto-generated constructor stub
 	}
 
