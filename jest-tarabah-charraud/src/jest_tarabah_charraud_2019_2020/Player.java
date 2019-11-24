@@ -92,8 +92,10 @@ public class Player
 		((Map<String, Card>) offer).put("Down", hand[numC-1]); // -1 car le tableau commence à l'indice 0, je caste l'offer  
 		((Map<String, Card>) offer).put("Up", hand[numC%2]); // avec le modulo 2 on obtient la case manquante, je caste l'offer
 		System.out.println(player.pseudo  + " a caché " + ((Map<String, Card>) offer).get("Down").getValue() + " de " + ((Map<String, Card>) offer).get("Down").getColor());
-		Player.listOffer.put(player.pseudo, player.offer); /* et la on affiche le pseudo du player en paramètre, avec get(Down) et la value de la carte, et la couleur
+		/* et la on affiche le pseudo du player en paramètre, avec get(Down) et la value de la carte, et la couleur
 		*/
+		
+		Player.listOffer.put(player.pseudo, player.offer); // on ajoute l'offre du player a la listOffer.
 		
 	}
 	
