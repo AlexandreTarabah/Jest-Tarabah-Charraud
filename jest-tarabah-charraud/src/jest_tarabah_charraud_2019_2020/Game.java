@@ -32,7 +32,7 @@ import java.util.Scanner;
 public class Game {
 	protected static int nbPlayer;
 
-	private Card[] trophyCards = new Card[2] ;
+	Card[] trophyCards = new Card[2] ;
 
 	private String gameplay;
 
@@ -85,17 +85,17 @@ public class Game {
 
 
 
-	public void initializeGame() {
+	public void initializeGame(Game g) {
 
 		players = new ArrayList<Player>();
 		listOffer = new HashMap<>();
-		drawdeck = new DrawDeck();
+		drawdeck = new DrawDeck(g);
 		drawdeck.shuffle();
-		for(int i = 0 ; i<2 ; i++)
+/*		for(int i = 0 ; i<2 ; i++)
 		{
 			trophyCards[i] = drawdeck.takeCards() ;
 		}
-		currentPlay=false;   
+*/		currentPlay=false;   
 
 
 	}
@@ -129,9 +129,7 @@ public class Game {
 		if(currentPlay==false) {
 			players.add(p);
 			p.setPseudo(p, input);
-			
-			
-			 
+ 
 			
 		}
 	}
@@ -147,7 +145,7 @@ public class Game {
 
 		Game newGame = new Game();
 
-		newGame.initializeGame(); 
+		newGame.initializeGame(newGame); 
 
 		Scanner input = new Scanner(System.in) ;
 

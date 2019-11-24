@@ -10,9 +10,9 @@ public class TrophyHighest extends Trophy implements Visitor
 		// TODO Auto-generated constructor stub
 	}
 
-	public void visitJest(Jest jest, Color color) 
+	public Card visitJest(Jest jest, Color color) 
 	{
-		Card highest = null ;
+		Card highest = new Card(Value.un, Color.heart);
 		int highestOrdinal = 0 ;
 
 		Iterator<Card> itJC = jest.jestCards.iterator() ; /* Entrance dans le
@@ -31,6 +31,9 @@ public class TrophyHighest extends Trophy implements Visitor
 
 
 		}
+
+		return highest ;
+
 	}
 
 
