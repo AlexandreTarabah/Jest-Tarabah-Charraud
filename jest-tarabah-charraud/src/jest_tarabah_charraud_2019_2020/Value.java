@@ -4,8 +4,7 @@ public enum Value {
 	un("un"),
 	deux("deux"),
 	trois("trois"),
-	quatre("quatre"),
-	cinq("cinq");
+	quatre("quatre");
 
 	private String str =" ";
 	

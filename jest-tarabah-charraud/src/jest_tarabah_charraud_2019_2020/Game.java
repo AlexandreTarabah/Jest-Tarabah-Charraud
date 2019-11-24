@@ -4,6 +4,8 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Scanner;
+import java.util.Set;
+import java.util.Map.Entry;
 
 
 
@@ -36,11 +38,11 @@ public class Game {
 
 	private String gameplay;
 
-	ArrayList<Player> players = new ArrayList<Player>() ;
+	static ArrayList<Player> players = new ArrayList<Player>() ;
 	
 	static HashMap<String, HashMap<String, Card>> listOffer= new HashMap<>();
 
-	private DrawDeck drawdeck;
+	private static DrawDeck drawdeck;
 
 	boolean currentPlay;
 
@@ -100,7 +102,9 @@ public class Game {
 
 	}
 
+
 	
+
 	
 			
 	
@@ -156,16 +160,29 @@ public class Game {
 		newGame.addPlayer(p1, input) ;
 		newGame.addPlayer(p2, input) ;
 		newGame.addPlayer(p3, input) ; 
+		
+		
+		while(DrawDeck.nbCardDD>0)
+		{ 
 
 		newGame.distribute();
+		
+		p1.determinateFirstPlayer( p1,p2,p3);
 
 		p1.upsideDown(p1, input) ; 
 		p2.upsideDown(p2, input) ;
 		p3.upsideDown(p3, input) ;
 		
-		p1.stealCard(p1, input) ;
-		p2.stealCard(p2, input) ;
-		p3.stealCard(p3, input) ;	
+		p1.stealCard(p1,null, input) ;
+		p2.stealCard(null,null, input) ;
+		p3.stealCard(null,null, input) ;	
+		
+		
+		drawdeck.collectCards(p1);
+		drawdeck.collectCards(p2);
+		drawdeck.collectCards(p3);
+		}
+		
 		
 		ArrayList<Player> p = newGame.players ;
 
