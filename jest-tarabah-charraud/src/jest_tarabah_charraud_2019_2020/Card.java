@@ -22,7 +22,7 @@ public class Card {
 		{
 			if(this.value == Value.un)
 			{
-				this.trophy = new TrophyHighest() ;
+				this.trophy = new TrophyHighest(Color.club) ;
 			}
 			if(this.value == Value.deux)
 			{
@@ -41,7 +41,7 @@ public class Card {
 		{
 			if(this.value == Value.un)
 			{
-				this.trophy = new TrophyHighest() ;
+				this.trophy = new TrophyHighest(Color.spade) ;
 			}
 			if(this.value == Value.deux)
 			{
@@ -49,7 +49,7 @@ public class Card {
 			}
 			if(this.value == Value.trois)
 			{
-				this.trophy = new TrophyHighest() ;
+				this.trophy = new TrophyHighest(Color.heart) ;
 			}
 			if(this.value == Value.quatre)
 			{
@@ -68,7 +68,7 @@ public class Card {
 			}
 			if(this.value == Value.deux)
 			{
-				this.trophy = new TrophyHighest() ;
+				this.trophy = new TrophyHighest(Color.diamond) ;
 			}
 			if(this.value == Value.trois)
 			{

@@ -5,14 +5,7 @@ import java.util.Iterator;
 public class TrophyHighest extends Trophy implements Visitor 
 {
 
-<<<<<<< HEAD
-	public TrophyHighest() {
-=======
-	 public TrophyHighest(Value value, Color color) {
-		super(value, color);
->>>>>>> branch 'master' of https://github.com/AlexandreTarabah/Jest-Tarabah-Charraud
-		// TODO Auto-generated constructor stub
-	}
+	public TrophyHighest(Color color) {}
 
 	public Card visitJest(Jest jest, Color color) 
 	{
