@@ -2,13 +2,13 @@ package jest_tarabah_charraud_2019_2020;
 
 public enum Color {
 
-	spade("spade"),
-	club("club"),
-	diamond("diamond"),
-	heart("heart");
+	spade("pique"),
+	club("trèfle"),
+	diamond("carreau"),
+	heart("coeur");
 	
 	
-	private String strColor ="";
+	private String strColor =" ";
 	
 	Color(String strColor){
 		this.strColor=strColor;

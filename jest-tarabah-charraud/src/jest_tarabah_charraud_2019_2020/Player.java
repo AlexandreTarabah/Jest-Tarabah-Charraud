@@ -7,7 +7,7 @@ import java.util.Map;
 public class Player
 {
 
-	private static String pseudo;
+	String  pseudo;
 
 	private int nump;
 
@@ -15,11 +15,10 @@ public class Player
 
 	public boolean hasHighestFup;
 
-	private static HashMap<String, Card> offer;
+	 HashMap<String, Card> offer;
 	
-	private static HashMap<String, HashMap<String, Card>> listOffer;
+	static HashMap<String,HashMap<String,Card>> listOffer = new HashMap();
 	
-	private ArrayList<Player> listPlayer;
 
 	private Card[] hand = new Card[2] ;
 
@@ -32,21 +31,27 @@ public class Player
 	{
 		offer = new HashMap<String, Card>();
 		
-		listOffer.put(Player.pseudo, offer);
+
 		
-		this.jest = jest ;
+		this.jest = new Jest() ;
 	}
 
 	
 	
 
-	public void stealCard(Player player, Scanner input)
-	{
+	public void stealCard(Player player, Scanner input) {
 		System.out.println("Qui sera votre victime ? ");
-		String victime = input.nextLine() ;
+		String victime = input.next(); 
+		 victime = player.pseudo;
 		System.out.println("Quelle carte voulez-vous lui dérober ? ");
-		String stolenCard = input.nextLine();
-		jest.jestCards.add(listOffer.get(victime).get(stolenCard)) ; // Map est juste l'interface de HashMap
+		String stolenCard = input.next();
+		if(stolenCard == "down") {
+			this.jest.jestCards.add(Player.listOffer.get(player.pseudo).get("down")); /* Player.listOffer car c'esT static, et
+																					je vais get player.pseudo dans la listOffer, avec la clé down.*/
+		}
+		else if (stolenCard =="up") {
+			this.jest.jestCards.add(Player.listOffer.get(player.pseudo).get("up")); 
+		}
 
 	}
 
@@ -54,34 +59,44 @@ public class Player
 	
 	
 
-	public void setPseudo(Scanner input) 
+	public void setPseudo(Player player, Scanner input) 
 	{
 		System.out.println("Entrez le nom du joueur : ");
-		String name = input.nextLine() ;
-		this.pseudo = name ;
+		String pseudo = input.nextLine() ;
+		 player.pseudo = pseudo;
+		
 	}
 
 	
 	
-	public void setHand(int i, Card card)
+	public  void setHand(int i, Card card)
 	{
-		this.hand[i] = card ;
+		this.hand[i] = card;
+				
 	}
 
 	
 	
 	// la c'est la méthode pour 
-	public void upsideDown(Scanner input) 
-	{
+	public void upsideDown(Player player, Scanner input) 
+	{		
+		System.out.println("voici vos cartes : ");
+		for(int i=0; i<2;i++) {
+			System.out.println(hand[i].getValue() +" de "+ hand[i].getColor()); // on affiche les cartes du joueur
+		}
 
 		System.out.println("Quelle carte voulez-vous garder cachée?");
 
 		int numC = input.nextInt() ; // demande au joueur de rentrer un numéro entre 1 et 2
-		offer.put("Down", hand[numC-1]); // -1 car le tableau commence à l'indice 0
-//		System.out.println(hand[numC-1].getValue().name() + " " + hand[numC-1].getColor().name()); 
-		offer.put("Up", hand[numC%2]); // avec le modulo 2 on obtient la case manquante
-//		System.out.println(hand[numC%2].getValue().name() + " " + hand[numC-1].getColor().name());
+		
+		((Map<String, Card>) offer).put("Down", hand[numC-1]); // -1 car le tableau commence à l'indice 0, je caste l'offer  
+		((Map<String, Card>) offer).put("Up", hand[numC%2]); // avec le modulo 2 on obtient la case manquante, je caste l'offer
+		System.out.println(player.pseudo  + " a caché " + ((Map<String, Card>) offer).get("Down").getValue() + " de " + ((Map<String, Card>) offer).get("Down").getColor());
+		Player.listOffer.put(player.pseudo, player.offer); /* et la on affiche le pseudo du player en paramètre, avec get(Down) et la value de la carte, et la couleur
+		*/
+		
 	}
+	
 	
 	
 	

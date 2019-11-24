@@ -7,7 +7,7 @@ public enum Value {
 	quatre("quatre"),
 	cinq("cinq");
 
-	private String str ="";
+	private String str =" ";
 	
 	//constructeur 
 	Value(String str){

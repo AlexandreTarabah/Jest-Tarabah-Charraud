@@ -37,15 +37,12 @@ public class Game {
 	private String gameplay;
 
 	ArrayList<Player> players = new ArrayList<Player>() ;
-
+	
+	static HashMap<String, HashMap<String, Card>> listOffer= new HashMap<>();
 
 	private DrawDeck drawdeck;
 
 	boolean currentPlay;
-
-
-
-
 
 	public void determinateWinner() {
 	}
@@ -57,7 +54,7 @@ public class Game {
 
 		this.currentPlay=true;
 
-		if (drawdeck.isEmpty() != false)
+		if (drawdeck.isEmpty() != true)
 		{		
 
 
@@ -68,6 +65,8 @@ public class Game {
 					Player p = (Player) it.next();
 					p.setHand(i, drawdeck.takeCards()) ; // place une carte en position i dans la
 					// main du joueur (qui est un tableau)
+				
+					
 				}
 			}
 		}
@@ -89,6 +88,7 @@ public class Game {
 	public void initializeGame() {
 
 		players = new ArrayList<Player>();
+		listOffer = new HashMap<>();
 		drawdeck = new DrawDeck();
 		drawdeck.shuffle();
 		for(int i = 0 ; i<2 ; i++)
@@ -101,6 +101,12 @@ public class Game {
 	}
 
 	
+	
+			
+	
+
+	
+
 	
 
 
@@ -122,7 +128,10 @@ public class Game {
 	public void addPlayer(Player p, Scanner input) {
 		if(currentPlay==false) {
 			players.add(p);
-			p.setPseudo(input);
+			p.setPseudo(p, input);
+			
+			
+			 
 			
 		}
 	}
@@ -152,9 +161,9 @@ public class Game {
 
 		newGame.distribute();
 
-		p1.upsideDown(input) ; 
-		p2.upsideDown(input) ;
-		p3.upsideDown(input) ;
+		p1.upsideDown(p1, input) ; 
+		p2.upsideDown(p2, input) ;
+		p3.upsideDown(p3, input) ;
 		
 		p1.stealCard(p1, input) ;
 		p2.stealCard(p2, input) ;

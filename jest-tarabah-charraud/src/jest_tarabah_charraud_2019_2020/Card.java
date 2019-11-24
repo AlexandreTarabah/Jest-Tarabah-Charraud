@@ -47,10 +47,12 @@ public Trophy getTrophy()
 }
 
 
-
-	public String tostring() {
-		return value.toString() + color.toString();
+public String toString() {
+	return "value :"+ value.toString() + "color :"+ color.toString();
+	
+}
+	
  	}
 ;
 
-}
+

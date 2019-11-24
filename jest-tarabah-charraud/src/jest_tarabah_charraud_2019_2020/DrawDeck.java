@@ -38,6 +38,7 @@ public class DrawDeck {
     }
     
     public Card takeCards() {
+    	nbCardDD=drawdeck.size();
 		int position = (int) ((int) Math.round(DrawDeck.nbCardDD-1)*Math.random());
 		return drawdeck.remove(position);
 			
