@@ -22,7 +22,7 @@ public class Player
 	
 	static HashMap<String,HashMap<String,Card>> listOffer = new HashMap();
 	
-	 boolean GotStolen=false;
+	 boolean HasStolen=false;
 	
 
 	private Card[] hand = new Card[2] ;
@@ -30,7 +30,8 @@ public class Player
 	private Jest jest ;
 	
 	boolean firstPlayer = false;
-
+	
+	private String victime;
 
 	//j'instancie l'objet offre, qui est aussi une collection de carte, dans le constructeur player ici 
 
@@ -38,7 +39,7 @@ public class Player
 	{
 		offer = new HashMap<String, Card>();
 		
-
+		this.pseudo=pseudo;
 		
 		this.jest = new Jest() ;
 	}
@@ -48,26 +49,44 @@ public class Player
 
 	public void stealCard(Player playerSteal, Player playerStolen, Scanner input) {
 		System.out.println("Qui sera votre victime ? ");
-		String victime = input.next(); 
+		 victime = input.next(); 
 		 victime = playerStolen.pseudo;
-		 while(playerStolen.GotStolen=true) {
+		 while(playerStolen.offer.size()<2) {
 			 System.out.println("le joueur a déja été volé");
+			 System.out.println("Veuillez rentrer un joueur qui à une offre complète");
+			 victime = input.next(); 
+			 victime = playerStolen.pseudo;
 		 }
 		System.out.println("Quelle carte voulez-vous lui dérober ? ");
 		String stolenCard = input.next();
 		if(stolenCard == "down") {
-			this.jest.jestCards.add(Player.listOffer.get(playerStolen.pseudo).get("down")); /* Player.listOffer car c'esT static, et
+			playerSteal.jest.jestCards.add(Player.listOffer.get(playerStolen.pseudo).get("down")); /* Player.listOffer car c'esT static, et
 																					je vais get player.pseudo dans la listOffer, avec la clé down.*/
 		}
 		else if (stolenCard =="up") {
-			this.jest.jestCards.add(Player.listOffer.get(playerStolen.pseudo).get("up")); 
+			playerSteal.jest.jestCards.add(Player.listOffer.get(playerStolen.pseudo).get("up")); 
 		}
-			playerStolen.GotStolen=true;
+			playerSteal.HasStolen=true;
 		
 	}
 	
 	
-	
+	public void Round(Player p1, Player p2, Player p3, Scanner input) {
+		if (p1.firstPlayer==true) {
+			p1.stealCard(p1, null, input);
+			if(victime==p2.pseudo) {
+				p2.stealCard(p2, null, input);
+				p3.stealCard(p3, null, input);
+			}else 
+				if(victime==p3.pseudo) {
+					p3.stealCard(p3, null, input);
+					p2.stealCard(p2, null, input);
+				
+			}
+		}
+		
+		
+	}
 
 	public void setPseudo(Player player, Scanner input) 
 	{

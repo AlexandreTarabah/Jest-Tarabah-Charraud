@@ -173,10 +173,6 @@ public class Game {
 		p2.upsideDown(p2, input) ;
 		p3.upsideDown(p3, input) ;
 		
-		p1.stealCard(p1,null, input) ;
-		p2.stealCard(null,null, input) ;
-		p3.stealCard(null,null, input) ;	
-		
 		
 		drawdeck.collectCards(p1);
 		drawdeck.collectCards(p2);
