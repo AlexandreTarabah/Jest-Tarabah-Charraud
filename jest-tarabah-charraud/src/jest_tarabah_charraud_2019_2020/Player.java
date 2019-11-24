@@ -66,7 +66,7 @@ public class Player
 		else if (stolenCard =="up") {
 			playerSteal.jest.jestCards.add(Player.listOffer.get(playerStolen.pseudo).get("up")); 
 		}
-			playerSteal.HasStolen=true;
+			playerSteal.HasStolen=true; 
 		
 	}
 	
