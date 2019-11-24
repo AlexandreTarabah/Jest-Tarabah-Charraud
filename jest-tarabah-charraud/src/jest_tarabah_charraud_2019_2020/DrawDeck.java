@@ -2,11 +2,12 @@ package jest_tarabah_charraud_2019_2020;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Iterator;
 
 public class DrawDeck {
     public static int nbCardDD;
     
-    private ArrayList<Card> drawdeck;
+    private ArrayList<Card> drawdeck = new ArrayList<Card>();
     
     
 // j'ai pu simplifié le mélange des cartes avec shuffle directement implementé dans le java, Collections.shuffle et je mélange les cartes 
@@ -26,13 +27,26 @@ public class DrawDeck {
     
     
     
-    public DrawDeck() {
+    public DrawDeck(Game g) {
     	drawdeck= new ArrayList<Card>();
     	
     	for (Color c : Color.values()) {
     		for(Value v : Value.values()) {
+    			if (v == Value.un && c == Color.club)
+    			{
+    				Card card = new Card(v,c);
+    				g.trophyCards[0] = card ;
+    			}
+    			else if (v == Value.trois && c == Color.club)
+    			{
+    				Card card = new Card(v,c);
+    				g.trophyCards[1] = card ;
+    			}
+    			else
+    			{
     			Card card = new Card(v,c);
     			drawdeck.add(card);
+    			}
     		}
     	}
     }
@@ -43,6 +57,7 @@ public class DrawDeck {
 		return drawdeck.remove(position);
 			
     }
+
     
     public boolean isEmpty()
     {

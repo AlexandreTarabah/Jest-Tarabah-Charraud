@@ -67,6 +67,8 @@ public class Player
 	}
 
 	
+	
+	
 	public void DeterminateFirstPlayer(Player p1, Player p2, Player p3) {
 		
 		Set<Entry<String, HashMap<String, Card>>> listOfferHM = listOffer.entrySet();
@@ -85,7 +87,6 @@ public class Player
 		    		}
 		    	}
 	      }
-		    		
 		    		
 		    		if(it1.next().getKey()==p1.pseudo) {
 		    			p1.firstPlayer = true;
