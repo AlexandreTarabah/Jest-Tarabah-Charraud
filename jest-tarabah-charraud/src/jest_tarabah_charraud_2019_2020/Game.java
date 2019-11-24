@@ -36,7 +36,7 @@ public class Game {
 
 	private String gameplay;
 
-	ArrayList<Player> players = new ArrayList<Player>() ;
+	static ArrayList<Player> players = new ArrayList<Player>() ;
 	
 	static HashMap<String, HashMap<String, Card>> listOffer= new HashMap<>();
 
@@ -165,9 +165,9 @@ public class Game {
 		p2.upsideDown(p2, input) ;
 		p3.upsideDown(p3, input) ;
 		
-		p1.stealCard(p1, input) ;
-		p2.stealCard(p2, input) ;
-		p3.stealCard(p3, input) ;	
+		p1.stealCard(p1,null, input) ;
+		p2.stealCard(null,null, input) ;
+		p3.stealCard(null,null, input) ;	
 		
 		ArrayList<Player> p = newGame.players ;
 
