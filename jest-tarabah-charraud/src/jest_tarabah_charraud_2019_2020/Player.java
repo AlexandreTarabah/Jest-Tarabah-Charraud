@@ -94,7 +94,8 @@ public class Player
 		    			if(it1.next().getKey()==p2.pseudo) {
 		    				System.out.println("Joueur p2 commence ! ");
 		    				p1.firstPlayer=true;
-		    			}else if(it1.next().getKey()==p3.pseudo) {
+		    			}else 
+		    				if(it1.next().getKey()==p3.pseudo) {
 		    				System.out.println("Joueur p3 commence ! ");
 		    				p3.firstPlayer=true;
 		    			}
