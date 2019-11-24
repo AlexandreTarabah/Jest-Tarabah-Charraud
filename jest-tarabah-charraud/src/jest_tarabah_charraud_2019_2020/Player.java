@@ -65,20 +65,41 @@ public class Player
 			playerStolen.GotStolen=true;
 		
 	}
+	
+	
+	
+
+	public void setPseudo(Player player, Scanner input) 
+	{
+		System.out.println("Entrez le nom du joueur : ");
+		String pseudo = input.nextLine() ;
+		 player.pseudo = pseudo;
+		
+	}
+
+	
+	
+	public  void setHand(int i, Card card)
+	{
+		this.hand[i] = card;
+				
+	}
 
 	
 	
 	
-	public void DeterminateFirstPlayer(Player p1, Player p2, Player p3) {
+	
+	
+public void determinateFirstPlayer(Player p1, Player p2, Player p3) {
 		
 		Set<Entry<String, HashMap<String, Card>>> listOfferHM = listOffer.entrySet();
 	      Iterator<Entry<String, HashMap<String, Card>>> it1 = listOfferHM.iterator();
 	      Set<Entry<String, Card>> OfferHM = offer.entrySet();
 	      Iterator<Entry<String, Card>> it2 = OfferHM.iterator();
+	      int HighestValue = 0;
+	    	String PlayerHighestValue;
 	      while(it1.hasNext()){
 		      while(it2.hasNext()) {
-		    	int HighestValue = 0;
-		    	String PlayerHighestValue;
 		    	
 		    	if(HighestValue > it2.next().getValue().getValue().ordinal())
 		    		{
@@ -103,32 +124,14 @@ public class Player
 		    				
 		    		
 		    	};
-		    	  
-		      
-	      
-	
-
-	
-	
-	
-
-	public void setPseudo(Player player, Scanner input) 
-	{
-		System.out.println("Entrez le nom du joueur : ");
-		String pseudo = input.nextLine() ;
-		 player.pseudo = pseudo;
-		
-	}
-
-	
-	
-	public  void setHand(int i, Card card)
-	{
-		this.hand[i] = card;
-				
-	}
-
-	
+		    	
+		    	
+		    	
+		    	
+		    	
+		    	
+		    	
+		    	
 	
 	// la c'est la méthode pour 
 	public void upsideDown(Player player, Scanner input) 

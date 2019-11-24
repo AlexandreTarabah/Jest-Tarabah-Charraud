@@ -6,7 +6,6 @@ public class Trophy extends Card implements Visitor
 	
     public Trophy(Value value, Color color) {
 		super(value, color);
-		// TODO Auto-generated constructor stub
 	}
 
 	@Override

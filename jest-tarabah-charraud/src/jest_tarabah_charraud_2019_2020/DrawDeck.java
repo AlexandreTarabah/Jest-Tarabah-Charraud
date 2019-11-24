@@ -5,6 +5,7 @@ import java.util.Collections;
 import java.util.Iterator;
 
 public class DrawDeck {
+	
     public static int nbCardDD;
     
     private ArrayList<Card> drawdeck = new ArrayList<Card>();
@@ -58,6 +59,16 @@ public class DrawDeck {
 			
     }
 
+    
+    public void collectCards(Player player) {
+    	if(player.offer.get("up")==null) {
+    		drawdeck.add(player.offer.get("down"));
+    	}else
+    	drawdeck.add(player.offer.get("up"));
+    }
+    		
+    		
+    
     
     public boolean isEmpty()
     {
