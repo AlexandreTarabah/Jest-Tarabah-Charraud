@@ -4,10 +4,12 @@ import java.util.Iterator;
 
 public class TrophyHighest extends Trophy implements Visitor 
 {
-//bleu
-	public TrophyHighest(Color color) {}
+	
+	public TrophyHighest(Color color) 
+	{
+	}
 
-	public Card visitJest(Jest jest, Color color) 
+	public void visitJest(Jest jest, Color color) 
 	{
 		Card highest = new Card(Value.un, Color.heart);
 		int highestOrdinal = 0 ;
@@ -25,11 +27,10 @@ public class TrophyHighest extends Trophy implements Visitor
 					highest = card ; 
 				}
 			}
-
+			
+			super.highCandidate = highest ;
 
 		}
-
-		return highest ;
 
 	}
 

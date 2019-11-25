@@ -9,9 +9,9 @@ public class Card implements Cloneable {
 
 	private boolean faceUp;
 
-	private Color color ;
+	Color color ;
 
-	private Value value;
+	Value value;
 
 	private Trophy trophy ;
 
@@ -112,7 +112,7 @@ public class Card implements Cloneable {
 
 
 	public String toString() {
-		return "value :"+ value.toString() + "color :"+ color.toString();
+		return "value :"+ this.value.toString() + "color :"+ this.color.toString();
 
 	}
 

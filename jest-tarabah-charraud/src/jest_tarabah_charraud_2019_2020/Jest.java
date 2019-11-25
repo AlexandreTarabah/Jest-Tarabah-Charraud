@@ -11,7 +11,7 @@ public class Jest {
 
     public void acceptVisitor(Trophy trophy) 
     {
-    	trophy.visitJest(this); 
+    	trophy.visitJest(this);
     }
 
     public void calculateScore() {

@@ -1,5 +1,6 @@
 package jest_tarabah_charraud_2019_2020;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
@@ -178,15 +179,24 @@ public class Game {
 		drawdeck.collectCards(p3);
 
 
+		System.out.println(Arrays.deepToString(newGame.trophyCards)) ;
+
 		ArrayList<Player> p = newGame.players ;
+		Card[] t = newGame.trophyCards ;
 
-		for(int i = 0 ; i < p.size() ; i ++)
+		for(int j = 0 ; j < t.length ; j ++) // parcourt les trophies
 		{
-			Jest jest = p.get(i).getJest() ;
-			jest.acceptVisitor(newGame.trophyCards[0].getTrophy()) ;
-			jest.acceptVisitor(newGame.trophyCards[1].getTrophy()) ;
+			if(t[j].getTrophy() instanceof TrophyHighest) // si c'est des trophyHighest
+			{
+				for(int i = 0 ; i < p.size() ; i ++) // parcourt les joueurs
+				{
+					Jest jest = p.get(i).getJest() ;
+					jest.acceptVisitor(newGame.trophyCards[j].getTrophy()) ;
+					System.out.println(newGame.trophyCards[j].getTrophy().highCandidate) ;
+					System.out.println("ok");
+				}
+			}
 		}
-
 
 	}
 
