@@ -189,7 +189,7 @@ public class Player
 	}
 
 
-// fsfqsf
+// fsfqs
 
 	public Jest getJest()
 	{
