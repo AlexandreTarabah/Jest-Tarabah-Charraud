@@ -16,4 +16,11 @@ public class Jest {
     public void calculateScore() {
     }
 
+    public static Card AddJest(String victime, String stolenCard) {
+    	
+    	Card card = Player.listOffer.get(victime).get(stolenCard).clone();
+    	Player.listOffer.get(victime).remove(stolenCard);
+    	return card;
+    	
+    }
 }

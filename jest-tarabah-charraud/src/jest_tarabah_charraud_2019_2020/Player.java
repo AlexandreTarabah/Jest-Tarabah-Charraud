@@ -52,7 +52,7 @@ public class Player
 
 	public void stealCard( Scanner input) {
 		System.out.println("Qui sera votre victime ? ");
-		 victime = input.next(); 
+		 victime = input.next();
 		 while(Player.listOffer.get(victime).size()<2) {
 			 System.out.println("Offre de la victime incomplète, veuillez saisir une offre complete"); // vérification que l'offre est bien complète
 			 victime=input.next();
@@ -62,11 +62,11 @@ public class Player
 		String stolenCard = input.next();
 		if(stolenCard.equals("down")) {
 			
-			this.jest.jestCards.add(Player.listOffer.get(victime).get("down"));/* Player.listOffer car c'esT static, et
+			this.jest.jestCards.add(Jest.AddJest( victime, stolenCard));/* Player.listOffer car c'esT static, et
 																					je vais get player.pseudo dans la listOffer, avec la clé down.*/
 		}
 		else if (stolenCard.equals("up")) {
-			this.jest.jestCards.add(Player.listOffer.get(victime).get("up")); 
+			this.jest.jestCards.add(Jest.AddJest( victime, stolenCard)); 
 		}
 		
 			this.HasStolen=true; 
