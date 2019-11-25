@@ -109,17 +109,6 @@ public class Game {
 	}
 
 
-	
-
-	
-			
-	
-
-	
-
-	
-
-
 
 	public void chooseGameplay() {
 	}
@@ -169,8 +158,8 @@ public class Game {
 		newGame.addPlayer(p3, input) ; 
 		
 		
-		while(DrawDeck.nbCardDD>0)
-		{ 
+		
+		
 
 		newGame.distribute();
 		
@@ -188,7 +177,6 @@ public class Game {
 		drawdeck.collectCards(p1);
 		drawdeck.collectCards(p2);
 		drawdeck.collectCards(p3);
-		}
 		
 		
 		ArrayList<Player> p = newGame.players ;

@@ -47,11 +47,8 @@ public class Player
 	}
 	
 
-<<<<<<< HEAD
-	public void stealCard(Player playerStolen, Scanner input) {
-=======
+
 	public void stealCard( Scanner input) {
->>>>>>> branch 'master' of https://github.com/AlexandreTarabah/Jest-Tarabah-Charraud
 		System.out.println("Qui sera votre victime ? ");
 		 victime = input.next(); 
 		 while(Player.listOffer.get(victime).size()<2) {
@@ -62,24 +59,12 @@ public class Player
 		System.out.println("Quelle carte voulez-vous lui dérober ? ");
 		String stolenCard = input.next();
 		if(stolenCard == "down") {
-<<<<<<< HEAD
-			this.jest.jestCards.add(Player.listOffer.get(playerStolen.pseudo).get("down")); /* Player.listOffer car c'esT static, et
-=======
 			this.jest.jestCards.add(Player.listOffer.get(victime).get("down")); /* Player.listOffer car c'esT static, et
->>>>>>> branch 'master' of https://github.com/AlexandreTarabah/Jest-Tarabah-Charraud
 																					je vais get player.pseudo dans la listOffer, avec la clé down.*/
 		}
 		else if (stolenCard =="up") {
-<<<<<<< HEAD
-			this.jest.jestCards.add(Player.listOffer.get(playerStolen.pseudo).get("up")); 
-=======
 			this.jest.jestCards.add(Player.listOffer.get(victime).get("up")); 
->>>>>>> branch 'master' of https://github.com/AlexandreTarabah/Jest-Tarabah-Charraud
 		}
-<<<<<<< HEAD
-			this.HasStolen=true; 
-=======
->>>>>>> branch 'master' of https://github.com/AlexandreTarabah/Jest-Tarabah-Charraud
 		
 			this.HasStolen=true; 
 			
@@ -97,8 +82,6 @@ public class Player
 		       
 				
 			}
-	
-	
 	
 
 	public void setPseudo(Player player, Scanner input) 
@@ -129,7 +112,7 @@ public void determinateFirstPlayer(Player p1, Player p2, Player p3) {
 	      Set<Entry<String, Card>> OfferHM = offer.entrySet();
 	      Iterator<Entry<String, Card>> it2 = OfferHM.iterator();
 	      int HighestValue = 0;
-	    	String PlayerHighestValue;
+	    	String PlayerHighestValue = null;
 	      while(it1.hasNext()){
 		      while(it2.hasNext()) {
 		    	
@@ -141,17 +124,17 @@ public void determinateFirstPlayer(Player p1, Player p2, Player p3) {
 		    	}
 	      }
 		    		
-		    		if(it1.next().getKey()==p1.pseudo) {
+		    		if(PlayerHighestValue==p1.pseudo) {
 		    			p1.firstPlayer = true;
 		    			starter=p1.pseudo;
 		    			System.out.println("Joueur p1 commence !");
 		    		}else 
-		    			if(it1.next().getKey()==p2.pseudo) {
+		    			if(PlayerHighestValue==p2.pseudo) {
 		    				System.out.println("Joueur p2 commence ! ");
 		    				p2.firstPlayer=true;
 		    				starter=p2.pseudo;
 		    			}else 
-		    				if(it1.next().getKey()==p3.pseudo) {
+		    				if(PlayerHighestValue==p3.pseudo) {
 		    				System.out.println("Joueur p3 commence ! ");
 		    				starter=p3.pseudo;
 		    				p3.firstPlayer=true;
