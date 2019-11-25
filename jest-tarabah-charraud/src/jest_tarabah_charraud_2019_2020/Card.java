@@ -93,7 +93,7 @@ public class Card implements Cloneable {
 
 	}
 
-
+//yep
 	public Value getValue() {
 		return value;
 	}
