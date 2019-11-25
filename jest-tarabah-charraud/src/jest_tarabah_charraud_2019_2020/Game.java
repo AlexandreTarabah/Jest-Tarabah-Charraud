@@ -188,7 +188,7 @@ public class Game {
 
 			System.out.println(Arrays.deepToString(newGame.trophyCards)) ;
 
-			ArrayList<Player> p = newGame.players ;
+			ArrayList<Player> p = Game.players ;
 			Card[] t = newGame.trophyCards ;
 
 			for(int j = 0 ; j < t.length ; j ++) // parcourt les trophies
