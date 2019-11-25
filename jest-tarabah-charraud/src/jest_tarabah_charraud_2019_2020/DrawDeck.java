@@ -60,6 +60,7 @@ public class DrawDeck {
     }
 
     
+    
     public void collectCards(Player player) {
     	if(player.offer.get("up")==null) {
     		drawdeck.add(player.offer.get("down"));
