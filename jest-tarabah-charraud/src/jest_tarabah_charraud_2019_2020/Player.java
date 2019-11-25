@@ -92,7 +92,7 @@ public class Player
 	{
 		System.out.println("Entrez le nom du joueur : ");
 		String pseudo = input.nextLine() ;
-		 player.pseudo = pseudo;
+		 player.pseudo = pseudo;  
 		
 	}
 
