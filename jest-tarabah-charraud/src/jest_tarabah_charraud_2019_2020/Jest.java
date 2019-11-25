@@ -17,13 +17,15 @@ public class Jest {
     public void calculateScore() {
     }
 
-
-    public static Card AddJest(String victime, String stolenCard) {
-    	Card card = new Card(null, null);
-    	card = Player.listOffer.get(victime).get(stolenCard);
-    	Player.listOffer.get(victime).remove(stolenCard);
-    	return (Card) card;
+    
+    
+    
+    public void CountJest(Player player) {
+    	
+    	
+    	
     	
     }
 }
-//bonjour madame mons
+
+

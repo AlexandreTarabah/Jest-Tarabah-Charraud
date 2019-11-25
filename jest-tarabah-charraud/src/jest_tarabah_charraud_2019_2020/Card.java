@@ -117,13 +117,6 @@ public class Card implements Cloneable {
 	}
 
 	
-	public Object clone() {
-			try {            
-				return (Card) super.clone();        }       
-			catch (CloneNotSupportedException e){          
-				throw new InternalError();       
-				}        
-			}
 	}
 
 ;

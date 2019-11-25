@@ -160,44 +160,51 @@ public class Game {
 		newGame.addPlayer(p3, input) ; 
 
 
-		newGame.distribute();
+		if(drawdeck.getSize()>3) {
+
+			newGame.distribute();
 
 
 
-		p1.upsideDown(p1, input) ; 
-		p2.upsideDown(p2, input) ;
-		p3.upsideDown(p3, input) ;
+			p1.upsideDown(p1, input) ; 
+			p2.upsideDown(p2, input) ;
+			p3.upsideDown(p3, input) ;
 
-		p1.determinateFirstPlayer( p1,p2,p3);
+			p1.determinateFirstPlayer( p1,p2,p3);
 
-		ForMainPlay.get(Player.getStarter()).stealCard(input);
-		ForMainPlay.get(Player.getVictime()).stealCard(input);
-		ForMainPlay.get(Player.getVictime()).stealCard(input);
+			System.out.println(ForMainPlay.get(Player.getStarter()).pseudo + " vous commencez ");
+			ForMainPlay.get(Player.getStarter()).stealCard(input);
 
-		drawdeck.collectCards(p1);
-		drawdeck.collectCards(p2);
-		drawdeck.collectCards(p3);
+			System.out.println(ForMainPlay.get(Player.getStarter()).pseudo + " à vous de jouer ");
+			ForMainPlay.get(Player.getVictime()).stealCard(input);
+
+			System.out.println(ForMainPlay.get(Player.getStarter()).pseudo + " à vous de jouer ");
+			ForMainPlay.get(Player.getVictime()).stealCard(input);
+
+			drawdeck.collectCards(p1);
+			drawdeck.collectCards(p2);
+			drawdeck.collectCards(p3);
 
 
-		System.out.println(Arrays.deepToString(newGame.trophyCards)) ;
+			System.out.println(Arrays.deepToString(newGame.trophyCards)) ;
 
-		ArrayList<Player> p = newGame.players ;
-		Card[] t = newGame.trophyCards ;
+			ArrayList<Player> p = newGame.players ;
+			Card[] t = newGame.trophyCards ;
 
-		for(int j = 0 ; j < t.length ; j ++) // parcourt les trophies
-		{
-			if(t[j].getTrophy() instanceof TrophyHighest) // si c'est des trophyHighest
+			for(int j = 0 ; j < t.length ; j ++) // parcourt les trophies
 			{
-				for(int i = 0 ; i < p.size() ; i ++) // parcourt les joueurs
+				if(t[j].getTrophy() instanceof TrophyHighest) // si c'est des trophyHighest
 				{
-					Jest jest = p.get(i).getJest() ;
-					jest.acceptVisitor(newGame.trophyCards[j].getTrophy()) ;
-					System.out.println(newGame.trophyCards[j].getTrophy().highCandidate) ;
-					System.out.println("ok");
+					for(int i = 0 ; i < p.size() ; i ++) // parcourt les joueurs
+					{
+						Jest jest = p.get(i).getJest() ;
+						jest.acceptVisitor(newGame.trophyCards[j].getTrophy()) ;
+						System.out.println(newGame.trophyCards[j].getTrophy().highCandidate) ;
+						System.out.println("ok");
+					}
 				}
 			}
+
 		}
-
 	}
-
 }
