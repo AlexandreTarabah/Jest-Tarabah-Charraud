@@ -38,7 +38,9 @@ public class Game {
 
 	private String gameplay;
 
-	static ArrayList<Player> players = new ArrayList<Player>() ;
+	static HashMap<String,Player> ForMainPlay = new HashMap<String,Player>() ;
+	
+	static ArrayList<Player> players = new ArrayList<Player>();
 	
 	static HashMap<String, HashMap<String, Card>> listOffer= new HashMap<>();
 
@@ -83,6 +85,10 @@ public class Game {
 
 	}
 
+	
+	public static HashMap<String, Player> getForMainPlay() {
+		return ForMainPlay;
+	}
 
 
 
@@ -131,8 +137,9 @@ public class Game {
 
 	public void addPlayer(Player p, Scanner input) {
 		if(currentPlay==false) {
-			players.add(p);
+			
 			p.setPseudo(p, input);
+			ForMainPlay.put(p.pseudo, p);
  
 			
 		}
@@ -173,6 +180,10 @@ public class Game {
 		p2.upsideDown(p2, input) ;
 		p3.upsideDown(p3, input) ;
 		
+		
+		ForMainPlay.get(Player.getStarter()).stealCard(input);
+		ForMainPlay.get(Player.getVictime()).stealCard(input);
+		ForMainPlay.get(Player.getVictime()).stealCard(input);
 		
 		drawdeck.collectCards(p1);
 		drawdeck.collectCards(p2);

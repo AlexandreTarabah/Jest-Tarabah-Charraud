@@ -22,7 +22,7 @@ public class Player
 	
 	static HashMap<String,HashMap<String,Card>> listOffer = new HashMap();
 	
-	 boolean HasStolen=false;
+	boolean HasStolen=false;
 	
 
 	private Card[] hand = new Card[2] ;
@@ -31,7 +31,9 @@ public class Player
 	
 	boolean firstPlayer = false;
 	
-	private String victime;
+	static private String victime;
+	
+	static private String starter;
 
 	//j'instancie l'objet offre, qui est aussi une collection de carte, dans le constructeur player ici 
 
@@ -45,46 +47,59 @@ public class Player
 	}
 	
 
+<<<<<<< HEAD
 	public void stealCard(Player playerStolen, Scanner input) {
+=======
+	public void stealCard( Scanner input) {
+>>>>>>> branch 'master' of https://github.com/AlexandreTarabah/Jest-Tarabah-Charraud
 		System.out.println("Qui sera votre victime ? ");
 		 victime = input.next(); 
-		 victime = playerStolen.pseudo;
-		 while(playerStolen.offer.size()<2) {
-			 System.out.println("le joueur a déja été volé");
-			 System.out.println("Veuillez rentrer un joueur qui à une offre complète");
-			 victime = input.next(); 
-			 victime = playerStolen.pseudo;
+		 while(Player.listOffer.get(victime).size()<2) {
+			 System.out.println("Offre de la victime incomplète, veuillez saisir une offre complete"); // vérification que l'offre est bien complète
+			 victime=input.next();
 		 }
+		
 		System.out.println("Quelle carte voulez-vous lui dérober ? ");
 		String stolenCard = input.next();
 		if(stolenCard == "down") {
+<<<<<<< HEAD
 			this.jest.jestCards.add(Player.listOffer.get(playerStolen.pseudo).get("down")); /* Player.listOffer car c'esT static, et
+=======
+			this.jest.jestCards.add(Player.listOffer.get(victime).get("down")); /* Player.listOffer car c'esT static, et
+>>>>>>> branch 'master' of https://github.com/AlexandreTarabah/Jest-Tarabah-Charraud
 																					je vais get player.pseudo dans la listOffer, avec la clé down.*/
 		}
 		else if (stolenCard =="up") {
+<<<<<<< HEAD
 			this.jest.jestCards.add(Player.listOffer.get(playerStolen.pseudo).get("up")); 
+=======
+			this.jest.jestCards.add(Player.listOffer.get(victime).get("up")); 
+>>>>>>> branch 'master' of https://github.com/AlexandreTarabah/Jest-Tarabah-Charraud
 		}
+<<<<<<< HEAD
 			this.HasStolen=true; 
+=======
+>>>>>>> branch 'master' of https://github.com/AlexandreTarabah/Jest-Tarabah-Charraud
 		
-	}
-	
-	
-	public void Round(Player p1, Player p2, Player p3, Scanner input) {
-		if (p1.firstPlayer==true) {
-			p1.stealCard(p1, null, input);
-			if(victime==p2.pseudo) {
-				p2.stealCard(p2, null, input);
-				p3.stealCard(p3, null, input); 
-			}else 
-				if(victime==p3.pseudo) {
-					p3.stealCard(p3, null, input);
-					p2.stealCard(p2, null, input);
+			this.HasStolen=true; 
+			
+			if(Game.getForMainPlay().get(victime).HasStolen==true) { // Dans le cas ou le joueur vole le voleur précédent, on fixe la prochaine victime au joueur qui a l'offre complete. 
+				
+				for (HashMap.Entry<String,Player> mapentry : Game.getForMainPlay().entrySet()) {
+					if (mapentry.getValue().offer.size()==2) {
+						
+						victime=mapentry.getKey();
+						
+					}
+				}
+		        }
+		        
+		       
 				
 			}
-		}
-		
-		
-	}
+	
+	
+	
 
 	public void setPseudo(Player player, Scanner input) 
 	{
@@ -128,14 +143,17 @@ public void determinateFirstPlayer(Player p1, Player p2, Player p3) {
 		    		
 		    		if(it1.next().getKey()==p1.pseudo) {
 		    			p1.firstPlayer = true;
+		    			starter=p1.pseudo;
 		    			System.out.println("Joueur p1 commence !");
 		    		}else 
 		    			if(it1.next().getKey()==p2.pseudo) {
 		    				System.out.println("Joueur p2 commence ! ");
-		    				p1.firstPlayer=true;
+		    				p2.firstPlayer=true;
+		    				starter=p2.pseudo;
 		    			}else 
 		    				if(it1.next().getKey()==p3.pseudo) {
 		    				System.out.println("Joueur p3 commence ! ");
+		    				starter=p3.pseudo;
 		    				p3.firstPlayer=true;
 		    			}
 		    				
@@ -143,7 +161,13 @@ public void determinateFirstPlayer(Player p1, Player p2, Player p3) {
 		    	};
 		    	
 		    	
+		    	public static String getStarter() {
+		    		return starter;
+		    	}
 		    	
+		    	public static String getVictime() {
+		    		return victime;
+		    	}
 		    	
 		    	
 		    	
