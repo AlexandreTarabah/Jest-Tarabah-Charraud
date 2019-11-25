@@ -175,10 +175,10 @@ public class Game {
 			System.out.println(ForMainPlay.get(Player.getStarter()).pseudo + " vous commencez ");
 			ForMainPlay.get(Player.getStarter()).stealCard(input);
 
-			System.out.println(ForMainPlay.get(Player.getStarter()).pseudo + " à vous de jouer ");
+			System.out.println(ForMainPlay.get(Player.getVictime()).pseudo + " à vous de jouer ");
 			ForMainPlay.get(Player.getVictime()).stealCard(input);
 
-			System.out.println(ForMainPlay.get(Player.getStarter()).pseudo + " à vous de jouer ");
+			System.out.println(ForMainPlay.get(Player.getVictime()).pseudo + " à vous de jouer ");
 			ForMainPlay.get(Player.getVictime()).stealCard(input);
 
 			drawdeck.collectCards(p1);
