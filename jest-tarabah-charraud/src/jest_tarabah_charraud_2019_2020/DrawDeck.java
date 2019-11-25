@@ -62,10 +62,22 @@ public class DrawDeck {
     
     
     public void collectCards(Player player) {
+    	
+    	if(drawdeck.size()>0) {
+    	
     	if(player.offer.get("up")==null) {
     		drawdeck.add(player.offer.get("down"));
     	}else
     	drawdeck.add(player.offer.get("up"));
+    }else 
+    	if(drawdeck.size()<3) {
+    		
+    		if(player.offer.get("up")==null) {
+        		player.getJest().jestCards.add(player.offer.get("down"));
+        	}else
+        		player.getJest().jestCards.add(player.offer.get("up"));
+    		
+    	}
     }
     		
     		
@@ -75,5 +87,12 @@ public class DrawDeck {
     {
     	return drawdeck.isEmpty(); 
     }
+
+
+
+	public int getSize() {
+		// TODO Auto-generated method stub
+		return drawdeck.size();
+	}
     
 }

@@ -159,6 +159,8 @@ public class Game {
 		newGame.addPlayer(p3, input) ; 
 
 
+		if(drawdeck.getSize()>3) {
+		
 		newGame.distribute();
 
 
@@ -168,16 +170,21 @@ public class Game {
 		p3.upsideDown(p3, input) ;
 
 		p1.determinateFirstPlayer( p1,p2,p3);
-
+		
+		System.out.println(ForMainPlay.get(Player.getStarter()).pseudo + " vous commencez ");
 		ForMainPlay.get(Player.getStarter()).stealCard(input);
+		
+		System.out.println(ForMainPlay.get(Player.getStarter()).pseudo + " à vous de jouer ");
 		ForMainPlay.get(Player.getVictime()).stealCard(input);
+		
+		System.out.println(ForMainPlay.get(Player.getStarter()).pseudo + " à vous de jouer ");
 		ForMainPlay.get(Player.getVictime()).stealCard(input);
 
 		drawdeck.collectCards(p1);
 		drawdeck.collectCards(p2);
 		drawdeck.collectCards(p3);
 
-
+		}
 		ArrayList<Player> p = newGame.players ;
 
 		for(int i = 0 ; i < p.size() ; i ++)

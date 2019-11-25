@@ -59,14 +59,28 @@ public class Player implements Cloneable
 */
 
 	public void stealCard(Scanner input) {
-		System.out.println("Qui sera votre victime ? ");
+		System.out.println("Qui sera votre victime ? Rentrer le pseudo d'un joueur ");
 		victime = input.next();
+		starter="";
+		while(listOffer.containsKey(victime)==false) {
+			System.out.println("Veuillez rentrer un joueur existant");
+			victime=input.next();
+		}
+		
+		if(victime.equals(Game.ForMainPlay.get(Player.getVictime()).pseudo) || victime.equals(Game.ForMainPlay.get(Player.getStarter()).pseudo)  ) {
+			while(listOffer.size()>4){
+				System.out.println(" n'oubliez pas que vous pouvez vous volez uniquement si vous êtes le dernier joueur");
+				victime=input.next();
+			}
+		}
+		
 		while(Player.listOffer.get(victime).size()<2) {
 			System.out.println("Offre de la victime incomplète, veuillez saisir une offre complete"); // vérification que l'offre est bien complète
 			victime=input.next();
 		}
 
 		System.out.println("Quelle carte voulez-vous lui dérober ? ");
+		
 		String stolenCard = input.next();
 
 		this.jest.jestCards.add(Player.listOffer.get(victime).get(stolenCard)); // méthode AddJest() implementé dans Jest.
@@ -86,11 +100,13 @@ public class Player implements Cloneable
 		Iterator it = this.jest.jestCards.iterator() ;
 		while(it.hasNext())
 		{
-			System.out.println(it.next());
+			System.out.println("vous avez ajouté à votre Jest" + it.next());
 		}
 	}
 
 
+	
+	
 
 
 	public void setPseudo(Player player, Scanner input) 
@@ -101,6 +117,10 @@ public class Player implements Cloneable
 
 	}
 
+	
+	
+	
+	
 
 
 	public  void setHand(int i, Card card)
@@ -111,6 +131,10 @@ public class Player implements Cloneable
 
 
 
+	
+	
+	
+	
 
 
 
@@ -121,22 +145,22 @@ public class Player implements Cloneable
 		int HighestColor =0;
 		String PlayerHighestValue = null;
 		for(Entry<String, HashMap<String, Card>> mapentry : listOffer.entrySet()) {
-			for(Entry<String, Card> mapentry2 : offer.entrySet()) {
+				for(Entry<String, Card> mapentry2 : offer.entrySet()) {
 
-				if(HighestValue < mapentry.getValue().get(mapentry2.getKey()).getValue().ordinal())
-				{
+					if(HighestValue < mapentry.getValue().get(mapentry2.getKey()).getValue().ordinal())
+					{
 					HighestValue=mapentry.getValue().get(mapentry2.getKey()).getValue().ordinal();
 					PlayerHighestValue = mapentry.getKey();
-				}
-				/* if(HighestValue == mapentry.getValue().get(mapentry2.getKey()).getValue().ordinal() && PlayerHighestValue != mapentry.getKey() ){
+					}
+						/* if(HighestValue == mapentry.getValue().get(mapentry2.getKey()).getValue().ordinal() && PlayerHighestValue != mapentry.getKey() ){
 
-		    		if( mapentry.getValue().get(PlayerHighestValue).getColor().ordinal()<mapentry.getValue().get(mapentry2.getKey()).getColor().ordinal() ) {
+								if( mapentry.getValue().get(PlayerHighestValue).getColor().ordinal()<mapentry.getValue().get(mapentry2.getKey()).getColor().ordinal() ) {
 
-		    			PlayerHighestValue=mapentry.getKey();*/
-			};
-
-
-		}
+									PlayerHighestValue=mapentry.getKey();
+				};
+		}*/
+	}
+}
 
 
 
@@ -157,13 +181,23 @@ public class Player implements Cloneable
 				}
 
 
-	};
+	}
 
 
+	
+	
+	
+	
+	
 	public static String getStarter() {
 		return starter;
 	}
 
+	
+	
+	
+	
+	
 	public static String getVictime() {
 		return victime;
 	}
@@ -172,11 +206,13 @@ public class Player implements Cloneable
 
 
 
+	
+	
 
 	// la c'est la méthode pour 
 	public void upsideDown(Player player, Scanner input) 
 	{		
-		System.out.println("voici vos cartes : ");
+		System.out.println("voici vos cartes : " + player.pseudo);
 		for(int i=0; i<2;i++) {
 			System.out.println(hand[i].getValue() +" de "+ hand[i].getColor()); // on affiche les cartes du joueur
 		}
@@ -185,9 +221,9 @@ public class Player implements Cloneable
 
 		int numC = input.nextInt() ; // demande au joueur de rentrer un numéro entre 1 et 2
 
-		((Map<String, Card>) offer).put("Down", hand[numC-1]); // -1 car le tableau commence à l'indice 0, je caste l'offer  
-		((Map<String, Card>) offer).put("Up", hand[numC%2]); // avec le modulo 2 on obtient la case manquante, je caste l'offer
-		System.out.println(player.pseudo  + " a caché " + ((Map<String, Card>) offer).get("Down").getValue() + " de " + ((Map<String, Card>) offer).get("Down").getColor());
+		((Map<String, Card>) offer).put("down", hand[numC-1]); // -1 car le tableau commence à l'indice 0, je caste l'offer  
+		((Map<String, Card>) offer).put("up", hand[numC%2]); // avec le modulo 2 on obtient la case manquante, je caste l'offer
+		System.out.println(player.pseudo  + " a caché " + ((Map<String, Card>) offer).get("down").getValue() + " de " + ((Map<String, Card>) offer).get("down").getColor());
 		/* et la on affiche le pseudo du player en paramètre, avec get(Down) et la value de la carte, et la couleur
 		 */
 
@@ -196,6 +232,8 @@ public class Player implements Cloneable
 	}
 
 
+	
+	
 
 
 	public Jest getJest()
