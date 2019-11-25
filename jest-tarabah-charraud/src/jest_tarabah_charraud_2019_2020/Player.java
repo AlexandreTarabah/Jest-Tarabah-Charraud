@@ -1,5 +1,6 @@
 package jest_tarabah_charraud_2019_2020;
 import java.util.Scanner;
+
 import java.util.Set;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -58,11 +59,12 @@ public class Player
 		
 		System.out.println("Quelle carte voulez-vous lui dérober ? ");
 		String stolenCard = input.next();
-		if(stolenCard == "down") {
-			this.jest.jestCards.add(Player.listOffer.get(victime).get("down")); /* Player.listOffer car c'esT static, et
+		if(stolenCard.equals("down")) {
+			
+			this.jest.jestCards.add(Player.listOffer.get(victime).get("down"));/* Player.listOffer car c'esT static, et
 																					je vais get player.pseudo dans la listOffer, avec la clé down.*/
 		}
-		else if (stolenCard =="up") {
+		else if (stolenCard.equals("up")) {
 			this.jest.jestCards.add(Player.listOffer.get(victime).get("up")); 
 		}
 		
@@ -79,7 +81,7 @@ public class Player
 				}
 		        }
 		        
-		       
+		     ;
 				
 			}
 	
@@ -107,22 +109,29 @@ public class Player
 	
 public void determinateFirstPlayer(Player p1, Player p2, Player p3) {
 		
-		Set<Entry<String, HashMap<String, Card>>> listOfferHM = listOffer.entrySet();
-	      Iterator<Entry<String, HashMap<String, Card>>> it1 = listOfferHM.iterator();
-	      Set<Entry<String, Card>> OfferHM = offer.entrySet();
-	      Iterator<Entry<String, Card>> it2 = OfferHM.iterator();
-	      int HighestValue = 0;
+		
+	     int HighestValue = 0;
+	     int HighestColor =0;
 	    	String PlayerHighestValue = null;
-	      while(it1.hasNext()){
-		      while(it2.hasNext()) {
+	      for(Entry<String, HashMap<String, Card>> mapentry : listOffer.entrySet()) {
+	    	  for(Entry<String, Card> mapentry2 : offer.entrySet()) {
 		    	
-		    	if(HighestValue > it2.next().getValue().getValue().ordinal())
+		    	if(HighestValue < mapentry.getValue().get(mapentry2.getKey()).getValue().ordinal())
 		    		{
-		    		HighestValue=it2.next().getValue().getValue().ordinal();
-		    		PlayerHighestValue = it1.next().getKey();
+		    		HighestValue=mapentry.getValue().get(mapentry2.getKey()).getValue().ordinal();
+		    		PlayerHighestValue = mapentry.getKey();
 		    		}
+		    	/* if(HighestValue == mapentry.getValue().get(mapentry2.getKey()).getValue().ordinal() && PlayerHighestValue != mapentry.getKey() ){
+		    		
+		    		if( mapentry.getValue().get(PlayerHighestValue).getColor().ordinal()<mapentry.getValue().get(mapentry2.getKey()).getColor().ordinal() ) {
+		    			
+		    			PlayerHighestValue=mapentry.getKey();*/
+		    		};
+		    		
+		    			
 		    	}
-	      }
+		    	
+	      
 		    		
 		    		if(PlayerHighestValue==p1.pseudo) {
 		    			p1.firstPlayer = true;
@@ -139,7 +148,7 @@ public void determinateFirstPlayer(Player p1, Player p2, Player p3) {
 		    				starter=p3.pseudo;
 		    				p3.firstPlayer=true;
 		    			}
-		    				
+
 		    		
 		    	};
 		    	

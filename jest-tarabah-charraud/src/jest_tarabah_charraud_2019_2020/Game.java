@@ -161,12 +161,20 @@ public class Game {
 		
 		newGame.distribute();
 		
+<<<<<<< HEAD
+=======
+
+>>>>>>> branch 'master' of https://github.com/AlexandreTarabah/Jest-Tarabah-Charraud
 
 		p1.upsideDown(p1, input) ; 
 		p2.upsideDown(p2, input) ;
 		p3.upsideDown(p3, input) ;
 		
+<<<<<<< HEAD
 		p1.determinateFirstPlayer(p1,p2,p3);
+=======
+		p1.determinateFirstPlayer( p1,p2,p3);
+>>>>>>> branch 'master' of https://github.com/AlexandreTarabah/Jest-Tarabah-Charraud
 		
 		ForMainPlay.get(Player.getStarter()).stealCard(input);
 		ForMainPlay.get(Player.getVictime()).stealCard(input);
