@@ -1,6 +1,7 @@
 package jest_tarabah_charraud_2019_2020;
 
 import java.util.ArrayList;
+
 import java.util.List;
 
 public class Jest {
@@ -17,10 +18,10 @@ public class Jest {
     }
 
     public static Card AddJest(String victime, String stolenCard) {
-    	
-    	Card card = Player.listOffer.get(victime).get(stolenCard).clone();
+    	Card card = new Card(null, null);
+    	card = Player.listOffer.get(victime).get(stolenCard);
     	Player.listOffer.get(victime).remove(stolenCard);
-    	return card;
+    	return (Card) card;
     	
     }
 }
