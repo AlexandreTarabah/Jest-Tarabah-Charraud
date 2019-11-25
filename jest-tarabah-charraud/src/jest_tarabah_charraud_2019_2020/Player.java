@@ -59,31 +59,51 @@ public class Player implements Cloneable
 */
 
 	public void stealCard(Scanner input) {
-		System.out.println("Qui sera votre victime ? Rentrer le pseudo d'un joueur ");
-		victime = input.next();
-		starter="";
+		int nbCardOffer=0;
+		for(Entry<String, HashMap<String, Card>> map : listOffer.entrySet()) {
+			 
+				
+				{nbCardOffer = nbCardOffer+map.getValue().size();}
+			}
+		
+				
+				System.out.println("Qui sera votre victime ? Rentrer le pseudo d'un joueur ");
+				victime = input.next();
+				
+				
+				
 		while(listOffer.containsKey(victime)==false) {
 			System.out.println("Veuillez rentrer un joueur existant");
 			victime=input.next();
 		}
 		
-		if(victime.equals(Game.ForMainPlay.get(Player.getVictime()).pseudo) || victime.equals(Game.ForMainPlay.get(Player.getStarter()).pseudo)  ) {
-			while(listOffer.size()>4){
-				System.out.println(" n'oubliez pas que vous pouvez vous volez uniquement si vous êtes le dernier joueur");
-				victime=input.next();
-			}
-		}
 		
-		while(Player.listOffer.get(victime).size()<2) {
-			System.out.println("Offre de la victime incomplète, veuillez saisir une offre complete"); // vérification que l'offre est bien complète
-			victime=input.next();
+		
+		if(nbCardOffer>4) {
+			;
+			
+			while(Player.listOffer.get(victime).size()<2) {
+				System.out.println("Offre de la victime incomplète, veuillez saisir une offre complete"); // vérification que l'offre est bien complète
+				victime=input.next();
+		
+		while( this.pseudo.equals(victime))  {
+			System.out.println(this.pseudo);
+			System.out.println(" n'oubliez pas que vous pouvez vous volez uniquement si vous êtes le dernier joueur");
+				victime=input.next();					
+						}
+				}
+		
+			
+		
+		
 		}
 
 		System.out.println("Quelle carte voulez-vous lui dérober ? ");
 		
 		String stolenCard = input.next();
 
-		this.jest.jestCards.add(Player.listOffer.get(victime).get(stolenCard)); // méthode AddJest() implementé dans Jest.
+		this.jest.jestCards.add(Player.listOffer.get(victime).get(stolenCard));
+		Player.listOffer.get(victime).remove(stolenCard);// méthode AddJest() implementé dans Jest.
 
 		this.HasStolen=true; 
 
@@ -97,6 +117,7 @@ public class Player implements Cloneable
 				}
 			}
 		}
+		starter="";
 		Iterator it = this.jest.jestCards.iterator() ;
 		while(it.hasNext())
 		{
