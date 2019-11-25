@@ -39,9 +39,9 @@ public class Game {
 	private String gameplay;
 
 	static HashMap<String,Player> ForMainPlay = new HashMap<String,Player>() ;
-	
+
 	static ArrayList<Player> players = new ArrayList<Player>();
-	
+
 	static HashMap<String, HashMap<String, Card>> listOffer= new HashMap<>();
 
 	private static DrawDeck drawdeck;
@@ -69,8 +69,8 @@ public class Game {
 					Player p = (Player) it.next();
 					p.setHand(i, drawdeck.takeCards()) ; // place une carte en position i dans la
 					// main du joueur (qui est un tableau)
-				
-					
+
+
 				}
 			}
 		}
@@ -85,7 +85,7 @@ public class Game {
 
 	}
 
-	
+
 	public static HashMap<String, Player> getForMainPlay() {
 		return ForMainPlay;
 	}
@@ -99,11 +99,11 @@ public class Game {
 		listOffer = new HashMap<>();
 		drawdeck = new DrawDeck(g);
 		drawdeck.shuffle();
-/*		for(int i = 0 ; i<2 ; i++)
+		/*		for(int i = 0 ; i<2 ; i++)
 		{
 			trophyCards[i] = drawdeck.takeCards() ;
 		}
-*/		currentPlay=false;   
+		 */		currentPlay=false;   
 
 
 	}
@@ -126,12 +126,12 @@ public class Game {
 
 	public void addPlayer(Player p, Scanner input) {
 		if(currentPlay==false) {
-			
+
 			p.setPseudo(p, input);
 			players.add(p);
 			ForMainPlay.put(p.pseudo, p);
- 
-			
+
+
 		}
 	}
 
@@ -157,34 +157,27 @@ public class Game {
 		newGame.addPlayer(p1, input) ;
 		newGame.addPlayer(p2, input) ;
 		newGame.addPlayer(p3, input) ; 
-		
-		
-		newGame.distribute();
-		
-<<<<<<< HEAD
-=======
 
->>>>>>> branch 'master' of https://github.com/AlexandreTarabah/Jest-Tarabah-Charraud
+
+		newGame.distribute();
+
+
 
 		p1.upsideDown(p1, input) ; 
 		p2.upsideDown(p2, input) ;
 		p3.upsideDown(p3, input) ;
-		
-<<<<<<< HEAD
-		p1.determinateFirstPlayer(p1,p2,p3);
-=======
+
 		p1.determinateFirstPlayer( p1,p2,p3);
->>>>>>> branch 'master' of https://github.com/AlexandreTarabah/Jest-Tarabah-Charraud
-		
+
 		ForMainPlay.get(Player.getStarter()).stealCard(input);
 		ForMainPlay.get(Player.getVictime()).stealCard(input);
 		ForMainPlay.get(Player.getVictime()).stealCard(input);
-		
+
 		drawdeck.collectCards(p1);
 		drawdeck.collectCards(p2);
 		drawdeck.collectCards(p3);
-		
-		
+
+
 		ArrayList<Player> p = newGame.players ;
 
 		for(int i = 0 ; i < p.size() ; i ++)
@@ -193,7 +186,8 @@ public class Game {
 			jest.acceptVisitor(newGame.trophyCards[0].getTrophy()) ;
 			jest.acceptVisitor(newGame.trophyCards[1].getTrophy()) ;
 		}
-		
+
 
 	}
+
 }
