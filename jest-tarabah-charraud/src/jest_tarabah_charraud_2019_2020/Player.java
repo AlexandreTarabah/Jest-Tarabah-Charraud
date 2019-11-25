@@ -115,7 +115,7 @@ public void determinateFirstPlayer(Player p1, Player p2, Player p3) {
 	      Set<Entry<String, Card>> OfferHM = offer.entrySet();
 	      Iterator<Entry<String, Card>> it2 = OfferHM.iterator();
 	      int HighestValue = 0;
-	    	String PlayerHighestValue;
+	    	String PlayerHighestValue = null;
 	      while(it1.hasNext()){
 		      while(it2.hasNext()) {
 		    	
@@ -127,17 +127,17 @@ public void determinateFirstPlayer(Player p1, Player p2, Player p3) {
 		    	}
 	      }
 		    		
-		    		if(it1.next().getKey()==p1.pseudo) {
+		    		if(PlayerHighestValue==p1.pseudo) {
 		    			p1.firstPlayer = true;
 		    			starter=p1.pseudo;
 		    			System.out.println("Joueur p1 commence !");
 		    		}else 
-		    			if(it1.next().getKey()==p2.pseudo) {
+		    			if(PlayerHighestValue==p2.pseudo) {
 		    				System.out.println("Joueur p2 commence ! ");
 		    				p2.firstPlayer=true;
 		    				starter=p2.pseudo;
 		    			}else 
-		    				if(it1.next().getKey()==p3.pseudo) {
+		    				if(PlayerHighestValue==p3.pseudo) {
 		    				System.out.println("Joueur p3 commence ! ");
 		    				starter=p3.pseudo;
 		    				p3.firstPlayer=true;
