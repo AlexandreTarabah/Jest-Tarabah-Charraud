@@ -139,6 +139,7 @@ public class Game {
 		if(currentPlay==false) {
 			
 			p.setPseudo(p, input);
+			players.add(p);
 			ForMainPlay.put(p.pseudo, p);
  
 			
@@ -169,9 +170,6 @@ public class Game {
 		newGame.addPlayer(p3, input) ; 
 		
 		
-		
-		
-
 		newGame.distribute();
 		
 		p1.determinateFirstPlayer( p1,p2,p3);
