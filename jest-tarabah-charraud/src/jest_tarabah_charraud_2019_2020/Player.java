@@ -62,10 +62,10 @@ public class Player
 		String stolenCard = input.next();
 		if(stolenCard.equals("down")) {
 			
-			this.jest.jestCards.add(Jest.AddJest( victime, stolenCard)); // méthode AddJest() implementé dans Jest.
+			this.jest.jestCards.add(Player.listOffer.get(victime).get(stolenCard)); // méthode AddJest() implementé dans Jest.
 		}
 		else if (stolenCard.equals("up")) {
-			this.jest.jestCards.add(Jest.AddJest( victime, stolenCard)); 
+			this.jest.jestCards.add(Player.listOffer.get(victime).get(stolenCard)); 
 		}
 		
 			this.HasStolen=true; 
