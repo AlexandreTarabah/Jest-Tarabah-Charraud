@@ -62,8 +62,7 @@ public class Player
 		String stolenCard = input.next();
 		if(stolenCard.equals("down")) {
 			
-			this.jest.jestCards.add(Jest.AddJest( victime, stolenCard));/* Player.listOffer car c'esT static, et
-																					je vais get player.pseudo dans la listOffer, avec la clé down.*/
+			this.jest.jestCards.add(Jest.AddJest( victime, stolenCard)); // méthode AddJest() implementé dans Jest.
 		}
 		else if (stolenCard.equals("up")) {
 			this.jest.jestCards.add(Jest.AddJest( victime, stolenCard)); 
