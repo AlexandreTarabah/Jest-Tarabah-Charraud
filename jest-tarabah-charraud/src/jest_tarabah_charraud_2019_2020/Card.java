@@ -1,4 +1,5 @@
 package jest_tarabah_charraud_2019_2020;
+import java.lang.Cloneable;
 
 //carotte
 
@@ -81,6 +82,7 @@ public class Card implements Cloneable {
 		}
 
 	}
+	
 
 
 	public Color getColor() {
@@ -115,23 +117,15 @@ public class Card implements Cloneable {
 	}
 
 	
-	public Card clone() {
-		Object c = null;
-		try {
-			// On récupère l'instance à renvoyer par l'appel de la 
-			// méthode super.clone()
-			c = super.clone();
-		} catch(CloneNotSupportedException cnse) {
-			// Ne devrait jamais arriver car nous implémentons 
-			// l'interface Cloneable
-			cnse.printStackTrace(System.err);
-		}
-		// on renvoie le clone
-		
-		
-		return (Card) c;
+	public Object clone() {
+			try {            
+				return (Card) super.clone();        }       
+			catch (CloneNotSupportedException e){          
+				throw new InternalError();       
+				}        
+			}
 	}
-}
+
 ;
 
 
