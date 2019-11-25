@@ -81,6 +81,7 @@ public class Card implements Cloneable {
 		}
 
 	}
+	
 
 
 	public Color getColor() {
