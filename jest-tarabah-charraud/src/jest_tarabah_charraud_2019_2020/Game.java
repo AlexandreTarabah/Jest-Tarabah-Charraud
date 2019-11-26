@@ -205,9 +205,9 @@ public class Game {
 				}
 			}
 
-<<<<<<< HEAD
+
 		
-=======
+
 		}
 
 		 */	Game newGame = new Game();
@@ -229,6 +229,5 @@ public class Game {
 		 Jest jest = p1.getJest() ;
 		 jest.acceptVisitor(newGame.trophyCards[0].getTrophy()) ;
 		 System.out.println(newGame.trophyCards[0].getTrophy().highCandidate) ;
->>>>>>> branch 'master' of https://github.com/AlexandreTarabah/Jest-Tarabah-Charraud
 	}
 }
