@@ -78,15 +78,14 @@ public class Player implements Cloneable
 		}
 		
 		
-		
-		if(nbCardOffer>4) {
-			;
+		while(Player.listOffer.get(victime).size()<2) {
+			System.out.println("Offre de la victime incomplète, veuillez saisir une offre complete"); // vérification que l'offre est bien complète
+			victime=input.next();}
 			
-			while(Player.listOffer.get(victime).size()<2) {
-				System.out.println("Offre de la victime incomplète, veuillez saisir une offre complete"); // vérification que l'offre est bien complète
-				victime=input.next();
+		if(nbCardOffer>4) {
 		
-		while( this.pseudo.equals(victime))  {
+		
+		while( this.pseudo.equals(victime) || victime==starter)  {
 			System.out.println(this.pseudo);
 			System.out.println(" n'oubliez pas que vous pouvez vous volez uniquement si vous êtes le dernier joueur");
 				victime=input.next();					
@@ -96,7 +95,6 @@ public class Player implements Cloneable
 			
 		
 		
-		}
 
 		System.out.println("Quelle carte voulez-vous lui dérober ? ");
 		
