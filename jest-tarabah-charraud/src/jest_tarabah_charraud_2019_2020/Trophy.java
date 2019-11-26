@@ -13,7 +13,10 @@ public class Trophy implements Visitor
 
 	@Override
 	public void visitJest(Jest jest) {
-		// TODO Auto-generated method stu
+		// TODO Auto-generated method stub
+		
 	}
 
+	
+	
 }

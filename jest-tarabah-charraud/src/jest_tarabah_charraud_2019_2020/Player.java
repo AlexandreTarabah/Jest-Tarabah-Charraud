@@ -37,6 +37,8 @@ public class Player implements Cloneable
 	static private String victime;
 
 	static private String starter;
+	
+	int nbPoint;
 
 	//j'instancie l'objet offre, qui est aussi une collection de carte, dans le constructeur player ici 
 
@@ -50,13 +52,7 @@ public class Player implements Cloneable
 	}
 
 
-/*	public Player clone() throws CloneNotSupportedException
-	{
-		Player copie = (Player)super.clone() ;
-		return copie;
-		
-	}
-*/
+
 
 	public void stealCard(Scanner input) {
 		int nbCardOffer=0;

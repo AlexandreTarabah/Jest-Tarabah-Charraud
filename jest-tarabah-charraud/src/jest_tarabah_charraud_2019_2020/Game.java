@@ -49,8 +49,7 @@ public class Game {
 
 	boolean currentPlay;
 
-	public void determinateWinner() {
-	}
+	
 
 
 	// La c'est la distribution des cartes, ou finalement j'invoque la méthode takecards et donc le joueur prend 2 cartes, et créé son offer
@@ -100,11 +99,11 @@ public class Game {
 		listOffer = new HashMap<>();
 		drawdeck = new DrawDeck(g);
 		drawdeck.shuffle();
-		/*		for(int i = 0 ; i<2 ; i++)
+				for(int i = 0 ; i<2 ; i++)
 		{
 			trophyCards[i] = drawdeck.takeCards() ;
 		}
-		 */		currentPlay=false;   
+		 		currentPlay=false;   
 
 
 	}
@@ -144,7 +143,7 @@ public class Game {
 
 
 	public static void main(String[] args) {
-		/*
+		
 		Game newGame = new Game();
 
 		newGame.initializeGame(newGame); 
@@ -159,8 +158,6 @@ public class Game {
 		newGame.addPlayer(p2, input) ;
 		newGame.addPlayer(p3, input) ; 
 
-
-		while(drawdeck.getSize()>3) {
 
 			newGame.distribute();
 
@@ -184,7 +181,7 @@ public class Game {
 			drawdeck.collectCards(p1);
 			drawdeck.collectCards(p2);
 			drawdeck.collectCards(p3);
-		}
+		
 
 			System.out.println(Arrays.deepToString(newGame.trophyCards)) ;
 
@@ -204,30 +201,17 @@ public class Game {
 					}
 				}
 			}
+			
+			p1.getJest().countJest(p1);
+			p2.getJest().countJest(p2);
+			p3.getJest().countJest(p3);
+			
+			p1.getJest().calculateScore();
 
 
 		
 
-		}
+		} 
 
-		 */	Game newGame = new Game();
-
-		 newGame.initializeGame(newGame); 
-
-		 Scanner input = new Scanner(System.in) ;
 		 
-		 Player p1 = new Player() ;
-
-
-		 newGame.addPlayer(p1, input) ;
-
-
-		 newGame.distribute();
-		 
-		 System.out.println(Arrays.deepToString(newGame.trophyCards)) ;
-
-		 Jest jest = p1.getJest() ;
-		 jest.acceptVisitor(newGame.trophyCards[0].getTrophy()) ;
-		 System.out.println(newGame.trophyCards[0].getTrophy().highCandidate) ;
 	}
-}

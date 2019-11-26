@@ -3,7 +3,7 @@ package jest_tarabah_charraud_2019_2020;
 import java.util.Iterator;
 
 public class TrophyHighest extends Trophy implements Visitor 
-{
+{Card highest = new Card(Value.un, Color.heart);
 	
 	public TrophyHighest(Color color) 
 	{
@@ -12,7 +12,7 @@ public class TrophyHighest extends Trophy implements Visitor
 
 	public void visitJest(Jest jest, Color color) 
 	{
-		Card highest = new Card(Value.un, Color.heart);
+		
 		int highestOrdinal = 0 ;
 
 		Iterator<Card> itJC = jest.jestCards.iterator() ; // Entrance dans le
