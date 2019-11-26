@@ -144,7 +144,7 @@ public class Game {
 
 
 	public static void main(String[] args) {
-
+		/*
 		Game newGame = new Game();
 
 		newGame.initializeGame(newGame); 
@@ -200,11 +200,35 @@ public class Game {
 						Jest jest = p.get(i).getJest() ;
 						jest.acceptVisitor(newGame.trophyCards[j].getTrophy()) ;
 						System.out.println(newGame.trophyCards[j].getTrophy().highCandidate) ;
-						System.out.println("ok");
+						System.out.println("ok");	
 					}
 				}
 			}
 
+<<<<<<< HEAD
 		
+=======
+		}
+
+		 */	Game newGame = new Game();
+
+		 newGame.initializeGame(newGame); 
+
+		 Scanner input = new Scanner(System.in) ;
+		 
+		 Player p1 = new Player() ;
+
+
+		 newGame.addPlayer(p1, input) ;
+
+
+		 newGame.distribute();
+		 
+		 System.out.println(Arrays.deepToString(newGame.trophyCards)) ;
+
+		 Jest jest = p1.getJest() ;
+		 jest.acceptVisitor(newGame.trophyCards[0].getTrophy()) ;
+		 System.out.println(newGame.trophyCards[0].getTrophy().highCandidate) ;
+>>>>>>> branch 'master' of https://github.com/AlexandreTarabah/Jest-Tarabah-Charraud
 	}
 }

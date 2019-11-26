@@ -5,27 +5,27 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Jest {
-    private int nbCardJest;
+	private int nbCardJest;
 
-    public List<Card> jestCards = new ArrayList<Card> ();
+	public List<Card> jestCards = new ArrayList<Card> ();
 
-    public void acceptVisitor(Trophy trophy) 
-    {
-    	trophy.visitJest(this);
-    }
+	public void acceptVisitor(Trophy trophy) 
+	{
+		trophy.visitJest(this);
+	}
 
-    public void calculateScore() {
-    }
+	public void calculateScore() {
+	}
 
-    
-    
-    
-    public void CountJest(Player player) {
-    	
-    	
-    	
-    	
-    }
+
+
+
+	public void CountJest(Player player) {
+
+
+
+
+	}
 }
 
 

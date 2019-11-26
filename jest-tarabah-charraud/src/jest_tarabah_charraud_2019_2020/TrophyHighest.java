@@ -7,6 +7,7 @@ public class TrophyHighest extends Trophy implements Visitor
 	
 	public TrophyHighest(Color color) 
 	{
+		
 	}
 
 	public void visitJest(Jest jest, Color color) 
