@@ -225,6 +225,6 @@ public class Game {
 
 		 Jest jest = p1.getJest() ;
 		 jest.acceptVisitor(newGame.trophyCards[0].getTrophy()) ;
-		 System.out.println(newGame.trophyCards[1].getTrophy().highCandidate) ;
+		 System.out.println(newGame.trophyCards[0].getTrophy().highCandidate) ;
 	}
 }
