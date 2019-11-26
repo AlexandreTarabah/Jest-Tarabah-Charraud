@@ -11,8 +11,21 @@ public class Jest {
 
 	public void acceptVisitor(Trophy trophy) 
 	{
-		trophy.visitJest(this);
+		if (trophy instanceof TrophyHighest) 
+		{
+			trophy.visitJest(this, trophy.getColor());
+			// TODO Auto-generated catch block
+
+		}
+		
+		else if (trophy instanceof TrophyLowest) 
+		{
+			trophy.visitJest(this, trophy.getColor());
+			// TODO Auto-generated catch block
+
+		}
 	}
+
 
 	public void calculateScore() {
 	}

@@ -38,7 +38,7 @@ public class DrawDeck {
     				Card card = new Card(v,c);
     				g.trophyCards[0] = card ;
     			}
-    			else if (v == Value.trois && c == Color.club)
+    			else if (v == Value.trois && c == Color.diamond)
     			{
     				Card card = new Card(v,c);
     				g.trophyCards[1] = card ;

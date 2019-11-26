@@ -2,25 +2,26 @@ package jest_tarabah_charraud_2019_2020;
 
 import java.util.Iterator;
 
-public class TrophyHighest extends Trophy implements Visitor 
+public class TrophyHighest extends Trophy
 {
-	
+
 	public TrophyHighest(Color color) 
 	{
-		
+		super(color) ;
 	}
 
-	public void visitJest(Jest jest, Color color) 
+	public void visitJest(Jest jest, Color color)
 	{
-		Card highest = new Card(Value.un, Color.heart);
+		Card highest = new Card(Value.un, Color.heart) ;
 		int highestOrdinal = 0 ;
 
 		Iterator<Card> itJC = jest.jestCards.iterator() ; // Entrance dans le
-													   // jest du joueur
-		 
+		// jest du joueur
+
 		while(itJC.hasNext())
 		{
 			Card card = (Card) itJC.next();
+
 			if(card.getColor().equals(color))
 			{
 				if(card.getValue().ordinal() > highestOrdinal)
@@ -28,12 +29,9 @@ public class TrophyHighest extends Trophy implements Visitor
 					highest = card ; 
 				}
 			}
-			
-			super.highCandidate = highest ;
-
 		}
 
+		super.highCandidate = highest ;
 	}
-
 
 }

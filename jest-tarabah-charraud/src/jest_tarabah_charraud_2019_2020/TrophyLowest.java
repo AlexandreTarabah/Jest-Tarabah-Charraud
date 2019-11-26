@@ -2,41 +2,36 @@ package jest_tarabah_charraud_2019_2020;
 
 import java.util.Iterator;
 
-public class TrophyLowest extends Trophy implements Visitor {
-	
-	Card lowest ; 
-	
-	public TrophyLowest() {
+public class TrophyLowest extends Trophy
+{
 
-		// TODO Auto-generated constructor stub
+	public TrophyLowest(Color color) 
+	{
+		super(color) ;
 	}
 
+	public void visitJest(Jest jest, Color color)
+	{
+		Card lowest = new Card(Value.un, Color.heart) ;
+		int lowestOrdinal = 0 ;
 
-	public void visitJest(Jest jest, Color color) {
+		Iterator<Card> itJC = jest.jestCards.iterator() ; // Entrance dans le
+		// jest du joueur
 
+		while(itJC.hasNext())
 		{
-			Card lowest= new Card(Value.un, Color.heart); 
-			int lowestOrdinal = 5 ;
+			Card card = (Card) itJC.next();
 
-			Iterator<Card> itJC = jest.jestCards.iterator() ; /* Entrance dans le
-    													   jest du joueur
-			 */
-			while(itJC.hasNext())
+			if(card.getColor().equals(color))
 			{
-				Card card = (Card) itJC.next();
-				if(card.getColor().equals(color))
+				if(card.getValue().ordinal() < lowestOrdinal)
 				{
-					if(card.getValue().ordinal() < lowestOrdinal)
-					{
-						lowest = card ; 
-					}
+					lowest = card ; 
 				}
-				
-				this.lowest = lowest ;
-
 			}
 		}
-	}
 
+		super.lowCandidate = lowest ;
+	}
 
 }

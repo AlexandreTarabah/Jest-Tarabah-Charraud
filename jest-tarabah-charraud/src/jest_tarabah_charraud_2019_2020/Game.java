@@ -143,8 +143,9 @@ public class Game {
 
 
 
-	public static void main(String[] args) {
-		/*
+	public static void main(String[] args) 
+	{
+
 		Game newGame = new Game();
 
 		newGame.initializeGame(newGame); 
@@ -198,33 +199,47 @@ public class Game {
 					for(int i = 0 ; i < p.size() ; i ++) // parcourt les joueurs
 					{
 						Jest jest = p.get(i).getJest() ;
-						jest.acceptVisitor(newGame.trophyCards[j].getTrophy()) ;
-						System.out.println(newGame.trophyCards[j].getTrophy().highCandidate) ;
-						System.out.println("ok");	
+						jest.acceptVisitor(t[j].getTrophy()) ;
+						if(t[j].getTrophy().highCandidate.getColor()
+						  .equals(t[j].getTrophy().getColor()) == false)
+						{
+							System.out.println("Vous n'avez aucune carte de la même couleur !\n") ;
+						}
+						else
+						{
+							System.out.println("Voici votre carte de " + t[j].getTrophy().getColor() 
+												+ " de plus grande valeur : "
+												+ t[j].getTrophy().highCandidate.getValue() + " de " 
+												+ t[j].getTrophy().highCandidate.getColor() + "\n") ;	
+						}
+						
+					}
+				}
+				
+				else if(t[j].getTrophy() instanceof TrophyLowest) // si c'est des trophyHighest
+				{
+					for(int i = 0 ; i < p.size() ; i ++) // parcourt les joueurs
+					{
+						Jest jest = p.get(i).getJest() ;
+						jest.acceptVisitor(t[j].getTrophy()) ;
+						if(t[j].getTrophy().lowCandidate.getColor()
+						  .equals(t[j].getTrophy().getColor()) == false)
+						{
+							System.out.println("Vous n'avez aucune carte de la même couleur !\n") ;
+						}
+						else
+						{
+							System.out.println("Voici votre carte de " + t[j].getTrophy().getColor() 
+									+ " de plus faible valeur : "
+									+ t[j].getTrophy().lowCandidate.getValue() + " de " 
+									+ t[j].getTrophy().lowCandidate.getColor() + "\n") ;	
+						}
+						
 					}
 				}
 			}
 
 		}
-
-		 */	Game newGame = new Game();
-
-		 newGame.initializeGame(newGame); 
-
-		 Scanner input = new Scanner(System.in) ;
-		 
-		 Player p1 = new Player() ;
-
-
-		 newGame.addPlayer(p1, input) ;
-
-
-		 newGame.distribute();
-		 
-		 System.out.println(Arrays.deepToString(newGame.trophyCards)) ;
-
-		 Jest jest = p1.getJest() ;
-		 jest.acceptVisitor(newGame.trophyCards[0].getTrophy()) ;
-		 System.out.println(newGame.trophyCards[0].getTrophy().highCandidate) ;
 	}
+
 }

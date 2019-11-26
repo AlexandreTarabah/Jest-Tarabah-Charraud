@@ -35,7 +35,7 @@ public class Card implements Cloneable {
 			}
 			if(this.value == Value.quatre)
 			{
-				this.trophy = new TrophyLowest() ;
+				this.trophy = new TrophyLowest(Color.club) ;
 			}
 		}
 		else if (this.color == Color.club)
@@ -46,7 +46,7 @@ public class Card implements Cloneable {
 			}
 			if(this.value == Value.deux)
 			{
-				this.trophy = new TrophyLowest() ;
+				this.trophy = new TrophyLowest(Color.heart) ;
 			}
 			if(this.value == Value.trois)
 			{
@@ -54,7 +54,7 @@ public class Card implements Cloneable {
 			}
 			if(this.value == Value.quatre)
 			{
-				this.trophy = new TrophyLowest() ;
+				this.trophy = new TrophyLowest(Color.spade) ;
 			}
 		}
 		else if (this.color == Color.heart)
@@ -73,7 +73,7 @@ public class Card implements Cloneable {
 			}
 			if(this.value == Value.trois)
 			{
-				this.trophy = new TrophyLowest() ;
+				this.trophy = new TrophyLowest(Color.diamond) ;
 			}
 			if(this.value == Value.quatre)
 			{
