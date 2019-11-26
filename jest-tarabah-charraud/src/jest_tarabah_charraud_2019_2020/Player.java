@@ -37,6 +37,8 @@ public class Player implements Cloneable
 	static private String victime;
 
 	static private String starter;
+	
+	int nbPoint;
 
 	//j'instancie l'objet offre, qui est aussi une collection de carte, dans le constructeur player ici 
 
@@ -50,13 +52,7 @@ public class Player implements Cloneable
 	}
 
 
-/*	public Player clone() throws CloneNotSupportedException
-	{
-		Player copie = (Player)super.clone() ;
-		return copie;
-		
-	}
-*/
+
 
 	public void stealCard(Scanner input) {
 		int nbCardOffer=0;
@@ -67,19 +63,19 @@ public class Player implements Cloneable
 			}
 		
 				
-				System.out.println("Qui sera votre victime ? Rentrer le pseudo d'un joueur ");
+				System.out.println("Qui sera votre victime ? Rentrer le pseudo d'un joueur\n ");
 				victime = input.next();
 				
 				
 				
 		while(listOffer.containsKey(victime)==false) {
-			System.out.println("Veuillez rentrer un joueur existant");
+			System.out.println("Veuillez rentrer un joueur existant\n");
 			victime=input.next();
 		}
 		
 		
 		while(Player.listOffer.get(victime).size()<2) {
-			System.out.println("Offre de la victime incomplète, veuillez saisir une offre complete"); // vérification que l'offre est bien complète
+			System.out.println("Offre de la victime incomplète, veuillez saisir une offre complete\n"); // vérification que l'offre est bien complète
 			victime=input.next();}
 			
 		if(nbCardOffer>4) {
@@ -87,7 +83,7 @@ public class Player implements Cloneable
 		
 		while( this.pseudo.equals(victime) || victime==starter)  {
 			System.out.println(this.pseudo);
-			System.out.println(" n'oubliez pas que vous pouvez vous volez uniquement si vous êtes le dernier joueur");
+			System.out.println(" n'oubliez pas que vous pouvez vous volez uniquement si vous êtes le dernier joueur\n Rentrer un pseudo\n");
 				victime=input.next();					
 						}
 				}
@@ -96,10 +92,10 @@ public class Player implements Cloneable
 		
 		
 
-		System.out.println("Quelle carte voulez-vous lui dérober ? ");
+		System.out.println("Quelle carte voulez-vous lui dérober ?\n ");
 		
 		String stolenCard = input.next();
-
+		
 		this.jest.jestCards.add(Player.listOffer.get(victime).get(stolenCard));
 		Player.listOffer.get(victime).remove(stolenCard);// méthode AddJest() implementé dans Jest.
 
@@ -119,7 +115,7 @@ public class Player implements Cloneable
 		Iterator it = this.jest.jestCards.iterator() ;
 		while(it.hasNext())
 		{
-			System.out.println("vous avez ajouté à votre Jest" + it.next());
+			System.out.println("vous avez ajouté à votre Jest " + it.next()+" "+"\n");
 		}
 	}
 
@@ -170,14 +166,14 @@ public class Player implements Cloneable
 					{
 					HighestValue=mapentry.getValue().get(mapentry2.getKey()).getValue().ordinal();
 					PlayerHighestValue = mapentry.getKey();
-					}
-						/* if(HighestValue == mapentry.getValue().get(mapentry2.getKey()).getValue().ordinal() && PlayerHighestValue != mapentry.getKey() ){
+				
+						if(HighestValue == mapentry.getValue().get(mapentry2.getKey()).getValue().ordinal() && PlayerHighestValue != mapentry.getKey() ){
 
 								if( mapentry.getValue().get(PlayerHighestValue).getColor().ordinal()<mapentry.getValue().get(mapentry2.getKey()).getColor().ordinal() ) {
 
 									PlayerHighestValue=mapentry.getKey();
-				};
-		}*/
+									};
+						}}
 	}
 }
 
@@ -186,15 +182,15 @@ public class Player implements Cloneable
 		if(PlayerHighestValue==p1.pseudo) {
 			p1.firstPlayer = true;
 			starter=p1.pseudo;
-			System.out.println("Joueur p1 commence !");
+			System.out.println("Joueur " + p1.pseudo + " commence\n");
 		}else 
 			if(PlayerHighestValue==p2.pseudo) {
-				System.out.println("Joueur p2 commence ! ");
+				System.out.println("Joueur " + p2.pseudo + " commence\n");
 				p2.firstPlayer=true;
 				starter=p2.pseudo;
 			}else 
 				if(PlayerHighestValue==p3.pseudo) {
-					System.out.println("Joueur p3 commence ! ");
+					System.out.println("Joueur " + p3.pseudo + " commence\n");
 					starter=p3.pseudo;
 					p3.firstPlayer=true;
 				}
@@ -231,18 +227,18 @@ public class Player implements Cloneable
 	// la c'est la méthode pour 
 	public void upsideDown(Player player, Scanner input) 
 	{		
-		System.out.println("voici vos cartes : " + player.pseudo);
+		System.out.println("voici vos cartes joueur : " + player.pseudo+"\n");
 		for(int i=0; i<2;i++) {
 			System.out.println(hand[i].getValue() +" de "+ hand[i].getColor()); // on affiche les cartes du joueur
 		}
 
-		System.out.println("Quelle carte voulez-vous garder cachée?");
+		System.out.println("Quelle carte voulez-vous garder cachée?\n");
 
 		int numC = input.nextInt() ; // demande au joueur de rentrer un numéro entre 1 et 2
 
 		((Map<String, Card>) offer).put("down", hand[numC-1]); // -1 car le tableau commence à l'indice 0, je caste l'offer  
 		((Map<String, Card>) offer).put("up", hand[numC%2]); // avec le modulo 2 on obtient la case manquante, je caste l'offer
-		System.out.println(player.pseudo  + " a caché " + ((Map<String, Card>) offer).get("down").getValue() + " de " + ((Map<String, Card>) offer).get("down").getColor());
+		System.out.println(player.pseudo  + " a caché " + ((Map<String, Card>) offer).get("down").getValue() + " de " + ((Map<String, Card>) offer).get("down").getColor()+"\n");
 		/* et la on affiche le pseudo du player en paramètre, avec get(Down) et la value de la carte, et la couleur
 		 */
 

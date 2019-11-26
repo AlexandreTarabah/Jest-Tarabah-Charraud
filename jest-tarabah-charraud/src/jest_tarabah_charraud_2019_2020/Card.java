@@ -13,7 +13,7 @@ public class Card implements Cloneable {
 
 	Value value;
 
-	private Trophy trophy ;
+	public Trophy trophy ;
 
 
 	public Card (Value value, Color color) {
@@ -112,7 +112,7 @@ public class Card implements Cloneable {
 
 
 	public String toString() {
-		return "value :"+ this.value.toString() + "color :"+ this.color.toString();
+		return "value : "+ this.value.toString() + "color : "+ this.color.toString();
 
 	}
 

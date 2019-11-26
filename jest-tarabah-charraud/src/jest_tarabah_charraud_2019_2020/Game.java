@@ -49,8 +49,7 @@ public class Game {
 
 	boolean currentPlay;
 
-	public void determinateWinner() {
-	}
+	
 
 
 	// La c'est la distribution des cartes, ou finalement j'invoque la méthode takecards et donc le joueur prend 2 cartes, et créé son offer
@@ -100,11 +99,11 @@ public class Game {
 		listOffer = new HashMap<>();
 		drawdeck = new DrawDeck(g);
 		drawdeck.shuffle();
-		/*		for(int i = 0 ; i<2 ; i++)
+				for(int i = 0 ; i<2 ; i++)
 		{
 			trophyCards[i] = drawdeck.takeCards() ;
 		}
-		 */		currentPlay=false;   
+		 		currentPlay=false;   
 
 
 	}
@@ -143,9 +142,14 @@ public class Game {
 
 
 
+<<<<<<< HEAD
 	public static void main(String[] args) 
 	{
 
+=======
+	public static void main(String[] args) {
+		
+>>>>>>> branch 'master' of https://github.com/AlexandreTarabah/Jest-Tarabah-Charraud
 		Game newGame = new Game();
 
 		newGame.initializeGame(newGame); 
@@ -161,8 +165,6 @@ public class Game {
 		newGame.addPlayer(p3, input) ; 
 
 
-		if(drawdeck.getSize()>3) {
-
 			newGame.distribute();
 
 
@@ -173,19 +175,19 @@ public class Game {
 
 			p1.determinateFirstPlayer( p1,p2,p3);
 
-			System.out.println(ForMainPlay.get(Player.getStarter()).pseudo + " vous commencez ");
+			
 			ForMainPlay.get(Player.getStarter()).stealCard(input);
 
-			System.out.println(ForMainPlay.get(Player.getVictime()).pseudo + " à vous de jouer ");
+			System.out.println(ForMainPlay.get(Player.getVictime()).pseudo + " à vous de jouer\n ");
 			ForMainPlay.get(Player.getVictime()).stealCard(input);
 
-			System.out.println(ForMainPlay.get(Player.getVictime()).pseudo + " à vous de jouer ");
+			System.out.println(ForMainPlay.get(Player.getVictime()).pseudo + " à vous de jouer\n ");
 			ForMainPlay.get(Player.getVictime()).stealCard(input);
 
 			drawdeck.collectCards(p1);
 			drawdeck.collectCards(p2);
 			drawdeck.collectCards(p3);
-
+		
 
 			System.out.println(Arrays.deepToString(newGame.trophyCards)) ;
 
@@ -238,8 +240,26 @@ public class Game {
 					}
 				}
 			}
+			
+			p1.getJest().countJest(p1);
+			p2.getJest().countJest(p2);
+			p3.getJest().countJest(p3);
+			
+			p1.getJest().calculateScore();
 
+<<<<<<< HEAD
 		}
+=======
+
+		
+
+		} 
+
+		 
+>>>>>>> branch 'master' of https://github.com/AlexandreTarabah/Jest-Tarabah-Charraud
 	}
+<<<<<<< HEAD
 
 }
+=======
+>>>>>>> branch 'master' of https://github.com/AlexandreTarabah/Jest-Tarabah-Charraud
