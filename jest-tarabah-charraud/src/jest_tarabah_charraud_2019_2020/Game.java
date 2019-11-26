@@ -160,7 +160,7 @@ public class Game {
 		newGame.addPlayer(p3, input) ; 
 
 
-		if(drawdeck.getSize()>3) {
+		while(drawdeck.getSize()>3) {
 
 			newGame.distribute();
 
@@ -184,7 +184,7 @@ public class Game {
 			drawdeck.collectCards(p1);
 			drawdeck.collectCards(p2);
 			drawdeck.collectCards(p3);
-
+		}
 
 			System.out.println(Arrays.deepToString(newGame.trophyCards)) ;
 
@@ -205,6 +205,6 @@ public class Game {
 				}
 			}
 
-		}
+		
 	}
 }
