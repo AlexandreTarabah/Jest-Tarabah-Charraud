@@ -26,7 +26,7 @@ public class Trophy implements Visitor
 		
 	}
 
-<<<<<<< HEAD
+
 	public void visitJest(Jest jest, Color color) 
 	{
 		// TODO Auto-generated method stu
@@ -42,8 +42,7 @@ public class Trophy implements Visitor
 
 
 
-=======
+
 	
-	
->>>>>>> branch 'master' of https://github.com/AlexandreTarabah/Jest-Tarabah-Charraud
+
 }
