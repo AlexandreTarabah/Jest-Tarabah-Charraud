@@ -1,7 +1,7 @@
 package jest_tarabah_charraud_2019_2020;
 
 
-public class Trophy implements Visitor 
+public class Trophy 
 {
 	Value value ;
 	Color color ;
@@ -20,13 +20,12 @@ public class Trophy implements Visitor
 		this.color = color ;
 	}
 
-	@Override
 	public void visitJest(Jest jest) {
 		// TODO Auto-generated method stub
 		
 	}
 
-<<<<<<< HEAD
+
 	public void visitJest(Jest jest, Color color) 
 	{
 		// TODO Auto-generated method stu
@@ -40,10 +39,4 @@ public class Trophy implements Visitor
 		this.color = color;
 	}
 
-
-
-=======
-	
-	
->>>>>>> branch 'master' of https://github.com/AlexandreTarabah/Jest-Tarabah-Charraud
 }

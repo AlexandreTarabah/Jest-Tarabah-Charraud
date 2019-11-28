@@ -49,7 +49,7 @@ public class Game {
 
 	boolean currentPlay;
 
-	
+
 
 
 	// La c'est la distribution des cartes, ou finalement j'invoque la méthode takecards et donc le joueur prend 2 cartes, et créé son offer
@@ -99,12 +99,12 @@ public class Game {
 		listOffer = new HashMap<>();
 		drawdeck = new DrawDeck(g);
 		drawdeck.shuffle();
-				for(int i = 0 ; i<2 ; i++)
+		/*	for(int i = 0 ; i<2 ; i++)
 		{
 			trophyCards[i] = drawdeck.takeCards() ;
 		}
 		 		currentPlay=false;   
-
+		 */
 
 	}
 
@@ -142,14 +142,11 @@ public class Game {
 
 
 
-<<<<<<< HEAD
-	public static void main(String[] args) 
-	{
 
-=======
+
 	public static void main(String[] args) {
-		
->>>>>>> branch 'master' of https://github.com/AlexandreTarabah/Jest-Tarabah-Charraud
+
+
 		Game newGame = new Game();
 
 		newGame.initializeGame(newGame); 
@@ -165,101 +162,100 @@ public class Game {
 		newGame.addPlayer(p3, input) ; 
 
 
-			newGame.distribute();
+		newGame.distribute();
 
 
 
-			p1.upsideDown(p1, input) ; 
-			p2.upsideDown(p2, input) ;
-			p3.upsideDown(p3, input) ;
+		p1.upsideDown(p1, input) ; 
+		p2.upsideDown(p2, input) ;
+		p3.upsideDown(p3, input) ;
 
-			p1.determinateFirstPlayer( p1,p2,p3);
+		p1.determinateFirstPlayer( p1,p2,p3);
 
-			
-			ForMainPlay.get(Player.getStarter()).stealCard(input);
 
-			System.out.println(ForMainPlay.get(Player.getVictime()).pseudo + " à vous de jouer\n ");
-			ForMainPlay.get(Player.getVictime()).stealCard(input);
+		ForMainPlay.get(Player.getStarter()).stealCard(input);
 
-			System.out.println(ForMainPlay.get(Player.getVictime()).pseudo + " à vous de jouer\n ");
-			ForMainPlay.get(Player.getVictime()).stealCard(input);
+		System.out.println(ForMainPlay.get(Player.getVictime()).pseudo + " à vous de jouer\n ");
+		ForMainPlay.get(Player.getVictime()).stealCard(input);
 
-			drawdeck.collectCards(p1);
-			drawdeck.collectCards(p2);
-			drawdeck.collectCards(p3);
-		
+		System.out.println(ForMainPlay.get(Player.getVictime()).pseudo + " à vous de jouer\n ");
+		ForMainPlay.get(Player.getVictime()).stealCard(input);
 
-			System.out.println(Arrays.deepToString(newGame.trophyCards)) ;
+		drawdeck.collectCards(p1);
+		drawdeck.collectCards(p2);
+		drawdeck.collectCards(p3);
 
-			ArrayList<Player> p = Game.players ;
-			Card[] t = newGame.trophyCards ;
 
-			for(int j = 0 ; j < t.length ; j ++) // parcourt les trophies
+		System.out.println(Arrays.deepToString(newGame.trophyCards)) ;
+
+		ArrayList<Player> p = Game.players ;
+		Card[] t = newGame.trophyCards ;
+
+		for(int j = 0 ; j < t.length ; j ++) // parcourt les trophies
+		{
+			if(t[j].getTrophy() instanceof TrophyHighest) // si c'est des trophyHighest
 			{
-				if(t[j].getTrophy() instanceof TrophyHighest) // si c'est des trophyHighest
+				for(int i = 0 ; i < p.size() ; i ++) // parcourt les joueurs
 				{
-					for(int i = 0 ; i < p.size() ; i ++) // parcourt les joueurs
+					Jest jest = p.get(i).getJest() ;
+					jest.acceptVisitor(t[j].getTrophy()) ;
+					if(t[j].getTrophy().highCandidate.getColor()
+							.equals(t[j].getTrophy().getColor()) == false)
 					{
-						Jest jest = p.get(i).getJest() ;
-						jest.acceptVisitor(t[j].getTrophy()) ;
-						if(t[j].getTrophy().highCandidate.getColor()
-						  .equals(t[j].getTrophy().getColor()) == false)
-						{
-							System.out.println("Vous n'avez aucune carte de la même couleur !\n") ;
-						}
-						else
-						{
-							System.out.println("Voici votre carte de " + t[j].getTrophy().getColor() 
-												+ " de plus grande valeur : "
-												+ t[j].getTrophy().highCandidate.getValue() + " de " 
-												+ t[j].getTrophy().highCandidate.getColor() + "\n") ;	
-						}
-						
+						System.out.println("Vous n'avez aucune carte de la même couleur !\n") ;
 					}
-				}
-				
-				else if(t[j].getTrophy() instanceof TrophyLowest) // si c'est des trophyHighest
-				{
-					for(int i = 0 ; i < p.size() ; i ++) // parcourt les joueurs
+					else
 					{
-						Jest jest = p.get(i).getJest() ;
-						jest.acceptVisitor(t[j].getTrophy()) ;
-						if(t[j].getTrophy().lowCandidate.getColor()
-						  .equals(t[j].getTrophy().getColor()) == false)
-						{
-							System.out.println("Vous n'avez aucune carte de la même couleur !\n") ;
-						}
-						else
-						{
-							System.out.println("Voici votre carte de " + t[j].getTrophy().getColor() 
-									+ " de plus faible valeur : "
-									+ t[j].getTrophy().lowCandidate.getValue() + " de " 
-									+ t[j].getTrophy().lowCandidate.getColor() + "\n") ;	
-						}
-						
+						System.out.println("Voici votre carte de " + t[j].getTrophy().getColor() 
+								+ " de plus grande valeur : "
+								+ t[j].getTrophy().highCandidate.getValue() + " de " 
+								+ t[j].getTrophy().highCandidate.getColor() + "\n") ;	
 					}
+
 				}
 			}
-			
-			p1.getJest().countJest(p1);
-			p2.getJest().countJest(p2);
-			p3.getJest().countJest(p3);
-			
-			p1.getJest().calculateScore();
 
-<<<<<<< HEAD
+
+
+			else if(t[j].getTrophy() instanceof TrophyLowest) // si c'est des trophyHighest
+			{
+				for(int i = 0 ; i < p.size() ; i ++) // parcourt les joueurs
+				{
+					Jest jest = p.get(i).getJest() ;
+					jest.acceptVisitor(t[j].getTrophy()) ;
+					if(t[j].getTrophy().lowCandidate.getColor()
+							.equals(t[j].getTrophy().getColor()) == false)
+					{
+						System.out.println("Vous n'avez aucune carte de la même couleur !\n") ;
+					}
+					else
+					{
+						System.out.println("Voici votre carte de " + t[j].getTrophy().getColor() 
+								+ " de plus faible valeur : "
+								+ t[j].getTrophy().lowCandidate.getValue() + " de " 
+								+ t[j].getTrophy().lowCandidate.getColor() + "\n") ;	
+					}
+
+				}
+			}
+
+
 		}
-=======
 
-		
+		p1.getJest().countJest(p1);
+		p2.getJest().countJest(p2);
+		p3.getJest().countJest(p3);
 
-		} 
+		p1.getJest().winnerDetermination();
 
-		 
->>>>>>> branch 'master' of https://github.com/AlexandreTarabah/Jest-Tarabah-Charraud
+
 	}
-<<<<<<< HEAD
+
+
+
+
+
+
+
 
 }
-=======
->>>>>>> branch 'master' of https://github.com/AlexandreTarabah/Jest-Tarabah-Charraud

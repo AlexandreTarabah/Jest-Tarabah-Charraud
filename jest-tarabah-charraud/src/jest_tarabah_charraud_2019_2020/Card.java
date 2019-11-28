@@ -3,7 +3,8 @@ import java.lang.Cloneable;
 
 //carotte
 
-public class Card implements Cloneable {
+public class Card 
+{
 
 	private boolean ace;
 
@@ -59,7 +60,7 @@ public class Card implements Cloneable {
 		}
 		else if (this.color == Color.heart)
 		{
-				this.trophy = new TrophyJoker() ;
+			this.trophy = new TrophyJoker() ;
 		}
 		else if (this.color == Color.diamond)
 		{
@@ -82,7 +83,7 @@ public class Card implements Cloneable {
 		}
 
 	}
-	
+
 
 
 	public Color getColor() {
@@ -95,7 +96,7 @@ public class Card implements Cloneable {
 
 	}
 
-//yep
+	//yep
 	public Value getValue() {
 		return value;
 	}
@@ -116,8 +117,8 @@ public class Card implements Cloneable {
 
 	}
 
-	
-	}
+
+}
 
 ;
 
