@@ -35,6 +35,7 @@ import java.util.Map.Entry;
 public class Game {
 	protected static int nbPlayer;
 
+
 	Card[] trophyCards = new Card[2] ;
 
 	private String gameplay;
@@ -48,6 +49,7 @@ public class Game {
 	private static DrawDeck drawdeck;
 
 	boolean currentPlay;
+	
 
 
 
@@ -215,7 +217,7 @@ public class Game {
 					for(int i=0; i<p.size(); i++) {
 						Jest jest = p.get(i).getJest();
 						jest.acceptVisitor(t[j].getTrophy());
-<<<<<<< HEAD
+
 						
 						if(t[j].getTrophy().bestJestCandidate==jest.bestJest()) {
 							System.out.println("Vous avez le BestJest ! ");
@@ -223,9 +225,7 @@ public class Game {
 						}
 						else
 							System.out.println("Vous n'avez pas le best Jest ! ");
-=======
 
->>>>>>> branch 'master' of https://github.com/AlexandreTarabah/Jest-Tarabah-Charraud
 					}
 				}
 			}
