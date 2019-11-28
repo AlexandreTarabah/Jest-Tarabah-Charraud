@@ -12,6 +12,8 @@ public class Jest {
 	
 	HashMap<String,Integer> winner = new HashMap();
 	
+	int bestJest;
+	
 	private int nbCardJest;
 
 	public List<Card> jestCards = new ArrayList<Card>();
@@ -61,6 +63,12 @@ public class Jest {
 	
 		}
 		
+	}
+	public int bestJest() {
+		for(int i=0; i<jestCards.size(); i++) {
+			bestJest =+ jestCards.get(i).value.ordinal();
+		}
+		return bestJest;
 	}
 
 }

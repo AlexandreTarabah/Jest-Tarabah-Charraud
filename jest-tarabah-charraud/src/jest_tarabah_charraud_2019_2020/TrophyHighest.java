@@ -14,6 +14,8 @@ public class TrophyHighest extends Trophy implements Visitor
 		super(color) ;
 	}
 
+	
+	
 	public void visitJest(Jest jest, Color color)
 	{
 

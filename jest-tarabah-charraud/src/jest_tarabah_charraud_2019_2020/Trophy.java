@@ -10,7 +10,7 @@ public class Trophy implements Visitor
 
 	protected Card lowCandidate = new Card(value, color);
 	
-	protected int BestJestCandidate;
+	protected int bestJestCandidate;
 
 	public Trophy() 
 	{

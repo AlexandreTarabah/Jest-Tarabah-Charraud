@@ -220,6 +220,12 @@ public class Game {
 						Jest jest = p.get(i).getJest();
 						jest.acceptVisitor(t[j].getTrophy());
 						
+						if(t[j].getTrophy().bestJestCandidate==jest.bestJest()) {
+							System.out.println("Vous avez le BestJest ! ");
+			
+						}
+						else
+							System.out.println("Vous n'avez pas le best Jest ! ");
 					}
 				}
 			}
