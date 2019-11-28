@@ -99,12 +99,12 @@ public class Game {
 		listOffer = new HashMap<>();
 		drawdeck = new DrawDeck(g);
 		drawdeck.shuffle();
-				for(int i = 0 ; i<2 ; i++)
+			/*	for(int i = 0 ; i<2 ; i++)
 		{
 			trophyCards[i] = drawdeck.takeCards() ;
 		}
 		 		currentPlay=false;   
-
+*/
 
 	}
 
@@ -142,14 +142,11 @@ public class Game {
 
 
 
-<<<<<<< HEAD
-	public static void main(String[] args) 
-	{
 
-=======
+
 	public static void main(String[] args) {
 		
->>>>>>> branch 'master' of https://github.com/AlexandreTarabah/Jest-Tarabah-Charraud
+
 		Game newGame = new Game();
 
 		newGame.initializeGame(newGame); 
@@ -218,7 +215,19 @@ public class Game {
 					}
 				}
 				
-				else if(t[j].getTrophy() instanceof TrophyLowest) // si c'est des trophyHighest
+				if(t[j].getTrophy() instanceof TrophyBestJest) {
+					for(int i=0; i<p.size(); i++) {
+						Jest jest = p.get(i).getJest();
+						jest.acceptVisitor(t[j].getTrophy());
+						
+					}
+				}
+			}
+			
+				
+				
+				
+				/*else if(t[j].getTrophy() instanceof TrophyLowest) // si c'est des trophyHighest
 				{
 					for(int i = 0 ; i < p.size() ; i ++) // parcourt les joueurs
 					{
@@ -238,28 +247,30 @@ public class Game {
 						}
 						
 					}
-				}
-			}
+				}*/
+				
+				
+				
 			
 			p1.getJest().countJest(p1);
 			p2.getJest().countJest(p2);
 			p3.getJest().countJest(p3);
 			
-			p1.getJest().calculateScore();
+			p1.getJest().winnerDetermination();
 
-<<<<<<< HEAD
+
 		}
-=======
+
 
 		
 
-		} 
+		
 
 		 
->>>>>>> branch 'master' of https://github.com/AlexandreTarabah/Jest-Tarabah-Charraud
-	}
-<<<<<<< HEAD
 
-}
-=======
->>>>>>> branch 'master' of https://github.com/AlexandreTarabah/Jest-Tarabah-Charraud
+	}
+
+
+
+
+
