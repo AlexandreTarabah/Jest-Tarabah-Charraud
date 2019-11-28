@@ -100,12 +100,15 @@ public class Game {
 		drawdeck = new DrawDeck(g);
 		drawdeck.shuffle();
 		/*	for(int i = 0 ; i<2 ; i++)
+=======
+			/*	for(int i = 0 ; i<2 ; i++)
+>>>>>>> branch 'master' of https://github.com/AlexandreTarabah/Jest-Tarabah-Charraud
 		{
 			trophyCards[i] = drawdeck.takeCards() ;
 		}
 		 		currentPlay=false;   
+<<<<<<< HEAD
 		 */
-
 	}
 
 
@@ -145,7 +148,6 @@ public class Game {
 
 
 	public static void main(String[] args) {
-
 
 		Game newGame = new Game();
 
@@ -204,18 +206,20 @@ public class Game {
 					{
 						System.out.println("Vous n'avez aucune carte de la même couleur !\n") ;
 					}
-					else
-					{
-						System.out.println("Voici votre carte de " + t[j].getTrophy().getColor() 
-								+ " de plus grande valeur : "
-								+ t[j].getTrophy().highCandidate.getValue() + " de " 
-								+ t[j].getTrophy().highCandidate.getColor() + "\n") ;	
-					}
 
 				}
+
 			}
+			/*
+				if(t[j].getTrophy() instanceof TrophyBestJest) {
+					for(int i=0; i<p.size(); i++) {
+						Jest jest = p.get(i).getJest();
+						jest.acceptVisitor(t[j].getTrophy());
 
-
+					}
+				}
+			}
+			 */
 
 			else if(t[j].getTrophy() instanceof TrophyLowest) // si c'est des trophyHighest
 			{
@@ -242,9 +246,11 @@ public class Game {
 
 		}
 
+
 		p1.getJest().countJest(p1);
 		p2.getJest().countJest(p2);
 		p3.getJest().countJest(p3);
+
 
 		p1.getJest().winnerDetermination();
 
@@ -254,8 +260,8 @@ public class Game {
 
 
 
-
-
-
-
 }
+
+
+
+

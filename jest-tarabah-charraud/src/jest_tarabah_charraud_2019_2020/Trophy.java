@@ -9,6 +9,8 @@ public class Trophy
 	protected Card highCandidate = new Card(value, color);
 
 	protected Card lowCandidate = new Card(value, color);
+	
+	protected int BestJestCandidate;
 
 	public Trophy() 
 	{
@@ -38,5 +40,4 @@ public class Trophy
 	public void setColor(Color color) {
 		this.color = color;
 	}
-
 }

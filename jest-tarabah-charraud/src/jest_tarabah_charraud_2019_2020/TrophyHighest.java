@@ -8,6 +8,7 @@ public class TrophyHighest extends Trophy
 
 {
 
+
 	public TrophyHighest(Color color) 
 	{
 		super(color) ;
@@ -17,6 +18,7 @@ public class TrophyHighest extends Trophy
 	{
 
 		Card highest = new Card(Value.un, Color.heart) ;
+
 
 		int highestOrdinal = 0 ;
 
@@ -39,5 +41,5 @@ public class TrophyHighest extends Trophy
 
 		super.highCandidate = highest ;
 	}
-
 }
+

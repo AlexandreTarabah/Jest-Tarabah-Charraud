@@ -1,18 +1,23 @@
 package jest_tarabah_charraud_2019_2020;
 
+import java.util.Iterator;
 
 public class TrophyBestJest extends Trophy {
-    public TrophyBestJest() {
+    public TrophyBestJest(Color color) {
 
-		// TODO Auto-generated constructor stub
+    	super(color);
 	}
 
-	public void bestJest() 
-	{
-		
+
+    public void visitJest(Jest jest) {
+    	
+    	for(int i=0;i<jest.jestCards.size(); i++) {
+			int bestJest =+ jest.jestCards.get(i).value.ordinal();
+			System.out.println("Votre jest à un total de "+ bestJest + "points");
+			}
+    			
+		}
+    
     }
 
-    public void visitJest(Jest p1) {
-    }
 
-}
