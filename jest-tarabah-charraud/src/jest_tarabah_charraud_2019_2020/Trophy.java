@@ -1,7 +1,7 @@
 package jest_tarabah_charraud_2019_2020;
 
 
-public class Trophy implements Visitor 
+public class Trophy 
 {
 	Value value ;
 	Color color ;
@@ -22,7 +22,6 @@ public class Trophy implements Visitor
 		this.color = color ;
 	}
 
-	@Override
 	public void visitJest(Jest jest) {
 		// TODO Auto-generated method stub
 		
@@ -41,10 +40,4 @@ public class Trophy implements Visitor
 	public void setColor(Color color) {
 		this.color = color;
 	}
-
-
-
-
-	
-
 }

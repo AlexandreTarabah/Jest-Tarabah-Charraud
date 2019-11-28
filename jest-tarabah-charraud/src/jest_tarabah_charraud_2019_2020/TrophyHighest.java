@@ -3,11 +3,11 @@ package jest_tarabah_charraud_2019_2020;
 import java.util.Iterator;
 
 
-public class TrophyHighest extends Trophy implements Visitor
+public class TrophyHighest extends Trophy
 
 
-{Card highest = new Card(Value.un, Color.heart);
-	
+{
+
 
 	public TrophyHighest(Color color) 
 	{
@@ -21,7 +21,6 @@ public class TrophyHighest extends Trophy implements Visitor
 
 		Card highest = new Card(Value.un, Color.heart) ;
 
-		
 
 		int highestOrdinal = 0 ;
 
@@ -36,12 +35,13 @@ public class TrophyHighest extends Trophy implements Visitor
 			{
 				if(card.getValue().ordinal() > highestOrdinal)
 				{
-					highest = card ; 
-				}
+					highest = card ;
+					highestOrdinal = card.getValue().ordinal() ;
+				} 
 			}
 		}
 
 		super.highCandidate = highest ;
 	}
-
 }
+

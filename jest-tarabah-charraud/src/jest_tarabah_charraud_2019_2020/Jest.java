@@ -34,6 +34,7 @@ public class Jest {
 			// TODO Auto-generated catch block
 
 		}
+		
 	}
 
 
@@ -58,7 +59,7 @@ public class Jest {
 		int maxValueInMap=(Collections.max(winner.values()));  // This will return max value in the Hashmap
         for (Entry<String, Integer> entry : winner.entrySet()) {  // Itrate through hashmap
             if (entry.getValue()==maxValueInMap) {
-                System.out.println(entry.getKey() + "à gagner !" );
+                System.out.println(entry.getKey() + " à gagner !" );
             }
 	
 		}

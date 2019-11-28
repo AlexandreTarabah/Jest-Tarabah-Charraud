@@ -13,7 +13,8 @@ public class TrophyLowest extends Trophy
 	public void visitJest(Jest jest, Color color)
 	{
 		Card lowest = new Card(Value.un, Color.heart) ;
-		int lowestOrdinal = 0 ;
+		
+		int lowestOrdinal = 5 ;
 
 		Iterator<Card> itJC = jest.jestCards.iterator() ; // Entrance dans le
 		// jest du joueur
@@ -26,7 +27,8 @@ public class TrophyLowest extends Trophy
 			{
 				if(card.getValue().ordinal() < lowestOrdinal)
 				{
-					lowest = card ; 
+					lowest = card ;
+					lowestOrdinal = card.getValue().ordinal() ; 
 				}
 			}
 		}
