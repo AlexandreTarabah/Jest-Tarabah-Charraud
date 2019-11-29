@@ -3,6 +3,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Scanner;
 import java.util.Set;
@@ -188,7 +189,7 @@ public class Game {
 		drawdeck.collectCards(p3);
 
 
-		System.out.println(Arrays.deepToString(newGame.trophyCards)) ;
+		System.out.println(Arrays.deepToString(newGame.trophyCards) + "\n") ;
 
 		ArrayList<Player> p = Game.players ;
 		Card[] t = newGame.trophyCards ;
@@ -197,55 +198,141 @@ public class Game {
 		{
 			if(t[j].getTrophy() instanceof TrophyHighest) // si c'est des trophyHighest
 			{
+
+				Card highest = new Card(Value.un, Color.heart) ;
+				
+				LinkedList<Card> comparateur = new LinkedList<Card>() ;
+
 				for(int i = 0 ; i < p.size() ; i ++) // parcourt les joueurs
 				{
 					Jest jest = p.get(i).getJest() ;
 					jest.acceptVisitor(t[j].getTrophy()) ;
+
 					if(t[j].getTrophy().highCandidate.getColor()
 							.equals(t[j].getTrophy().getColor()) == false)
 					{
-						System.out.println("Vous n'avez aucune carte de la même couleur !\n") ;
+						System.out.println("Vous n'avez aucune carte de la même couleur joueur " +
+								(i+1) + " !\n") ;
+						comparateur.add(t[j].getTrophy().highCandidate) ;
 					}
 
+					else
+					{
+						{
+							System.out.println("Voici votre carte de " + t[j].getTrophy().getColor() 
+									+ " de plus grande valeur joueur " + (i+1) + " : "
+									+ t[j].getTrophy().highCandidate.getValue() + " de " 
+									+ t[j].getTrophy().highCandidate.getColor() + "\n") ;
+							comparateur.add(t[j].getTrophy().highCandidate) ;
+						}
+					}
+				}
+
+				Iterator<Card> it = comparateur.iterator() ;
+				
+				int player = 1 ;
+				int i = 1 ;
+				
+				while(it.hasNext())
+				{
+					if(it.next().getValue().ordinal() >= highest.getValue().ordinal())
+					{
+						highest = it.next() ;
+						player = i ;
+					}
+
+					i ++ ;
+					
+				}
+
+				p.get(player).getJest().jestCards.add(t[j]) ;
+
+
+				System.out.println("Bravo Joueur " + (player) + " ! " + "Les cartes de votre Jest sont : " 
+						+ "\n") ;
+
+				Iterator<Card> it1 = p.get(player).getJest().jestCards.iterator() ;
+				while(it1.hasNext())
+				{
+					System.out.println(it1.next()+"\n") ;
 				}
 
 			}
-			/*
+			/*			
 				if(t[j].getTrophy() instanceof TrophyBestJest) {
 					for(int i=0; i<p.size(); i++) {
 						Jest jest = p.get(i).getJest();
 						jest.acceptVisitor(t[j].getTrophy());
 
+
 					}
 				}
 			}
-			 */
+			 */			 
 
 			else if(t[j].getTrophy() instanceof TrophyLowest) // si c'est des trophyHighest
 			{
+
+				Card lowest = new Card(Value.quatre, Color.heart) ;
+				
+				LinkedList<Card> comparateur = new LinkedList<Card>() ;
+
 				for(int i = 0 ; i < p.size() ; i ++) // parcourt les joueurs
 				{
 					Jest jest = p.get(i).getJest() ;
 					jest.acceptVisitor(t[j].getTrophy()) ;
+
 					if(t[j].getTrophy().lowCandidate.getColor()
 							.equals(t[j].getTrophy().getColor()) == false)
 					{
-						System.out.println("Vous n'avez aucune carte de la même couleur !\n") ;
+						System.out.println("Vous n'avez aucune carte de la même couleur joueur " +
+								(i+1) + " !\n") ;
+						comparateur.add(t[j].getTrophy().lowCandidate) ;
 					}
+
 					else
 					{
-						System.out.println("Voici votre carte de " + t[j].getTrophy().getColor() 
-								+ " de plus faible valeur : "
-								+ t[j].getTrophy().lowCandidate.getValue() + " de " 
-								+ t[j].getTrophy().lowCandidate.getColor() + "\n") ;	
+						{
+							System.out.println("Voici votre carte de " + t[j].getTrophy().getColor() 
+									+ " de plus faible valeur joueur " + (i+1) + " : "
+									+ t[j].getTrophy().lowCandidate.getValue() + " de " 
+									+ t[j].getTrophy().lowCandidate.getColor() + "\n") ;
+							comparateur.add(t[j].getTrophy().lowCandidate) ;
+						}
+					}
+				}
+
+				Iterator<Card> it = comparateur.iterator() ;
+				int i = 1 ;
+				int player = 1 ;
+				while(it.hasNext())
+				{
+					
+
+					if(it.next().getValue().ordinal() <= lowest.getValue().ordinal())
+					{
+						lowest = it.next() ;
+						player = i ;
 					}
 
+					i ++ ;
+
 				}
+
+				p.get(player).getJest().jestCards.add(t[j]) ;
+
+
+				System.out.println("Bravo Joueur " + (player) + " ! " + "Les cartes de votre Jest sont : " 
+						+ "\n") ;
+
+				Iterator<Card> it1 = p.get(player).getJest().jestCards.iterator() ;
+				while(it1.hasNext())
+				{
+					System.out.println(it1.next()+"\n") ;
+				}
+
 			}
-
-
 		}
-
 
 		p1.getJest().countJest(p1);
 		p2.getJest().countJest(p2);
@@ -261,6 +348,9 @@ public class Game {
 
 
 }
+
+
+
 
 
 
