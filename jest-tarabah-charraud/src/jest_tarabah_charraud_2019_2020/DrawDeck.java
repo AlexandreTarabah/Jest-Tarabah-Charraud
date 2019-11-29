@@ -52,7 +52,7 @@ public class DrawDeck {
 		}
 	}
 
-	public Card takeCards() {
+	public Card takeCards() { // méthode pour prendre une carte.
 		nbCardDD=drawdeck.size();
 		int position = (int) ((int) Math.round(DrawDeck.nbCardDD-1)*Math.random());
 		return drawdeck.remove(position);
@@ -60,16 +60,16 @@ public class DrawDeck {
 
 
 
-	public void collectCards(Player player) {
+	public void collectCards(Player player) {  // ici on collecte les cartes pour les rebalancer dans le DD, sauf si DDsize<3 
 
-		if(drawdeck.size()>0) {
+		if(drawdeck.size()>3) {
 
 			if(player.offer.get("up")==null) {
 				drawdeck.add(player.offer.get("down"));
 			}else
 				drawdeck.add(player.offer.get("up"));
 		}else 
-			if(drawdeck.size()<3) {
+			
 
 				if(player.offer.get("up")==null) {
 					player.getJest().jestCards.add(player.offer.get("down"));
@@ -77,7 +77,7 @@ public class DrawDeck {
 					player.getJest().jestCards.add(player.offer.get("up"));
 
 			}
-	}
+	
 
 
 

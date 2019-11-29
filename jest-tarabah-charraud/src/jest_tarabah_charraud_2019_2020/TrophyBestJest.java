@@ -11,10 +11,18 @@ public class TrophyBestJest extends Trophy {
 
     public void visitJest(Jest jest) {
     	
+    	int bestJest = 0 ;
+
     	for(int i=0;i<jest.jestCards.size(); i++) {
-			int bestJest =+ jest.jestCards.get(i).value.ordinal();
-			System.out.println("Votre jest à un total de "+ bestJest + "points");
+			 bestJest =+ jest.jestCards.get(i).value.ordinal();
+    	}
+			if(super.bestJestCandidate<bestJest) {
+				
+		super.bestJestCandidate = bestJest;
 			}
+    	
+    	
+    	
     			
 		}
     

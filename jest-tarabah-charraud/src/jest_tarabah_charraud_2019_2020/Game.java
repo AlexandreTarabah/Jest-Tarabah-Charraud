@@ -36,6 +36,7 @@ import java.util.Map.Entry;
 public class Game {
 	protected static int nbPlayer;
 
+
 	Card[] trophyCards = new Card[2] ;
 
 	private String gameplay;
@@ -49,6 +50,7 @@ public class Game {
 	private static DrawDeck drawdeck;
 
 	boolean currentPlay;
+	
 
 
 
@@ -101,14 +103,14 @@ public class Game {
 		drawdeck = new DrawDeck(g);
 		drawdeck.shuffle();
 		/*	for(int i = 0 ; i<2 ; i++)
-=======
+
 			/*	for(int i = 0 ; i<2 ; i++)
->>>>>>> branch 'master' of https://github.com/AlexandreTarabah/Jest-Tarabah-Charraud
+
 		{
 			trophyCards[i] = drawdeck.takeCards() ;
 		}
 		 		currentPlay=false;   
-<<<<<<< HEAD
+
 		 */
 	}
 
@@ -160,31 +162,31 @@ public class Game {
 		Player p2 = new Player() ;
 		Player p3 = new Player() ;
 
-		newGame.addPlayer(p1, input) ;
+		newGame.addPlayer(p1, input) ; // On ajoute les Joueurs (Dvp vers un ajout dynamique)
 		newGame.addPlayer(p2, input) ;
 		newGame.addPlayer(p3, input) ; 
 
 
-		newGame.distribute();
+		newGame.distribute(); // distribuer les cartes 
 
 
 
-		p1.upsideDown(p1, input) ; 
+		p1.upsideDown(p1, input) ; // Proposer a chaque joueur quelle carte il veut mettre faceUP/faceDown
 		p2.upsideDown(p2, input) ;
 		p3.upsideDown(p3, input) ;
 
-		p1.determinateFirstPlayer( p1,p2,p3);
+		p1.determinateFirstPlayer( p1,p2,p3); // on determine le premier qui joue : player.pseudo = starter
 
 
 		ForMainPlay.get(Player.getStarter()).stealCard(input);
 
 		System.out.println(ForMainPlay.get(Player.getVictime()).pseudo + " à vous de jouer\n ");
-		ForMainPlay.get(Player.getVictime()).stealCard(input);
+		ForMainPlay.get(Player.getVictime()).stealCard(input);												// Les manip de chaque joueur pendant le tour 
 
 		System.out.println(ForMainPlay.get(Player.getVictime()).pseudo + " à vous de jouer\n ");
 		ForMainPlay.get(Player.getVictime()).stealCard(input);
 
-		drawdeck.collectCards(p1);
+		drawdeck.collectCards(p1); // on rebalance les cartes restantes dans le drawdeck.
 		drawdeck.collectCards(p2);
 		drawdeck.collectCards(p3);
 
@@ -257,18 +259,39 @@ public class Game {
 					System.out.println(it1.next()+"\n") ;
 				}
 
+<<<<<<< HEAD
 			}
 			/*			
+=======
+			} /* else
+			
+>>>>>>> branch 'master' of https://github.com/AlexandreTarabah/Jest-Tarabah-Charraud
 				if(t[j].getTrophy() instanceof TrophyBestJest) {
 					for(int i=0; i<p.size(); i++) {
 						Jest jest = p.get(i).getJest();
 						jest.acceptVisitor(t[j].getTrophy());
 
+<<<<<<< HEAD
+=======
+						
+						if(t[j].getTrophy().bestJestCandidate==jest.bestJest()) {
+							System.out.println("Vous avez le BestJest ! ");
+			
+						}
+						else
+							System.out.println("Vous n'avez pas le best Jest ! ");
+>>>>>>> branch 'master' of https://github.com/AlexandreTarabah/Jest-Tarabah-Charraud
 
 					}
+<<<<<<< HEAD
 				}
 			}
 			 */			 
+=======
+				}*/ 
+			
+			 
+>>>>>>> branch 'master' of https://github.com/AlexandreTarabah/Jest-Tarabah-Charraud
 
 			else if(t[j].getTrophy() instanceof TrophyLowest) // si c'est des trophyHighest
 			{
@@ -318,6 +341,7 @@ public class Game {
 					i ++ ;
 
 				}
+<<<<<<< HEAD
 
 				p.get(player).getJest().jestCards.add(t[j]) ;
 
@@ -331,6 +355,9 @@ public class Game {
 					System.out.println(it1.next()+"\n") ;
 				}
 
+=======
+				
+>>>>>>> branch 'master' of https://github.com/AlexandreTarabah/Jest-Tarabah-Charraud
 			}
 		}
 

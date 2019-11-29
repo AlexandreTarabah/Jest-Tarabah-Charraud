@@ -86,31 +86,38 @@ public class Card
 
 
 
+	
+	
 	public Color getColor() {
 		return color;
 	}
 
 
+	
 	public void setColor(Color color) {
 		this.color=color;
 
 	}
 
-	//yep
+	
+
 	public Value getValue() {
 		return value;
 	}
 
 
+	
 	public void setValue(Value value) {
 		this.value=value;
 	}
 
+	
 	public Trophy getTrophy()
 	{
 		return trophy ;
 	}
 
+	
 
 	public String toString() {
 		return "value : "+ this.value.toString() + "color : "+ this.color.toString();

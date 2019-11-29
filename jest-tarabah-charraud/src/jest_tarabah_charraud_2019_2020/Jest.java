@@ -12,6 +12,8 @@ public class Jest {
 	
 	HashMap<String,Integer> winner = new HashMap();
 	
+	int bestJest;
+	
 	private int nbCardJest;
 
 	public List<Card> jestCards = new ArrayList<Card>();
@@ -54,14 +56,20 @@ public class Jest {
 		
 	public void winnerDetermination() {
 		
-		int maxValueInMap=(Collections.max(winner.values()));  // This will return max value in the Hashmap
-        for (Entry<String, Integer> entry : winner.entrySet()) {  // Itrate through hashmap
+		int maxValueInMap=(Collections.max(winner.values()));  // retourne la valeur max de la hashmap winner
+        for (Entry<String, Integer> entry : winner.entrySet()) {  
             if (entry.getValue()==maxValueInMap) {
-                System.out.println(entry.getKey() + " à gagner !" );
+                System.out.println(entry.getKey() + " à gagner !" ); // détermine a quelle clé cela appartient pour afficher le gagnant 
             }
 	
 		}
 		
+	}
+	public int bestJest() { // Calcul juste les points le trophée bestJest.
+		for(int i=0; i<jestCards.size(); i++) {
+			bestJest =+ jestCards.get(i).value.ordinal();
+		}
+		return bestJest;
 	}
 
 }

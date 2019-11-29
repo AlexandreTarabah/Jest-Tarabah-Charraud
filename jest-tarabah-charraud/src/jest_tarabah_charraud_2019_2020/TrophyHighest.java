@@ -14,6 +14,8 @@ public class TrophyHighest extends Trophy
 		super(color) ;
 	}
 
+	
+	
 	public void visitJest(Jest jest, Color color)
 	{
 
