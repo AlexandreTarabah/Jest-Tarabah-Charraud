@@ -102,14 +102,14 @@ public class Game {
 		drawdeck = new DrawDeck(g);
 		drawdeck.shuffle();
 		/*	for(int i = 0 ; i<2 ; i++)
-=======
+
 			/*	for(int i = 0 ; i<2 ; i++)
->>>>>>> branch 'master' of https://github.com/AlexandreTarabah/Jest-Tarabah-Charraud
+
 		{
 			trophyCards[i] = drawdeck.takeCards() ;
 		}
 		 		currentPlay=false;   
-<<<<<<< HEAD
+
 		 */
 	}
 
@@ -251,6 +251,7 @@ public class Game {
 					}
 
 				}
+				
 			}
 
 
