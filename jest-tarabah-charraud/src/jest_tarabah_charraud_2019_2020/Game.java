@@ -211,8 +211,8 @@ public class Game {
 
 				}
 
-			}
-			/*
+			} /* else
+			
 				if(t[j].getTrophy() instanceof TrophyBestJest) {
 					for(int i=0; i<p.size(); i++) {
 						Jest jest = p.get(i).getJest();
@@ -227,9 +227,9 @@ public class Game {
 							System.out.println("Vous n'avez pas le best Jest ! ");
 
 					}
-				}
-			}
-			 */
+				}*/ 
+			
+			 
 
 			else if(t[j].getTrophy() instanceof TrophyLowest) // si c'est des trophyHighest
 			{
