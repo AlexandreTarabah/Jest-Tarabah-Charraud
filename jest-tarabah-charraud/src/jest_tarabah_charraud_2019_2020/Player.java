@@ -53,6 +53,8 @@ public class Player implements Cloneable
 
 
 
+	
+	
 
 	public void stealCard(Scanner input) {
 		int nbCardOffer=0;
@@ -123,6 +125,12 @@ public class Player implements Cloneable
 	
 	
 
+	
+	
+	
+	
+	
+	
 
 	public void setPseudo(Player player, Scanner input) 
 	{
@@ -172,10 +180,11 @@ public class Player implements Cloneable
 								if( mapentry.getValue().get(PlayerHighestValue).getColor().ordinal()<mapentry.getValue().get(mapentry2.getKey()).getColor().ordinal() ) {
 
 									PlayerHighestValue=mapentry.getKey();
-									};
-						}}
-	}
-}
+										};
+								}
+						}
+				}
+		}
 
 
 
