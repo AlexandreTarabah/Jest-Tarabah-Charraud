@@ -59,7 +59,7 @@ public class Jest {
 		int maxValueInMap=(Collections.max(winner.values()));  // retourne la valeur max de la hashmap winner
         for (Entry<String, Integer> entry : winner.entrySet()) {  
             if (entry.getValue()==maxValueInMap) {
-                System.out.println(entry.getKey() + " à gagner !" ); // détermine a quelle clé cela appartient pour afficher le gagnant 
+                System.out.println(entry.getKey() + " a gagné !" ); // détermine a quelle clé cela appartient pour afficher le gagnant 
             }
 	
 		}
