@@ -1,12 +1,15 @@
 package jest_tarabah_charraud_2019_2020;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
 import java.util.Scanner;
 import java.util.Set;
+import java.util.TreeMap;
 import java.util.Map.Entry;
 
 
@@ -50,8 +53,7 @@ public class Game {
 	private static DrawDeck drawdeck;
 
 	boolean currentPlay;
-	//ff
-	
+
 
 
 
@@ -176,7 +178,7 @@ public class Game {
 		p2.upsideDown(p2, input) ;
 		p3.upsideDown(p3, input) ;
 
-		p1.determinateFirstPlayer( p1,p2,p3); // on determine le premier qui joue : player.pseudo = starter
+		p1.determinateFirstPlayer(p1,p2,p3); // on determine le premier qui joue : player.pseudo = starter
 
 
 		ForMainPlay.get(Player.getStarter()).stealCard(input);
@@ -197,14 +199,19 @@ public class Game {
 		ArrayList<Player> p = Game.players ;
 		Card[] t = newGame.trophyCards ;
 
+		Comparator<Integer> valueComparator = new Comparator<Integer>() {
+			@Override
+			public int compare(Integer int1, Integer int2) {
+				return int1.compareTo(int2);
+			}
+		} ;
+
 		for(int j = 0 ; j < t.length ; j ++) // parcourt les trophies
 		{
 			if(t[j].getTrophy() instanceof TrophyHighest) // si c'est des trophyHighest
 			{
 
-				Card highest = new Card(Value.un, Color.heart) ;
-				
-				LinkedList<Card> comparateur = new LinkedList<Card>() ;
+				Map<Player,Integer> highCandidates = new HashMap<Player, Integer>();
 
 				for(int i = 0 ; i < p.size() ; i ++) // parcourt les joueurs
 				{
@@ -214,92 +221,46 @@ public class Game {
 					if(t[j].getTrophy().highCandidate.getColor()
 							.equals(t[j].getTrophy().getColor()) == false)
 					{
-						System.out.println("Vous n'avez aucune carte de la même couleur joueur " +
-								(i+1) + " !\n") ;
-						comparateur.add(t[j].getTrophy().highCandidate) ;
+						System.out.println("Vous n'avez aucune carte de la même couleur " + p.get(i).pseudo + " !\n") ;
 					}
 
 					else
 					{
 						{
 							System.out.println("Voici votre carte de " + t[j].getTrophy().getColor() 
-									+ " de plus grande valeur joueur " + (i+1) + " : "
+									+ " de plus grande valeur " + p.get(i).pseudo + " : "
 									+ t[j].getTrophy().highCandidate.getValue() + " de " 
 									+ t[j].getTrophy().highCandidate.getColor() + "\n") ;
-							comparateur.add(t[j].getTrophy().highCandidate) ;
+							highCandidates.put(p.get(i), t[j].getTrophy().highCandidate.getValue().ordinal()) ;
+
 						}
 					}
 				}
 
-				Iterator<Card> it = comparateur.iterator() ;
+				MapValueComparator<Player, Integer> mapComparator = new MapValueComparator<Player,Integer>(highCandidates, valueComparator);
+				Map<Player, Integer> sortedHighCandidates = new TreeMap<Player, Integer>(mapComparator);
+				sortedHighCandidates.putAll(highCandidates) ;
 				
-				int player = 1 ;
-				int i = 1 ;
+				if(sortedHighCandidates != null)
+				{
+				(((TreeMap<Player, Integer>) sortedHighCandidates).firstKey()).getJest().jestCards.
+				add(t[j]) ;
 				
-				while(it.hasNext())
-				{
-					if(it.next().getValue().ordinal() >= highest.getValue().ordinal())
-					{
-						highest = it.next() ;
-						player = i ;
-					}
 
-					i ++ ;
-					
+
+				System.out.println("Bravo Joueur " + ((TreeMap<Player, Integer>) sortedHighCandidates).firstKey().pseudo + 
+						" vous avez la plus forte carte de " + t[j].getTrophy().getColor() 
+						+ " vous remportez le Trophée ! Les cartes de votre Jest sont : " 
+						+ ((TreeMap<Player, Integer>) sortedHighCandidates).firstKey().getJest().jestCards + "\n" ) ;
+				
 				}
-
-				p.get(player).getJest().jestCards.add(t[j]) ;
-
-
-				System.out.println("Bravo Joueur " + (player) + " ! " + "Les cartes de votre Jest sont : " 
-						+ "\n") ;
-
-				Iterator<Card> it1 = p.get(player).getJest().jestCards.iterator() ;
-				while(it1.hasNext())
-				{
-					System.out.println(it1.next()+"\n") ;
-				}
-
-
-			
-						
-
-			 /* else
-			
-
-				if(t[j].getTrophy() instanceof TrophyBestJest) {
-					for(int i=0; i<p.size(); i++) {
-						Jest jest = p.get(i).getJest();
-						jest.acceptVisitor(t[j].getTrophy());
-
-
-
-						
-						if(t[j].getTrophy().bestJestCandidate==jest.bestJest()) {
-							System.out.println("Vous avez le BestJest ! ");
-			
-						}
-						else
-							System.out.println("Vous n'avez pas le best Jest ! ");
-
-
-					}
-
-				}
-			}
-			 */			 
-
-				} 
-			
-			 
+			} 
 
 
 			else if(t[j].getTrophy() instanceof TrophyLowest) // si c'est des trophyHighest
 			{
 
-				Card lowest = new Card(Value.quatre, Color.heart) ;
-				
-				LinkedList<Card> comparateur = new LinkedList<Card>() ;
+				Map<Player,Integer> lowCandidates = new HashMap<Player, Integer>();
 
 				for(int i = 0 ; i < p.size() ; i ++) // parcourt les joueurs
 				{
@@ -309,55 +270,39 @@ public class Game {
 					if(t[j].getTrophy().lowCandidate.getColor()
 							.equals(t[j].getTrophy().getColor()) == false)
 					{
-						System.out.println("Vous n'avez aucune carte de la même couleur joueur " +
-								(i+1) + " !\n") ;
-						comparateur.add(t[j].getTrophy().lowCandidate) ;
+						System.out.println("Vous n'avez aucune carte de la même couleur " + p.get(i).pseudo + " !\n") ;
 					}
 
 					else
 					{
 						{
 							System.out.println("Voici votre carte de " + t[j].getTrophy().getColor() 
-									+ " de plus faible valeur joueur " + (i+1) + " : "
+									+ " de plus faible valeur " + p.get(i).pseudo + " : "
 									+ t[j].getTrophy().lowCandidate.getValue() + " de " 
 									+ t[j].getTrophy().lowCandidate.getColor() + "\n") ;
-							comparateur.add(t[j].getTrophy().lowCandidate) ;
+							lowCandidates.put(p.get(i), t[j].getTrophy().lowCandidate.getValue().ordinal()) ;
 						}
 					}
 				}
 
-				Iterator<Card> it = comparateur.iterator() ;
-				int i = 1 ;
-				int player = 1 ;
-				while(it.hasNext())
+				MapValueComparator<Player, Integer> mapComparator = new MapValueComparator<Player,Integer>(lowCandidates, valueComparator);
+				Map<Player, Integer> sortedLowCandidates = new TreeMap<Player, Integer>(mapComparator);
+				sortedLowCandidates.putAll(lowCandidates) ;
+
+				if(sortedLowCandidates != null)
 				{
-					
-
-					if(it.next().getValue().ordinal() <= lowest.getValue().ordinal())
-					{
-						lowest = it.next() ;
-						player = i ;
-					}
-
-					i ++ ;
-
-				}
-
-
-				p.get(player).getJest().jestCards.add(t[j]) ;
-
-
-				System.out.println("Bravo Joueur " + (player) + " ! " + "Les cartes de votre Jest sont : " 
-						+ "\n") ;
-
-				Iterator<Card> it1 = p.get(player).getJest().jestCards.iterator() ;
-				while(it1.hasNext())
-				{
-					System.out.println(it1.next()+"\n") ;
-				}
-
-
+				(((TreeMap<Player, Integer>) sortedLowCandidates).firstKey()).getJest().jestCards.
+				add(t[j]) ;
 				
+
+
+				System.out.println("Bravo Joueur " + ((TreeMap<Player, Integer>) sortedLowCandidates).firstKey().pseudo + 
+						" vous avez la plus faible carte de " + t[j].getTrophy().getColor() 
+						+ " vous remportez le Trophée ! Les cartes de votre Jest sont : " 
+						+ ((TreeMap<Player, Integer>) sortedLowCandidates).firstKey().getJest().jestCards + "\n" ) ;
+				
+				}
+
 
 			}
 		}
@@ -376,11 +321,3 @@ public class Game {
 
 
 }
-
-
-
-
-
-
-
-
