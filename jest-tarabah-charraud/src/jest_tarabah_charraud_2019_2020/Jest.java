@@ -44,8 +44,7 @@ public class Jest {
 
 
 
-	public void countJest(Player player) {
-
+	public void countJest(Player player) { // A revoir avec Strategy ou visitor
 
 		for(int i=0;i<player.getJest().jestCards.size(); i++) {
 			player.nbPoint = player.nbPoint + player.getJest().jestCards.get(i).value.ordinal();
@@ -54,6 +53,11 @@ public class Jest {
 		winner.put(player.pseudo, player.nbPoint);
 	}
 		
+	
+	
+	
+	
+	
 	public void winnerDetermination() {
 		
 		int maxValueInMap=(Collections.max(winner.values()));  // retourne la valeur max de la hashmap winner

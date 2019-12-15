@@ -37,7 +37,8 @@ import java.util.Map.Entry;
  */
 
 public class Game {
-	protected static int nbPlayer;
+	
+	protected static int nbPlayers;
 
 
 	Card[] trophyCards = new Card[2] ;
@@ -133,16 +134,7 @@ public class Game {
 
 
 
-	public void addPlayer(Player p, Scanner input) {
-		if(currentPlay==false) {
-
-			p.setPseudo(p, input);
-			players.add(p);
-			ForMainPlay.put(p.pseudo, p);
-
-
-		}
-	}
+	
 
 
 
@@ -160,24 +152,28 @@ public class Game {
 		newGame.initializeGame(newGame); 
 
 		Scanner input = new Scanner(System.in) ;
-
-		Player p1 = new Player() ;
-		Player p2 = new Player() ;
-		Player p3 = new Player() ;
-
-		newGame.addPlayer(p1, input) ; // On ajoute les Joueurs (Dvp vers un ajout dynamique)
-		newGame.addPlayer(p2, input) ;
-		newGame.addPlayer(p3, input) ; 
+// DEBUT DES MANOEUVRES PÖUR 3 ou 4 joueurs
+		System.out.println("Bonjour jeunes gens ! combien voulez-vous de joueur ?");
+		nbPlayers = input.nextInt() ;
+	      int i = 0;
+		while(i<nbPlayers) { 
+	        new Player(input);
+	         i++;
+	      }
 
 
 		newGame.distribute(); // distribuer les cartes 
+		
+		
+
+iterator it = players.iterator();
+	p1.upsideDown(p1, input) ; // Proposer a chaque joueur quelle carte il veut mettre faceUP/faceDown
+	p2.upsideDown(p2, input) ;
+	p3.upsideDown(p3, input) ;
+}
 
 
-
-		p1.upsideDown(p1, input) ; // Proposer a chaque joueur quelle carte il veut mettre faceUP/faceDown
-		p2.upsideDown(p2, input) ;
-		p3.upsideDown(p3, input) ;
-
+/*
 		p1.determinateFirstPlayer(p1,p2,p3); // on determine le premier qui joue : player.pseudo = starter
 
 
@@ -243,15 +239,15 @@ public class Game {
 				
 				if(sortedHighCandidates != null)
 				{
-				(((TreeMap<Player, Integer>) sortedHighCandidates).firstKey()).getJest().jestCards.
+				(((TreeMap<Player, Integer>) sortedHighCandidates).lastKey()).getJest().jestCards.
 				add(t[j]) ;
 				
 
 
-				System.out.println("Bravo Joueur " + ((TreeMap<Player, Integer>) sortedHighCandidates).firstKey().pseudo + 
+				System.out.println("Bravo Joueur " + ((TreeMap<Player, Integer>) sortedHighCandidates).lastKey().pseudo + 
 						" vous avez la plus forte carte de " + t[j].getTrophy().getColor() 
 						+ " vous remportez le Trophée ! Les cartes de votre Jest sont : " 
-						+ ((TreeMap<Player, Integer>) sortedHighCandidates).firstKey().getJest().jestCards + "\n" ) ;
+						+ ((TreeMap<Player, Integer>) sortedHighCandidates).lastKey().getJest().jestCards + "\n" ) ;
 				
 				}
 			} 
@@ -314,7 +310,7 @@ public class Game {
 
 		p1.getJest().winnerDetermination();
 
-
+*/
 	}
 
 

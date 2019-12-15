@@ -10,7 +10,7 @@ import java.util.Iterator;
 import java.util.Map;
 import java.util.Map.Entry;
 
-public class Player implements Cloneable
+public class Player 
 {
 
 	String  pseudo;
@@ -42,13 +42,15 @@ public class Player implements Cloneable
 
 	//j'instancie l'objet offre, qui est aussi une collection de carte, dans le constructeur player ici 
 
-	public Player () 
+	public Player (Scanner input) 
 	{
-		offer = new HashMap<String, Card>();
-
+		this.offer = new HashMap<String, Card>();
+		System.out.println("Entrez le nom du joueur : ");
+		String pseudo = input.next();
 		this.pseudo=pseudo;
-
-		this.jest = new Jest() ;
+		this.jest = new Jest();
+		Game.players.add(this);
+		Game.ForMainPlay.put(this.pseudo, this);
 	}
 
 
@@ -132,11 +134,11 @@ public class Player implements Cloneable
 	
 	
 
-	public void setPseudo(Player player, Scanner input) 
+	public String setPseudo( Scanner input) 
 	{
 		System.out.println("Entrez le nom du joueur : ");
 		String pseudo = input.nextLine() ;
-		player.pseudo = pseudo;  
+		return pseudo;
 
 	}
 
@@ -170,14 +172,14 @@ public class Player implements Cloneable
 		for(Entry<String, HashMap<String, Card>> mapentry : listOffer.entrySet()) {
 				for(Entry<String, Card> mapentry2 : offer.entrySet()) {
 
-					if(HighestValue < mapentry.getValue().get(mapentry2.getKey()).getValue().ordinal())
+					if(HighestValue < mapentry.getValue().get(mapentry2.getKey()).getValue().getCardValue())
 					{
-					HighestValue=mapentry.getValue().get(mapentry2.getKey()).getValue().ordinal();
+					HighestValue=mapentry.getValue().get(mapentry2.getKey()).getValue().getCardValue();
 					PlayerHighestValue = mapentry.getKey();
 				
-						if(HighestValue == mapentry.getValue().get(mapentry2.getKey()).getValue().ordinal() && PlayerHighestValue != mapentry.getKey() ){
+						if(HighestValue == mapentry.getValue().get(mapentry2.getKey()).getValue().getCardValue() && PlayerHighestValue != mapentry.getKey() ){
 
-								if( mapentry.getValue().get(PlayerHighestValue).getColor().ordinal()<mapentry.getValue().get(mapentry2.getKey()).getColor().ordinal() ) {
+								if( mapentry.getValue().get(PlayerHighestValue).getColor().getColorValue()<mapentry.getValue().get(mapentry2.getKey()).getColor().getColorValue() ) {
 
 									PlayerHighestValue=mapentry.getKey();
 										};
@@ -203,6 +205,8 @@ public class Player implements Cloneable
 					starter=p3.pseudo;
 					p3.firstPlayer=true;
 				}
+					
+					
 
 
 	}
