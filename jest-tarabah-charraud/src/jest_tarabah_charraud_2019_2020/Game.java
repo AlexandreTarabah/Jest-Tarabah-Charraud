@@ -259,20 +259,20 @@ public class Game {
 					System.out.println(it1.next()+"\n") ;
 				}
 
-<<<<<<< HEAD
-			}
-			/*			
-=======
-			} /* else
+
 			
->>>>>>> branch 'master' of https://github.com/AlexandreTarabah/Jest-Tarabah-Charraud
+						
+
+			 /* else
+			
+
 				if(t[j].getTrophy() instanceof TrophyBestJest) {
 					for(int i=0; i<p.size(); i++) {
 						Jest jest = p.get(i).getJest();
 						jest.acceptVisitor(t[j].getTrophy());
 
-<<<<<<< HEAD
-=======
+
+
 						
 						if(t[j].getTrophy().bestJestCandidate==jest.bestJest()) {
 							System.out.println("Vous avez le BestJest ! ");
@@ -280,18 +280,18 @@ public class Game {
 						}
 						else
 							System.out.println("Vous n'avez pas le best Jest ! ");
->>>>>>> branch 'master' of https://github.com/AlexandreTarabah/Jest-Tarabah-Charraud
+
 
 					}
-<<<<<<< HEAD
+
 				}
 			}
 			 */			 
-=======
-				}*/ 
+
+				} 
 			
 			 
->>>>>>> branch 'master' of https://github.com/AlexandreTarabah/Jest-Tarabah-Charraud
+
 
 			else if(t[j].getTrophy() instanceof TrophyLowest) // si c'est des trophyHighest
 			{
@@ -341,7 +341,7 @@ public class Game {
 					i ++ ;
 
 				}
-<<<<<<< HEAD
+
 
 				p.get(player).getJest().jestCards.add(t[j]) ;
 
@@ -355,9 +355,9 @@ public class Game {
 					System.out.println(it1.next()+"\n") ;
 				}
 
-=======
+
 				
->>>>>>> branch 'master' of https://github.com/AlexandreTarabah/Jest-Tarabah-Charraud
+
 			}
 		}
 
@@ -375,6 +375,7 @@ public class Game {
 
 
 }
+
 
 
 
