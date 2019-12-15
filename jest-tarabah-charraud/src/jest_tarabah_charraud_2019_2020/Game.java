@@ -50,6 +50,7 @@ public class Game {
 	private static DrawDeck drawdeck;
 
 	boolean currentPlay;
+	//ff
 	
 
 
