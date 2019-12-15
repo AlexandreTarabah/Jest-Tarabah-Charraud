@@ -3,6 +3,16 @@ package jest_tarabah_charraud_2019_2020;
 import java.util.Iterator;
 
 
+/**
+ * Trophyhighest est une classe fille de Trophy
+ * @see Trophy
+ * 
+ * @author Yosh
+ * @version 4.0
+ * 
+ */
+
+
 public class TrophyHighest extends Trophy
 
 
@@ -14,7 +24,11 @@ public class TrophyHighest extends Trophy
 		super(color) ;
 	}
 
-	
+	/**
+	 * Redéfinit la méthode visitJest de Trophy
+	 * @see Trophy
+	 * 
+	 * @since 3.0*/
 	
 	public void visitJest(Jest jest, Color color)
 	{
@@ -33,7 +47,7 @@ public class TrophyHighest extends Trophy
 
 			if(card.getColor().equals(color))
 			{
-				if(card.getValue().ordinal() > highestOrdinal)
+				if(card.getValue().ordinal() >= highestOrdinal)
 				{
 					highest = card ;
 					highestOrdinal = card.getValue().ordinal() ;

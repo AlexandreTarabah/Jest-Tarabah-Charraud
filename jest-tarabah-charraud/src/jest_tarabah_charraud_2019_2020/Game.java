@@ -243,15 +243,15 @@ public class Game {
 				
 				if(sortedHighCandidates != null)
 				{
-				(((TreeMap<Player, Integer>) sortedHighCandidates).firstKey()).getJest().jestCards.
+				(((TreeMap<Player, Integer>) sortedHighCandidates).lastKey()).getJest().jestCards.
 				add(t[j]) ;
 				
 
 
-				System.out.println("Bravo Joueur " + ((TreeMap<Player, Integer>) sortedHighCandidates).firstKey().pseudo + 
+				System.out.println("Bravo Joueur " + ((TreeMap<Player, Integer>) sortedHighCandidates).lastKey().pseudo + 
 						" vous avez la plus forte carte de " + t[j].getTrophy().getColor() 
 						+ " vous remportez le Trophée ! Les cartes de votre Jest sont : " 
-						+ ((TreeMap<Player, Integer>) sortedHighCandidates).firstKey().getJest().jestCards + "\n" ) ;
+						+ ((TreeMap<Player, Integer>) sortedHighCandidates).lastKey().getJest().jestCards + "\n" ) ;
 				
 				}
 			} 
