@@ -643,4 +643,4 @@ public class Game {
 
 	}
 
-}
+} // ARMAGEDDON DE SES MORTS
