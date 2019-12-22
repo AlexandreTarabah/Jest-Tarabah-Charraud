@@ -28,11 +28,11 @@ public class Card
 			}
 			if(this.value == Value.deux)
 			{
-				this.trophy = new TrophyMajority() ;
+				this.trophy = new TrophyMajority(Value.trois) ;
 			}
 			if(this.value == Value.trois)
 			{
-				this.trophy = new TrophyMajority() ;
+				this.trophy = new TrophyMajority(Value.deux) ;
 			}
 			if(this.value == Value.quatre)
 			{
@@ -66,7 +66,7 @@ public class Card
 		{
 			if(this.value == Value.un)
 			{
-				this.trophy = new TrophyMajority() ;
+				this.trophy = new TrophyMajority(Value.quatre) ;
 			}
 			if(this.value == Value.deux)
 			{
@@ -119,9 +119,9 @@ public class Card
 
 	
 
-	public String toString() {
-		return "value : "+ this.value.toString() + "color : "+ this.color.toString();
-
+	public String toString() 
+	{
+		return "value : " + this.value.toString() + "color : " + this.color.toString() ;
 	}
 
 

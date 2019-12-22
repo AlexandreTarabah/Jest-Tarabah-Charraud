@@ -9,22 +9,23 @@ public class TrophyBestJest extends Trophy {
 	}
 
 
-    public void visitJest(Jest jest) {
-    	
-    	int bestJest = 0 ;
+    public void visitJest(Jest jest) 
+	{
+		int bestJest = 0 ;
 
-    	for(int i=0;i<jest.jestCards.size(); i++) {
-			 bestJest =+ jest.jestCards.get(i).value.ordinal();
-    	}
-			if(super.bestJestCandidate<bestJest) {
-				
-		super.bestJestCandidate = bestJest;
-			}
-    	
-    	
-    	
-    			
+		Iterator<Card> itJC = jest.jestCards.iterator() ; // Entrance dans le
+		// jest du joueur
+
+		while(itJC.hasNext())
+		{
+			Card card = (Card) itJC.next();
+
+					bestJest += card.value.getCardValue();
 		}
+
+		
+		super.bestJestCandidate = bestJest ;
+	}
     
     }
 

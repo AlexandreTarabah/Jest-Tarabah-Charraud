@@ -46,6 +46,35 @@ public class Jest {
 
 		}
 		
+		else if (trophy instanceof TrophyMajority) 
+		{
+			trophy.visitJest(this, trophy.getValue());
+			trophy.bigColor(this, trophy.getValue());
+			// TODO Auto-generated catch block
+		}
+		
+		else if (trophy instanceof TrophyBestJest) 
+		{
+			trophy.visitJest(this);
+			trophy.bigColor(this);
+			trophy.bigValue(this);
+			// TODO Auto-generated catch block
+		}
+		
+		else if (trophy instanceof TrophyBestJestNoJoke) 
+		{
+			trophy.visitJest(this);
+			trophy.bigColor(this);
+			trophy.bigValue(this);
+			// TODO Auto-generated catch block
+		}
+		
+		else if (trophy instanceof TrophyJoker) 
+		{
+			trophy.visitJest(this);
+			// TODO Auto-generated catch block
+		}
+		
 	}
 
 
@@ -55,8 +84,7 @@ public class Jest {
 
 
 
-	public void countJest(Player player) {
-
+	public void countJest(Player player) { // A revoir avec Strategy ou visitor
 
 		for(int i=0;i<player.getJest().jestCards.size(); i++) {
 			player.nbPoint = player.nbPoint + player.getJest().jestCards.get(i).value.ordinal();
@@ -65,6 +93,11 @@ public class Jest {
 		winner.put(player.pseudo, player.nbPoint);
 	}
 		
+	
+	
+	
+	
+	
 	public void winnerDetermination() {
 		
 		int maxValueInMap=(Collections.max(winner.values()));  // retourne la valeur max de la hashmap winner
@@ -86,7 +119,8 @@ public class Jest {
 		for(int i=0; i<jestCards.size(); i++) {
 			bestJest =+ jestCards.get(i).value.ordinal();
 		}
-		return bestJest;
+		
+		return bestJest ;
 	}
 
 }

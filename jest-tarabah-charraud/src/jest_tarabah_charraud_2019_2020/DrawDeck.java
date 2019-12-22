@@ -33,12 +33,12 @@ public class DrawDeck {
 
 		for (Color c : Color.values()) {
 			for(Value v : Value.values()) {
-				if (v == Value.un && c == Color.club)
+				if (v == Value.deux && c == Color.spade)
 				{
 					Card card = new Card(v,c);
 					g.trophyCards[0] = card ;
 				}
-				else if (v == Value.trois && c == Color.diamond)
+				else if (v == Value.quatre && c == Color.diamond)
 				{
 					Card card = new Card(v,c);
 					g.trophyCards[1] = card ;
