@@ -16,7 +16,7 @@ public class TrophyJoker extends Trophy {
 
 		int jokeDetecter = 0 ;
 
-		for (Iterator<Card> it = jest.jestCards.iterator() ; it.hasNext(); )
+		for (Iterator<Card> it = jest.jestCards.iterator() ; it.hasNext();)
 		{
 			Card itg = it.next();
 
