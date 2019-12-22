@@ -39,14 +39,15 @@ import java.util.NavigableMap;
  */
 
 public class Game {
-	protected static int nbPlayer;
+
+	protected static int nbPlayers;
 
 
 	Card[] trophyCards = new Card[2] ;
 
 	private String gameplay;
 
-	static HashMap<String,Player> ForMainPlay = new HashMap<String,Player>();
+	static HashMap<String,Player> ForMainPlay = new HashMap<String,Player>() ;
 
 	static ArrayList<Player> players = new ArrayList<Player>();
 
@@ -121,29 +122,7 @@ public class Game {
 
 
 
-	public void chooseGameplay() {
-	}
 
-
-	protected void finalize() {
-	}
-
-
-	public void highestFUp() {
-	}
-
-	
-	
-	public void mainCollectCards()
-	{
-		for(int i=0; i <players.size();i++)
-		 {
-				drawdeck.collectCards(players.get(i)); // on rebalance les cartes restantes dans le drawdeck.
-		 }
-	}
-
-
-<<<<<<< HEAD
 
 	public void addPlayer(Player p, Scanner input) {
 		if(currentPlay==false) {
@@ -156,7 +135,16 @@ public class Game {
 		}
 	}
 
-=======
+
+	public void mainCollectCards()
+	{
+		for(int i=0; i <players.size();i++)
+		{
+			drawdeck.collectCards(players.get(i)); // on rebalance les cartes restantes dans le drawdeck.
+		}
+	}
+
+
 	public void determinateFirstPlayer() { // Code  pour comparer dans countJest, dans cette méthode, et dans stealCards
 		int highestCardValue = 0;
 		int highestColorValue = 0;
@@ -169,27 +157,22 @@ public class Game {
 					highestCardValue = p.hand[i].getValue().getCardValue();
 					highestColorValue = p.hand[i].getColor().getColorValue();
 					Player.starter = p.pseudo;
-					
+
 				}
-				
+
 				if((highestCardValue == p.hand[i].getValue().getCardValue()) && (highestColorValue <  p.hand[i].getColor().getColorValue()))
 				{
 					highestColorValue =  p.hand[i].getColor().getColorValue();
 					Player.starter=p.pseudo;
 				}
-				
+
 			}
-			
-			
-			
+
+
+
+		}
+		System.out.println(Player.starter +" commence la partie");
 	}
-		System.out.println(Player.starter +"Commence la partie");
-	}
-	
->>>>>>> branch 'master' of https://github.com/AlexandreTarabah/Jest-Tarabah-Charraud
-
-
-
 
 	//j'ai mis le main ici, je me suis dis que ca pourrait être bien de mettre le déroulement de la partie dans Game 
 
@@ -204,89 +187,50 @@ public class Game {
 		newGame.initializeGame(newGame); 
 
 		Scanner input = new Scanner(System.in) ;
-<<<<<<< HEAD
 
-		Player p1 = new Player() ;
-		Player p2 = new Player() ;
-		Player p3 = new Player() ;
-
-		newGame.addPlayer(p1, input) ; // On ajoute les Joueurs (Dvp vers un ajout dynamique)
-		newGame.addPlayer(p2, input) ;
-		newGame.addPlayer(p3, input) ; 
-
-
-		newGame.distribute(); // distribuer les cartes 
-=======
-// DEBUT DES MANOEUVRES PÖUR 3 ou 4 joueurs
-		
-		System.out.println("Bonjour jeunes gens ! combien voulez-vous de joueur ?");
+		System.out.println("Bonjour jeunes gens ! Combien voulez-vous de joueur ?");
 		nbPlayers = input.nextInt() ;
-	      int i = 0;
-		while(i<nbPlayers) { 
-	        new Player(input);
-	         i++;
-	    }
-		
-		
+		int k = 0;
+		while(k<nbPlayers) 
+		{ 
+			new Player(input);
+			k++;
+		}
+
 		while(newGame.drawdeck.getSize()>nbPlayers) // On repete le processus jusqu'a temps qu'on ait plu de carte
 		{
-			
-newGame.distribute(); // distribuer les cartes 
-		
 
-
-
-// UPSIDE DOWN DE CHAQUE JOUEUR		
-Iterator<Player> it = players.iterator();
-while(it.hasNext()) {
-	Player p = it.next();
-	p.upsideDown(p, input);
-}
->>>>>>> branch 'master' of https://github.com/AlexandreTarabah/Jest-Tarabah-Charraud
-
-
-<<<<<<< HEAD
-
-		p1.upsideDown(p1, input) ; // Proposer a chaque joueur quelle carte il veut mettre faceUP/faceDown
-		p2.upsideDown(p2, input) ;
-		p3.upsideDown(p3, input) ;
-
-		p1.determinateFirstPlayer(p1,p2,p3); // on determine le premier qui joue : player.pseudo = starter
-
-
-		ForMainPlay.get(Player.getStarter()).stealCard(input);
-
-		System.out.println(ForMainPlay.get(Player.getVictime()).pseudo + " à vous de jouer\n ");
-		ForMainPlay.get(Player.getVictime()).stealCard(input);												// Les manip de chaque joueur pendant le tour 
-
-		System.out.println(ForMainPlay.get(Player.getVictime()).pseudo + " à vous de jouer\n ");
-		ForMainPlay.get(Player.getVictime()).stealCard(input);
-
-		drawdeck.collectCards(p1); // on rebalance les cartes restantes dans le drawdeck.
-		drawdeck.collectCards(p2);
-		drawdeck.collectCards(p3);
-
-
-=======
-newGame.determinateFirstPlayer(); // on détermine le premier Joueur
+			newGame.distribute(); // distribuer les cartes 
 
 
 
 
-ForMainPlay.get(Player.getStarter()).stealCard(input); // le premier joueur Joue
-		
-		for(int j =1; j<nbPlayers;j++) {  // le reste suit selon la méthode stealCard(input)
-			ForMainPlay.get(Player.getVictime()).stealCard(input);	 // Les manip de chaque joueur pendant le tour 
+			// UPSIDE DOWN DE CHAQUE JOUEUR		
+			Iterator<Player> it = players.iterator();
+			while(it.hasNext()) {
+				Player p = it.next();
+				p.upsideDown(p, input);
+			}
+
+
+			newGame.determinateFirstPlayer(); // on détermine le premier Joueur
+
+
+
+
+			ForMainPlay.get(Player.getStarter()).stealCard(input); // le premier joueur Joue
+
+			for(int j =1; j<nbPlayers;j++) {  // le reste suit selon la méthode stealCard(input)
+				ForMainPlay.get(Player.getVictime()).stealCard(input);	 // Les manip de chaque joueur pendant le tour 
+			}
+
+
+
+			newGame.mainCollectCards(); // On ramasse les cartes et on les rebalance dans le jeu pour recommencer 
+
 		}
-		
-		
-		
-newGame.mainCollectCards(); // On ramasse les cartes et on les rebalance dans le jeu pour recommencer 
 
-}
- 
-/*
->>>>>>> branch 'master' of https://github.com/AlexandreTarabah/Jest-Tarabah-Charraud
+
 		System.out.println(Arrays.deepToString(newGame.trophyCards) + "\n") ;
 
 		ArrayList<Player> p = Game.players ;
@@ -297,7 +241,7 @@ newGame.mainCollectCards(); // On ramasse les cartes et on les rebalance dans le
 			public int compare(Integer int1, Integer int2) {
 				return int1.compareTo(int2);
 			}
-		};
+		} ;
 
 		for(int j = 0 ; j < t.length ; j ++) // parcourt les trophies
 		{
@@ -403,7 +347,7 @@ newGame.mainCollectCards(); // On ramasse les cartes et on les rebalance dans le
 				Map<Integer,Integer> majCandidates = new HashMap<Integer, Integer>();
 				Map<Player,Entry<Integer, Integer>> majPlayer = new HashMap<Player, Entry<Integer, Integer>>();
 				Map.Entry<Integer,Integer> myEntry = new AbstractMap.SimpleEntry<Integer, Integer>(0, 0);
-				majPlayer.put(p1, myEntry) ;
+				majPlayer.put(players.get(1), myEntry) ;
 
 				for(int i = 0 ; i < p.size() ; i ++) // parcourt les joueurs
 				{
@@ -469,8 +413,8 @@ newGame.mainCollectCards(); // On ramasse les cartes et on les rebalance dans le
 				Map<Player,Entry<Integer, Integer>> bestJestPlayer = new HashMap<Player, Entry<Integer, Integer>>();
 				Map<Player,Entry<Integer, Integer>> bestJestColor = new HashMap<Player, Entry<Integer, Integer>>();
 				Map.Entry<Integer,Integer> myEntry = new AbstractMap.SimpleEntry<Integer, Integer>(0, 0);
-				bestJestPlayer.put(p1, myEntry) ;
-				bestJestColor.put(p1, myEntry) ; ;
+				bestJestPlayer.put(players.get(1), myEntry) ;
+				bestJestColor.put(players.get(1), myEntry) ; ;
 
 				for(int i = 0 ; i < p.size() ; i ++) // parcourt les joueurs
 				{
@@ -556,8 +500,8 @@ newGame.mainCollectCards(); // On ramasse les cartes et on les rebalance dans le
 				Map<Player,Entry<Integer, Integer>> bestJestPlayer = new HashMap<Player, Entry<Integer, Integer>>();
 				Map<Player,Entry<Integer, Integer>> bestJestColor = new HashMap<Player, Entry<Integer, Integer>>();
 				Map.Entry<Integer,Integer> myEntry = new AbstractMap.SimpleEntry<Integer, Integer>(0, 0);
-				bestJestPlayer.put(p1, myEntry) ;
-				bestJestColor.put(p1, myEntry) ;
+				bestJestPlayer.put(players.get(1), myEntry) ;
+				bestJestColor.put(players.get(1), myEntry) ;
 
 				int[] jokeDetecter = new int[1] ;
 				jokeDetecter[0] = 0 ;
@@ -695,11 +639,6 @@ newGame.mainCollectCards(); // On ramasse les cartes et on les rebalance dans le
 				}
 			}
 
-			p1.getJest().countJest(p1);
-			p2.getJest().countJest(p2);
-			p3.getJest().countJest(p3);
-
-			p1.getJest().winnerDetermination();
 		}
 
 	}

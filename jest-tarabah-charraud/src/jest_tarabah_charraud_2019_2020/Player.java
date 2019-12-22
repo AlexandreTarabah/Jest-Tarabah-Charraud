@@ -49,6 +49,7 @@ public class Player
 		String pseudo = input.next();
 		this.pseudo=pseudo;
 		this.jest = new Jest();
+		Game.players.add(this) ;
 		Game.ForMainPlay.put(this.pseudo, this);
 	}
 
