@@ -110,18 +110,6 @@ public class Jest {
 		
 	}
 	
-	/**
-	 *@return bestJest qui est le total des points du Jest d'un joueur 
-	 *
-	 *@deprecated depuis Jest 4.0, à repenser
-	 */
-	public int bestJest() { // Calcul juste les points le trophée bestJest. 
-		for(int i=0; i<jestCards.size(); i++) {
-			bestJest =+ jestCards.get(i).value.ordinal();
-		}
-		
-		return bestJest ;
-	}
 
 }
 	

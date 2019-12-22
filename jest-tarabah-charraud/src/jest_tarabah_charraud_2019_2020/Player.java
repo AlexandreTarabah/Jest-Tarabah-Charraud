@@ -93,7 +93,7 @@ public class Player
 		
 		if(Game.nbPlayers==3) {
 		if(nbCardOffer>4) {
-		while( this.pseudo.equals(victime) || victime==starter)  {
+		while( this.pseudo.equals(victime))  {
 			System.out.println(this.pseudo);
 			System.out.println(" n'oubliez pas que vous pouvez vous volez uniquement si vous êtes le dernier joueur\n Rentrer un pseudo\n");
 				victime=input.next();					
@@ -103,7 +103,7 @@ public class Player
 			
 			if(Game.nbPlayers==4) {
 				if(nbCardOffer>5) {
-					while( this.pseudo.equals(victime) || victime==starter)  {
+					while( this.pseudo.equals(victime))  {
 						System.out.println(this.pseudo);
 						System.out.println(" n'oubliez pas que vous pouvez vous volez uniquement si vous êtes le dernier joueur\n Rentrer un pseudo\n");
 							victime=input.next();					
@@ -161,6 +161,7 @@ public class Player
 					}
 		}
 		starter="";
+		nbCardOffer-=1;
 		Iterator it = this.jest.jestCards.iterator();
 			while(it.hasNext())
 			{
@@ -168,9 +169,15 @@ public class Player
 			}
 	
 			
+		if(Game.nbPlayers == 3 && nbCardOffer>3)
+		{System.out.println(Game.ForMainPlay.get(Player.getVictime()).pseudo + " à vous de jouer\n ");
+		}else
+			if(Game.nbPlayers==4 && nbCardOffer>4)
+			{System.out.println(Game.ForMainPlay.get(Player.getVictime()).pseudo + " à vous de jouer\n ");}
 		
-		System.out.println(Game.ForMainPlay.get(Player.getVictime()).pseudo + " à vous de jouer\n ");
 	
+	 
+		
 }
 
 

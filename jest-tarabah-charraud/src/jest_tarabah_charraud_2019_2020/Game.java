@@ -156,14 +156,14 @@ public class Game {
 				{
 					highestCardValue = p.hand[i].getValue().getCardValue();
 					highestColorValue = p.hand[i].getColor().getColorValue();
-					Player.starter = p.pseudo;
+					Player.victime = p.pseudo;
 
 				}
 
 				if((highestCardValue == p.hand[i].getValue().getCardValue()) && (highestColorValue <  p.hand[i].getColor().getColorValue()))
 				{
 					highestColorValue =  p.hand[i].getColor().getColorValue();
-					Player.starter=p.pseudo;
+					Player.victime=p.pseudo;
 				}
 
 			}
@@ -171,7 +171,7 @@ public class Game {
 
 
 		}
-		System.out.println(Player.starter +" commence la partie");
+		System.out.println(Player.victime +" commence la partie");
 	}
 
 	//j'ai mis le main ici, je me suis dis que ca pourrait être bien de mettre le déroulement de la partie dans Game 
@@ -197,7 +197,7 @@ public class Game {
 			k++;
 		}
 
-		while(newGame.drawdeck.getSize()>nbPlayers) // On repete le processus jusqu'a temps qu'on ait plu de carte
+		while(newGame.drawdeck.getSize()!=0) // On repete le processus jusqu'a temps qu'on ait plu de carte
 		{
 
 			newGame.distribute(); // distribuer les cartes 
@@ -218,13 +218,14 @@ public class Game {
 
 
 
-			ForMainPlay.get(Player.getStarter()).stealCard(input); // le premier joueur Joue
 
-			for(int j =1; j<nbPlayers;j++) {  // le reste suit selon la méthode stealCard(input)
+			for(int j =0; j<nbPlayers;j++) {  // le reste suit selon la méthode stealCard(input)
 				ForMainPlay.get(Player.getVictime()).stealCard(input);	 // Les manip de chaque joueur pendant le tour 
 			}
 
-
+			 for(int i=0; i<Game.nbPlayers;i++) {
+				 Game.players.get(i).HasStolen=false;
+			 }
 
 			newGame.mainCollectCards(); // On ramasse les cartes et on les rebalance dans le jeu pour recommencer 
 
