@@ -7,18 +7,19 @@ public enum Value {
 	quatre("quatre",4);
 
 	private String str =" ";
-	private int cardvalue;
+	private int cardValue;
 	
 	//constructeur 
 	Value(String str, int value){
 		this.str=str;
-		this.cardvalue=value;
+		this.cardValue=value;
 	}
+	
 	public String toString() {
 		return str;
 	}
 	
 	public int getCardValue() {
-		return cardvalue;
+		return cardValue;
 	}
 }

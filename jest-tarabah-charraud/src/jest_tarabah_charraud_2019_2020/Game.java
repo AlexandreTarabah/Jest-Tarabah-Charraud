@@ -45,7 +45,7 @@ public class Game {
 
 	private String gameplay;
 
-	static HashMap<String,Player> ForMainPlay = new HashMap<String,Player>() ;
+	static HashMap<String,Player> ForMainPlay = new HashMap<String,Player>();
 
 	static ArrayList<Player> players = new ArrayList<Player>();
 
@@ -131,9 +131,45 @@ public class Game {
 	public void highestFUp() {
 	}
 
+	
+	
+	public void mainCollectCards()
+	{
+		for(int i=0; i <players.size();i++)
+		 {
+				drawdeck.collectCards(players.get(i)); // on rebalance les cartes restantes dans le drawdeck.
+		 }
+	}
 
 
-
+	public void determinateFirstPlayer() { // Code  pour comparer dans countJest, dans cette méthode, et dans stealCards
+		int highestCardValue = 0;
+		int highestColorValue = 0;
+		for (Iterator<Player> it = Game.players.iterator(); it.hasNext();) 
+		{
+			Player p = (Player) it.next();
+			for(int i=0;i<2;i++) {
+				if(highestCardValue < p.hand[i].getValue().getCardValue())
+				{
+					highestCardValue = p.hand[i].getValue().getCardValue();
+					highestColorValue = p.hand[i].getColor().getColorValue();
+					Player.starter = p.pseudo;
+					
+				}
+				
+				if((highestCardValue == p.hand[i].getValue().getCardValue()) && (highestColorValue <  p.hand[i].getColor().getColorValue()))
+				{
+					highestColorValue =  p.hand[i].getColor().getColorValue();
+					Player.starter=p.pseudo;
+				}
+				
+			}
+			
+			
+			
+	}
+		System.out.println(Player.starter +"Commence la partie");
+	}
 	
 
 
@@ -153,43 +189,50 @@ public class Game {
 
 		Scanner input = new Scanner(System.in) ;
 // DEBUT DES MANOEUVRES PÖUR 3 ou 4 joueurs
+		
 		System.out.println("Bonjour jeunes gens ! combien voulez-vous de joueur ?");
 		nbPlayers = input.nextInt() ;
 	      int i = 0;
 		while(i<nbPlayers) { 
 	        new Player(input);
 	         i++;
-	      }
-
-
-		newGame.distribute(); // distribuer les cartes 
+	    }
 		
 		
+		while(newGame.drawdeck.getSize()>nbPlayers) // On repete le processus jusqu'a temps qu'on ait plu de carte
+		{
+			
+newGame.distribute(); // distribuer les cartes 
+		
 
-iterator it = players.iterator();
-	p1.upsideDown(p1, input) ; // Proposer a chaque joueur quelle carte il veut mettre faceUP/faceDown
-	p2.upsideDown(p2, input) ;
-	p3.upsideDown(p3, input) ;
+
+
+// UPSIDE DOWN DE CHAQUE JOUEUR		
+Iterator<Player> it = players.iterator();
+while(it.hasNext()) {
+	Player p = it.next();
+	p.upsideDown(p, input);
 }
 
 
+newGame.determinateFirstPlayer(); // on détermine le premier Joueur
+
+
+
+
+ForMainPlay.get(Player.getStarter()).stealCard(input); // le premier joueur Joue
+		
+		for(int j =1; j<nbPlayers;j++) {  // le reste suit selon la méthode stealCard(input)
+			ForMainPlay.get(Player.getVictime()).stealCard(input);	 // Les manip de chaque joueur pendant le tour 
+		}
+		
+		
+		
+newGame.mainCollectCards(); // On ramasse les cartes et on les rebalance dans le jeu pour recommencer 
+
+}
+ 
 /*
-		p1.determinateFirstPlayer(p1,p2,p3); // on determine le premier qui joue : player.pseudo = starter
-
-
-		ForMainPlay.get(Player.getStarter()).stealCard(input);
-
-		System.out.println(ForMainPlay.get(Player.getVictime()).pseudo + " à vous de jouer\n ");
-		ForMainPlay.get(Player.getVictime()).stealCard(input);												// Les manip de chaque joueur pendant le tour 
-
-		System.out.println(ForMainPlay.get(Player.getVictime()).pseudo + " à vous de jouer\n ");
-		ForMainPlay.get(Player.getVictime()).stealCard(input);
-
-		drawdeck.collectCards(p1); // on rebalance les cartes restantes dans le drawdeck.
-		drawdeck.collectCards(p2);
-		drawdeck.collectCards(p3);
-
-
 		System.out.println(Arrays.deepToString(newGame.trophyCards) + "\n") ;
 
 		ArrayList<Player> p = Game.players ;
@@ -200,7 +243,7 @@ iterator it = players.iterator();
 			public int compare(Integer int1, Integer int2) {
 				return int1.compareTo(int2);
 			}
-		} ;
+		};
 
 		for(int j = 0 ; j < t.length ; j ++) // parcourt les trophies
 		{
