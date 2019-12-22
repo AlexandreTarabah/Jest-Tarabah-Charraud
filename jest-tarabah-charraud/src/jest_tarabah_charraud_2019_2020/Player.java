@@ -28,15 +28,15 @@ public class Player
 	boolean HasStolen=false;
 
 
-	private Card[] hand = new Card[2] ;
+	Card[] hand = new Card[2] ;
 
 	private Jest jest ;
 
 	boolean firstPlayer = false;
 
-	static private String victime;
+	static  String victime;
 
-	static private String starter;
+	static  String starter;
 	
 	int nbPoint;
 
@@ -86,17 +86,29 @@ public class Player
 		
 		while(Player.listOffer.get(victime).size()<2) {
 			System.out.println("Offre de la victime incomplète, veuillez saisir une offre complete\n"); // vérification que l'offre est bien complète
-			victime=input.next();}
-			
+			victime=input.next();
+			}
+		
+		
+		if(Game.nbPlayers==3) {
 		if(nbCardOffer>4) {
-		
-		
 		while( this.pseudo.equals(victime) || victime==starter)  {
 			System.out.println(this.pseudo);
 			System.out.println(" n'oubliez pas que vous pouvez vous volez uniquement si vous êtes le dernier joueur\n Rentrer un pseudo\n");
 				victime=input.next();					
 						}
 				}
+		}else 
+			
+			if(Game.nbPlayers==4) {
+				if(nbCardOffer>5) {
+					while( this.pseudo.equals(victime) || victime==starter)  {
+						System.out.println(this.pseudo);
+						System.out.println(" n'oubliez pas que vous pouvez vous volez uniquement si vous êtes le dernier joueur\n Rentrer un pseudo\n");
+							victime=input.next();					
+									}
+						}
+			}
 		
 			
 		
@@ -113,21 +125,52 @@ public class Player
 
 		if(Game.getForMainPlay().get(victime).HasStolen==true) { // Dans le cas ou le joueur vole le voleur précédent, on fixe la prochaine victime au joueur qui a l'offre complete. 
 
-			for (HashMap.Entry<String,Player> mapentry : Game.getForMainPlay().entrySet()) {
-				if (mapentry.getValue().offer.size()==2) {
+			
+			if(Game.nbPlayers==3) {
+				for (HashMap.Entry<String,Player> mapentry : Game.getForMainPlay().entrySet()) {
+					if (mapentry.getValue().offer.size()==2) {
 
 					victime=mapentry.getKey();
 
-				}
-			}
+							}
+					}
+			}else
+							if(Game.nbPlayers==4) {
+					
+								int highestCardValue = 0;
+								int highestColorValue = 0;
+					
+									for (HashMap.Entry<String,Player> mapentry2 : Game.getForMainPlay().entrySet()) {
+										if (mapentry2.getValue().offer.size()==2) {
+											if(highestCardValue <  mapentry2.getValue().offer.get("up").value.getCardValue())
+											{
+												highestCardValue = mapentry2.getValue().offer.get("up").value.getCardValue();
+												highestColorValue = mapentry2.getValue().offer.get("up").getColor().getColorValue();
+												victime = mapentry2.getKey();
+											}
+								
+												if(highestCardValue == mapentry2.getValue().offer.get("up").value.getCardValue() && 
+												highestColorValue < mapentry2.getValue().offer.get("up").getColor().getColorValue()) {
+									
+													victime = mapentry2.getKey();
+													
+												}		
+					                }
+							}
+					}
 		}
 		starter="";
-		Iterator it = this.jest.jestCards.iterator() ;
-		while(it.hasNext())
-		{
+		Iterator it = this.jest.jestCards.iterator();
+			while(it.hasNext())
+			{
 			System.out.println("vous avez ajouté à votre Jest " + it.next()+" "+"\n");
-		}
-	}
+			}
+	
+			
+		
+		System.out.println(Game.ForMainPlay.get(Player.getVictime()).pseudo + " à vous de jouer\n ");
+	
+}
 
 
 	
@@ -165,58 +208,6 @@ public class Player
 
 	
 	
-	
-	
-
-
-
-	public void determinateFirstPlayer(Player p1, Player p2, Player p3) {
-
-
-		int HighestValue = 0;
-		int HighestColor =0;
-		String PlayerHighestValue = null;
-		for(Entry<String, HashMap<String, Card>> mapentry : listOffer.entrySet()) {
-				for(Entry<String, Card> mapentry2 : offer.entrySet()) {
-
-					if(HighestValue < mapentry.getValue().get(mapentry2.getKey()).getValue().getCardValue())
-					{
-					HighestValue=mapentry.getValue().get(mapentry2.getKey()).getValue().getCardValue();
-					PlayerHighestValue = mapentry.getKey();
-				
-						if(HighestValue == mapentry.getValue().get(mapentry2.getKey()).getValue().getCardValue() && PlayerHighestValue != mapentry.getKey() ){
-
-								if( mapentry.getValue().get(PlayerHighestValue).getColor().getColorValue()<mapentry.getValue().get(mapentry2.getKey()).getColor().getColorValue() ) {
-
-									PlayerHighestValue=mapentry.getKey();
-										};
-								}
-						}
-				}
-		}
-
-
-
-		if(PlayerHighestValue==p1.pseudo) {
-			p1.firstPlayer = true;
-			starter=p1.pseudo;
-			System.out.println("Joueur " + p1.pseudo + " commence\n");
-		}else 
-			if(PlayerHighestValue==p2.pseudo) {
-				System.out.println("Joueur " + p2.pseudo + " commence\n");
-				p2.firstPlayer=true;
-				starter=p2.pseudo;
-			}else 
-				if(PlayerHighestValue==p3.pseudo) {
-					System.out.println("Joueur " + p3.pseudo + " commence\n");
-					starter=p3.pseudo;
-					p3.firstPlayer=true;
-				}
-					
-					
-
-
-	}
 
 
 	
@@ -245,9 +236,9 @@ public class Player
 	
 
 	// la c'est la méthode pour 
-	public void upsideDown(Player player, Scanner input) 
+	public void upsideDown(Player p, Scanner input) 
 	{		
-		System.out.println("voici vos cartes joueur : " + player.pseudo+"\n");
+		System.out.println("voici vos cartes joueur : " + this.pseudo+"\n");
 		for(int i=0; i<2;i++) {
 			System.out.println(hand[i].getValue() +" de "+ hand[i].getColor()); // on affiche les cartes du joueur
 		}
@@ -258,11 +249,11 @@ public class Player
 
 		((Map<String, Card>) offer).put("down", hand[numC-1]); // -1 car le tableau commence à l'indice 0, je caste l'offer  
 		((Map<String, Card>) offer).put("up", hand[numC%2]); // avec le modulo 2 on obtient la case manquante, je caste l'offer
-		System.out.println(player.pseudo  + " a caché " + ((Map<String, Card>) offer).get("down").getValue() + " de " + ((Map<String, Card>) offer).get("down").getColor()+"\n");
+		System.out.println(this.pseudo  + " a caché " + ((Map<String, Card>) offer).get("down").getValue() + " de " + ((Map<String, Card>) offer).get("down").getColor()+"\n");
 		/* et la on affiche le pseudo du player en paramètre, avec get(Down) et la value de la carte, et la couleur
 		 */
 
-		Player.listOffer.put(player.pseudo, player.offer); // on ajoute l'offre du player a la listOffer.
+		Player.listOffer.put(this.pseudo, this.offer); // on ajoute l'offre du player a la listOffer.
 
 	}
 

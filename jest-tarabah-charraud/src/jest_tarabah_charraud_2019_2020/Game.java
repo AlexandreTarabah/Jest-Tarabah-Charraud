@@ -46,7 +46,7 @@ public class Game {
 
 	private String gameplay;
 
-	static HashMap<String,Player> ForMainPlay = new HashMap<String,Player>() ;
+	static HashMap<String,Player> ForMainPlay = new HashMap<String,Player>();
 
 	static ArrayList<Player> players = new ArrayList<Player>();
 
@@ -132,8 +132,18 @@ public class Game {
 	public void highestFUp() {
 	}
 
+	
+	
+	public void mainCollectCards()
+	{
+		for(int i=0; i <players.size();i++)
+		 {
+				drawdeck.collectCards(players.get(i)); // on rebalance les cartes restantes dans le drawdeck.
+		 }
+	}
 
 
+<<<<<<< HEAD
 
 	public void addPlayer(Player p, Scanner input) {
 		if(currentPlay==false) {
@@ -146,6 +156,37 @@ public class Game {
 		}
 	}
 
+=======
+	public void determinateFirstPlayer() { // Code  pour comparer dans countJest, dans cette méthode, et dans stealCards
+		int highestCardValue = 0;
+		int highestColorValue = 0;
+		for (Iterator<Player> it = Game.players.iterator(); it.hasNext();) 
+		{
+			Player p = (Player) it.next();
+			for(int i=0;i<2;i++) {
+				if(highestCardValue < p.hand[i].getValue().getCardValue())
+				{
+					highestCardValue = p.hand[i].getValue().getCardValue();
+					highestColorValue = p.hand[i].getColor().getColorValue();
+					Player.starter = p.pseudo;
+					
+				}
+				
+				if((highestCardValue == p.hand[i].getValue().getCardValue()) && (highestColorValue <  p.hand[i].getColor().getColorValue()))
+				{
+					highestColorValue =  p.hand[i].getColor().getColorValue();
+					Player.starter=p.pseudo;
+				}
+				
+			}
+			
+			
+			
+	}
+		System.out.println(Player.starter +"Commence la partie");
+	}
+	
+>>>>>>> branch 'master' of https://github.com/AlexandreTarabah/Jest-Tarabah-Charraud
 
 
 
@@ -163,6 +204,7 @@ public class Game {
 		newGame.initializeGame(newGame); 
 
 		Scanner input = new Scanner(System.in) ;
+<<<<<<< HEAD
 
 		Player p1 = new Player() ;
 		Player p2 = new Player() ;
@@ -174,8 +216,36 @@ public class Game {
 
 
 		newGame.distribute(); // distribuer les cartes 
+=======
+// DEBUT DES MANOEUVRES PÖUR 3 ou 4 joueurs
+		
+		System.out.println("Bonjour jeunes gens ! combien voulez-vous de joueur ?");
+		nbPlayers = input.nextInt() ;
+	      int i = 0;
+		while(i<nbPlayers) { 
+	        new Player(input);
+	         i++;
+	    }
+		
+		
+		while(newGame.drawdeck.getSize()>nbPlayers) // On repete le processus jusqu'a temps qu'on ait plu de carte
+		{
+			
+newGame.distribute(); // distribuer les cartes 
+		
 
 
+
+// UPSIDE DOWN DE CHAQUE JOUEUR		
+Iterator<Player> it = players.iterator();
+while(it.hasNext()) {
+	Player p = it.next();
+	p.upsideDown(p, input);
+}
+>>>>>>> branch 'master' of https://github.com/AlexandreTarabah/Jest-Tarabah-Charraud
+
+
+<<<<<<< HEAD
 
 		p1.upsideDown(p1, input) ; // Proposer a chaque joueur quelle carte il veut mettre faceUP/faceDown
 		p2.upsideDown(p2, input) ;
@@ -197,6 +267,26 @@ public class Game {
 		drawdeck.collectCards(p3);
 
 
+=======
+newGame.determinateFirstPlayer(); // on détermine le premier Joueur
+
+
+
+
+ForMainPlay.get(Player.getStarter()).stealCard(input); // le premier joueur Joue
+		
+		for(int j =1; j<nbPlayers;j++) {  // le reste suit selon la méthode stealCard(input)
+			ForMainPlay.get(Player.getVictime()).stealCard(input);	 // Les manip de chaque joueur pendant le tour 
+		}
+		
+		
+		
+newGame.mainCollectCards(); // On ramasse les cartes et on les rebalance dans le jeu pour recommencer 
+
+}
+ 
+/*
+>>>>>>> branch 'master' of https://github.com/AlexandreTarabah/Jest-Tarabah-Charraud
 		System.out.println(Arrays.deepToString(newGame.trophyCards) + "\n") ;
 
 		ArrayList<Player> p = Game.players ;
@@ -207,7 +297,7 @@ public class Game {
 			public int compare(Integer int1, Integer int2) {
 				return int1.compareTo(int2);
 			}
-		} ;
+		};
 
 		for(int j = 0 ; j < t.length ; j ++) // parcourt les trophies
 		{

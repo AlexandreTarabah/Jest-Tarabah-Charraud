@@ -3,7 +3,7 @@ package jest_tarabah_charraud_2019_2020;
 
 public class Bot extends Player {
     public Bot(String pseudo) {
-		super();
+		super(null);
 		// TODO Auto-generated constructor stub
 	}
 

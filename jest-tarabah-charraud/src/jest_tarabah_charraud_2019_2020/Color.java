@@ -12,6 +12,7 @@ public enum Color {
 	
 	Color(String strColor, int colorValue){
 		this.strColor=strColor;
+		this.colorValue = colorValue;
 	}
 	
 	public String toString() {
