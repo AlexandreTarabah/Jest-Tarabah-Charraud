@@ -13,6 +13,8 @@ public class Card
 	Color color ;
 
 	Value value;
+	
+	
 
 	public Trophy trophy ;
 
@@ -83,7 +85,6 @@ public class Card
 		}
 
 	}
-
 
 
 	

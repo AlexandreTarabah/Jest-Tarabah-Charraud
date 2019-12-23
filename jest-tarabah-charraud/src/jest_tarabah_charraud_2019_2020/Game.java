@@ -19,22 +19,26 @@ import java.util.NavigableMap;
 
 /*			 COMMENTAIRE 
  * ----------------------------------------------------------------------------------------------------------------
- tu verras dans le débogguage, c'est le add(player) ligne 99 qui cause probleme, j'ai changé aussi 
- le nom de la classe gamer en Player, c'est plus mainipulable. 
- Je me suis permis de changer d'emplacement certaines méthodes, notamment de player et game
-
- Pour public void distribute j'ai appliqué le td jeu de bataille.
- initializeGame c'est JeudeCartes. 
- Dans player, j'ai mis des System.out.println pour essayer d'afficher les cartes des joueurs.
-
- Pour les cartes en elle-meme, j'ai bossé avec des enums Value et Color, j'ai donc rajouter les fichiers enum et j'ai 
- implementer des méthodes String toString() pour pouvoir afficher, mais je suis pas sur de devoir faire comme ca.
-
- Enjoy mon boug.
-
-
-
- 			Fin Commentaire 
+ Premiere version du jeu avec Bots + extension (Famille de 6)
+ si extension=true {
+ Si(nbPlayers=3)
+ trophyCards=null;
+ Si(nbPlayers=4)
+ trophyCards=1;
+ }
+ 
+ création d'une méthode createTrophies() pour instancier les bons nombres de trophées selon les conditions préalables.
+ 
+ le main ressemble maintenant a : 
+ initialize Game(extension ou non)  
+ chooseGamePlay(3 ou 4 joueurs/bots) 
+ createTrophies; 
+ et la boucle while pour faire tourner 
+ 
+ Tu remarqueras un petit (t!=null) avant toute la partie trophée, puisque si on joue a 3 avec extension on a pas de trophées, ca évite
+ les pointeurs null exceptions 
+ 
+ TEST AVEC TOUS LES PARAMETRES 
  ------------------------------------------------------------------------------------------------------------------------------
  */
 
@@ -54,6 +58,8 @@ public class Game {
 	private DrawDeck drawdeck;
 
 	boolean currentPlay;
+	
+	 boolean extension=true;
 
 
 
@@ -98,26 +104,36 @@ public class Game {
 
 
 
-	public void initializeGame(Game g) {
+	public void initializeGame(Game g,Scanner input) {
+System.out.println("Bonjour jeunes gens ! Voulez-faire une partie avec ou sans extension ? \n"
+		+ "1 - Avec\n"
+		+ "2 - Sans");
+int choix=input.nextInt();
+if(choix==2) // On choisit si on joue avec ou sans extension, ce qui va impacter new DrawDeck(g)
+	g.extension=false;
 
 		players = new ArrayList<Player>();
 		listOffer = new HashMap<>();
 		drawdeck = new DrawDeck(g);
 		drawdeck.shuffle();
-		/*	for(int i = 0 ; i<2 ; i++)
-
-			/*	for(int i = 0 ; i<2 ; i++)
-
-		{
-			trophyCards[i] = drawdeck.takeCards() ;
-		}
-		 		currentPlay=false;   
-
-		 */
 	}
 
 
-
+public void createTrophies(Game g) { // On instancie les trophées a partir du DrawDeckn en fonction des parametres 
+	if(extension=false) {
+		if(nbPlayers==3)
+		{if(extension=false)
+			for(int i=0; i<2;i++) {
+				g.trophyCards[i]=g.drawdeck.takeCards();
+			}else 
+				g.trophyCards=null;
+		}else 
+			if(nbPlayers==4)
+			 {
+				trophyCards[1]=g.drawdeck.takeCards();
+			}		
+	}
+}
 
 
 	public void addPlayer(Player p, Scanner input) {
@@ -170,21 +186,9 @@ public class Game {
 		System.out.println(Player.victime +" commence la partie");
 	}
 
-	//j'ai mis le main ici, je me suis dis que ca pourrait être bien de mettre le déroulement de la partie dans Game 
-
-
-
-
-
-	public static void main(String[] args) {
-
-		Game newGame = new Game();
-
-		newGame.initializeGame(newGame); 
-
-		Scanner input = new Scanner(System.in) ;
-
-		System.out.println("Bonjour jeunes gens ! Combien voulez-vous de joueur rééls ?\n"
+	
+	public void configureGameplay(Scanner input) {
+		System.out.println(" Combien voulez-vous de joueur rééls ?\n"
 				+ "Vous avez le choix entre 0 - 1 - 2 - 3 - 4 joueurs rééls");
 		nbRealPlayers = input.nextInt();
 		int k = 0;
@@ -212,7 +216,26 @@ public class Game {
 		
 		nbPlayers = nbBots + nbRealPlayers;
 		
+	}
+	//j'ai mis le main ici, je me suis dis que ca pourrait être bien de mettre le déroulement de la partie dans Game 
+
+
 	
+
+
+
+
+	public static void main(String[] args) {
+
+		Game newGame = new Game();
+		Scanner input = new Scanner(System.in) ;
+		newGame.initializeGame(newGame, input); 
+		newGame.configureGameplay(input);
+		newGame.createTrophies(newGame);
+		
+	
+		
+		
 		while(newGame.drawdeck.getSize()!=0) // On repete le processus jusqu'a temps qu'on ait plu de carte
 		{
 
@@ -247,12 +270,17 @@ public class Game {
 
 		}
 
+		
+		
+		
 
 		System.out.println(Arrays.deepToString(newGame.trophyCards) + "\n") ;
 
 		ArrayList<Player> p = Game.players ;
-		Card[] t = newGame.trophyCards ;
-
+		Card[] t = newGame.trophyCards;
+		
+if(t!=null) { // Si y'a l'extension et 3 joueurs y'a pas de trophées ducoup on passe.
+	
 		Comparator<Integer> valueComparator = new Comparator<Integer>() {
 			@Override
 			public int compare(Integer int1, Integer int2) {
@@ -658,13 +686,13 @@ public class Game {
 					else
 					{
 						System.out.println("Personne n'a le Joker !") ;
-					}
+						}
 
+					}
 				}
+
 			}
 
 		}
-
 	}
-
 } // ARMAGEDDON DE SES MORTS
