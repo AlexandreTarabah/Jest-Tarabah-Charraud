@@ -13,7 +13,7 @@ import java.util.Map.Entry;
 public class Player 
 {
 
-	String  pseudo;
+	String pseudo;
 
 	private int nump;
 
@@ -30,13 +30,12 @@ public class Player
 
 	Card[] hand = new Card[2] ;
 
-	private Jest jest ;
+	protected Jest jest ;
 
 	boolean firstPlayer = false;
 
 	static  String victime;
 
-	static  String starter;
 	
 	int nbPoint;
 
@@ -53,14 +52,7 @@ public class Player
 		Game.ForMainPlay.put(this.pseudo, this);
 	}
 
-	public Player () 
-	{
-		this.offer = new HashMap<String, Card>();
-		this.pseudo = pseudo;
-		this.jest = new Jest();
-		Game.ForMainPlay.put(this.pseudo, this);
-	}
-
+	
 
 	
 	
@@ -160,7 +152,6 @@ public class Player
 							}
 					}
 		}
-		starter="";
 		nbCardOffer-=1;
 		Iterator it = this.jest.jestCards.iterator();
 			while(it.hasNext())
@@ -223,9 +214,7 @@ public class Player
 	
 	
 	
-	public static String getStarter() {
-		return starter;
-	}
+	
 
 	
 	

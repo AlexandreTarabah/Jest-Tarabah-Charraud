@@ -83,12 +83,17 @@ public class Trophy
 		{
 			Card card = (Card) itJC.next();
 
-			if(card.getColor().ordinal() > bigCoeff)
-				bigCoeff = card.getColor().ordinal() ;
-		}
+			if(card.getValue().getCardValue() == this.bigValue)
+			{	
 
-		this.bigCoeff = bigCoeff ;
-	}
+				if(card.getColor().ordinal() > bigCoeff)
+					{bigCoeff = card.getColor().ordinal();
+					}
+				}
+			}
+
+		this.bigCoeff = bigCoeff;
+	}	
 
 	public void bigValue(Jest jest)
 	{
@@ -107,7 +112,7 @@ public class Trophy
 				}
 		}
 
-		this.bigValue = bigValue ;
+		this.bigValue = bigValue;
 	}
 
 	public Color getColor() {

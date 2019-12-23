@@ -62,7 +62,7 @@ public class DrawDeck {
 
 	public void collectCards(Player player) {  // ici on collecte les cartes pour les rebalancer dans le DD, sauf si DDsize<3 
 
-		if(drawdeck.size()>3) {
+		if(drawdeck.size()!=0) {
 
 			if(player.offer.get("up")==null) {
 				drawdeck.add(player.offer.get("down"));

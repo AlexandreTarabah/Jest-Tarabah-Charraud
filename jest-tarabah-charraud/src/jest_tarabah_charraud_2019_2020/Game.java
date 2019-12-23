@@ -41,11 +41,9 @@ import java.util.NavigableMap;
 public class Game {
 
 	protected static int nbPlayers;
-
-
+	protected static int nbBots;
+	protected static int nbRealPlayers;
 	Card[] trophyCards = new Card[2] ;
-
-	private String gameplay;
 
 	static HashMap<String,Player> ForMainPlay = new HashMap<String,Player>() ;
 
@@ -53,11 +51,9 @@ public class Game {
 
 	static HashMap<String, HashMap<String, Card>> listOffer= new HashMap<>();
 
-	private static DrawDeck drawdeck;
+	private DrawDeck drawdeck;
 
 	boolean currentPlay;
-
-
 
 
 
@@ -188,15 +184,35 @@ public class Game {
 
 		Scanner input = new Scanner(System.in) ;
 
-		System.out.println("Bonjour jeunes gens ! Combien voulez-vous de joueur ?");
-		nbPlayers = input.nextInt() ;
+		System.out.println("Bonjour jeunes gens ! Combien voulez-vous de joueur rééls ?\n"
+				+ "Vous avez le choix entre 0 - 1 - 2 - 3 - 4 joueurs rééls");
+		nbRealPlayers = input.nextInt();
 		int k = 0;
-		while(k<nbPlayers) 
+		while(k<nbRealPlayers) // instanciation des joueurs rééls
 		{ 
 			new Player(input);
 			k++;
 		}
-
+		
+		
+		System.out.println("Combien voulez-vous de bot ?\n"
+				+ "Vous pouvez choisir de jouer jusqu'a "+ (4-nbRealPlayers)+"Bots"); // CHoix nombre de bots
+		nbBots=input.nextInt();
+		System.out.println("quelle difficulté de Bot ? \n"
+				+ "Vous pouvez Choisir entre \n \n"
+				+ " 1 - BotDown : bot Facile qui fait des choix randoms\n"
+				+ "2 -  BotHard : bot assez difficile qui fera toujours le bon choix");
+		int choixBot = input.nextInt();
+		for(k=0;k<nbBots;k++) // instanciation des bots 
+		{
+			if(choixBot==1) {
+			new BotDown(input);}else
+				new BotHard(input);
+		}
+		
+		nbPlayers = nbBots + nbRealPlayers;
+		
+	
 		while(newGame.drawdeck.getSize()!=0) // On repete le processus jusqu'a temps qu'on ait plu de carte
 		{
 
@@ -277,19 +293,19 @@ public class Game {
 
 				MapValueComparator<Player, Integer> mapComparator = new MapValueComparator<Player,Integer>(highCandidates, valueComparator);
 				Map<Player, Integer> sortedHighCandidates = new TreeMap<Player, Integer>(mapComparator);
-				sortedHighCandidates.putAll(highCandidates) ;
+				sortedHighCandidates.putAll(highCandidates);
 
 				if(sortedHighCandidates != null)
 				{
-					(((TreeMap<Player, Integer>) sortedHighCandidates).firstKey()).getJest().jestCards.
-					add(t[j]) ;
+					(((TreeMap<Player, Integer>) sortedHighCandidates).lastKey()).getJest().jestCards.
+					add(t[j]);
 
 
 
-					System.out.println("Bravo Joueur " + ((TreeMap<Player, Integer>) sortedHighCandidates).firstKey().pseudo + 
+					System.out.println("Bravo Joueur " + ((TreeMap<Player, Integer>) sortedHighCandidates).lastKey().pseudo + 
 							" vous avez la plus forte carte de " + t[j].getTrophy().getColor() 
 							+ " vous remportez le Trophée ! Les cartes de votre Jest sont : " 
-							+ ((TreeMap<Player, Integer>) sortedHighCandidates).firstKey().getJest().jestCards + "\n" ) ;
+							+ ((TreeMap<Player, Integer>) sortedHighCandidates).lastKey().getJest().jestCards + "\n" ) ;
 
 				}
 			} 
@@ -367,7 +383,7 @@ public class Game {
 						/**
 						 * coeff le plus élevé et nombre de cartes mis dans une liste
 						 * */
-						majCandidates.put(t[j].getTrophy().bigCoeff, t[j].getTrophy().majCandidate) ;
+						majCandidates.put(t[j].getTrophy().bigCoeff, t[j].getTrophy().majCandidate);
 
 						Iterator<Entry<Integer, Integer>> itr = majCandidates.entrySet().iterator(); 
 
@@ -381,7 +397,14 @@ public class Game {
 							{
 								Entry<Player, Entry<Integer, Integer>> entryP = itrP.next();
 
-								if(entryP.getValue().getValue() <= entry.getValue()) 
+								if(entryP.getValue().getValue() < entry.getValue()) 
+								{
+									
+									majPlayer.clear();
+									majPlayer.put(p.get(i), entry) ;
+									
+								}
+								else if(entryP.getValue().getValue() == entry.getValue())
 								{
 									if(entryP.getValue().getKey() < entry.getKey())
 									{
@@ -396,13 +419,13 @@ public class Game {
 				}
 
 				// Instruction ci dessous marche car on a qu un seul élément On est sur par la conversion en array de le retouver
-				((Player) majPlayer.keySet().toArray()[0]).getJest().jestCards.add(t[j]) ; 
+				((Player) majPlayer.keySet().toArray()[0]).getJest().jestCards.add(t[j]); 
 
 
 				System.out.println("Bravo Joueur " + ((Player) majPlayer.keySet().toArray()[0]).pseudo + 
 						" vous avez le plus grand nombre de " + t[j].getTrophy().getValue() 
 						+ ". Vous remportez le Trophée ! Les cartes de votre Jest sont : " 
-						+ ((Player) majPlayer.keySet().toArray()[0]).getJest().jestCards + "\n" ) ;
+						+ ((Player) majPlayer.keySet().toArray()[0]).getJest().jestCards + "\n" );
 
 
 			}
@@ -504,8 +527,8 @@ public class Game {
 				bestJestPlayer.put(players.get(1), myEntry) ;
 				bestJestColor.put(players.get(1), myEntry) ;
 
-				int[] jokeDetecter = new int[1] ;
-				jokeDetecter[0] = 0 ;
+				int jokeDetecter = 0;
+				
 
 				Player bp = null ;
 
@@ -521,12 +544,12 @@ public class Game {
 
 						if(itg instanceof Joker)
 						{
-							jokeDetecter[0] += 1 ;
+							jokeDetecter=1;
 							break ;
 						}
 					}
 
-					if(jokeDetecter[0] == 1)
+					if(jokeDetecter == 1)
 					{
 						System.out.println(p.get(i).pseudo + " vous avez le Joker vous n'êtes pas éligible !") ;
 					}
@@ -571,7 +594,7 @@ public class Game {
 
 								else if(entryP.getValue().getValue() == entry.getValue())
 								{
-									if(entryP.getValue().getKey() < entry.getValue())
+									if(entryP.getValue().getKey() < entry.getKey())
 									{
 										bestJestPlayer.clear();
 										bestJestPlayer.put(p.get(i), entry) ;
@@ -580,9 +603,9 @@ public class Game {
 										bestJestColor.put(p.get(i), entry1) ;
 									}
 
-									else if(entryP.getValue().getKey() == entry.getValue())
+									else if(entryP.getValue().getKey() == entry.getKey())
 									{
-										if(entryC.getValue().getKey() < entry1.getValue())
+										if(entryC.getValue().getKey() < entry1.getKey())
 										{
 											bestJestPlayer.clear();
 											bestJestPlayer.put(p.get(i), entry) ;
