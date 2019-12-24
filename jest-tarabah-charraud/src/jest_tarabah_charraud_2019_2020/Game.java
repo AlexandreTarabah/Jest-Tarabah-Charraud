@@ -53,7 +53,7 @@ public class Game {
 
 	static HashMap<String, HashMap<String, Card>> listOffer= new HashMap<>();
 
-	private static DrawDeck drawdeck;
+	private DrawDeck drawdeck;
 
 	boolean currentPlay;
 
@@ -156,14 +156,14 @@ public class Game {
 				{
 					highestCardValue = p.hand[i].getValue().getCardValue();
 					highestColorValue = p.hand[i].getColor().getColorValue();
-					Player.starter = p.pseudo;
+					Player.victime = p.pseudo;
 
 				}
 
 				if((highestCardValue == p.hand[i].getValue().getCardValue()) && (highestColorValue <  p.hand[i].getColor().getColorValue()))
 				{
 					highestColorValue =  p.hand[i].getColor().getColorValue();
-					Player.starter=p.pseudo;
+					Player.victime = p.pseudo;
 				}
 
 			}
@@ -171,7 +171,7 @@ public class Game {
 
 
 		}
-		System.out.println(Player.starter +" commence la partie");
+		System.out.println(Player.victime +" commence la partie");
 	}
 
 	//j'ai mis le main ici, je me suis dis que ca pourrait être bien de mettre le déroulement de la partie dans Game 
@@ -197,7 +197,7 @@ public class Game {
 			k++;
 		}
 
-		while(newGame.drawdeck.getSize()>nbPlayers) // On repete le processus jusqu'a temps qu'on ait plu de carte
+		while(newGame.drawdeck.getSize()!=0) // On repete le processus jusqu'a temps qu'on ait plu de carte
 		{
 
 			newGame.distribute(); // distribuer les cartes 
@@ -218,13 +218,14 @@ public class Game {
 
 
 
-			ForMainPlay.get(Player.getStarter()).stealCard(input); // le premier joueur Joue
 
-			for(int j =1; j<nbPlayers;j++) {  // le reste suit selon la méthode stealCard(input)
+			for(int j =0; j<nbPlayers;j++) {  // le reste suit selon la méthode stealCard(input)
 				ForMainPlay.get(Player.getVictime()).stealCard(input);	 // Les manip de chaque joueur pendant le tour 
 			}
 
-
+			 for(int i=0; i<Game.nbPlayers;i++) {
+				 Game.players.get(i).HasStolen=false;
+			 }
 
 			newGame.mainCollectCards(); // On ramasse les cartes et on les rebalance dans le jeu pour recommencer 
 
@@ -280,15 +281,15 @@ public class Game {
 
 				if(sortedHighCandidates != null)
 				{
-					(((TreeMap<Player, Integer>) sortedHighCandidates).firstKey()).getJest().jestCards.
+					(((TreeMap<Player, Integer>) sortedHighCandidates).lastKey()).getJest().jestCards.
 					add(t[j]) ;
 
 
 
-					System.out.println("Bravo Joueur " + ((TreeMap<Player, Integer>) sortedHighCandidates).firstKey().pseudo + 
+					System.out.println("Bravo Joueur " + ((TreeMap<Player, Integer>) sortedHighCandidates).lastKey().pseudo + 
 							" vous avez la plus forte carte de " + t[j].getTrophy().getColor() 
 							+ " vous remportez le Trophée ! Les cartes de votre Jest sont : " 
-							+ ((TreeMap<Player, Integer>) sortedHighCandidates).firstKey().getJest().jestCards + "\n" ) ;
+							+ ((TreeMap<Player, Integer>) sortedHighCandidates).lastKey().getJest().jestCards + "\n" ) ;
 
 				}
 			} 
@@ -380,7 +381,15 @@ public class Game {
 							{
 								Entry<Player, Entry<Integer, Integer>> entryP = itrP.next();
 
-								if(entryP.getValue().getValue() <= entry.getValue()) 
+								if(entryP.getValue().getValue() < entry.getValue()) 
+								{
+									
+									majPlayer.clear();
+									majPlayer.put(p.get(i), entry) ;
+									
+								}
+								
+								else if(entryP.getValue().getValue() == entry.getValue())
 								{
 									if(entryP.getValue().getKey() < entry.getKey())
 									{
@@ -503,8 +512,8 @@ public class Game {
 				bestJestPlayer.put(players.get(1), myEntry) ;
 				bestJestColor.put(players.get(1), myEntry) ;
 
-				int[] jokeDetecter = new int[1] ;
-				jokeDetecter[0] = 0 ;
+				int jokeDetecter ;
+				jokeDetecter = 0 ;
 
 				Player bp = null ;
 
@@ -520,12 +529,12 @@ public class Game {
 
 						if(itg instanceof Joker)
 						{
-							jokeDetecter[0] += 1 ;
+							jokeDetecter += 1 ;
 							break ;
 						}
 					}
 
-					if(jokeDetecter[0] == 1)
+					if(jokeDetecter == 1)
 					{
 						System.out.println(p.get(i).pseudo + " vous avez le Joker vous n'êtes pas éligible !") ;
 					}
@@ -570,7 +579,7 @@ public class Game {
 
 								else if(entryP.getValue().getValue() == entry.getValue())
 								{
-									if(entryP.getValue().getKey() < entry.getValue())
+									if(entryP.getValue().getKey() < entry.getKey())
 									{
 										bestJestPlayer.clear();
 										bestJestPlayer.put(p.get(i), entry) ;
@@ -579,9 +588,9 @@ public class Game {
 										bestJestColor.put(p.get(i), entry1) ;
 									}
 
-									else if(entryP.getValue().getKey() == entry.getValue())
+									else if(entryP.getValue().getKey() == entry.getKey())
 									{
-										if(entryC.getValue().getKey() < entry1.getValue())
+										if(entryC.getValue().getKey() < entry1.getKey())
 										{
 											bestJestPlayer.clear();
 											bestJestPlayer.put(p.get(i), entry) ;

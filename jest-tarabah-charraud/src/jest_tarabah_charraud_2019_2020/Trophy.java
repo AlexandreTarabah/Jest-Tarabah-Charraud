@@ -17,7 +17,7 @@ public class Trophy
 
 	public int bigCoeff ;
 	public int bigValue ;
-	
+
 	public int jokerCandidate ; 
 
 	public Trophy() 
@@ -83,8 +83,13 @@ public class Trophy
 		{
 			Card card = (Card) itJC.next();
 
-			if(card.getColor().ordinal() > bigCoeff)
-				bigCoeff = card.getColor().ordinal() ;
+			if(card.getValue().getCardValue() == this.bigValue)
+			{	
+
+				if(card.getColor().ordinal() > bigCoeff)
+					bigCoeff = card.getColor().ordinal() ;
+
+			}
 		}
 
 		this.bigCoeff = bigCoeff ;
@@ -101,10 +106,10 @@ public class Trophy
 		{
 			Card card = (Card) itJC.next();
 
-				if(card.getValue().getCardValue() > bigValue)
-				{
-					bigValue = card.getValue().getCardValue() ;
-				}
+			if(card.getValue().getCardValue() > bigValue)
+			{
+				bigValue = card.getValue().getCardValue() ;
+			}
 		}
 
 		this.bigValue = bigValue ;
