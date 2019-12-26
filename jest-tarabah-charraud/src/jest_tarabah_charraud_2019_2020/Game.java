@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Comparator;
 import java.util.HashMap;
+import java.util.InputMismatchException;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
@@ -38,7 +39,7 @@ import java.util.NavigableMap;
  Tu remarqueras un petit (t!=null) avant toute la partie trophée, puisque si on joue a 3 avec extension on a pas de trophées, ca évite
  les pointeurs null exceptions 
 
- TEST AVEC TOUS LES PARAMETRES 
+ Création d'une méthode readInt qui te fait tester jusqu'a temps que tu rentres un Int, ensuite vérification selon la demande des parametres réntrés.
  ------------------------------------------------------------------------------------------------------------------------------
  */
 
@@ -61,6 +62,11 @@ public class Game {
 
 	boolean extension=true;
 
+	boolean variante = false;
+	
+	 ArrayList<Integer> choiceVar= new ArrayList<Integer>();
+	 
+	 ArrayList<Integer> choicePlayers= new ArrayList<Integer>();
 
 
 	// La c'est la distribution des cartes, ou finalement j'invoque la méthode takecards et donc le joueur prend 2 cartes, et créé son offer
@@ -101,22 +107,50 @@ public class Game {
 		return ForMainPlay;
 	}
 
+	public static int readInt(Scanner scanner, String prompt, String promptOnError) { // Methode qui permet de vérifier qu'on rentre bien un entier
+		 
+	    System.out.print(prompt);
+	 
+	    while ( !scanner.hasNextInt() ) {
+	        System.out.print(promptOnError);
+	        scanner.nextLine(); // vidage saisie incorrect
+	    }
+	 
+	    final int input = scanner.nextInt();
+	    scanner.nextLine(); // vidage buffer
+	    return input;
+	 
+	}
 
 
 
 	public void initializeGame(Game g,Scanner input) {
+		
+		choiceVar.add(1);
+		choiceVar.add(2);
+		
+		choicePlayers.add(0);
+		choicePlayers.add(1);
+		choicePlayers.add(2);
+		choicePlayers.add(3);
+		choicePlayers.add(4);
+		
+		
 		System.out.println("Bonjour jeunes gens ! Voulez-faire une partie avec ou sans extension ? \n"
 				+ "1 - Avec\n"
 				+ "2 - Sans");
-		int choix=input.nextInt();
-		if(choix==2) // On choisit si on joue avec ou sans extension, ce qui va impacter new DrawDeck(g)
-			g.extension=false;
-
+		int choice=0;
+		while(choiceVar.contains(choice)==false) {
+			 choice = readInt(input,"Entrez un nombre compris entre 1 et 2 : ", "Non, Recommencez : ");
+		}
+		if(choice==2)
+			g.extension=false; // if(choice==2) // On choisit si on joue avec ou sans extension, ce qui va impacter new DrawDeck(g)
 		players = new ArrayList<Player>();
 		listOffer = new HashMap<>();
 		drawdeck = new DrawDeck(g);
 		drawdeck.shuffle();
 	}
+	
 
 
 	public void createTrophies(Game g) { // On instancie les trophées a partir du DrawDeckn en fonction des parametres 
@@ -188,37 +222,64 @@ public class Game {
 
 
 	public void configureGameplay(Scanner input) {
+		
 		System.out.println(" Combien voulez-vous de joueur rééls ?\n"
 				+ "Vous avez le choix entre 0 - 1 - 2 - 3 - 4 joueurs rééls");
-		nbRealPlayers = input.nextInt();
+		int choiceNbPlayers=10;
+		while(choicePlayers.contains(choiceNbPlayers)==false) {
+			choiceNbPlayers = readInt(input,"Entrez un nombre compris entre 0 et 4 : ", "Non, Recommencez : ");
+		}
 		int k = 0;
-		while(k<nbRealPlayers) // instanciation des joueurs rééls
+		while(k<choiceNbPlayers) // instanciation des joueurs rééls
 		{ 
 			new Player(input);
 			k++;
 		}
 
+		
 
 		System.out.println("Combien voulez-vous de bot ?\n"
-				+ "Vous pouvez choisir de jouer jusqu'a "+ (4-nbRealPlayers)+" Bots"); // CHoix nombre de bots
-		nbBots=input.nextInt();
+				+ "Vous pouvez choisir de jouer jusqu'a "+ (4-choiceNbPlayers)+" Bots"); // CHoix nombre de bots
+		 int choiceNbBot=10;
+		while((choiceNbBot<0 ||choiceNbBot>(4-choiceNbPlayers))) {
+			choiceNbBot = readInt(input,"Veuillez choisir un nombre pour compléter à 3 ou 4 joueurs", "Non, Recommencez : ");
+		}
+		
+		
+		
 		System.out.println("Quelle difficulté de Bot ? \n"
 				+ "Vous pouvez Choisir entre \n \n"
 				+ " 1 - BotDown : bot Facile qui fait des choix randoms\n"
 				+ " 2 -  BotHard : bot assez difficile qui fera toujours le bon choix");
-		int choixBot = input.nextInt();
-		for(k=0;k<nbBots;k++) // instanciation des bots 
+		int choiceDifficulty=0;
+		while(choiceVar.contains(choiceDifficulty)==false) {
+			 choiceDifficulty = readInt(input,"Entrez un nombre compris entre 1 et 2 : ", "Non, Recommencez : ");
+		}
+		for(k=0;k<choiceNbBot;k++) // instanciation des bots 
 		{
-			if(choixBot==1) {
+			if(choiceDifficulty==1) {
 				new BotDown(input);}
 			else
 				new BotHard(input);
 		}
 
-		nbPlayers = nbBots + nbRealPlayers;
+		nbPlayers = choiceNbBot + choiceNbPlayers;
+		
+		
+		
+		
+		System.out.println("Avec quelle variante voulez-vous jouer ?\n"
+				+ "1 - Variante Classique \n"
+				+ "2 - Variante inversion\n");
+		int choicevar=0;
+		while(choiceVar.contains(choiceDifficulty)==false) {
+			choicevar = readInt(input,"Entrez un nombre compris entre 1 et 2 : ", "Non, Recommencez : ");
+		}
+			if(choicevar==2)
+			{variante=true;}
 
 	}
-	//j'ai mis le main ici, je me suis dis que ca pourrait être bien de mettre le déroulement de la partie dans Game 
+
 
 
 
@@ -297,7 +358,7 @@ public class Game {
 
 					add(t[j]) ;
 
-					System.out.println(result) ;
+					System.out.println(result);
 
 				}
 
@@ -430,7 +491,7 @@ public class Game {
 
 				else if(t[j].getTrophy() instanceof TrophyJoker) // si c'est des trophyHighest
 				{
-					String result = "" ;
+					String result = "";
 
 					for(int i = 0 ; i < p.size() ; i ++)
 					{
@@ -439,7 +500,7 @@ public class Game {
 
 						result = jest.winJoker(p.get(i), t[j]) ;
 
-						System.out.println(result) ;
+						System.out.println(result);
 
 					}
 				}
