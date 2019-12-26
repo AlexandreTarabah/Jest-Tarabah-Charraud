@@ -21,5 +21,5 @@ public enum Color {
 	
 	public int getColorValue() {
 		return colorValue;
-	}
+		}
 }

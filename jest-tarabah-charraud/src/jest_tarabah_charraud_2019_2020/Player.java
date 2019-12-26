@@ -13,7 +13,7 @@ import java.util.Map.Entry;
 public class Player 
 {
 
-	String  pseudo;
+	String pseudo;
 
 	private int nump;
 
@@ -30,14 +30,13 @@ public class Player
 
 	Card[] hand = new Card[2] ;
 
-	private Jest jest ;
+	protected Jest jest ;
 
 	boolean firstPlayer = false;
 
 	static  String victime;
 
-	static  String starter;
-	
+
 	int nbPoint;
 
 	//j'instancie l'objet offre, qui est aussi une collection de carte, dans le constructeur player ici 
@@ -53,72 +52,65 @@ public class Player
 		Game.ForMainPlay.put(this.pseudo, this);
 	}
 
-	public Player () 
-	{
-		this.offer = new HashMap<String, Card>();
-		this.pseudo = pseudo;
-		this.jest = new Jest();
-		Game.ForMainPlay.put(this.pseudo, this);
-	}
 
 
-	
-	
+
+
 
 	public void stealCard(Scanner input) {
 		int nbCardOffer=0;
 		for(Entry<String, HashMap<String, Card>> map : listOffer.entrySet()) {
-			 
-				
-				{nbCardOffer = nbCardOffer+map.getValue().size();}
-			}
-		
-				
-				System.out.println("Qui sera votre victime ? Rentrer le pseudo d'un joueur\n ");
-				victime = input.next();
-				
-				
-				
+
+
+			{nbCardOffer = nbCardOffer+map.getValue().size();}
+		}
+
+
+		System.out.println("Qui sera votre victime ? Rentrer le pseudo d'un joueur\n ");
+		victime = input.next();
+
+
+
 		while(listOffer.containsKey(victime)==false) {
 			System.out.println("Veuillez rentrer un joueur existant\n");
 			victime=input.next();
 		}
-		
-		
+
+
 		while(Player.listOffer.get(victime).size()<2) {
 			System.out.println("Offre de la victime incomplète, veuillez saisir une offre complete\n"); // vérification que l'offre est bien complète
 			victime=input.next();
-			}
-		
-		
+		}
+
+
 		if(Game.nbPlayers==3) {
-		if(nbCardOffer>4) {
-		while( this.pseudo.equals(victime))  {
-			System.out.println(this.pseudo);
-			System.out.println(" n'oubliez pas que vous pouvez vous volez uniquement si vous êtes le dernier joueur\n Rentrer un pseudo\n");
-				victime=input.next();					
-						}
+			if(nbCardOffer>4) {
+				while( this.pseudo.equals(victime))  {
+					System.out.println(this.pseudo);
+					System.out.println(" n'oubliez pas que vous pouvez vous volez uniquement si vous êtes le dernier joueur\n Rentrer un pseudo\n");
+					victime=input.next();					
 				}
+			}
 		}else 
-			
+
 			if(Game.nbPlayers==4) {
 				if(nbCardOffer>5) {
 					while( this.pseudo.equals(victime))  {
 						System.out.println(this.pseudo);
 						System.out.println(" n'oubliez pas que vous pouvez vous volez uniquement si vous êtes le dernier joueur\n Rentrer un pseudo\n");
-							victime=input.next();					
-									}
-						}
+						victime=input.next();					
+					}
+				}
 			}
-		
-			
-		
-		
+
+
+
+
 
 		System.out.println("Quelle carte voulez-vous lui dérober ?\n ");
-		
+
 		String stolenCard = input.next();
-		
+
 		this.jest.jestCards.add(Player.listOffer.get(victime).get(stolenCard));
 		Player.listOffer.get(victime).remove(stolenCard);// méthode AddJest() implementé dans Jest.
 
@@ -126,70 +118,70 @@ public class Player
 
 		if(Game.getForMainPlay().get(victime).HasStolen==true) { // Dans le cas ou le joueur vole le voleur précédent, on fixe la prochaine victime au joueur qui a l'offre complete. 
 
-			
+
 			if(Game.nbPlayers==3) {
 				for (HashMap.Entry<String,Player> mapentry : Game.getForMainPlay().entrySet()) {
 					if (mapentry.getValue().offer.size()==2) {
 
-					victime=mapentry.getKey();
+						victime=mapentry.getKey();
 
-							}
 					}
+				}
 			}else
-							if(Game.nbPlayers==4) {
-					
-								int highestCardValue = 0;
-								int highestColorValue = 0;
-					
-									for (HashMap.Entry<String,Player> mapentry2 : Game.getForMainPlay().entrySet()) {
-										if (mapentry2.getValue().offer.size()==2) {
-											if(highestCardValue <  mapentry2.getValue().offer.get("up").value.getCardValue())
-											{
-												highestCardValue = mapentry2.getValue().offer.get("up").value.getCardValue();
-												highestColorValue = mapentry2.getValue().offer.get("up").getColor().getColorValue();
-												victime = mapentry2.getKey();
-											}
-								
-												if(highestCardValue == mapentry2.getValue().offer.get("up").value.getCardValue() && 
-												highestColorValue < mapentry2.getValue().offer.get("up").getColor().getColorValue()) {
-									
-													victime = mapentry2.getKey();
-													
-												}		
-					                }
+				if(Game.nbPlayers==4) {
+
+					int highestCardValue = 0;
+					int highestColorValue = 0;
+
+					for (HashMap.Entry<String,Player> mapentry2 : Game.getForMainPlay().entrySet()) {
+						if (mapentry2.getValue().offer.size()==2) {
+							if(highestCardValue <  mapentry2.getValue().offer.get("up").value.getCardValue())
+							{
+								highestCardValue = mapentry2.getValue().offer.get("up").value.getCardValue();
+								highestColorValue = mapentry2.getValue().offer.get("up").getColor().getColorValue();
+								victime = mapentry2.getKey();
 							}
+
+							if(highestCardValue == mapentry2.getValue().offer.get("up").value.getCardValue() && 
+									highestColorValue < mapentry2.getValue().offer.get("up").getColor().getColorValue()) {
+
+								victime = mapentry2.getKey();
+
+							}		
+						}
 					}
+				}
 		}
 
 		nbCardOffer-=1;
 		Iterator it = this.jest.jestCards.iterator();
-			while(it.hasNext())
-			{
+		while(it.hasNext())
+		{
 			System.out.println("Vous avez ajouté à votre Jest " + it.next()+" "+"\n");
-			}
-	
-			
+		}
+
+
 		if(Game.nbPlayers == 3 && nbCardOffer>3)
 		{System.out.println(Game.ForMainPlay.get(Player.getVictime()).pseudo + " à vous de jouer\n ");
 		}else
 			if(Game.nbPlayers==4 && nbCardOffer>4)
 			{System.out.println(Game.ForMainPlay.get(Player.getVictime()).pseudo + " à vous de jouer\n ");}
-		
-	
-	 
-		
-}
 
 
-	
-	
 
-	
-	
-	
-	
-	
-	
+
+	}
+
+
+
+
+
+
+
+
+
+
+
 
 	public String setPseudo(Scanner input) 
 	{
@@ -200,10 +192,10 @@ public class Player
 
 	}
 
-	
-	
-	
-	
+
+
+
+
 
 
 	public  void setHand(int i, Card card)
@@ -214,24 +206,22 @@ public class Player
 
 
 
-	
-	
 
 
-	
-	
-	
-	
-	
-	public static String getStarter() {
-		return starter;
-	}
 
-	
-	
-	
-	
-	
+
+
+
+
+
+
+
+
+
+
+
+
+
 	public static String getVictime() {
 		return victime;
 	}
@@ -240,8 +230,8 @@ public class Player
 
 
 
-	
-	
+
+
 
 	// la c'est la méthode pour 
 	public void upsideDown(Player p, Scanner input) 
@@ -266,8 +256,8 @@ public class Player
 	}
 
 
-	
-	
+
+
 
 
 	public Jest getJest()

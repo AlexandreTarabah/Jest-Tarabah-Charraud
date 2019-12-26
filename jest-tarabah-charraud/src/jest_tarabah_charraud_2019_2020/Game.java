@@ -19,33 +19,35 @@ import java.util.NavigableMap;
 
 /*			 COMMENTAIRE 
  * ----------------------------------------------------------------------------------------------------------------
- tu verras dans le débogguage, c'est le add(player) ligne 99 qui cause probleme, j'ai changé aussi 
- le nom de la classe gamer en Player, c'est plus mainipulable. 
- Je me suis permis de changer d'emplacement certaines méthodes, notamment de player et game
+ Premiere version du jeu avec Bots + extension (Famille de 6)
+ si extension=true {
+ Si(nbPlayers=3)
+ trophyCards=null;
+ Si(nbPlayers=4)
+ trophyCards=1;
+ }
 
- Pour public void distribute j'ai appliqué le td jeu de bataille.
- initializeGame c'est JeudeCartes. 
- Dans player, j'ai mis des System.out.println pour essayer d'afficher les cartes des joueurs.
+ création d'une méthode createTrophies() pour instancier les bons nombres de trophées selon les conditions préalables.
 
- Pour les cartes en elle-meme, j'ai bossé avec des enums Value et Color, j'ai donc rajouter les fichiers enum et j'ai 
- implementer des méthodes String toString() pour pouvoir afficher, mais je suis pas sur de devoir faire comme ca.
+ le main ressemble maintenant a : 
+ initialize Game(extension ou non)  
+ chooseGamePlay(3 ou 4 joueurs/bots) 
+ createTrophies; 
+ et la boucle while pour faire tourner 
 
- Enjoy mon boug.
+ Tu remarqueras un petit (t!=null) avant toute la partie trophée, puisque si on joue a 3 avec extension on a pas de trophées, ca évite
+ les pointeurs null exceptions 
 
-
-
- 			Fin Commentaire 
+ TEST AVEC TOUS LES PARAMETRES 
  ------------------------------------------------------------------------------------------------------------------------------
  */
 
 public class Game {
 
 	protected static int nbPlayers;
-
-
+	protected static int nbBots;
+	protected static int nbRealPlayers;
 	Card[] trophyCards = new Card[2] ;
-
-	private String gameplay;
 
 	static HashMap<String,Player> ForMainPlay = new HashMap<String,Player>() ;
 
@@ -57,7 +59,7 @@ public class Game {
 
 	boolean currentPlay;
 
-
+	boolean extension=true;
 
 
 
@@ -102,26 +104,36 @@ public class Game {
 
 
 
-	public void initializeGame(Game g) {
+	public void initializeGame(Game g,Scanner input) {
+		System.out.println("Bonjour jeunes gens ! Voulez-faire une partie avec ou sans extension ? \n"
+				+ "1 - Avec\n"
+				+ "2 - Sans");
+		int choix=input.nextInt();
+		if(choix==2) // On choisit si on joue avec ou sans extension, ce qui va impacter new DrawDeck(g)
+			g.extension=false;
 
 		players = new ArrayList<Player>();
 		listOffer = new HashMap<>();
 		drawdeck = new DrawDeck(g);
 		drawdeck.shuffle();
-		/*	for(int i = 0 ; i<2 ; i++)
-
-			/*	for(int i = 0 ; i<2 ; i++)
-
-		{
-			trophyCards[i] = drawdeck.takeCards() ;
-		}
-		 		currentPlay=false;   
-
-		 */
 	}
 
 
-
+	public void createTrophies(Game g) { // On instancie les trophées a partir du DrawDeckn en fonction des parametres 
+		if(extension=false) {
+			if(nbPlayers==3)
+			{if(extension=false)
+				for(int i=0; i<2;i++) {
+					g.trophyCards[i]=g.drawdeck.takeCards();
+				}else 
+					g.trophyCards=null;
+			}else 
+				if(nbPlayers==4)
+				{
+					trophyCards[1]=g.drawdeck.takeCards();
+				}		
+		}
+	}
 
 
 	public void addPlayer(Player p, Scanner input) {
@@ -174,7 +186,41 @@ public class Game {
 		System.out.println(Player.victime +" commence la partie");
 	}
 
+
+	public void configureGameplay(Scanner input) {
+		System.out.println(" Combien voulez-vous de joueur rééls ?\n"
+				+ "Vous avez le choix entre 0 - 1 - 2 - 3 - 4 joueurs rééls");
+		nbRealPlayers = input.nextInt();
+		int k = 0;
+		while(k<nbRealPlayers) // instanciation des joueurs rééls
+		{ 
+			new Player(input);
+			k++;
+		}
+
+
+		System.out.println("Combien voulez-vous de bot ?\n"
+				+ "Vous pouvez choisir de jouer jusqu'a "+ (4-nbRealPlayers)+" Bots"); // CHoix nombre de bots
+		nbBots=input.nextInt();
+		System.out.println("Quelle difficulté de Bot ? \n"
+				+ "Vous pouvez Choisir entre \n \n"
+				+ " 1 - BotDown : bot Facile qui fait des choix randoms\n"
+				+ " 2 -  BotHard : bot assez difficile qui fera toujours le bon choix");
+		int choixBot = input.nextInt();
+		for(k=0;k<nbBots;k++) // instanciation des bots 
+		{
+			if(choixBot==1) {
+				new BotDown(input);}
+			else
+				new BotHard(input);
+		}
+
+		nbPlayers = nbBots + nbRealPlayers;
+
+	}
 	//j'ai mis le main ici, je me suis dis que ca pourrait être bien de mettre le déroulement de la partie dans Game 
+
+
 
 
 
@@ -183,27 +229,14 @@ public class Game {
 	public static void main(String[] args) {
 
 		Game newGame = new Game();
-
-		newGame.initializeGame(newGame); 
-
 		Scanner input = new Scanner(System.in) ;
-
-		System.out.println("Bonjour jeunes gens ! Combien voulez-vous de joueur ?");
-		nbPlayers = input.nextInt() ;
-		int k = 0;
-		while(k<nbPlayers) 
-		{ 
-			new Player(input);
-			k++;
-		}
+		newGame.initializeGame(newGame, input); 
+		newGame.configureGameplay(input);
+		newGame.createTrophies(newGame);
 
 		while(newGame.drawdeck.getSize()!=0) // On repete le processus jusqu'a temps qu'on ait plu de carte
 		{
-
 			newGame.distribute(); // distribuer les cartes 
-
-
-
 
 			// UPSIDE DOWN DE CHAQUE JOUEUR		
 			Iterator<Player> it = players.iterator();
@@ -215,441 +248,209 @@ public class Game {
 
 			newGame.determinateFirstPlayer(); // on détermine le premier Joueur
 
-
-
-
-
 			for(int j =0; j<nbPlayers;j++) {  // le reste suit selon la méthode stealCard(input)
 				ForMainPlay.get(Player.getVictime()).stealCard(input);	 // Les manip de chaque joueur pendant le tour 
 			}
 
-			 for(int i=0; i<Game.nbPlayers;i++) {
-				 Game.players.get(i).HasStolen=false;
-			 }
+			for(int i=0; i<Game.nbPlayers;i++) {
+				Game.players.get(i).HasStolen=false;
+			}
 
 			newGame.mainCollectCards(); // On ramasse les cartes et on les rebalance dans le jeu pour recommencer 
 
 		}
 
-
 		System.out.println(Arrays.deepToString(newGame.trophyCards) + "\n") ;
 
 		ArrayList<Player> p = Game.players ;
-		Card[] t = newGame.trophyCards ;
+		Card[] t = newGame.trophyCards;
 
-		Comparator<Integer> valueComparator = new Comparator<Integer>() {
-			@Override
-			public int compare(Integer int1, Integer int2) {
-				return int1.compareTo(int2);
-			}
-		} ;
+		if(t!=null) { // Si y'a l'extension et 3 joueurs y'a pas de trophées ducoup on passe.
 
-		for(int j = 0 ; j < t.length ; j ++) // parcourt les trophies
-		{
-			if(t[j].getTrophy() instanceof TrophyHighest) // si c'est des trophyHighest
-			{
-
-				Map<Player,Integer> highCandidates = new HashMap<Player, Integer>();
-
-				for(int i = 0 ; i < p.size() ; i ++) // parcourt les joueurs
-				{
-					Jest jest = p.get(i).getJest() ;
-					jest.acceptVisitor(t[j].getTrophy()) ;
-
-					if(t[j].getTrophy().highCandidate.getColor()
-							.equals(t[j].getTrophy().getColor()) == false)
-					{
-						System.out.println("Vous n'avez aucune carte de la même couleur " + p.get(i).pseudo + " !\n") ;
-					}
-
-					else
-					{
-						{
-							System.out.println("Voici votre carte de " + t[j].getTrophy().getColor() 
-									+ " de plus grande valeur " + p.get(i).pseudo + " : "
-									+ t[j].getTrophy().highCandidate.getValue() + " de " 
-									+ t[j].getTrophy().highCandidate.getColor() + "\n") ;
-							highCandidates.put(p.get(i), t[j].getTrophy().highCandidate.getValue().ordinal()) ;
-
-						}
-					}
+			Comparator<Integer> valueComparator = new Comparator<Integer>() {
+				@Override
+				public int compare(Integer int1, Integer int2) {
+					return int1.compareTo(int2);
 				}
+			} ;
 
-				MapValueComparator<Player, Integer> mapComparator = new MapValueComparator<Player,Integer>(highCandidates, valueComparator);
-				Map<Player, Integer> sortedHighCandidates = new TreeMap<Player, Integer>(mapComparator);
-				sortedHighCandidates.putAll(highCandidates) ;
-
-				if(sortedHighCandidates != null)
+			for(int j = 0 ; j < t.length ; j ++) // parcourt les trophies
+			{
+				if(t[j].getTrophy() instanceof TrophyHighest) // si c'est des trophyHighest
 				{
+
+					Map<Player,Integer> highCandidates = new HashMap<Player, Integer>();
+					MapValueComparator<Player, Integer> mapComparator = new MapValueComparator<Player,Integer>(highCandidates, valueComparator);
+					Map<Player, Integer> sortedHighCandidates = new TreeMap<Player, Integer>(mapComparator);
+					String result = "" ;
+
+					for(int i = 0 ; i < p.size() ; i ++) // parcourt les joueurs
+					{
+						Jest jest = p.get(i).getJest() ;
+						jest.acceptTrophy(t[j].getTrophy()) ;
+
+						result = jest.winHighest(p.get(i), t[j], highCandidates, valueComparator, sortedHighCandidates) ;
+
+					}
+
 					(((TreeMap<Player, Integer>) sortedHighCandidates).lastKey()).getJest().jestCards.
+
 					add(t[j]) ;
 
-
-
-					System.out.println("Bravo Joueur " + ((TreeMap<Player, Integer>) sortedHighCandidates).lastKey().pseudo + 
-							" vous avez la plus forte carte de " + t[j].getTrophy().getColor() 
-							+ " vous remportez le Trophée ! Les cartes de votre Jest sont : " 
-							+ ((TreeMap<Player, Integer>) sortedHighCandidates).lastKey().getJest().jestCards + "\n" ) ;
+					System.out.println(result) ;
 
 				}
-			} 
 
 
-			else if(t[j].getTrophy() instanceof TrophyLowest) // si c'est des trophyHighest
-			{
-
-				Map<Player,Integer> lowCandidates = new HashMap<Player, Integer>();
-
-				for(int i = 0 ; i < p.size() ; i ++) // parcourt les joueurs
+				else if(t[j].getTrophy() instanceof TrophyLowest) // si c'est des trophyHighest
 				{
-					Jest jest = p.get(i).getJest() ;
-					jest.acceptVisitor(t[j].getTrophy()) ;
 
-					if(t[j].getTrophy().lowCandidate.getColor()
-							.equals(t[j].getTrophy().getColor()) == false)
+					Map<Player,Integer> lowCandidates = new HashMap<Player, Integer>();
+					MapValueComparator<Player, Integer> mapComparator = new MapValueComparator<Player,Integer>(lowCandidates, valueComparator);
+					Map<Player, Integer> sortedHighCandidates = new TreeMap<Player, Integer>(mapComparator);
+					String result = "" ;
+
+					for(int i = 0 ; i < p.size() ; i ++) // parcourt les joueurs
 					{
-						System.out.println("Vous n'avez aucune carte de la même couleur " + p.get(i).pseudo + " !\n") ;
+						Jest jest = p.get(i).getJest() ;
+						jest.acceptTrophy(t[j].getTrophy()) ;
+
+						result = jest.winLowest(p.get(i), t[j], lowCandidates, valueComparator, sortedHighCandidates) ;
+
 					}
 
-					else
-					{
-						System.out.println("Voici votre carte de " + t[j].getTrophy().getColor() 
-								+ " de plus faible valeur " + p.get(i).pseudo + " : "
-								+ t[j].getTrophy().lowCandidate.getValue() + " de " 
-								+ t[j].getTrophy().lowCandidate.getColor() + "\n") ;
-						lowCandidates.put(p.get(i), t[j].getTrophy().lowCandidate.getValue().ordinal()) ;
+					(((TreeMap<Player, Integer>) sortedHighCandidates).firstKey()).getJest().jestCards.
 
-					}
+					add(t[j]) ;
+
+					System.out.println(result) ;
+
 				}
 
-
-				MapValueComparator<Player, Integer> mapComparator = new MapValueComparator<Player,Integer>(lowCandidates, valueComparator);
-				Map<Player, Integer> sortedLowCandidates = new TreeMap<Player, Integer>(mapComparator);
-				sortedLowCandidates.putAll(lowCandidates) ;
-
-
-				(((TreeMap<Player, Integer>) sortedLowCandidates).firstKey()).getJest().jestCards.
-				add(t[j]) ;
-
-
-
-				System.out.println("Bravo Joueur " + ((TreeMap<Player, Integer>) sortedLowCandidates).firstKey().pseudo + 
-						" vous avez la plus faible carte de " + t[j].getTrophy().getColor() 
-						+ " vous remportez le Trophée ! Les cartes de votre Jest sont : " 
-						+ ((TreeMap<Player, Integer>) sortedLowCandidates).firstKey().getJest().jestCards + "\n" ) ;
-
-
-
-			}
-
-			else if(t[j].getTrophy() instanceof TrophyMajority) // si c'est des trophyHighest
-			{
-
-				Map<Integer,Integer> majCandidates = new HashMap<Integer, Integer>();
-				Map<Player,Entry<Integer, Integer>> majPlayer = new HashMap<Player, Entry<Integer, Integer>>();
-				Map.Entry<Integer,Integer> myEntry = new AbstractMap.SimpleEntry<Integer, Integer>(0, 0);
-				majPlayer.put(players.get(1), myEntry) ;
-
-				for(int i = 0 ; i < p.size() ; i ++) // parcourt les joueurs
+				else if(t[j].getTrophy() instanceof TrophyMajority) // si c'est des trophyHighest
 				{
-					Jest jest = p.get(i).getJest() ;
-					jest.acceptVisitor(t[j].getTrophy()) ;
 
-					if(t[j].getTrophy().majCandidate == 0)
+					Map<Integer,Integer> majCandidates = new HashMap<Integer, Integer>();
+					Map<Player,Entry<Integer, Integer>> majPlayer = new HashMap<Player, Entry<Integer, Integer>>();
+					Map.Entry<Integer,Integer> myEntry = new AbstractMap.SimpleEntry<Integer, Integer>(0, 0);
+					majPlayer.put(players.get(1), myEntry) ;
+					String result = "" ;
+
+					for(int i = 0 ; i < p.size() ; i ++) // parcourt les joueurs
 					{
-						System.out.println("Vous n'avez aucune carte de la même valeur " + p.get(i).pseudo + " !\n") ;
+						Jest jest = p.get(i).getJest() ;
+						jest.acceptTrophy(t[j].getTrophy()) ;
+
+						result = jest.winMajority(p.get(i), t[j], majCandidates, majPlayer, myEntry) ;	
+
 					}
+					// Instruction ci dessous marche car on a qu un seul élément On est sur par la conversion en array de le retouver
+					((Player) majPlayer.keySet().toArray()[0]).getJest().jestCards.add(t[j]);
 
-					else
-					{
-						System.out.println(p.get(i).pseudo + " voici votre nombre de " + t[j].getTrophy().getValue() 
-								+ " : " + t[j].getTrophy().majCandidate + "\n") ;
-						/**
-						 * coeff le plus élevé et nombre de cartes mis dans une liste
-						 * */
-						majCandidates.put(t[j].getTrophy().bigCoeff, t[j].getTrophy().majCandidate) ;
+					System.out.println(result) ;
 
-						Iterator<Entry<Integer, Integer>> itr = majCandidates.entrySet().iterator(); 
-
-						while(itr.hasNext()) 
-						{ 
-							Entry<Integer, Integer> entry = itr.next();
-							// parcourrons la map (contient un joueur) qui est candidat au trophy
-							Iterator<Entry<Player, Entry<Integer, Integer>>> itrP = majPlayer.entrySet().iterator();
-
-							while(itrP.hasNext())
-							{
-								Entry<Player, Entry<Integer, Integer>> entryP = itrP.next();
-
-								if(entryP.getValue().getValue() < entry.getValue()) 
-								{
-									
-									majPlayer.clear();
-									majPlayer.put(p.get(i), entry) ;
-									
-								}
-								
-								else if(entryP.getValue().getValue() == entry.getValue())
-								{
-									if(entryP.getValue().getKey() < entry.getKey())
-									{
-										majPlayer.clear();
-										majPlayer.put(p.get(i), entry) ;
-									}
-								}
-							}
-
-						}
-					}
 				}
 
-				// Instruction ci dessous marche car on a qu un seul élément On est sur par la conversion en array de le retouver
-				((Player) majPlayer.keySet().toArray()[0]).getJest().jestCards.add(t[j]) ; 
-
-
-				System.out.println("Bravo Joueur " + ((Player) majPlayer.keySet().toArray()[0]).pseudo + 
-						" vous avez le plus grand nombre de " + t[j].getTrophy().getValue() 
-						+ ". Vous remportez le Trophée ! Les cartes de votre Jest sont : " 
-						+ ((Player) majPlayer.keySet().toArray()[0]).getJest().jestCards + "\n" ) ;
-
-
-			}
-
-			else if(t[j].getTrophy() instanceof TrophyBestJest) // si c'est des trophyHighest
-			{
-				Map<Integer,Integer> bestJestCandidates = new HashMap<Integer, Integer>();
-				Map<Integer,Integer> bestJestCandidates1 = new HashMap<Integer, Integer>();
-				Map<Player,Entry<Integer, Integer>> bestJestPlayer = new HashMap<Player, Entry<Integer, Integer>>();
-				Map<Player,Entry<Integer, Integer>> bestJestColor = new HashMap<Player, Entry<Integer, Integer>>();
-				Map.Entry<Integer,Integer> myEntry = new AbstractMap.SimpleEntry<Integer, Integer>(0, 0);
-				bestJestPlayer.put(players.get(1), myEntry) ;
-				bestJestColor.put(players.get(1), myEntry) ; ;
-
-				for(int i = 0 ; i < p.size() ; i ++) // parcourt les joueurs
+				else if(t[j].getTrophy() instanceof TrophyBestJest) // si c'est des trophyHighest
 				{
-					Jest jest = p.get(i).getJest() ;
-					jest.acceptVisitor(t[j].getTrophy()) ;
+					Map<Integer,Integer> bestJestCandidates = new HashMap<Integer, Integer>();
+					Map<Integer,Integer> bestJestCandidates1 = new HashMap<Integer, Integer>();
+					Map<Player,Entry<Integer, Integer>> bestJestPlayer = new HashMap<Player, Entry<Integer, Integer>>();
+					Map<Player,Entry<Integer, Integer>> bestJestColor = new HashMap<Player, Entry<Integer, Integer>>();
+					Map.Entry<Integer,Integer> myEntry = new AbstractMap.SimpleEntry<Integer, Integer>(0, 0);
+					bestJestPlayer.put(players.get(1), myEntry) ;
+					bestJestColor.put(players.get(1), myEntry) ; 
+					String result = "" ;
 
-					System.out.println(p.get(i).pseudo + " voici la valeur de votre jest : " +
-							t[j].getTrophy().bestJestCandidate + "\n") ;
-					/**
-					 * coeff le plus élevé et nombre de cartes mis dans une liste
-					 * */
+					for(int i = 0 ; i < p.size() ; i ++) // parcourt les joueurs
+					{
+						Jest jest = p.get(i).getJest() ;
+						jest.acceptTrophy(t[j].getTrophy()) ;
+						result = jest.winBestJest(p.get(i), t[j], bestJestCandidates, bestJestCandidates1, bestJestPlayer, bestJestColor, myEntry) ;
+					}
 
-					bestJestCandidates.put(t[j].getTrophy().bigValue, t[j].getTrophy().bestJestCandidate) ;
-					bestJestCandidates1.put(t[j].getTrophy().bigCoeff, t[j].getTrophy().bestJestCandidate) ;
+					((Player) bestJestPlayer.keySet().toArray()[0]).getJest().jestCards.add(t[j]) ;
+					System.out.println(result) ;
+				}
 
-					Iterator<Entry<Integer, Integer>> itr = bestJestCandidates.entrySet().iterator();
-					Iterator<Entry<Integer, Integer>> itr1 = bestJestCandidates1.entrySet().iterator();
+				else if(t[j].getTrophy() instanceof TrophyBestJestNoJoke) // si c'est des trophyHighest
+				{
+					Map<Integer,Integer> bestJestCandidates = new HashMap<Integer, Integer>();
+					Map<Integer,Integer> bestJestCandidates1 = new HashMap<Integer, Integer>();
+					Map<Player,Entry<Integer, Integer>> bestJestPlayer = new HashMap<Player, Entry<Integer, Integer>>();
+					Map<Player,Entry<Integer, Integer>> bestJestColor = new HashMap<Player, Entry<Integer, Integer>>();
+					Map.Entry<Integer,Integer> myEntry = new AbstractMap.SimpleEntry<Integer, Integer>(0, 0);
+					bestJestPlayer.put(players.get(1), myEntry) ;
+					bestJestColor.put(players.get(1), myEntry) ;
+					String result = "" ; 
 
-					while(itr.hasNext() && itr1.hasNext()) 
-					{ 
-						Entry<Integer, Integer> entry = itr.next();
-						Entry<Integer, Integer> entry1 = itr1.next();
-						// parcourrons la map (contient un joueur) qui est candidat au trophy
-						Iterator<Entry<Player, Entry<Integer, Integer>>> itrP = bestJestPlayer.entrySet().iterator();
-						Iterator<Entry<Player, Entry<Integer, Integer>>> itrC = bestJestColor.entrySet().iterator();
+					int jokeDetecter ;
+					jokeDetecter = 0 ;
 
-						while(itrP.hasNext() && itrC.hasNext())
+					Player bp = null ;
+
+					for(int i = 0 ; i < p.size() ; i ++) // parcourt les joueurs
+					{
+						Jest jest = p.get(i).getJest() ;
+
+						bp = p.get(i) ; // for bestPlayer
+
+						for (Iterator<Card> it = jest.jestCards.iterator() ; it.hasNext(); )
 						{
-							Entry<Player, Entry<Integer, Integer>> entryP = itrP.next();
-							Entry<Player, Entry<Integer, Integer>> entryC = itrC.next();
+							Card itg = it.next();
 
-							if(entryP.getValue().getValue() < entry.getValue()) 
+							if(itg instanceof Joker)
 							{
-								bestJestPlayer.clear();
-								bestJestPlayer.put(p.get(i), entry) ;
+								jokeDetecter += 1 ;
 
-								bestJestColor.clear();
-								bestJestColor.put(p.get(i), entry1) ;
-							}
-
-							else if(entryP.getValue().getValue() == entry.getValue())
-							{
-								if(entryP.getValue().getKey() < entry.getValue())
-								{
-									bestJestPlayer.clear();
-									bestJestPlayer.put(p.get(i), entry) ;
-
-									bestJestColor.clear();
-									bestJestColor.put(p.get(i), entry1) ;
-								}
-
-								else if(entryP.getValue().getKey() == entry.getValue())
-								{
-									if(entryC.getValue().getKey() < entry1.getValue())
-									{
-										bestJestPlayer.clear();
-										bestJestPlayer.put(p.get(i), entry) ;
-
-										bestJestColor.clear();
-										bestJestColor.put(p.get(i), entry1) ;
-									}
-								}
+								break ;
 							}
 						}
 
-					}
-				}
-
-				((Player) bestJestPlayer.keySet().toArray()[0]).getJest().jestCards.add(t[j]) ; 
-
-
-				System.out.println("Bravo Joueur " + ((Player) bestJestPlayer.keySet().toArray()[0]).pseudo + 
-						" vous avez le meilleur jest sans joker dont le total de points est " 
-						+ ((Card) bestJestPlayer.values()).getValue()  
-						+ ". Vous remportez le Trophée ! Les cartes de votre Jest sont : " 
-						+ ((Player) bestJestPlayer.keySet().toArray()[0]).getJest().jestCards + "\n" ) ;
-			}
-
-			else if(t[j].getTrophy() instanceof TrophyBestJestNoJoke) // si c'est des trophyHighest
-			{
-				Map<Integer,Integer> bestJestCandidates = new HashMap<Integer, Integer>();
-				Map<Integer,Integer> bestJestCandidates1 = new HashMap<Integer, Integer>();
-				Map<Player,Entry<Integer, Integer>> bestJestPlayer = new HashMap<Player, Entry<Integer, Integer>>();
-				Map<Player,Entry<Integer, Integer>> bestJestColor = new HashMap<Player, Entry<Integer, Integer>>();
-				Map.Entry<Integer,Integer> myEntry = new AbstractMap.SimpleEntry<Integer, Integer>(0, 0);
-				bestJestPlayer.put(players.get(1), myEntry) ;
-				bestJestColor.put(players.get(1), myEntry) ;
-
-				int jokeDetecter ;
-				jokeDetecter = 0 ;
-
-				Player bp = null ;
-
-				for(int i = 0 ; i < p.size() ; i ++) // parcourt les joueurs
-				{
-					Jest jest = p.get(i).getJest() ;
-
-					bp = p.get(i) ; // for bestPlayer
-
-					for (Iterator<Card> it = jest.jestCards.iterator() ; it.hasNext(); )
-					{
-						Card itg = it.next();
-
-						if(itg instanceof Joker)
+						if(jokeDetecter == 1)
 						{
-							jokeDetecter += 1 ;
-							break ;
+							System.out.println(p.get(i).pseudo + " vous avez le Joker vous n'êtes pas éligible !") ;
 						}
-					}
 
-					if(jokeDetecter == 1)
-					{
-						System.out.println(p.get(i).pseudo + " vous avez le Joker vous n'êtes pas éligible !") ;
-					}
+						else
+						{
+							jest.acceptTrophy(t[j].getTrophy()) ;
 
-					else
-					{
-						jest.acceptVisitor(t[j].getTrophy()) ;
-
-						System.out.println(p.get(i).pseudo + " voici la valeur de votre jest : " +
-								t[j].getTrophy().bestJestCandidate + "\n") ;
-						/**
-						 * coeff le plus élevé et nombre de cartes mis dans une liste
-						 * */
-
-						bestJestCandidates.put(t[j].getTrophy().bigValue, t[j].getTrophy().bestJestCandidate) ;
-						bestJestCandidates1.put(t[j].getTrophy().bigCoeff, t[j].getTrophy().bestJestCandidate) ;
-
-						Iterator<Entry<Integer, Integer>> itr = bestJestCandidates.entrySet().iterator();
-						Iterator<Entry<Integer, Integer>> itr1 = bestJestCandidates1.entrySet().iterator();
-
-						while(itr.hasNext() && itr1.hasNext()) 
-						{ 
-							Entry<Integer, Integer> entry = itr.next();
-							Entry<Integer, Integer> entry1 = itr1.next();
-							// parcourrons la map (contient un joueur) qui est candidat au trophy
-							Iterator<Entry<Player, Entry<Integer, Integer>>> itrP = bestJestPlayer.entrySet().iterator();
-							Iterator<Entry<Player, Entry<Integer, Integer>>> itrC = bestJestColor.entrySet().iterator();
-
-							while(itrP.hasNext() && itrC.hasNext())
-							{
-								Entry<Player, Entry<Integer, Integer>> entryP = itrP.next();
-								Entry<Player, Entry<Integer, Integer>> entryC = itrC.next();
-
-								if(entryP.getValue().getValue() < entry.getValue()) 
-								{
-									bestJestPlayer.clear();
-									bestJestPlayer.put(p.get(i), entry) ;
-
-									bestJestColor.clear();
-									bestJestColor.put(p.get(i), entry1) ;
-								}
-
-								else if(entryP.getValue().getValue() == entry.getValue())
-								{
-									if(entryP.getValue().getKey() < entry.getKey())
-									{
-										bestJestPlayer.clear();
-										bestJestPlayer.put(p.get(i), entry) ;
-
-										bestJestColor.clear();
-										bestJestColor.put(p.get(i), entry1) ;
-									}
-
-									else if(entryP.getValue().getKey() == entry.getKey())
-									{
-										if(entryC.getValue().getKey() < entry1.getKey())
-										{
-											bestJestPlayer.clear();
-											bestJestPlayer.put(p.get(i), entry) ;
-
-											bestJestColor.clear();
-											bestJestColor.put(p.get(i), entry1) ;
-
-										}
-									}
-								}
-							}
+							result = jest.winBestJest(p.get(i), t[j], bestJestCandidates, 
+									bestJestCandidates1, bestJestPlayer, bestJestColor, myEntry) ;
 
 						}
 
-
 					}
+
+					((Player) bestJestPlayer.keySet().toArray()[0]).getJest().jestCards.add(t[j]) ;
+					System.out.println(result) ;
 
 				}
 
-				((Player) bestJestPlayer.keySet().toArray()[0]).getJest().jestCards.add(t[j]) ; 
-
-
-				System.out.println("Bravo Joueur " + ((Player) bestJestPlayer.keySet().toArray()[0]).pseudo + 
-						" vous avez le meilleur jest dont le total de points est " 
-						+ bestJestPlayer.get(bp).getValue()
-						+ ". Vous remportez le Trophée ! Les cartes de votre Jest sont : " 
-						+ ((Player) bestJestPlayer.keySet().toArray()[0]).getJest().jestCards + "\n" ) ;
-			}
-
-			else if(t[j].getTrophy() instanceof TrophyJoker) // si c'est des trophyHighest
-			{
-
-				for(int i = 0 ; i < p.size() ; i ++)
+				else if(t[j].getTrophy() instanceof TrophyJoker) // si c'est des trophyHighest
 				{
-					Jest jest = p.get(i).getJest() ;
-					jest.acceptVisitor(t[j].getTrophy()) ;
+					String result = "" ;
 
-					if(t[j].getTrophy().jokerCandidate == 1)
+					for(int i = 0 ; i < p.size() ; i ++)
 					{
-						p.get(i).getJest().jestCards.add(t[j]) ; 
+						Jest jest = p.get(i).getJest() ;
+						jest.acceptTrophy(t[j].getTrophy()) ;
 
-						System.out.println("Bravo Joueur " + p.get(i).pseudo + 
-								" vous avez le Joker ! "
-								+ "Vous remportez le Trophée ! Les cartes de votre Jest sont : " 
-								+ p.get(i).getJest().jestCards + "\n" ) ;
+						result = jest.winJoker(p.get(i), t[j]) ;
 
-						break ;
+						System.out.println(result) ;
+
 					}
-
-					else
-					{
-						System.out.println("Personne n'a le Joker !") ;
-					}
-
 				}
+
 			}
 
 		}
-
+		
+		for (int i = 0 ; i <= players.size() ; i ++)
+		{
+			p.get(i).jest.acceptCount(new Count(), p.get(i)) ;
+		}
 	}
-
 } // ARMAGEDDON DE SES MORTS

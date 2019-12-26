@@ -92,8 +92,9 @@ public class Trophy
 			}
 		}
 
-		this.bigCoeff = bigCoeff ;
-	}
+
+		this.bigCoeff = bigCoeff;
+	}	
 
 	public void bigValue(Jest jest)
 	{
@@ -112,7 +113,7 @@ public class Trophy
 			}
 		}
 
-		this.bigValue = bigValue ;
+		this.bigValue = bigValue;
 	}
 
 	public Color getColor() {

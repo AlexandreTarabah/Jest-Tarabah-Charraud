@@ -3,9 +3,9 @@ package jest_tarabah_charraud_2019_2020;
 import java.util.Iterator;
 
 public class TrophyBestJest extends Trophy {
-	public TrophyBestJest(Color color) {
+	public TrophyBestJest() {
 
-		super(color);
+		super();
 	}
 
 

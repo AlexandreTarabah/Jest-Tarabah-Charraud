@@ -13,8 +13,15 @@ public class Card
 	Color color ;
 
 	Value value;
+	
+	
 
 	public Trophy trophy ;
+	
+	public Card()
+	{
+		
+	}
 
 
 	public Card (Value value, Color color) {
@@ -83,7 +90,6 @@ public class Card
 		}
 
 	}
-
 
 
 	

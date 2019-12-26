@@ -8,6 +8,7 @@ public class DrawDeck {
 
 	public static int nbCardDD;
 
+
 	private ArrayList<Card> drawdeck = new ArrayList<Card>();
 
 
@@ -29,28 +30,30 @@ public class DrawDeck {
 
 
 	public DrawDeck(Game g) {
+		
 		drawdeck= new ArrayList<Card>();
 
 		for (Color c : Color.values()) {
 			for(Value v : Value.values()) {
-				if (v == Value.deux && c == Color.spade)
-				{
-					Card card = new Card(v,c);
-					g.trophyCards[0] = card ;
-				}
-				else if (v == Value.quatre && c == Color.diamond)
-				{
-					Card card = new Card(v,c);
-					g.trophyCards[1] = card ;
-				}
-				else
-				{
+				
 					Card card = new Card(v,c);
 					drawdeck.add(card);
 				}
+			
+			Card card = new Joker() ;
+			drawdeck.add(card);
+			
+		}
+		if(g.extension==false) { // Si on joue sans extension, on retire les 6 du jeu
+			int verif6=6;
+			for(int i=0; i<drawdeck.size();i++) {
+				if(verif6==drawdeck.get(i).value.getCardValue())
+				{drawdeck.remove(i);}
 			}
 		}
-	}
+		// Si tu ajoutes le Joker ici, soit tu l'ajoutes après les removes, soit tu changes la position des removes pour que ça corresponde
+	
+		} 
 
 	public Card takeCards() { // méthode pour prendre une carte.
 		nbCardDD=drawdeck.size();
@@ -62,7 +65,7 @@ public class DrawDeck {
 
 	public void collectCards(Player player) {  // ici on collecte les cartes pour les rebalancer dans le DD, sauf si DDsize<3 
 
-		if(drawdeck.size()>3) {
+		if(drawdeck.size()!=0) {
 
 			if(player.offer.get("up")==null) {
 				drawdeck.add(player.offer.get("down"));
