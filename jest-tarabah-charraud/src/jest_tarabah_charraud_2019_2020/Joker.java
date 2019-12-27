@@ -6,7 +6,8 @@ public class Joker extends Card{
 
 		super();
 		this.trophy = new TrophyBestJest() ;
-
+		super.color = Color.joker ;
+		super.value = Value.un ; 
 	}
 
 }

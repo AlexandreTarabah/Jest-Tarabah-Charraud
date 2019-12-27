@@ -3,30 +3,35 @@ package jest_tarabah_charraud_2019_2020;
 import java.util.Iterator;
 
 public class TrophyBestJestNoJoke extends Trophy {
-    public TrophyBestJestNoJoke() {
-	
+	public TrophyBestJestNoJoke() {
+
 		// TODO Auto-generated constructor stub
 	}
 
 	public void bestJestNoJoke() {
-    }
+	}
 
-	 public void visitJest(Jest jest) 
+	public void visitJest(Jest jest) 
+	{
+		int bestJest = 0 ;
+
+		Iterator<Card> itJC = jest.jestCards.iterator() ; // Entrance dans le
+		// jest du joueur
+
+		while(itJC.hasNext())
 		{
-			int bestJest = 0 ;
+			Card card = (Card) itJC.next();
 
-			Iterator<Card> itJC = jest.jestCards.iterator() ; // Entrance dans le
-			// jest du joueur
-
-			while(itJC.hasNext())
+			if(card.getColor() != Color.joker)
 			{
-				Card card = (Card) itJC.next();
 
-						bestJest += card.value.getCardValue();
+				bestJest += card.value.getCardValue();
+
 			}
-
-			
-			super.bestJestCandidate = bestJest ;
 		}
+
+
+		super.bestJestCandidate = bestJest ;
+	}
 
 }

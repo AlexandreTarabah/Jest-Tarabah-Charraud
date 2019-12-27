@@ -4,11 +4,11 @@ import java.util.Iterator;
 
 public class TrophyMajority extends Trophy 
 {
-    public TrophyMajority(Value value)
-    {
-    	super(value) ;
+	public TrophyMajority(Value value)
+	{
+		super(value) ;
 	} 
-    
+
 	public void visitJest(Jest jest, Value value) 
 	{
 		int majority = 0 ;
@@ -20,13 +20,16 @@ public class TrophyMajority extends Trophy
 		{
 			Card card = (Card) itJC.next();
 
+			if(card.getColor() != Color.joker)
+			{
 				if(card.getValue() == value)
 				{
 					majority ++ ;
 				} 
+			}
 		}
 
-		
+
 		super.majCandidate = majority ;
 	}
 

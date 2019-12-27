@@ -19,8 +19,6 @@ import java.util.Map.Entry;
 
 public class Jest {
 
-	HashMap<String,Integer> winner = new HashMap();
-
 	int bestJest;
 
 	private int nbCardJest;
@@ -314,24 +312,8 @@ public class Jest {
 	{ // A revoir avec Strategy ou visitor
 
 
-			count.visitJest(this) ;
-			winner.put(p.pseudo, p.nbPoint);
-
-	}
-
-
-	public void winnerDetermination() {
-
-		int maxValueInMap=(Collections.max(winner.values()));  // retourne la valeur max de la hashmap winner
-		for (Entry<String, Integer> entry : winner.entrySet()) {  
-			if (entry.getValue()==maxValueInMap) {
-				System.out.println(entry.getKey() + " a gagné !" ); // détermine a quelle clé cela appartient pour afficher le gagnant 
-			}
-
-		}
-
-
-
+			p.nbPoint = count.visitJest(this) ;
+			Game.winner.put(p.pseudo, p.nbPoint) ;
 
 	}
 

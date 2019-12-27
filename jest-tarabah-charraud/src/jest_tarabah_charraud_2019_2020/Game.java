@@ -2,6 +2,7 @@ package jest_tarabah_charraud_2019_2020;
 import java.util.AbstractMap;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -61,6 +62,7 @@ public class Game {
 
 	boolean extension=true;
 
+	static HashMap<String,Integer> winner = new HashMap<String,Integer>();
 
 
 	// La c'est la distribution des cartes, ou finalement j'invoque la méthode takecards et donc le joueur prend 2 cartes, et créé son offer
@@ -164,7 +166,7 @@ public class Game {
 		{
 			Player p = (Player) it.next();
 			for(int i=0;i<2;i++) {
-				if(highestCardValue < p.hand[i].getValue().getCardValue())
+				if(highestCardValue <= p.hand[i].getValue().getCardValue())
 				{
 					highestCardValue = p.hand[i].getValue().getCardValue();
 					highestColorValue = p.hand[i].getColor().getColorValue();
@@ -222,7 +224,18 @@ public class Game {
 
 
 
+	public void winnerDetermination() {
 
+		int maxValueInMap=(Collections.max(winner.values()));  // retourne la valeur max de la hashmap winner
+		for (Entry<String, Integer> entry : winner.entrySet()) {  
+			if (entry.getValue()==maxValueInMap) {
+				System.out.println(entry.getKey() + " a gagné !" ); // détermine a quelle clé cela appartient pour afficher le gagnant 
+			}
+
+		}
+
+
+	}
 
 
 
@@ -447,10 +460,13 @@ public class Game {
 			}
 
 		}
-		
+
 		for (int i = 0 ; i <= players.size() ; i ++)
 		{
-			p.get(i).jest.acceptCount(new Count(), p.get(i)) ;
+			p.get(i).jest.acceptCount(new CountOne(), p.get(i)) ;
 		}
+
+		newGame.winnerDetermination() ; 
+
 	}
 } // ARMAGEDDON DE SES MORTS

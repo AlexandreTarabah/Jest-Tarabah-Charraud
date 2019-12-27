@@ -2,6 +2,7 @@ package jest_tarabah_charraud_2019_2020;
 
 public enum Color {
 	
+	joker("joker",0),
 	heart("coeur",1),
 	diamond("carreau",2),
 	club("trèfle",3),

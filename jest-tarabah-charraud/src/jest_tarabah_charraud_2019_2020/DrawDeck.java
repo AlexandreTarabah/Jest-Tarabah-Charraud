@@ -30,19 +30,25 @@ public class DrawDeck {
 
 
 	public DrawDeck(Game g) {
-		
+
 		drawdeck= new ArrayList<Card>();
 
 		for (Color c : Color.values()) {
-			for(Value v : Value.values()) {
-				
+
+			if(c == Color.joker)
+			{
+				Card card = new Joker() ;
+				drawdeck.add(card);
+			}
+			else
+			{
+				for(Value v : Value.values()) {
+
 					Card card = new Card(v,c);
 					drawdeck.add(card);
 				}
-			
-			Card card = new Joker() ;
-			drawdeck.add(card);
-			
+
+			}
 		}
 		if(g.extension==false) { // Si on joue sans extension, on retire les 6 du jeu
 			int verif6=6;
@@ -52,8 +58,8 @@ public class DrawDeck {
 			}
 		}
 		// Si tu ajoutes le Joker ici, soit tu l'ajoutes après les removes, soit tu changes la position des removes pour que ça corresponde
-	
-		} 
+
+	} 
 
 	public Card takeCards() { // méthode pour prendre une carte.
 		nbCardDD=drawdeck.size();
@@ -72,15 +78,15 @@ public class DrawDeck {
 			}else
 				drawdeck.add(player.offer.get("up"));
 		}else 
-			
 
-				if(player.offer.get("up")==null) {
-					player.getJest().jestCards.add(player.offer.get("down"));
-				}else
-					player.getJest().jestCards.add(player.offer.get("up"));
 
-			}
-	
+			if(player.offer.get("up")==null) {
+				player.getJest().jestCards.add(player.offer.get("down"));
+			}else
+				player.getJest().jestCards.add(player.offer.get("up"));
+
+	}
+
 
 
 

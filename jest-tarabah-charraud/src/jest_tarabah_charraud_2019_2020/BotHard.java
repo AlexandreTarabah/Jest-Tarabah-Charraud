@@ -84,7 +84,7 @@ public class BotHard extends Player implements Difficulty {
 		int i=0;
 
 		if(Game.nbPlayers==3) {
-			if(nbCardOffer>4) {
+			if(nbCardOffer>=4) {
 				while( Game.players.get(i)==this || Game.players.get(i).offer.size()!=2)  {
 					i++;				
 				}victime = Game.players.get(i).pseudo;
@@ -92,7 +92,7 @@ public class BotHard extends Player implements Difficulty {
 		}else 
 
 			if(Game.nbPlayers==4) {
-				if(nbCardOffer>5) {
+				if(nbCardOffer>=5) {
 					while( Game.players.get(i)==this  || Game.players.get(i).offer.size()!=2)  {
 						i++;
 					}victime = Game.players.get(i).pseudo;	

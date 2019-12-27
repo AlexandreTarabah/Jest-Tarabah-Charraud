@@ -2,13 +2,10 @@ package jest_tarabah_charraud_2019_2020;
 
 public enum Value {
 	
-	zero("zero", 0),
 	un("un",1),
 	deux("deux",2),
 	trois("trois",3),
-	quatre("quatre",4),
-	cinq("cinq",5),
-	six("six",6);
+	quatre("quatre",4) ; 
 	
 	
 	

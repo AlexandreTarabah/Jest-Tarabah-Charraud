@@ -19,8 +19,12 @@ public class TrophyBestJest extends Trophy {
 		while(itJC.hasNext())
 		{
 			Card card = (Card) itJC.next();
+			if(card.getColor() != Color.joker)
+			{
 
-			bestJest += card.value.getCardValue();
+				bestJest += card.value.getCardValue();
+
+			}
 		}
 
 
