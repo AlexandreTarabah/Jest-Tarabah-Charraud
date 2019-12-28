@@ -84,23 +84,35 @@ public class BotHard extends Player implements Difficulty {
 		int i=0;
 
 		if(Game.nbPlayers==3) {
-			if(nbCardOffer>=4) {
-				while( Game.players.get(i)==this || Game.players.get(i).offer.size()!=2)  {
-					i++;				
-				}victime = Game.players.get(i).pseudo;
+			if(nbCardOffer==4 && this.offer.size()==2)
+			{victime=this.pseudo;
 			}
-		}else 
+			else 
+			{
+			while( Game.players.get(i)==this ||  Game.players.get(i).offer.size()!=2)  {
+					i++;				
+			}
+			victime = Game.players.get(i).pseudo;
+		}
+						
 
-			if(Game.nbPlayers==4) {
-				if(nbCardOffer>=5) {
-					while( Game.players.get(i)==this  || Game.players.get(i).offer.size()!=2)  {
-						i++;
-					}victime = Game.players.get(i).pseudo;	
-				}
-			}else 
-				victime=this.pseudo;
+			
+	}		
+	else 
 
-		System.out.println(victime) ; 
+		if(Game.nbPlayers==4) {
+			
+				if(nbCardOffer==5 && this.offer.size()==2)
+				{victime=this.pseudo;}
+				else {
+				while( Game.players.get(i)==this  || Game.players.get(i).offer.size()!=2)  {
+					i++;
+				}victime = Game.players.get(i).pseudo;	
+			}
+		
+		}	
+
+	System.out.println(victime);
 
 
 
@@ -118,10 +130,10 @@ public class BotHard extends Player implements Difficulty {
 		int highestCV = Game.ForMainPlay.get(victime).hand[0].getColor().getColorValue();
 		if(highestCV <= Game.ForMainPlay.get(victime).hand[1].getColor().getColorValue())
 		{
-			stolenCard = "up";
+			stolenCard = "down";
 
 		}else 
-			stolenCard ="down";
+			stolenCard ="up";
 
 		System.out.println(stolenCard);
 		this.jest.jestCards.add(Player.listOffer.get(victime).get(stolenCard));
