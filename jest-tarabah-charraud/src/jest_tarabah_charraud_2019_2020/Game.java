@@ -61,7 +61,7 @@ public class Game {
 
 	boolean currentPlay;
 
-	boolean extension = false;
+	boolean extension = true;
 
 	static HashMap<String,Integer> winner = new HashMap<String,Integer>();
 
@@ -147,7 +147,7 @@ public class Game {
 			choice = readInt(input,"Entrez un nombre compris entre 1 et 2 : ", "Non, Recommencez : ");
 		}
 		if(choice==2)
-			g.extension=false; // if(choice==2) // On choisit si on joue avec ou sans extension, ce qui va impacter new DrawDeck(g)
+			{g.extension=false;} // if(choice==2) // On choisit si on joue avec ou sans extension, ce qui va impacter new DrawDeck(g)
 		players = new ArrayList<Player>();
 		listOffer = new HashMap<>();
 		drawdeck = new DrawDeck(g);

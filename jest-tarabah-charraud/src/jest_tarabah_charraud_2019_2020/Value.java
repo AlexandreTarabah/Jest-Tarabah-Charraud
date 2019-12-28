@@ -5,7 +5,8 @@ public enum Value {
 	un("un",1),
 	deux("deux",2),
 	trois("trois",3),
-	quatre("quatre",4) ; 
+	quatre("quatre",4),
+	six("six",6);
 	
 	
 	
