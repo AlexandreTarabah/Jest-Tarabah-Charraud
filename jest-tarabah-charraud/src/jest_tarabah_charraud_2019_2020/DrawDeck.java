@@ -37,8 +37,8 @@ public class DrawDeck {
 
 			if(c == Color.joker)
 			{
-				Card card = new Joker() ;
-				drawdeck.add(card);
+				/*Card card = new Joker() ;
+				drawdeck.add(card);*/
 			}
 			else
 			{

@@ -1,5 +1,6 @@
 package jest_tarabah_charraud_2019_2020;
 
+import java.util.AbstractMap;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
@@ -148,6 +149,8 @@ public class Jest {
 			String loose = ("Vous n'avez aucune carte de la même couleur " + p.pseudo + " !\n") ;
 
 			System.out.println(loose) ;
+			
+			highCandidates.put(p, 0) ;
 		}
 
 		else
@@ -157,6 +160,7 @@ public class Jest {
 						+ " de plus grande valeur " + p.pseudo + " : "
 						+ t.getTrophy().highCandidate.getValue() + " de " 
 						+ t.getTrophy().highCandidate.getColor() + "\n") ;
+				
 				highCandidates.put(p, t.getTrophy().highCandidate.getValue().ordinal()) ;
 
 			}
@@ -175,14 +179,16 @@ public class Jest {
 	}
 
 	public String winLowest(Player p, Card t, Map<Player,Integer> lowCandidates, Comparator<Integer> valueComparator,
-			Map<Player, Integer> sortedHighCandidates)
+			Map<Player, Integer> sortedLowCandidates)
 	{
-		if(t.getTrophy().highCandidate.getColor()
+		if(t.getTrophy().lowCandidate.getColor()
 				.equals(t.getTrophy().getColor()) == false)
 		{
 			String loose = ("Vous n'avez aucune carte de la même couleur " + p.pseudo + " !\n") ;
 
 			System.out.println(loose) ;
+			
+			lowCandidates.put(p, 10) ;
 		}
 
 		else
@@ -190,27 +196,27 @@ public class Jest {
 			{
 				System.out.println("Voici votre carte de " + t.getTrophy().getColor() 
 						+ " de plus faible valeur " + p.pseudo + " : "
-						+ t.getTrophy().highCandidate.getValue() + " de " 
-						+ t.getTrophy().highCandidate.getColor() + "\n") ;
-				lowCandidates.put(p, t.getTrophy().highCandidate.getValue().ordinal()) ;
+						+ t.getTrophy().lowCandidate.getValue() + " de " 
+						+ t.getTrophy().lowCandidate.getColor() + "\n") ;
+				lowCandidates.put(p, t.getTrophy().lowCandidate.getValue().ordinal()) ;
 
 			}
 		}
 
-		sortedHighCandidates.putAll(lowCandidates);
+		sortedLowCandidates.putAll(lowCandidates);
 
-		String win = ("Bravo Joueur " + ((TreeMap<Player, Integer>) sortedHighCandidates).firstKey().pseudo + 
+		String win = ("Bravo Joueur " + ((TreeMap<Player, Integer>) sortedLowCandidates).firstKey().pseudo + 
 				" vous avez la plus faible carte de " + t.getTrophy().getColor() 
 				+ " vous remportez le Trophée ! Les cartes de votre Jest sont : " 
-				+ ((TreeMap<Player, Integer>) sortedHighCandidates).firstKey().getJest().jestCards + "\n" ) ;
+				+ ((TreeMap<Player, Integer>) sortedLowCandidates).firstKey().getJest().jestCards + "\n" ) ;
 
 		return win ;
 
 	}
 
-	public String winBestJest(Player p, Card t, Map<Integer,Integer> bestJestCandidates, Map<Integer,Integer> bestJestCandidates1, 
-			Map<Player,Entry<Integer, Integer>> bestJestPlayer, Map<Player,Entry<Integer, Integer>> bestJestColor,
-			Map.Entry<Integer,Integer> myEntry)
+	public String winBestJest(Player p, Card t, Map<Player,Integer> bestJestCandidates, Map<Player, Integer> bestJestCandidates1, 
+			Map<Player,Entry<Player, Integer>> bestJestValue, Map<Player, Entry<Player, Integer>> bestJestColor, Map<Player, Integer> bestJestPlayer, 
+			Entry<Player, Integer> myEntry)
 	{
 
 		System.out.println(p.pseudo + " voici la valeur de votre jest : " +
@@ -219,67 +225,79 @@ public class Jest {
 		 * coeff le plus élevé et nombre de cartes mis dans une liste
 		 * */
 
-		bestJestCandidates.put(t.getTrophy().bigValue, t.getTrophy().bestJestCandidate) ;
-		bestJestCandidates1.put(t.getTrophy().bigCoeff, t.getTrophy().bestJestCandidate) ;
+		int jestValue = t.getTrophy().bestJestCandidate ; 
 
-		Iterator<Entry<Integer, Integer>> itr = bestJestCandidates.entrySet().iterator();
-		Iterator<Entry<Integer, Integer>> itr1 = bestJestCandidates1.entrySet().iterator();
+		bestJestCandidates.put(p, t.getTrophy().bigValue) ;
+		bestJestCandidates1.put(p, t.getTrophy().bigCoeff) ;
 
-		while(itr.hasNext() && itr1.hasNext()) 
-		{ 
-			Entry<Integer, Integer> entry = itr.next();
-			Entry<Integer, Integer> entry1 = itr1.next();
+		Iterator<Entry<Player, Integer>> itr = bestJestCandidates.entrySet().iterator();
+		Iterator<Entry<Player, Integer>> itr1 = bestJestCandidates1.entrySet().iterator();
+
+		while(itr1.hasNext()) 
+		{
+			Entry<Player, Integer> entry = itr.next();
+			Entry<Player, Integer> entry1 = itr1.next();
 			// parcourrons la map (contient un joueur) qui est candidat au trophy
-			Iterator<Entry<Player, Entry<Integer, Integer>>> itrP = bestJestPlayer.entrySet().iterator();
-			Iterator<Entry<Player, Entry<Integer, Integer>>> itrC = bestJestColor.entrySet().iterator();
+			Iterator<Entry<Player, Entry<Player, Integer>>> itrV = bestJestValue.entrySet().iterator();
+			Iterator<Entry<Player, Entry<Player, Integer>>> itrC = bestJestColor.entrySet().iterator();
+			Iterator<Entry<Player, Integer>> itrP = bestJestPlayer.entrySet().iterator();
 
-			while(itrP.hasNext() && itrC.hasNext())
+			while(itrV.hasNext() && itrC.hasNext())
 			{
-				Entry<Player, Entry<Integer, Integer>> entryP = itrP.next();
-				Entry<Player, Entry<Integer, Integer>> entryC = itrC.next();
+				Entry<Player, Entry<Player, Integer>> entryV = itrV.next();
+				Entry<Player, Entry<Player, Integer>> entryC = itrC.next();
+				Entry<Player, Integer> entryP = itrP.next();
 
-				if(entryP.getValue().getValue() < entry.getValue()) 
-				{
-					bestJestPlayer.clear();
-					bestJestPlayer.put(p, entry) ;
-
-					bestJestColor.clear();
-					bestJestColor.put(p, entry1) ;
-				}
-
-				else if(entryP.getValue().getValue() == entry.getValue())
-				{
-					if(entryP.getValue().getKey() < entry.getValue())
+					if(entryP.getValue() < jestValue) 
 					{
-						bestJestPlayer.clear();
-						bestJestPlayer.put(p, entry) ;
+						bestJestValue.clear();
+						bestJestValue.put(p, entry) ;
 
 						bestJestColor.clear();
 						bestJestColor.put(p, entry1) ;
+
+						bestJestPlayer.clear();
+						bestJestPlayer.put(p, jestValue) ; 
 					}
 
-					else if(entryP.getValue().getKey() == entry.getValue())
+					else if(entry.getValue() == jestValue && entryP.getKey() != entry.getKey())
 					{
-						if(entryC.getValue().getKey() < entry1.getValue())
+						if(entryV.getValue().getValue() < entry.getValue())
 						{
-							bestJestPlayer.clear();
-							bestJestPlayer.put(p, entry) ;
+							bestJestValue.clear();
+							bestJestValue.put(p, entry) ;
 
 							bestJestColor.clear();
 							bestJestColor.put(p, entry1) ;
+							
+							bestJestPlayer.clear();
+							bestJestPlayer.put(p, jestValue) ;
+						}
+
+						else if(entryV.getValue().getValue() == entry.getValue() && entryP.getKey() != entry.getKey())
+						{
+							if(entryC.getValue().getValue() < entry1.getValue())
+							{
+								bestJestValue.clear();
+								bestJestValue.put(p, entry) ;
+
+								bestJestColor.clear();
+								bestJestColor.put(p, entry1) ;
+								
+								bestJestPlayer.clear();
+								bestJestPlayer.put(p, jestValue) ;
+							}
 						}
 					}
 				}
 			}
 
-		} 
-
 
 		String win = ("Bravo Joueur " + ((Player) bestJestPlayer.keySet().toArray()[0]).pseudo + 
-				" vous avez le meilleur jest sans joker dont le total de points est " 
-				+ ((Card) bestJestPlayer.values()).getValue()  
+				" vous avez le meilleur jest dont le total de points est " 
+				+ bestJestPlayer.get(((Player) bestJestPlayer.keySet().toArray()[0]))
 				+ ". Vous remportez le Trophée ! Les cartes de votre Jest sont : " 
-				+ ((Player) bestJestPlayer.keySet().toArray()[0]).getJest().jestCards + "\n" ) ;
+				+ ((Player) bestJestValue.keySet().toArray()[0]).getJest().jestCards + "\n" ) ;
 
 		return win ;
 
@@ -308,12 +326,12 @@ public class Jest {
 
 
 	public void acceptCount(Count count, Player p) 
-	
+
 	{ // A revoir avec Strategy ou visitor
 
 
-			p.nbPoint = count.visitJest(this) ;
-			Game.winner.put(p.pseudo, p.nbPoint) ;
+		p.nbPoint = count.visitJest(this) ;
+		Game.winner.put(p.pseudo, p.nbPoint) ;
 
 	}
 

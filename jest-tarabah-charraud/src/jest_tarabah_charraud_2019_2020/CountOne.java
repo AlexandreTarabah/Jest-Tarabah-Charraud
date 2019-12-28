@@ -132,7 +132,7 @@ public class CountOne implements Count {
 
 				if (card1.color == Color.spade || card1.color == Color.club)
 				{
-					for(Iterator<Card> itg = jest.jestCards.iterator(); it.hasNext();)
+					for(Iterator<Card> itg = jest.jestCards.iterator(); itg.hasNext();)
 					{
 						Card card2  = itg.next() ;
 
