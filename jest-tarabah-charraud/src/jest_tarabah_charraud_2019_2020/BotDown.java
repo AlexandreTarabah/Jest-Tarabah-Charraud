@@ -27,7 +27,7 @@ public class BotDown extends Player implements Difficulty {
 		int numC = 1 ; // demande au joueur de rentrer un numéro entre 1 et 2
 
 		try {
-			Thread.sleep(1000);
+			Thread.sleep(100);
 			System.out.println(numC);
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
@@ -61,7 +61,7 @@ public class BotDown extends Player implements Difficulty {
 
 		System.out.println("Qui sera votre victime ? Rentrer le pseudo d'un joueur\n ");
 		try {
-			Thread.sleep(1000);
+			Thread.sleep(100);
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -69,30 +69,50 @@ public class BotDown extends Player implements Difficulty {
 		int i=0;
 
 		if(Game.nbPlayers==3) {
+
 			if(nbCardOffer>4) {
-				while( Game.players.get(i)==this || Game.players.get(i).offer.size()!=2)  {
-					i++;				
+				while(Game.players.get(i)==this || Game.players.get(i).offer.size()!=2)  {
+					i++;
 				}victime = Game.players.get(i).pseudo;
 			}
-		}else 
 
-			if(Game.nbPlayers==4) {
-				if(nbCardOffer>5) {
-					while( Game.players.get(i)==this  || Game.players.get(i).offer.size()!=2)  {
-						i++;
-					}victime = Game.players.get(i).pseudo;	
+			else if(nbCardOffer==4 && this.offer.size()==2)
+			{victime=this.pseudo;
+			}
+			else if(nbCardOffer==4 && this.offer.size()!=2)
+			{
+				while( Game.players.get(i)==this ||  Game.players.get(i).offer.size()!=2)  {
+					i++;				
 				}
-			}else 
-				victime=this.pseudo;
+				victime = Game.players.get(i).pseudo;
+			}
+
+		}
+
+
+
+		if(Game.nbPlayers==4) {
+			if(nbCardOffer>5) {
+				while( Game.players.get(i)==this || Game.players.get(i).offer.size()!=2)  {
+					i++;
+				}victime = Game.players.get(i).pseudo;	
+			}
+
+			else if(nbCardOffer==5 && this.offer.size()==2)
+			{victime=this.pseudo;}
+			else {
+				while( Game.players.get(i)==this  || Game.players.get(i).offer.size()!=2)  {
+					i++;
+				}victime = Game.players.get(i).pseudo;	
+			}
+		}
 
 		System.out.println(victime);
 
 
-
-
 		System.out.println("Quelle carte voulez-vous lui dérober ?\n ");
 		try {
-			Thread.sleep(2000);
+			Thread.sleep(100);
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -160,10 +180,12 @@ public class BotDown extends Player implements Difficulty {
 
 	}
 
-
-
-
-
-
-
 }
+
+
+
+
+
+
+
+

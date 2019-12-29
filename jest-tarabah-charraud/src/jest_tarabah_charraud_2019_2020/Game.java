@@ -61,7 +61,7 @@ public class Game {
 
 	boolean currentPlay;
 
-	boolean extension = false;
+	boolean extension = true;
 
 	static HashMap<String,Integer> winner = new HashMap<String,Integer>();
 
@@ -147,7 +147,7 @@ public class Game {
 			choice = readInt(input,"Entrez un nombre compris entre 1 et 2 : ", "Non, Recommencez : ");
 		}
 		if(choice==2)
-			g.extension=false; // if(choice==2) // On choisit si on joue avec ou sans extension, ce qui va impacter new DrawDeck(g)
+			{g.extension=false;} // if(choice==2) // On choisit si on joue avec ou sans extension, ce qui va impacter new DrawDeck(g)
 		players = new ArrayList<Player>();
 		listOffer = new HashMap<>();
 		drawdeck = new DrawDeck(g);
@@ -254,7 +254,7 @@ public class Game {
 		System.out.println("Quelle difficulté de Bot ? \n"
 				+ "Vous pouvez Choisir entre \n \n"
 				+ " 1 - BotDown : bot Facile qui fait des choix randoms\n"
-				+ " 2 -  BotHard : bot assez difficile qui fera toujours le bon choix");
+				+ " 2 - BotHard : bot assez difficile qui fera toujours le bon choix");
 		int choiceDifficulty=0;
 		while(choiceVar.contains(choiceDifficulty)==false) {
 			choiceDifficulty = readInt(input,"Entrez un nombre compris entre 1 et 2 : ", "Non, Recommencez : ");
@@ -311,7 +311,7 @@ public class Game {
 
 		System.out.println(Arrays.deepToString(newGame.trophyCards) + "\n") ;
 
-		while(newGame.drawdeck.getSize() > 10) // On repete le processus jusqu'a temps qu'on ait plu de carte
+		while(newGame.drawdeck.getSize() > 9) // On repete le processus jusqu'a temps qu'on ait plu de carte
 		{
 			newGame.distribute(); // distribuer les cartes 
 
@@ -372,7 +372,7 @@ public class Game {
 
 					add(t[j]) ;
 
-					System.out.println(result);
+					System.out.println(result+ " et " + t[j]);
 
 				}
 
@@ -398,7 +398,7 @@ public class Game {
 
 					add(t[j]) ;
 
-					System.out.println(result) ;
+					System.out.println(result+ " et " + t[j]) ;
 
 				}
 
@@ -422,7 +422,7 @@ public class Game {
 					// Instruction ci dessous marche car on a qu un seul élément On est sur par la conversion en array de le retouver
 					((Player) majPlayer.keySet().toArray()[0]).getJest().jestCards.add(t[j]);
 
-					System.out.println(result) ;
+					System.out.println(result+ " et " + t[j]) ;
 
 				}
 
@@ -447,7 +447,7 @@ public class Game {
 					}
 
 					((Player) bestJestValue.keySet().toArray()[0]).getJest().jestCards.add(t[j]) ;
-					System.out.println(result) ;
+					System.out.println(result+ " et " + t[j]) ;
 				}
 
 				else if(t[j].getTrophy() instanceof TrophyBestJestNoJoke) // si c'est des trophyHighest
@@ -462,8 +462,7 @@ public class Game {
 					bestJestColor.put(players.get(1), myEntry) ; 
 					String result = "" ; 
 
-					int jokeDetecter ;
-					jokeDetecter = 0 ;
+					int jokeDetecter = 0 ;
 
 					for(int i = 0 ; i < p.size() ; i ++) // parcourt les joueurs
 					{
@@ -494,11 +493,13 @@ public class Game {
 									bestJestCandidates1, bestJestValue, bestJestColor, bestJestCandidates1, myEntry) ;
 
 						}
+						
+						jokeDetecter = 0 ;
 
 					}
 
 					((Player) bestJestValue.keySet().toArray()[0]).getJest().jestCards.add(t[j]) ;
-					System.out.println(result) ;
+					System.out.println(result + " et " + t[j]) ;
 
 				}
 

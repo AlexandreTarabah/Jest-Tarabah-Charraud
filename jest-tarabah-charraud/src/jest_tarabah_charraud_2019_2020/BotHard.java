@@ -42,7 +42,7 @@ public class BotHard extends Player implements Difficulty {
 			int numC = 2 ; // demande au joueur de rentrer un numéro entre 1 et 2
 
 			try {
-				Thread.sleep(1000);
+				Thread.sleep(100);
 				System.out.println(numC);
 			} catch (InterruptedException e) {
 				// TODO Auto-generated catch block
@@ -76,7 +76,7 @@ public class BotHard extends Player implements Difficulty {
 
 		System.out.println("Qui sera votre victime ? Rentrer le pseudo d'un joueur\n ");
 		try {
-			Thread.sleep(1000);
+			Thread.sleep(100);
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -84,23 +84,45 @@ public class BotHard extends Player implements Difficulty {
 		int i=0;
 
 		if(Game.nbPlayers==3) {
+
 			if(nbCardOffer>4) {
-				while( Game.players.get(i)==this || Game.players.get(i).offer.size()!=2)  {
-					i++;				
+				while(Game.players.get(i)==this || Game.players.get(i).offer.size()!=2)  {
+					i++;
 				}victime = Game.players.get(i).pseudo;
 			}
-		}else 
 
-			if(Game.nbPlayers==4) {
-				if(nbCardOffer>5) {
-					while( Game.players.get(i)==this  || Game.players.get(i).offer.size()!=2)  {
-						i++;
-					}victime = Game.players.get(i).pseudo;	
+			else if(nbCardOffer==4 && this.offer.size()==2)
+			{victime=this.pseudo;
+			}
+			else if(nbCardOffer==4 && this.offer.size()!=2)
+			{
+				while( Game.players.get(i)==this ||  Game.players.get(i).offer.size()!=2)  {
+					i++;				
 				}
-			}else 
-				victime=this.pseudo;
+				victime = Game.players.get(i).pseudo;
+			}
 
-		System.out.println(victime) ; 
+		}
+
+
+
+		if(Game.nbPlayers==4) {
+			if(nbCardOffer>5) {
+				while( Game.players.get(i)==this || Game.players.get(i).offer.size()!=2)  {
+					i++;
+				}victime = Game.players.get(i).pseudo;	
+			}
+
+			else if(nbCardOffer==5 && this.offer.size()==2)
+			{victime=this.pseudo;}
+			else {
+				while( Game.players.get(i)==this  || Game.players.get(i).offer.size()!=2)  {
+					i++;
+				}victime = Game.players.get(i).pseudo;	
+			}
+		}
+
+		System.out.println(victime);
 
 
 
@@ -108,20 +130,36 @@ public class BotHard extends Player implements Difficulty {
 
 		System.out.println("Quelle carte voulez-vous lui dérober ?\n ");
 		try {
-			Thread.sleep(1000);
+			Thread.sleep(100);
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 
 		String stolenCard =null;
-		int highestCV = Game.ForMainPlay.get(victime).hand[0].getColor().getColorValue();
-		if(highestCV <= Game.ForMainPlay.get(victime).hand[1].getColor().getColorValue())
+		int highestC = Game.ForMainPlay.get(victime).hand[0].getColor().getColorValue();
+		int highestV = Game.ForMainPlay.get(victime).hand[0].getValue().getCardValue();
+		if(highestC < Game.ForMainPlay.get(victime).hand[1].getColor().getColorValue())
 		{
 			stolenCard = "up";
 
-		}else 
-			stolenCard ="down";
+		}
+		else if (highestC == Game.ForMainPlay.get(victime).hand[1].getColor().getColorValue())
+		{
+			if(highestV < Game.ForMainPlay.get(victime).hand[1].getValue().getCardValue())
+			{
+				stolenCard = "up";
+
+			}
+			else
+			{
+				stolenCard = "down";
+			}
+		}
+		else if(highestC > Game.ForMainPlay.get(victime).hand[1].getColor().getColorValue())
+		{
+			stolenCard = "down";
+		}
 
 		System.out.println(stolenCard);
 		this.jest.jestCards.add(Player.listOffer.get(victime).get(stolenCard));
@@ -183,7 +221,6 @@ public class BotHard extends Player implements Difficulty {
 
 
 	}
-
 
 
 }
