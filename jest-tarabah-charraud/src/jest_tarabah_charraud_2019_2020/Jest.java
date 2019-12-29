@@ -149,7 +149,7 @@ public class Jest {
 			String loose = ("Vous n'avez aucune carte de la même couleur " + p.pseudo + " !\n") ;
 
 			System.out.println(loose) ;
-			
+
 			highCandidates.put(p, 0) ;
 		}
 
@@ -160,7 +160,7 @@ public class Jest {
 						+ " de plus grande valeur " + p.pseudo + " : "
 						+ t.getTrophy().highCandidate.getValue() + " de " 
 						+ t.getTrophy().highCandidate.getColor() + "\n") ;
-				
+
 				highCandidates.put(p, t.getTrophy().highCandidate.getValue().ordinal()) ;
 
 			}
@@ -187,7 +187,7 @@ public class Jest {
 			String loose = ("Vous n'avez aucune carte de la même couleur " + p.pseudo + " !\n") ;
 
 			System.out.println(loose) ;
-			
+
 			lowCandidates.put(p, 10) ;
 		}
 
@@ -248,7 +248,21 @@ public class Jest {
 				Entry<Player, Entry<Player, Integer>> entryC = itrC.next();
 				Entry<Player, Integer> entryP = itrP.next();
 
-					if(entryP.getValue() < jestValue) 
+				if(entryP.getValue() < jestValue) 
+				{
+					bestJestValue.clear();
+					bestJestValue.put(p, entry) ;
+
+					bestJestColor.clear();
+					bestJestColor.put(p, entry1) ;
+
+					bestJestPlayer.clear();
+					bestJestPlayer.put(p, jestValue) ; 
+				}
+
+				else if(entry.getValue() == jestValue && entryP.getKey() != entry.getKey())
+				{
+					if(entryV.getValue().getValue() < entry.getValue())
 					{
 						bestJestValue.clear();
 						bestJestValue.put(p, entry) ;
@@ -257,40 +271,26 @@ public class Jest {
 						bestJestColor.put(p, entry1) ;
 
 						bestJestPlayer.clear();
-						bestJestPlayer.put(p, jestValue) ; 
+						bestJestPlayer.put(p, jestValue) ;
 					}
 
-					else if(entry.getValue() == jestValue && entryP.getKey() != entry.getKey())
+					else if(entryV.getValue().getValue() == entry.getValue() && entryP.getKey() != entry.getKey())
 					{
-						if(entryV.getValue().getValue() < entry.getValue())
+						if(entryC.getValue().getValue() < entry1.getValue())
 						{
 							bestJestValue.clear();
 							bestJestValue.put(p, entry) ;
 
 							bestJestColor.clear();
 							bestJestColor.put(p, entry1) ;
-							
+
 							bestJestPlayer.clear();
 							bestJestPlayer.put(p, jestValue) ;
-						}
-
-						else if(entryV.getValue().getValue() == entry.getValue() && entryP.getKey() != entry.getKey())
-						{
-							if(entryC.getValue().getValue() < entry1.getValue())
-							{
-								bestJestValue.clear();
-								bestJestValue.put(p, entry) ;
-
-								bestJestColor.clear();
-								bestJestColor.put(p, entry1) ;
-								
-								bestJestPlayer.clear();
-								bestJestPlayer.put(p, jestValue) ;
-							}
 						}
 					}
 				}
 			}
+		}
 
 
 		String win = ("Bravo Joueur " + ((Player) bestJestPlayer.keySet().toArray()[0]).pseudo + 
@@ -329,8 +329,10 @@ public class Jest {
 
 	{ // A revoir avec Strategy ou visitor
 
-
+		System.out.println("\nJoueur "+ p.pseudo + " effectuons le décompte de vos points ! \n"
+				+ "Rappelons les cartes de votre jest : " + p.jest.jestCards) ;
 		p.nbPoint = count.visitJest(this) ;
+		System.out.println("Joueur "+ p.pseudo + " votre jest vaut " + p.nbPoint + " pts") ;
 		Game.winner.put(p.pseudo, p.nbPoint) ;
 
 	}
