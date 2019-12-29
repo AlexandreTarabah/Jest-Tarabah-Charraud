@@ -311,7 +311,7 @@ public class Game {
 
 		System.out.println(Arrays.deepToString(newGame.trophyCards) + "\n") ;
 
-		while(newGame.drawdeck.getSize() > 9) // On repete le processus jusqu'a temps qu'on ait plu de carte
+		while(newGame.drawdeck.getSize() != 0) // On repete le processus jusqu'a temps qu'on ait plu de carte
 		{
 			newGame.distribute(); // distribuer les cartes 
 
@@ -522,16 +522,20 @@ public class Game {
 			}
 
 		}
+		
+		System.out.println("\n") ;
 
 		for (int i = 0 ; i < players.size() ; i ++)
 		{	
 			if (newGame.variante == false)
 			{
-				Count count = new CountOne() ;
+				Count count = new CountClassique() ;
 				p.get(i).jest.acceptCount(count, p.get(i)) ;
 			}
 		}
 
+		System.out.println("\n") ;
+		
 		newGame.winnerDetermination() ; 
 
 	}
