@@ -50,8 +50,6 @@ public class Game {
 	protected static int nbBots;
 	protected static int nbRealPlayers;
 	Card[] trophyCards = new Card[2] ;
-	
-	static ArrayList<String> upsideChoice = new ArrayList<String>();
 
 	static HashMap<String,Player> ForMainPlay = new HashMap<String,Player>() ;
 
@@ -131,16 +129,14 @@ public class Game {
 
 	public void initializeGame(Game g,Scanner input) {
 
-		choiceVar.add(1);					// initialisation des listes de verif des valeurs rentrées par user
+		choiceVar.add(1);
 		choiceVar.add(2);
 
-		for(int i=0;i<5;i++) {
-		choicePlayers.add(i);
-		}
-		
-		upsideChoice.add("down");
-		upsideChoice.add("up");
-		
+		choicePlayers.add(0);
+		choicePlayers.add(1);
+		choicePlayers.add(2);
+		choicePlayers.add(3);
+		choicePlayers.add(4);
 
 
 		System.out.println("Bonjour jeunes gens ! Voulez-faire une partie avec ou sans extension ? \n"
