@@ -110,6 +110,11 @@ public class Player
 		System.out.println("Quelle carte voulez-vous lui dérober ?\n ");
 
 		String stolenCard = input.next();
+			while(Game.upsideChoice.contains(stolenCard)==false)
+			{
+				System.out.println("Veuillez rentrer down ou up");
+				stolenCard=input.next();
+			}	
 
 		this.jest.jestCards.add(Player.listOffer.get(victime).get(stolenCard));
 		Player.listOffer.get(victime).remove(stolenCard);// méthode AddJest() implementé dans Jest.
