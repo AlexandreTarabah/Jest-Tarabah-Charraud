@@ -26,8 +26,7 @@ public class Player
 	static HashMap<String,HashMap<String,Card>> listOffer = new HashMap();
 
 	boolean HasStolen=false;
-
-
+	
 	Card[] hand = new Card[2] ;
 
 	protected Jest jest ;

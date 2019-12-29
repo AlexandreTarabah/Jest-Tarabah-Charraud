@@ -70,6 +70,8 @@ public class Game {
 	ArrayList<Integer> choiceVar= new ArrayList<Integer>();
 
 	ArrayList<Integer> choicePlayers= new ArrayList<Integer>();
+	
+	static ArrayList<String> upsideChoice = new ArrayList<String>() ; 
 
 
 	// La c'est la distribution des cartes, ou finalement j'invoque la méthode takecards et donc le joueur prend 2 cartes, et créé son offer
