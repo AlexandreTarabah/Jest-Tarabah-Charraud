@@ -149,13 +149,13 @@ public class CountClassique implements Count {
 		face value, the pair is worth a bonus 2 points in
 		addition to the face values of the cards.*/
 		if(CV.keySet().contains(Color.spade) && CV.keySet().contains(Color.club))
-		{
+		{ArrayList<Value> pairsDone = new ArrayList<Value>();
 			for(Iterator<Card> it = jest.jestCards.iterator(); it.hasNext();)
 			{
 				Card card1 = it.next() ;
-				ArrayList<Value> pairsDone = new ArrayList<Value>() ;
 				
-				if (card1.color == Color.spade)
+				
+				if (card1.color == Color.spade && pairsDone.contains(card1.value) == false)
 				{
 					for(Iterator<Card> itg = jest.jestCards.iterator(); itg.hasNext();)
 					{
@@ -167,7 +167,7 @@ public class CountClassique implements Count {
 							{
 								System.out.println("Quelle chance, vous avez une paire noire, vous remportez un bonus de 2 pts ! ");
 								jestValue += 2 ;
-								pairsDone.add(card1.value) ;
+								pairsDone.add(card1.value);
 							}
 						}
 					}
@@ -185,6 +185,7 @@ public class CountClassique implements Count {
 							{
 								System.out.println("Quelle chance, vous avez une paire noire, vous remportez un bonus de 2 pts ! ");
 								jestValue += 2 ;
+								pairsDone.add(card1.value);
 							}
 						}
 					}
