@@ -18,8 +18,8 @@ public class CountClassique implements Count {
 
 		for (Iterator<Card> it = jest.jestCards.iterator() ; it.hasNext();)
 		{
-			Card card = it.next() ;
-			CV.put(card.color, card.value) ;
+			Card card = it.next();
+			CV.put(card.color, card.value);
 
 			// Spades and Clubs always increase the value of your Jest by their face value.
 			if(card.color == Color.spade ||
@@ -96,7 +96,7 @@ public class CountClassique implements Count {
 				if(card.color == Color.heart)
 				{
 					System.out.println("- " + card.value.getCardValue() + " avec votre " + card.value.toString() + " de " + card.color.toString()) ;
-					jestValue -= card.value.getCardValue()  ;
+					jestValue -= card.value.getCardValue();
 				}
 
 			}

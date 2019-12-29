@@ -45,7 +45,7 @@ import java.util.NavigableMap;
  */
 
 public class Game {
-
+	
 	protected static int nbPlayers;
 	protected static int nbBots;
 	protected static int nbRealPlayers;
