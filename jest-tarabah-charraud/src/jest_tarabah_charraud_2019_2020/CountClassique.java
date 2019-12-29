@@ -1,5 +1,6 @@
 package jest_tarabah_charraud_2019_2020;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -152,7 +153,8 @@ public class CountClassique implements Count {
 			for(Iterator<Card> it = jest.jestCards.iterator(); it.hasNext();)
 			{
 				Card card1 = it.next() ;
-
+				ArrayList<Value> pairsDone = new ArrayList<Value>() ;
+				
 				if (card1.color == Color.spade)
 				{
 					for(Iterator<Card> itg = jest.jestCards.iterator(); itg.hasNext();)
@@ -165,12 +167,13 @@ public class CountClassique implements Count {
 							{
 								System.out.println("Quelle chance, vous avez une paire noire, vous remportez un bonus de 2 pts ! ");
 								jestValue += 2 ;
+								pairsDone.add(card1.value) ;
 							}
 						}
 					}
 				}
 				
-				if (card1.color == Color.club)
+				if (card1.color == Color.club && pairsDone.contains(card1.value) == false)
 				{
 					for(Iterator<Card> itg = jest.jestCards.iterator(); itg.hasNext();)
 					{
