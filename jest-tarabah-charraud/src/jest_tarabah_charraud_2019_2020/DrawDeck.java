@@ -37,8 +37,8 @@ public class DrawDeck {
 
 			if(c == Color.joker)
 			{
-				/*Card card = new Joker() ;
-				drawdeck.add(card);*/
+				Card card = new Joker() ;
+				drawdeck.add(card) ;
 			}
 			else
 			{
@@ -77,14 +77,15 @@ public class DrawDeck {
 				drawdeck.add(player.offer.get("down"));
 			}else
 				drawdeck.add(player.offer.get("up"));
-		}else 
-
+		}
+		else 
+		{
 
 			if(player.offer.get("up")==null) {
 				player.getJest().jestCards.add(player.offer.get("down"));
 			}else
 				player.getJest().jestCards.add(player.offer.get("up"));
-
+		}
 	}
 
 

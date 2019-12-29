@@ -161,12 +161,10 @@ public class Game {
 		{
 			if(nbPlayers==3)
 			{
-				trophyCards[0]= g.drawdeck.takeCards() ;
-				trophyCards[1]= new Joker() ;
-				/*for(int i=0; i<2;i++) 
+				for(int i=0; i<2;i++) 
 				{
 					g.trophyCards[i]= g.drawdeck.takeCards() ;
-				}*/
+				}
 			}
 			else if(nbPlayers==4)
 			{
@@ -313,7 +311,7 @@ public class Game {
 
 		System.out.println(Arrays.deepToString(newGame.trophyCards) + "\n") ;
 
-		while(newGame.drawdeck.getSize() > 9) // On repete le processus jusqu'a temps qu'on ait plu de carte
+		while(newGame.drawdeck.getSize() > 10) // On repete le processus jusqu'a temps qu'on ait plu de carte
 		{
 			newGame.distribute(); // distribuer les cartes 
 

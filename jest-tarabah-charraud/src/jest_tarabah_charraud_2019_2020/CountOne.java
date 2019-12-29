@@ -145,7 +145,7 @@ public class CountOne implements Count {
 			}
 		}
 		
-		return jestValue;
+		return jestValue ;
 
 	}
 
