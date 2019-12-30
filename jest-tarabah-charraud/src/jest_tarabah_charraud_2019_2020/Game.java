@@ -365,8 +365,8 @@ public class Game {
 
 					for(int i = 0 ; i < p.size() ; i ++) // parcourt les joueurs
 					{
-						Jest jest = p.get(i).getJest() ;
-						jest.acceptTrophy(t[j].getTrophy()) ;
+						Jest jest = p.get(i).getJest();
+						jest.acceptTrophy(t[j].getTrophy());
 
 						result = jest.winHighest(p.get(i), t[j], highCandidates, valueComparator, sortedHighCandidates) ;
 
