@@ -66,8 +66,10 @@ public class Game {
 	static HashMap<String,Integer> winner = new HashMap<String,Integer>();
 
 	boolean variante = false;
-
-	ArrayList<Integer> choiceVar= new ArrayList<Integer>();
+	
+// Liste de vérif pour les choix proposer a l'utilisateur : 
+	
+	static ArrayList<Integer> choiceVar= new ArrayList<Integer>();
 
 	ArrayList<Integer> choicePlayers= new ArrayList<Integer>();
 	
@@ -134,11 +136,11 @@ public class Game {
 		choiceVar.add(1);
 		choiceVar.add(2);
 
-		choicePlayers.add(0);
-		choicePlayers.add(1);
-		choicePlayers.add(2);
-		choicePlayers.add(3);
-		choicePlayers.add(4);
+		for(int i=0; i<5;i++) {
+			choicePlayers.add(i);
+		}
+		upsideChoice.add("down");
+		upsideChoice.add("up");
 
 
 		System.out.println("Bonjour jeunes gens ! Voulez-faire une partie avec ou sans extension ? \n"
@@ -546,4 +548,4 @@ public class Game {
 		newGame.winnerDetermination() ; 
 
 	}
-} // ARMAGEDDON DE SES MORTS
+} // ARMAGEDDON 

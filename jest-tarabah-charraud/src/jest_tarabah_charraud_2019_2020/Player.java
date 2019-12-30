@@ -15,15 +15,11 @@ public class Player
 
 	String pseudo;
 
-	private int nump;
-
 	public boolean isAThief;
-
-	public boolean hasHighestFup;
 
 	HashMap<String, Card> offer;
 
-	static HashMap<String,HashMap<String,Card>> listOffer = new HashMap();
+	static HashMap<String,HashMap<String,Card>> listOffer = new HashMap<String, HashMap<String, Card>>();
 
 	boolean HasStolen=false;
 	
@@ -34,7 +30,6 @@ public class Player
 	boolean firstPlayer = false;
 
 	static  String victime;
-
 
 	int nbPoint;
 
@@ -247,7 +242,11 @@ public class Player
 
 		System.out.println("Quelle carte voulez-vous garder cachée?\n");
 
-		int numC = input.nextInt() ; // demande au joueur de rentrer un numéro entre 1 et 2
+		int numC = 0; // demande au joueur de rentrer un numéro entre 1 et 2
+	
+		while(Game.choiceVar.contains(numC)==false) {
+			numC = Game.readInt(input,"Entrez un nombre compris entre 1 et 2 : ", "Non, Recommencez : ");
+		}
 
 		((Map<String, Card>) offer).put("down", hand[numC-1]); // -1 car le tableau commence à l'indice 0, je caste l'offer  
 		((Map<String, Card>) offer).put("up", hand[numC%2]); // avec le modulo 2 on obtient la case manquante, je caste l'offer
