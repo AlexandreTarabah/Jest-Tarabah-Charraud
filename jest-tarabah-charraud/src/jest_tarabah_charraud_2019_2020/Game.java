@@ -534,6 +534,11 @@ public class Game {
 				Count count = new CountClassique() ;
 				p.get(i).jest.acceptCount(count, p.get(i)) ;
 			}
+			else 
+			{
+				Count count = new CountInversion() ;
+				p.get(i).jest.acceptCount(count, p.get(i)) ;
+			}
 		}
 
 		System.out.println("\n") ;
