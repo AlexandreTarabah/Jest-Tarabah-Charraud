@@ -22,8 +22,6 @@ public class Jest {
 
 	int bestJest;
 
-	private int nbCardJest;
-
 	public List<Card> jestCards = new ArrayList<Card>();
 
 	/**

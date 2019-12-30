@@ -197,4 +197,4 @@ public class CountClassique implements Count {
 
 	}
 
-} // Coucou
+} 
