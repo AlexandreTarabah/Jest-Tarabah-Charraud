@@ -121,7 +121,7 @@ public class CountClassique implements Count {
 					if(occurrencesHeart == 1 && occurrencesJoker == 1)
 					{
 						System.out.println("Quelle malchance, cette carte vous ne fais pas perdre 1 pt mais 5 ! ");
-						jestValue -= 4 ; // 5 - 0 = 5 (0 est la valeur usuelle des coeurs)
+						jestValue -= 4 ; // -5 + 1 = -4
 
 					}
 					else
@@ -139,7 +139,7 @@ public class CountClassique implements Count {
 				if(card.color.equals(Color.diamond))
 				{
 					System.out.println("Quelle malchance, cette carte vous ne fais pas perdre 1 pt mais 5 ! ");
-					jestValue += 6 ; // 5 - (-1) = 6
+					jestValue -= 4 ; // -5 + 1 = -4
 				}
 			}
 		}
@@ -149,12 +149,13 @@ public class CountClassique implements Count {
 		face value, the pair is worth a bonus 2 points in
 		addition to the face values of the cards.*/
 		if(CV.keySet().contains(Color.spade) && CV.keySet().contains(Color.club))
-		{ArrayList<Value> pairsDone = new ArrayList<Value>();
+		{
+			ArrayList<Value> pairsDone = new ArrayList<Value>();
 			for(Iterator<Card> it = jest.jestCards.iterator(); it.hasNext();)
 			{
 				Card card1 = it.next() ;
-				
-				
+
+
 				if (card1.color == Color.spade && pairsDone.contains(card1.value) == false)
 				{
 					for(Iterator<Card> itg = jest.jestCards.iterator(); itg.hasNext();)
@@ -172,7 +173,7 @@ public class CountClassique implements Count {
 						}
 					}
 				}
-				
+
 				if (card1.color == Color.club && pairsDone.contains(card1.value) == false)
 				{
 					for(Iterator<Card> itg = jest.jestCards.iterator(); itg.hasNext();)
@@ -197,4 +198,4 @@ public class CountClassique implements Count {
 
 	}
 
-} 
+}
