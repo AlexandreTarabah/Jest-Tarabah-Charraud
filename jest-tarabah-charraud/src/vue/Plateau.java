@@ -25,9 +25,9 @@ public class Plateau extends JPanel implements Observer{
 	private Controleur controleur;
 	
 	private JFrame frame;
-	private PlayerPanel ppJoue;
+	private PlayerPanel pppoue;
 	private DrawDeckPanel deck;
-	private ArrayList<PlayerPanel> pj = new ArrayList<PlayerPanel>();
+	private ArrayList<PlayerPanel> pp = new ArrayList<PlayerPanel>();
 	
 	public Plateau(Game p, Controleur c){
 		super();
@@ -37,7 +37,7 @@ public class Plateau extends JPanel implements Observer{
 		this.controleur = c;
 		
 		this.frame = new JFrame();
-		this.frame.setTitle("Jeu de UNO");
+		this.frame.setTitle("JEST");
 		this.frame.setSize(1500, 1000);
 		this.frame.setLocationRelativeTo(null);               
 		this.frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -61,26 +61,26 @@ public class Plateau extends JPanel implements Observer{
 	public void afficherJoueurs(int nbrJoueurs){
 		ListIterator<Player> iJoueurs = partie.players.listIterator();
 		while (iJoueurs.hasNext()){
-			pj.add(new PlayerPanel(iJoueurs.next()));
+			pp.add(new PlayerPanel(iJoueurs.next()));
 		}
 		if (nbrJoueurs == 2){
-			pj.get(0).setBounds(500, 0, 500, 200);
-			this.add(pj.get(0));
-			pj.get(1).setBounds(500, 550, 500, 200);
-			this.add(pj.get(1));
+			pp.get(0).setBounds(500, 0, 500, 200);
+			this.add(pp.get(0));
+			pp.get(1).setBounds(500, 550, 500, 200);
+			this.add(pp.get(1));
 		}
 		if (nbrJoueurs == 3){
-			pj.get(0).setBounds(0, 0, 500, 200);
-			this.add(pj.get(0));
-			pj.get(1).setBounds(700, 0, 500, 200);
-			this.add(pj.get(1));
-			pj.get(2).setBounds(500, 550, 500, 200);
-			this.add(pj.get(2));
+			pp.get(0).setBounds(0, 0, 500, 200);
+			this.add(pp.get(0));
+			pp.get(1).setBounds(700, 0, 500, 200);
+			this.add(pp.get(1));
+			pp.get(2).setBounds(500, 550, 500, 200);
+			this.add(pp.get(2));
 		}
 		this.frame.setContentPane(this);
 	}
 	
-	public Image verifierCarte(Carte c){
+	public Image verifierCarte(Card c){
 		Image carte = null;
 		if (c.getClass() == CarteClassique.class){
 			switch(c.getNumero()){
@@ -304,9 +304,9 @@ public class Plateau extends JPanel implements Observer{
 	}
 	
 	public void afficherCartes(Joueur joueur){
-		ListIterator<PanelJoueur> iPj = this.pj.listIterator();
-		while (iPj.hasNext()){
-			PanelJoueur j = iPj.next();
+		ListIterator<PanelJoueur> ipp = this.pp.listIterator();
+		while (ipp.hasNext()){
+			PanelJoueur j = ipp.next();
 			if (j.getNomJoueur() == joueur.getNomJoueur()){
 				ListIterator<Carte> iCartes = joueur.getCartesEnMain().listIterator();
 				while (iCartes.hasNext()){
@@ -317,25 +317,25 @@ public class Plateau extends JPanel implements Observer{
 	}
 	
 	public void afficherJoueurCommence(){
-		ListIterator<PanelJoueur> iPj = pj.listIterator();
-		while (iPj.hasNext()){
-			iPj.next().setCartesVisibles(true);
+		ListIterator<PanelJoueur> ipp = pp.listIterator();
+		while (ipp.hasNext()){
+			ipp.next().setCartesVisibles(true);
 		}
 		ListIterator<Joueur> iJoueurs = partie.getJoueurs().listIterator();
 		while (iJoueurs.hasNext()){
 			this.afficherCartes(iJoueurs.next());
 		}
 		JOptionPane.showMessageDialog(null, partie.getJoueurCommence().getNomJoueur() + " commence cette manche !", "Qui Commence ?", JOptionPane.INFORMATION_MESSAGE);
-		while (iPj.hasPrevious()){
-			iPj.previous().retirerTout();
+		while (ipp.hasPrevious()){
+			ipp.previous().retirerTout();
 		}
 		this.frame.setContentPane(this);
 	}
 	
 	public void afficherDistribution(){
-		ListIterator<PanelJoueur> iPj = pj.listIterator();
-		while (iPj.hasNext()){
-			iPj.next().setCartesVisibles(false);
+		ListIterator<PanelJoueur> ipp = pp.listIterator();
+		while (ipp.hasNext()){
+			ipp.next().setCartesVisibles(false);
 		}
 		ListIterator<Joueur> iJoueurs = partie.getJoueurs().listIterator();
 		while (iJoueurs.hasNext()){
@@ -369,11 +369,11 @@ public class Plateau extends JPanel implements Observer{
 	}
 	
 	public void supprimerJeu(Joueur joueur){
-		ListIterator<PanelJoueur> iPj = pj.listIterator();
-		while (iPj.hasNext()){
-			PanelJoueur pj = iPj.next();
-			if (pj.getNomJoueur() == joueur.getNomJoueur()){
-				pj.getJeu().removeAll(pj.getJeu());
+		ListIterator<PanelJoueur> ipp = pp.listIterator();
+		while (ipp.hasNext()){
+			PanelJoueur pp = ipp.next();
+			if (pp.getNomJoueur() == joueur.getNomJoueur()){
+				pp.getJeu().removeAll(pp.getJeu());
 			}
 		}
 	}
@@ -396,11 +396,11 @@ public class Plateau extends JPanel implements Observer{
 	}
 	
 	public void changerVisibiliteCartes(Boolean visibles){
-		ListIterator<PanelJoueur> iPj = pj.listIterator();
-		while (iPj.hasNext()){
-			PanelJoueur pj = iPj.next();
-			if (pj.getNomJoueur() == partie.getJoueurJoue().getNomJoueur()){
-				pj.setCartesVisibles(visibles);
+		ListIterator<PanelJoueur> ipp = pp.listIterator();
+		while (ipp.hasNext()){
+			PanelJoueur pp = ipp.next();
+			if (pp.getNomJoueur() == partie.getJoueurJoue().getNomJoueur()){
+				pp.setCartesVisibles(visibles);
 			}
 		}
 		this.frame.setContentPane(this);
@@ -484,11 +484,11 @@ public class Plateau extends JPanel implements Observer{
 		return frame;
 	}
 
-	public PanelJoueur getPjJoue() {
-		return pjJoue;
+	public PanelJoueur getppJoue() {
+		return ppJoue;
 	}
 
-	public void setPjJoue(PanelJoueur pjJoue) {
-		this.pjJoue = pjJoue;
+	public void setppJoue(PanelJoueur ppJoue) {
+		this.ppJoue = ppJoue;
 	}
 }
