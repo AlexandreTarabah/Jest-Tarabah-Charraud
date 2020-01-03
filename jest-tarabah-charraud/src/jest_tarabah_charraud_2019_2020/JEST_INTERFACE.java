@@ -8,10 +8,15 @@ import javax.swing.JOptionPane;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import javax.swing.JTextField;
+import javax.swing.SwingConstants;
+import javax.swing.JPanel;
+import javax.swing.JTextArea;
 
 public class JEST_INTERFACE {
 
 	private JFrame frame;
+	private JTextField textField;
 	/**
 	 * Launch the application.
 	 */
@@ -41,9 +46,53 @@ public class JEST_INTERFACE {
 	
 	private void initialize() {
 		frame = new JFrame();
+<<<<<<< HEAD
 		frame.setBounds(100, 100, 1228, 698);
+=======
+		frame.setBounds(100, 100, 848, 553);
+>>>>>>> branch 'master' of https://github.com/AlexandreTarabah/Jest-Tarabah-Charraud
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		 frame.getContentPane().setLayout(null);
+		frame.getContentPane().setLayout(null);
+		
+		JButton button1 = new JButton("1/up");
+		button1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+			}
+		});
+		button1.setBounds(12, 402, 137, 51);
+		frame.getContentPane().add(button1);
+		
+		JButton button2 = new JButton("2/down");
+		button2.setBounds(175, 402, 137, 51);
+		frame.getContentPane().add(button2);
+		
+		textField = new JTextField();
+		textField.setBounds(342, 402, 137, 51);
+		frame.getContentPane().add(textField);
+		textField.setColumns(10);
+		
+		JLabel lblNewLabel = new JLabel("     carte 1");
+		lblNewLabel.setBounds(273, 146, 92, 147);
+		frame.getContentPane().add(lblNewLabel);
+		
+		JLabel lblCarte = new JLabel("     carte 2");
+		lblCarte.setBounds(475, 146, 92, 147);
+		frame.getContentPane().add(lblCarte);
+		
+		JTextArea textArea = new JTextArea();
+		textArea.setBounds(541, 402, 277, 91);
+		frame.getContentPane().add(textArea);
+		
+		JLabel lblNewLabel_1 = new JLabel("Affichage du d\u00E9roulement de la partie");
+		lblNewLabel_1.setBounds(541, 373, 236, 16);
+		frame.getContentPane().add(lblNewLabel_1);
+		
+		JLabel lblZoneDeSaisie = new JLabel("zone de saisie");
+		lblZoneDeSaisie.setBounds(342, 373, 128, 16);
+		frame.getContentPane().add(lblZoneDeSaisie);
+		
+		
+		
 		 String[] numberplayers = {"0","1","2","3","4"};
 		 String[] var = {"1","2"};
 		    JOptionPane jop = new JOptionPane(), 
@@ -96,5 +145,9 @@ public class JEST_INTERFACE {
 		    
 		    
 	}
+<<<<<<< HEAD
 	
 }
+=======
+}
+>>>>>>> branch 'master' of https://github.com/AlexandreTarabah/Jest-Tarabah-Charraud

@@ -307,15 +307,15 @@ public class Game {
 
 	public static void main(String[] args) {
 
-		Game newGame = new Game();
-		Scanner input = new Scanner(System.in) ;
+		Game newGame = new Game(); //Mettre main JESTINTERFACE 
+		Scanner input = new Scanner(System.in);
 		newGame.initializeGame(newGame, input); 
 		newGame.configureGameplay(input);
-		newGame.createTrophies(newGame);
+		newGame.createTrophies(newGame); //METTRE DANS MAIN JESTINTERFACE
 
-		System.out.println(Arrays.deepToString(newGame.trophyCards) + "\n") ;
+		System.out.println(Arrays.deepToString(newGame.trophyCards) + "\n"); // Création 2 labels 
 
-		while(newGame.drawdeck.getSize() != 0) // On repete le processus jusqu'a temps qu'on ait plu de carte
+		while(newGame.drawdeck.getSize() != 0) // On repète le processus jusqu'a temps qu'on ait plu de carte
 		{
 			newGame.distribute(); // distribuer les cartes 
 
@@ -325,8 +325,8 @@ public class Game {
 				Player p = it.next();
 				p.upsideDown(p, input);
 			}
-
-
+			
+			
 			newGame.determinateFirstPlayer(); // on détermine le premier Joueur
 
 			for(int j =0; j<nbPlayers;j++) {  // le reste suit selon la méthode stealCard(input)
