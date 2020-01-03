@@ -1,11 +1,11 @@
-package fr.utt.lo02.uno.vue.panneaux;
+package vue;
 
 import java.awt.*;
 import java.util.LinkedList;
 
 import javax.swing.*;
 
-import fr.utt.lo02.uno.modele.joueur.Joueur;
+
 import modele.joueur.Player;
 
 public class PlayerPanel extends JPanel{
@@ -22,16 +22,13 @@ public class PlayerPanel extends JPanel{
 	private JButton uno;
 	private Font font = new Font("Courier", Font.BOLD, 20);
 	
-	private Player jeu;
+	private LinkedList<Image> jeu;
 	
 	public PlayerPanel(Player joueur){
 		super();
 		this.setOpaque(false);
 		this.setLayout(new BorderLayout());
 		this.setJeu(new LinkedList<Image>());
-		
-		this.pp = new PlayerPanel(jeu);
-		this.add(pp);
 		
 		if (!joueur.isBot()){
 			this.virtuel = false;
@@ -52,7 +49,7 @@ public class PlayerPanel extends JPanel{
 		this.uno = uno;
 	}
 
-	public void piocher(Image carte){
+	public void	prendreCarte(Image carte){
 		this.jeu.add(carte);
 	}
 	
@@ -96,4 +93,3 @@ public class PlayerPanel extends JPanel{
 		this.virtuel = virtuel;
 	}
 }
-

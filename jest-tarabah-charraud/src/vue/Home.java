@@ -62,7 +62,7 @@ public class Home extends JFrame{
 	}
 
 	public void setListener(Controleur controleur) {
-		newGame.addActionListener(controleur) ;
+		nouvellePartie.addActionListener(controleur) ;
 		regles.addActionListener(controleur) ;
 		quitter.addActionListener(controleur) ;
 	}
