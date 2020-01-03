@@ -13,7 +13,6 @@ import java.util.Map;
 import java.util.Scanner;
 import java.util.Set;
 import java.util.TreeMap;
-import java.util.Map.Entry;
 
 import modele.carte.Card;
 import modele.carte.Joker;
@@ -33,6 +32,7 @@ import modele.tas.CountInversion;
 import modele.tas.DrawDeck;
 import modele.tas.Jest;
 
+import java.util.Map.Entry;
 import java.util.NavigableMap;
 
 
@@ -224,19 +224,18 @@ public class Game {
 		for (Iterator<Player> it = Game.players.iterator(); it.hasNext();) 
 		{
 			Player p = (Player) it.next();
-			Card[] hand = p.getHand();
 			for(int i=0;i<2;i++) {
-				if(highestCardValue <= hand[i].getValue().getCardValue())
+				if(highestCardValue <= p.getHand()[i].getValue().getCardValue())
 				{
-					highestCardValue = hand[i].getValue().getCardValue();
-					highestColorValue = hand[i].getColor().getColorValue();
+					highestCardValue = p.getHand()[i].getValue().getCardValue();
+					highestColorValue = p.getHand()[i].getColor().getColorValue();
 					Player.victime = p.pseudo;
 
 				}
 
-				if((highestCardValue == hand[i].getValue().getCardValue()) && (highestColorValue <  hand[i].getColor().getColorValue()))
+				if((highestCardValue == p.getHand()[i].getValue().getCardValue()) && (highestColorValue <  p.getHand()[i].getColor().getColorValue()))
 				{
-					highestColorValue =  hand[i].getColor().getColorValue();
+					highestColorValue =  p.getHand()[i].getColor().getColorValue();
 					Player.victime = p.pseudo;
 				}
 
@@ -323,46 +322,41 @@ public class Game {
 
 	}
 
-
-
-	public static void main(String[] args) {
-
-		Game newGame = new Game(); //Mettre main JESTINTERFACE 
-		Scanner input = new Scanner(System.in);
-		newGame.initializeGame(newGame, input); 
-		newGame.configureGameplay(input);
-		newGame.createTrophies(newGame); //METTRE DANS MAIN JESTINTERFACE
-
-		System.out.println(Arrays.deepToString(newGame.trophyCards) + "\n"); // Création 2 labels 
-
-		while(newGame.drawdeck.getSize() != 0) // On repète le processus jusqu'a temps qu'on ait plu de carte
+	public void playRounds() {
+		Scanner input2 = new Scanner(System.in);
+		
+		while(this.drawdeck.getSize() != 0) // On repète le processus jusqu'a temps qu'on ait plu de carte
 		{
-			newGame.distribute(); // distribuer les cartes 
+			this.distribute(); // distribuer les cartes 
 
 			// UPSIDE DOWN DE CHAQUE JOUEUR		
 			Iterator<Player> it = players.iterator();
 			while(it.hasNext()) {
 				Player p = it.next();
-				p.upsideDown(p, input);
+				p.upsideDown(p, input2);
 			}
 			
 			
-			newGame.determinateFirstPlayer(); // on détermine le premier Joueur
+			this.determinateFirstPlayer(); // on détermine le premier Joueur
 
 			for(int j =0; j<nbPlayers;j++) {  // le reste suit selon la méthode stealCard(input)
-				ForMainPlay.get(Player.getVictime()).stealCard(input);	 // Les manip de chaque joueur pendant le tour 
+				ForMainPlay.get(Player.getVictime()).stealCard(input2);	 // Les manip de chaque joueur pendant le tour 
 			}
 
 			for(int i=0; i<Game.nbPlayers;i++) {
 				Game.players.get(i).HasStolen=false;
 			}
 
-			newGame.mainCollectCards(); // On ramasse les cartes et on les rebalance dans le jeu pour recommencer 
+			this.mainCollectCards(); // On ramasse les cartes et on les rebalance dans le jeu pour recommencer 
 
 		}
+		
+	}
 
+	
+	public void giveTrophy() {
 		ArrayList<Player> p = Game.players ;
-		Card[] t = newGame.trophyCards;
+		Card[] t = this.trophyCards;
 
 		if(t[0] != null && t[1] != null) { // Si y'a l'extension et 3 joueurs y'a pas de trophées ducoup on passe.
 
@@ -548,24 +542,51 @@ public class Game {
 		}
 		
 		System.out.println("\n") ;
+		
+	}
 
+	
+	public void countPoints() {
 		for (int i = 0 ; i < players.size() ; i ++)
 		{	
-			if (newGame.variante == false)
+			if (this.variante == false)
 			{
 				Count count = new CountClassique() ;
-				p.get(i).getJest().acceptCount(count, p.get(i)) ;
+				Game.players.get(i).getJest().acceptCount(count, Game.players.get(i)) ;
 			}
 			else 
 			{
 				Count count = new CountInversion() ;
-				p.get(i).getJest().acceptCount(count, p.get(i)) ;
+				Game.players.get(i).getJest().acceptCount(count,Game.players.get(i)) ;
 			}
 		}
 
 		System.out.println("\n") ;
 		
-		newGame.winnerDetermination() ; 
+	}
+	
+	
+	public void run() {
+
+		
+		Scanner input = new Scanner(System.in);
+		
+		this.initializeGame(this, input); 
+		
+		this.configureGameplay(input);
+		
+		
+		this.createTrophies(this); //METTRE DANS MAIN JESTINTERFACE
+
+		System.out.println(Arrays.deepToString(this.trophyCards) + "\n"); // Création 2 labels 
+
+		this.playRounds(); 
+		
+		this.giveTrophy();
+		
+		this.countPoints();
+		
+		this.winnerDetermination() ; 
 
 	}
 } // ARMAGEDDON 
