@@ -39,7 +39,7 @@ import java.util.NavigableMap;
  trophyCards=null;
  Si(nbPlayers=4)
  trophyCards=1;
- }
+ }//
 
  création d'une méthode createTrophies() pour instancier les bons nombres de trophées selon les conditions préalables.
 
