@@ -1,4 +1,4 @@
-package Modele;
+package modele.carte;
 
 import java.util.Comparator;
 import java.util.Map;

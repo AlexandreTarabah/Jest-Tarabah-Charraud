@@ -1,4 +1,4 @@
-package Modele;
+package modele.carte;
 
 public class Joker extends Card{
 	

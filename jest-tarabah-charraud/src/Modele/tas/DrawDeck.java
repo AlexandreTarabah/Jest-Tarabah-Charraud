@@ -1,8 +1,15 @@
-package Modele;
+package modele.tas;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Iterator;
+
+import modele.carte.Card;
+import modele.carte.Color;
+import modele.carte.Joker;
+import modele.carte.Value;
+import modele.game.Game;
+import modele.joueur.Player;
 
 public class DrawDeck {
 
@@ -53,7 +60,7 @@ public class DrawDeck {
 		if(g.extension==false) { // Si on joue sans extension, on retire les 6 du jeu
 			int verif6=6;
 			for(int i=0; i<drawdeck.size();i++) {
-				if(verif6==drawdeck.get(i).value.getCardValue())
+				if(verif6==drawdeck.get(i).getValue().getCardValue())
 				{drawdeck.remove(i);}
 			}
 		}
@@ -73,18 +80,18 @@ public class DrawDeck {
 
 		if(drawdeck.size()!=0) {
 
-			if(player.offer.get("up")==null) {
-				drawdeck.add(player.offer.get("down"));
+			if(player.getOffer().get("up")==null) {
+				drawdeck.add(player.getOffer().get("down"));
 			}else
-				drawdeck.add(player.offer.get("up"));
+				drawdeck.add(player.getOffer().get("up"));
 		}
 		else 
 		{
 
-			if(player.offer.get("up")==null) {
-				player.getJest().jestCards.add(player.offer.get("down"));
+			if(player.getOffer().get("up")==null) {
+				player.getJest().jestCards.add(player.getOffer().get("down"));
 			}else
-				player.getJest().jestCards.add(player.offer.get("up"));
+				player.getJest().jestCards.add(player.getOffer().get("up"));
 		}
 	}
 

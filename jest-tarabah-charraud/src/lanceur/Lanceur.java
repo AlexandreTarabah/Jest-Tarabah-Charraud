@@ -1,4 +1,4 @@
-package Lanceur;
+package lanceur;
 
 public class Lanceur {
 

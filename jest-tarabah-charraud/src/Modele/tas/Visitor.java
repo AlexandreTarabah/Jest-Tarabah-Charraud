@@ -1,4 +1,4 @@
-package Modele;
+package modele.tas;
 
 public interface Visitor 
 {

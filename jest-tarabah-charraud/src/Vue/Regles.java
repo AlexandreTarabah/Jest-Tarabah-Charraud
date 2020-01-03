@@ -1,64 +1,43 @@
-package Vue;
+package vue;
 
-import java.awt.BorderLayout;
-import java.awt.Font;
-import java.io.*;
+import java.awt.EventQueue;
 
-import javax.swing.*;
-import javax.swing.text.rtf.RTFEditorKit;
+import javax.swing.JFrame;
 
-import Controleur.Controleur;
+public class Regles {
 
-public class Regles extends JPanel{
+	private JFrame frame;
 
 	/**
-	 * 
+	 * Launch the application.
 	 */
-	private static final long serialVersionUID = 1L;
-	
-	private JButton back;
-	private JFrame frame;
-	private Font font = new Font("Courier", Font.BOLD, 15);
-	
-	public Regles(){
-		super();
-		this.frame = new JFrame();
-		this.frame.setTitle("Regles du jeu");
-		this.frame.setSize(1000, 800);
-		this.frame.setLocationRelativeTo(null);               
-		this.frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+	public static void main(String[] args) {
+		EventQueue.invokeLater(new Runnable() {
+			public void run() {
+				try {
+					Regles window = new Regles();
+					window.frame.setVisible(true);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		});
+	}
 
-	    this.setLayout(new BorderLayout());
-	    
-	    this.back = new JButton("Retour au menu principal");
-	    this.back.setActionCommand("retour");
-	    this.back.setFont(font);
-	    
-	    RTFEditorKit rtf = new RTFEditorKit();  
-	    JTextPane regles = new JTextPane();  
-	    regles.setEditorKit(rtf);  
-	    FileInputStream fichier = null;
-		try {
-			fichier = new FileInputStream("JEST_Rules");
-		} catch (FileNotFoundException e) {
-			e.printStackTrace();
-		}  
-	    try {
-			rtf.read(fichier, regles.getDocument(), 0);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	    JScrollPane sRegles = new JScrollPane(regles);
-	    this.add(back, BorderLayout.SOUTH);
-	    this.add(sRegles);
-	    this.frame.setContentPane(this);
+	/**
+	 * Create the application.
+	 */
+	public Regles() {
+		initialize();
 	}
-	
-	public void setListener(Controleur controleur) {
-		back.addActionListener(controleur);
+
+	/**
+	 * Initialize the contents of the frame.
+	 */
+	private void initialize() {
+		frame = new JFrame();
+		frame.setBounds(100, 100, 450, 300);
+		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	}
-	
-	public JFrame getFrame() {
-		return frame;
-	}
+
 }

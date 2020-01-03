@@ -1,4 +1,4 @@
-package Modele;
+package modele.tas;
 
 import java.util.AbstractMap;
 import java.util.ArrayList;
@@ -10,6 +10,17 @@ import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
 import java.util.Map.Entry;
+
+import modele.carte.Card;
+import modele.carte.Trophy;
+import modele.carte.TrophyBestJest;
+import modele.carte.TrophyBestJestNoJoke;
+import modele.carte.TrophyHighest;
+import modele.carte.TrophyJoker;
+import modele.carte.TrophyLowest;
+import modele.carte.TrophyMajority;
+import modele.game.Game;
+import modele.joueur.Player;
 
 /**
  * Cette classe objectualise le Jest d'un joueur.
@@ -328,7 +339,7 @@ public class Jest {
 	{ // A revoir avec Strategy ou visitor
 
 		System.out.println("\nJoueur "+ p.pseudo + " effectuons le décompte de vos points ! \n"
-				+ "Rappelons les cartes de votre jest : " + p.jest.jestCards) ;
+				+ "Rappelons les cartes de votre jest : " + p.getJest().jestCards) ;
 		p.nbPoint = count.visitJest(this) ;
 		System.out.println("Joueur "+ p.pseudo + " votre jest vaut " + p.nbPoint + " pts") ;
 		Game.winner.put(p.pseudo, p.nbPoint) ;

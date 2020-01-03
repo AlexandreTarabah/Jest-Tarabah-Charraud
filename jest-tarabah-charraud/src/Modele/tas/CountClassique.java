@@ -1,9 +1,13 @@
-package Modele;
+package modele.tas;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Iterator;
+
+import modele.carte.Card;
+import modele.carte.Color;
+import modele.carte.Value;
 
 public class CountClassique implements Count {
 
@@ -20,33 +24,33 @@ public class CountClassique implements Count {
 		for (Iterator<Card> it = jest.jestCards.iterator() ; it.hasNext();)
 		{
 			Card card = it.next();
-			CV.put(card.color, card.value);
+			CV.put(card.getColor(), card.getValue());
 
 			// Spades and Clubs always increase the value of your Jest by their face value.
-			if(card.color == Color.spade ||
-					card.color == Color.club)
+			if(card.getColor() == Color.spade ||
+					card.getColor() == Color.club)
 			{
-				System.out.println("+ " + card.value.getCardValue() + " pt avec votre " + card.value.toString() + " de " + card.color.toString()) ;
-				jestValue += card.value.getCardValue() ;
+				System.out.println("+ " + card.getValue().getCardValue() + " pt avec votre " + card.getValue().toString() + " de " + card.getColor().toString()) ;
+				jestValue += card.getValue().getCardValue() ;
 			}
 
 			// Diamonds always reduce the value of your Jest by their face value
-			if(card.color == Color.diamond)
+			if(card.getColor() == Color.diamond)
 			{
-				System.out.println("- " + card.value.getCardValue() + " pt avec votre " + card.value.toString() + " de " + card.color.toString()) ;
-				jestValue -= card.value.getCardValue() ;
+				System.out.println("- " + card.getValue().getCardValue() + " pt avec votre " + card.getValue().toString() + " de " + card.getColor().toString()) ;
+				jestValue -= card.getValue().getCardValue() ;
 			}
 
 			// Hearts are worth nothing unless you have the Joker (cf ci-après)
-			if(card.color == Color.heart)
+			if(card.getColor() == Color.heart)
 			{
-				System.out.println("+ 0 pt avec votre " + card.value.toString() + " de " + card.color.toString()) ;
+				System.out.println("+ 0 pt avec votre " + card.getValue().toString() + " de " + card.getColor().toString()) ;
 				jestValue += 0 ;
 			}
 
-			if(card.color == Color.joker)
+			if(card.getColor() == Color.joker)
 			{
-				System.out.println("+ 0 pt avec votre " + card.color.toString()) ;
+				System.out.println("+ 0 pt avec votre " + card.getColor().toString()) ;
 				jestValue += 0 ;
 			}
 		}
@@ -67,10 +71,10 @@ public class CountClassique implements Count {
 			{
 				Card card = it.next() ;
 
-				if(card.color == Color.heart)
+				if(card.getColor() == Color.heart)
 				{
-					System.out.println("+ " + card.value.getCardValue() + " avec votre " + card.color.toString() + " de " + card.value.toString()) ;
-					jestValue += card.value.getCardValue()  ;
+					System.out.println("+ " + card.getValue().getCardValue() + " avec votre " + card.getColor().toString() + " de " + card.getValue().toString()) ;
+					jestValue += card.getValue().getCardValue()  ;
 				}
 
 			}
@@ -89,15 +93,15 @@ public class CountClassique implements Count {
 		value of your Jest by its face value.*/
 		else if(occurrencesHeart > 0 && occurrencesHeart < 4 && occurrencesJoker == 1)
 		{
-			System.out.println("Vous n'avez pas le Joker et seulement " + occurrencesHeart + " cartes de coeur ! Vous perdez de ce fait : ") ;
+			System.out.println("Vous avez le Joker et seulement " + occurrencesHeart + " cartes de coeur ! Vous perdez de ce fait : ") ;
 			for (Iterator<Card> it = jest.jestCards.iterator() ; it.hasNext();)
 			{
 				Card card = it.next() ;
 
-				if(card.color == Color.heart)
+				if(card.getColor() == Color.heart)
 				{
-					System.out.println("- " + card.value.getCardValue() + " avec votre " + card.value.toString() + " de " + card.color.toString()) ;
-					jestValue -= card.value.getCardValue();
+					System.out.println("- " + card.getValue().getCardValue() + " avec votre " + card.getValue().toString() + " de " + card.getColor().toString()) ;
+					jestValue -= card.getValue().getCardValue();
 				}
 
 			}
@@ -110,13 +114,13 @@ public class CountClassique implements Count {
 		{
 			Card card = it.next() ;
 
-			if(card.value.getCardValue() == 1 && 
-					Collections.frequency(jest.jestCards, card.color) == 1)
+			if(card.getValue().getCardValue() == 1 && 
+					Collections.frequency(jest.jestCards, card.getColor()) == 1)
 
 			{
-				System.out.println("Vous avez un as de " + card.color.toString() + ", c'est votre seule carte de " + card.color.toString()) ;
+				System.out.println("Vous avez un as de " + card.getColor().toString() + ", c'est votre seule carte de " + card.getColor().toString()) ;
 
-				if(card.color.equals(Color.heart))
+				if(card.getColor().equals(Color.heart))
 				{
 					if(occurrencesHeart == 1 && occurrencesJoker == 1)
 					{
@@ -130,13 +134,13 @@ public class CountClassique implements Count {
 					}
 				}
 
-				if(card.color.equals(Color.spade) || card.color.equals(Color.club))
+				if(card.getColor().equals(Color.spade) || card.getColor().equals(Color.club))
 				{
 					System.out.println("Quelle chance, cette carte vous ne fais pas gagner 1 pt mais 5 !");
 					jestValue += 4 ; // 5 - 1 = 4
 				}
 
-				if(card.color.equals(Color.diamond))
+				if(card.getColor().equals(Color.diamond))
 				{
 					System.out.println("Quelle malchance, cette carte vous ne fais pas perdre 1 pt mais 5 ! ");
 					jestValue -= 4 ; // -5 + 1 = -4
@@ -156,37 +160,37 @@ public class CountClassique implements Count {
 				Card card1 = it.next() ;
 
 
-				if (card1.color == Color.spade && pairsDone.contains(card1.value) == false)
+				if (card1.getColor() == Color.spade && pairsDone.contains(card1.getValue()) == false)
 				{
 					for(Iterator<Card> itg = jest.jestCards.iterator(); itg.hasNext();)
 					{
 						Card card2  = itg.next() ;
 
-						if (card2.color == Color.club)
+						if (card2.getColor() == Color.club)
 						{
-							if(card1.value == card2.value)
+							if(card1.getValue() == card2.getValue())
 							{
 								System.out.println("Quelle chance, vous avez une paire noire, vous remportez un bonus de 2 pts ! ");
 								jestValue += 2 ;
-								pairsDone.add(card1.value);
+								pairsDone.add(card1.getValue());
 							}
 						}
 					}
 				}
 
-				if (card1.color == Color.club && pairsDone.contains(card1.value) == false)
+				if (card1.getColor() == Color.club && pairsDone.contains(card1.getValue()) == false)
 				{
 					for(Iterator<Card> itg = jest.jestCards.iterator(); itg.hasNext();)
 					{
 						Card card2  = itg.next() ;
 
-						if (card2.color == Color.spade)
+						if (card2.getColor() == Color.spade)
 						{
-							if(card1.value == card2.value)
+							if(card1.getValue() == card2.getValue())
 							{
 								System.out.println("Quelle chance, vous avez une paire noire, vous remportez un bonus de 2 pts ! ");
 								jestValue += 2 ;
-								pairsDone.add(card1.value);
+								pairsDone.add(card1.getValue());
 							}
 						}
 					}

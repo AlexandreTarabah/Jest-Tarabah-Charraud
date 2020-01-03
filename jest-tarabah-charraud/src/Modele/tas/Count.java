@@ -1,4 +1,4 @@
-package Modele;
+package modele.tas;
 
 import java.util.HashMap;
 import java.util.Iterator;

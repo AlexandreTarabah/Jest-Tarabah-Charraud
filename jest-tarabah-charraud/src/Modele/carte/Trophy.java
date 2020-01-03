@@ -1,19 +1,21 @@
-package Modele;
+package modele.carte;
 
 import java.util.Iterator;
+
+import modele.tas.Jest;
 
 public class Trophy 
 {
 	Value value ;
 	Color color ;
 
-	protected Card highCandidate = new Card(value, color);
+	public Card highCandidate = new Card(value, color);
 
-	protected Card lowCandidate = new Card(value, color);
+	public Card lowCandidate = new Card(value, color);
 
-	protected int majCandidate ;
+	public int majCandidate ;
 
-	protected int bestJestCandidate;
+	public int bestJestCandidate;
 
 	public int bigCoeff ;
 	public int bigValue ;

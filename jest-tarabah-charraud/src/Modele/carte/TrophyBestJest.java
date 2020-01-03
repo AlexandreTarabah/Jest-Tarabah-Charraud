@@ -1,6 +1,8 @@
-package Modele;
+package modele.carte;
 
 import java.util.Iterator;
+
+import modele.tas.Jest;
 
 public class TrophyBestJest extends Trophy {
 	public TrophyBestJest() {

@@ -1,37 +1,43 @@
-package Vue;
+package vue;
+
+import java.awt.EventQueue;
 
 import javax.swing.JFrame;
-import javax.swing.JScrollPane;
-import javax.swing.JTable;
 
-import Modele.Game;
+public class Scores {
 
-public class Scores extends JFrame{
+	private JFrame frame;
+
 	/**
-	 * 
+	 * Launch the application.
 	 */
-	private static final long serialVersionUID = 1L;
-	
-	private JTable tableau;
-	private String titres[] = {"Nom du Joueur", "Score"};
-	private Object donnees[][];
-	
-	public Scores(Game p){
-		this.setLocationRelativeTo(null);
-		this.setSize(400, 300);
-	    this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-	    this.setTitle("Scores");
+	public static void main(String[] args) {
+		EventQueue.invokeLater(new Runnable() {
+			public void run() {
+				try {
+					Scores window = new Scores();
+					window.frame.setVisible(true);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		});
+	}
 
-	    this.donnees = new Object[p.getPlayers().size()][p.getPlayers().size()];
-	    for (int i=0;i<p.getPlayers().size();i++){
-	    	this.donnees[i][0] = p.getPlayers().get(i).getPseudo();
-	    }
-	    for (int j=0;j<p.getPlayers().size();j++){
-	    	this.donnees[j][1] = p.getPlayers().get(j).getScore();
-    	}
-	    this.tableau = new JTable(donnees, titres);
-	    this.setContentPane(new JScrollPane(tableau));
+	/**
+	 * Create the application.
+	 */
+	public Scores() {
+		initialize();
+	}
+
+	/**
+	 * Initialize the contents of the frame.
+	 */
+	private void initialize() {
+		frame = new JFrame();
+		frame.setBounds(100, 100, 450, 300);
+		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	}
 
 }
-
