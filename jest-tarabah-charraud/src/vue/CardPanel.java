@@ -10,7 +10,7 @@ import java.util.ListIterator;
 import javax.imageio.ImageIO;
 import javax.swing.JPanel;
 
-public class CardPanel extends JPanel{
+public class CardPanel extends JPanel {
 
 	/**
 	 * 
@@ -63,4 +63,3 @@ public class CardPanel extends JPanel{
 		}
 	}
 }
-
