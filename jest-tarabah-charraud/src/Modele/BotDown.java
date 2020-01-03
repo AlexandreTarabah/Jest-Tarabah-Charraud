@@ -71,9 +71,9 @@ public class BotDown extends Player implements Difficulty {
 		if(Game.nbPlayers==3) {
 
 			if(nbCardOffer>4) {
-				while(Game.players.get(i)==this || Game.players.get(i).offer.size()!=2)  {
+				while(Game.getPlayers().get(i)==this || Game.getPlayers().get(i).offer.size()!=2)  {
 					i++;
-				}victime = Game.players.get(i).pseudo;
+				}victime = Game.getPlayers().get(i).pseudo;
 			}
 
 			else if(nbCardOffer==4 && this.offer.size()==2)
@@ -81,10 +81,10 @@ public class BotDown extends Player implements Difficulty {
 			}
 			else if(nbCardOffer==4 && this.offer.size()!=2)
 			{
-				while( Game.players.get(i)==this ||  Game.players.get(i).offer.size()!=2)  {
+				while( Game.getPlayers().get(i)==this ||  Game.getPlayers().get(i).offer.size()!=2)  {
 					i++;				
 				}
-				victime = Game.players.get(i).pseudo;
+				victime = Game.getPlayers().get(i).pseudo;
 			}
 
 		}
@@ -93,17 +93,17 @@ public class BotDown extends Player implements Difficulty {
 
 		if(Game.nbPlayers==4) {
 			if(nbCardOffer>5) {
-				while( Game.players.get(i)==this || Game.players.get(i).offer.size()!=2)  {
+				while( Game.getPlayers().get(i)==this || Game.getPlayers().get(i).offer.size()!=2)  {
 					i++;
-				}victime = Game.players.get(i).pseudo;	
+				}victime = Game.getPlayers().get(i).pseudo;	
 			}
 
 			else if(nbCardOffer==5 && this.offer.size()==2)
 			{victime=this.pseudo;}
 			else {
-				while( Game.players.get(i)==this  || Game.players.get(i).offer.size()!=2)  {
+				while( Game.getPlayers().get(i)==this  || Game.getPlayers().get(i).offer.size()!=2)  {
 					i++;
-				}victime = Game.players.get(i).pseudo;	
+				}victime = Game.getPlayers().get(i).pseudo;	
 			}
 		}
 

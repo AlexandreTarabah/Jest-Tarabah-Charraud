@@ -42,7 +42,7 @@ public class Player
 		String pseudo = input.next();
 		this.pseudo=pseudo;
 		this.jest = new Jest();
-		Game.players.add(this) ;
+		Game.getPlayers().add(this) ;
 		Game.ForMainPlay.put(this.pseudo, this);
 	}
 
@@ -192,6 +192,9 @@ public class Player
 	}
 
 
+	public String getPseudo() {
+		return pseudo;
+	}
 
 
 
@@ -202,12 +205,6 @@ public class Player
 		this.hand[i] = card;
 
 	}
-
-
-
-
-
-
 
 
 
@@ -267,6 +264,12 @@ public class Player
 	{
 		return jest ;
 	}
+
+
+
+
+
+
 
 
 }

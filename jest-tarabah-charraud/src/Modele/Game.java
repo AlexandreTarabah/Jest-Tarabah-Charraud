@@ -53,7 +53,7 @@ public class Game {
 
 	static HashMap<String,Player> ForMainPlay = new HashMap<String,Player>() ;
 
-	static ArrayList<Player> players = new ArrayList<Player>();
+	private static ArrayList<Player> players = new ArrayList<Player>();
 
 	static HashMap<String, HashMap<String, Card>> listOffer= new HashMap<>();
 
@@ -88,7 +88,7 @@ public class Game {
 
 			for (int i=0 ; i < 2 ; i++) // Supposons qu'on distribue les cartes une à une
 			{
-				for (Iterator<Player> it = players.iterator(); it.hasNext();) 
+				for (Iterator<Player> it = getPlayers().iterator(); it.hasNext();) 
 				{
 					Player p = (Player) it.next();
 					p.setHand(i, drawdeck.takeCards()) ; // place une carte en position i dans la
@@ -182,7 +182,7 @@ public class Game {
 		if(currentPlay==false) {
 
 			p.setPseudo(input);
-			players.add(p);
+			getPlayers().add(p);
 			ForMainPlay.put(p.pseudo, p);
 
 
@@ -192,9 +192,9 @@ public class Game {
 
 	public void mainCollectCards()
 	{
-		for(int i=0; i <players.size();i++)
+		for(int i=0; i <getPlayers().size();i++)
 		{
-			drawdeck.collectCards(players.get(i)); // on rebalance les cartes restantes dans le drawdeck.
+			drawdeck.collectCards(getPlayers().get(i)); // on rebalance les cartes restantes dans le drawdeck.
 		}
 	}
 
@@ -202,7 +202,7 @@ public class Game {
 	public void determinateFirstPlayer() { // Code  pour comparer dans countJest, dans cette méthode, et dans stealCards
 		int highestCardValue = 0;
 		int highestColorValue = 0;
-		for (Iterator<Player> it = Game.players.iterator(); it.hasNext();) 
+		for (Iterator<Player> it = this.getPlayers().iterator(); it.hasNext();) 
 		{
 			Player p = (Player) it.next();
 			for(int i=0;i<2;i++) {
@@ -311,7 +311,7 @@ public class Game {
 			this.distribute(); // distribuer les cartes 
 
 			// UPSIDE DOWN DE CHAQUE JOUEUR		
-			Iterator<Player> it = players.iterator();
+			Iterator<Player> it = getPlayers().iterator();
 			while(it.hasNext()) {
 				Player p = it.next();
 				p.upsideDown(p, input2);
@@ -325,7 +325,7 @@ public class Game {
 			}
 
 			for(int i=0; i<Game.nbPlayers;i++) {
-				Game.players.get(i).HasStolen=false;
+				this.getPlayers().get(i).HasStolen=false;
 			}
 
 			this.mainCollectCards(); // On ramasse les cartes et on les rebalance dans le jeu pour recommencer 
@@ -336,7 +336,7 @@ public class Game {
 
 	
 	public void giveTrophy() {
-		ArrayList<Player> p = Game.players ;
+		ArrayList<Player> p = this.getPlayers() ;
 		Card[] t = this.trophyCards;
 
 		if(t[0] != null && t[1] != null) { // Si y'a l'extension et 3 joueurs y'a pas de trophées ducoup on passe.
@@ -407,7 +407,7 @@ public class Game {
 					Map<Integer,Integer> majCandidates = new HashMap<Integer, Integer>();
 					Map<Player,Entry<Integer, Integer>> majPlayer = new HashMap<Player, Entry<Integer, Integer>>();
 					Map.Entry<Integer,Integer> myEntry = new AbstractMap.SimpleEntry<Integer, Integer>(0, 0);
-					majPlayer.put(players.get(1), myEntry) ;
+					majPlayer.put(getPlayers().get(1), myEntry) ;
 					String result = "" ;
 
 					for(int i = 0 ; i < p.size() ; i ++) // parcourt les joueurs
@@ -432,10 +432,10 @@ public class Game {
 					Map<Player,Entry<Player, Integer>> bestJestValue = new HashMap<Player, Entry<Player, Integer>>();
 					Map<Player,Entry<Player, Integer>> bestJestColor = new HashMap<Player, Entry<Player, Integer>>();
 					Map<Player, Integer> bestJestPlayer = new HashMap<Player, Integer>();
-					Map.Entry<Player,Integer> myEntry = new AbstractMap.SimpleEntry<Player, Integer>(players.get(1), 0);
-					bestJestValue.put(players.get(1), myEntry) ;
-					bestJestColor.put(players.get(1), myEntry) ; 
-					bestJestPlayer.put(players.get(1), 0) ;
+					Map.Entry<Player,Integer> myEntry = new AbstractMap.SimpleEntry<Player, Integer>(getPlayers().get(1), 0);
+					bestJestValue.put(getPlayers().get(1), myEntry) ;
+					bestJestColor.put(getPlayers().get(1), myEntry) ; 
+					bestJestPlayer.put(getPlayers().get(1), 0) ;
 					String result = "" ; 
 
 					for(int i = 0 ; i < p.size() ; i ++) // parcourt les joueurs
@@ -456,9 +456,9 @@ public class Game {
 					Map<Player,Entry<Player, Integer>> bestJestValue = new HashMap<Player, Entry<Player, Integer>>();
 					Map<Player,Entry<Player, Integer>> bestJestColor = new HashMap<Player, Entry<Player, Integer>>();
 					Map<Player, Integer> bestJestPlayer = new HashMap<Player, Integer>();
-					Map.Entry<Player,Integer> myEntry = new AbstractMap.SimpleEntry<Player, Integer>(players.get(1), 0);
-					bestJestValue.put(players.get(1), myEntry) ;
-					bestJestColor.put(players.get(1), myEntry) ; 
+					Map.Entry<Player,Integer> myEntry = new AbstractMap.SimpleEntry<Player, Integer>(getPlayers().get(1), 0);
+					bestJestValue.put(getPlayers().get(1), myEntry) ;
+					bestJestColor.put(getPlayers().get(1), myEntry) ; 
 					String result = "" ; 
 
 					int jokeDetecter = 0 ;
@@ -528,17 +528,17 @@ public class Game {
 
 	
 	public void countPoints() {
-		for (int i = 0 ; i < players.size() ; i ++)
+		for (int i = 0 ; i < getPlayers().size() ; i ++)
 		{	
 			if (this.variante == false)
 			{
 				Count count = new CountClassique() ;
-				Game.players.get(i).jest.acceptCount(count, Game.players.get(i)) ;
+				this.getPlayers().get(i).jest.acceptCount(count, this.getPlayers().get(i)) ;
 			}
 			else 
 			{
 				Count count = new CountInversion() ;
-				Game.players.get(i).jest.acceptCount(count,Game.players.get(i)) ;
+				this.getPlayers().get(i).jest.acceptCount(count,this.getPlayers().get(i)) ;
 			}
 		}
 
@@ -567,7 +567,14 @@ public class Game {
 		
 		this.countPoints();
 		
-		this.winnerDetermination() ; 
+		this.winnerDetermination(); 
 
 	}
+
+
+	public static ArrayList<Player> getPlayers() {
+		return players;
+	}
+
+
 } // ARMAGEDDON 
