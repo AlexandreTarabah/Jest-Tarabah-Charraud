@@ -1,13 +1,13 @@
-package fr.utt.lo02.uno.vue.panneaux;
+package vue;
 
 import java.awt.*;
 import java.util.LinkedList;
 
 import javax.swing.*;
 
-import fr.utt.lo02.uno.modele.joueur.Joueur;
+import modele.joueur.Player;
 
-public class PanelJoueur extends JPanel{
+public class PlayerPanel extends JPanel{
 
 	/**
 	 * 
@@ -15,56 +15,45 @@ public class PanelJoueur extends JPanel{
 	private static final long serialVersionUID = 1L;
 
 	private String nomJoueur;
-	private Boolean virtuel = true;
+	private Boolean virtual = true;
 	private JLabel nomJoueurLabel;
-	private PanelCartes pc;
-	private JButton uno;
+	private CardPanel cd;
 	private Font font = new Font("Courier", Font.BOLD, 20);
 	
 	private LinkedList<Image> jeu;
 	
-	public PanelJoueur(Joueur joueur){
+	public PlayerPanel(Player player){
 		super();
 		this.setOpaque(false);
 		this.setLayout(new BorderLayout());
 		this.setJeu(new LinkedList<Image>());
 		
-		this.pc = new PanelCartes(jeu);
-		this.add(pc);
+		this.cd = new CardPanel(jeu);
+		this.add(cd);
 		
-		if (!joueur.isVirtuel()){
+		if (!player.isVirtual()){ // a compléter avec boolean isVirtual
 			this.virtuel = false;
 		}
 		
-		this.nomJoueur = joueur.getNomJoueur();
+		this.nomJoueur = player.getPseudo();
 		this.nomJoueurLabel = new JLabel(nomJoueur);
 		this.nomJoueurLabel.setFont(font);
 		this.nomJoueurLabel.setForeground(Color.RED);
 		this.add(nomJoueurLabel, BorderLayout.NORTH);
 	}
 
-	public JButton getUno() {
-		return uno;
-	}
 
-	public void setUno(JButton uno) {
-		this.uno = uno;
-	}
-
-	public void piocher(Image carte){
-		this.jeu.add(carte);
+	public void choisirCarteVolée(Image card){
+		this.jeu.add(card);
 	}
 	
-	public void retirer(Image carte){
-		this.jeu.remove(carte);
+	public void choisirUpsideDown(Image card) {
+		this.jeu.retourner(card); // créer la méthode retourner carte 
 	}
 	
-	public void retirerTout(){
-		this.jeu.removeAll(jeu);
-	}
 
 	public void setCartesVisibles(Boolean visibles){
-		this.pc.setCartesVisibles(visibles);
+		this.cd.setCartesVisibles(visibles);
 	}
 
 	public LinkedList<Image> getJeu() {
@@ -79,20 +68,20 @@ public class PanelJoueur extends JPanel{
 		return nomJoueur;
 	}
 
-	public PanelCartes getPc() {
-		return pc;
+	public CardPanel getPc() {
+		return cd;
 	}
 
-	public void setPc(PanelCartes pc) {
-		this.pc = pc;
+	public void setPc(CardPanel pc) {
+		this.cd = pc;
 	}
 	
-	public Boolean isVirtuel() {
-		return virtuel;
+	public Boolean isVirtual() {
+		return virtual;
 	}
 
 	public void setVirtuel(Boolean virtuel) {
-		this.virtuel = virtuel;
+		this.virtual = virtual;
 	}
 }
 
