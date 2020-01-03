@@ -29,7 +29,7 @@ import vue.Regles;
 
 	 /* Permettra de connaitre le modéle */
 	 public void setModele(Game game) {
-		 this.game = game;
+		 this.game = game ;
 	 }
 
 	 /* Permettra de connaitre la vue */
@@ -44,14 +44,14 @@ import vue.Regles;
 	 public void actionPerformed(ActionEvent e) {
 		 if (e.getActionCommand() == "nouvellegame"){
 			 parametres.setVisible(true);
-			 accueil.setVisible(false);
+			 home.setVisible(false);
 		 }
 		 if (e.getActionCommand() == "reglesdujeu"){
 			 regles.getFrame().setVisible(true);
-			 accueil.setVisible(false);
+			 home.setVisible(false);
 		 }
 		 if (e.getActionCommand() == "retour"){
-			 accueil.setVisible(true);
+			 home.setVisible(true);
 			 regles.setVisible(false);
 		 }
 		 if (e.getActionCommand() == "quittergame"){
