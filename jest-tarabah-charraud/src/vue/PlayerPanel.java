@@ -49,7 +49,7 @@ public class PlayerPanel extends JPanel{
 		this.uno = uno;
 	}
 
-	public void piocher(Image carte){
+	public void	prendreCarte(Image carte){
 		this.jeu.add(carte);
 	}
 	
