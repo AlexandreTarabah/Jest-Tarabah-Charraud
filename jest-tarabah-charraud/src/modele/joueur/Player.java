@@ -47,7 +47,7 @@ public class Player
 		String pseudo = input.next();
 		this.setPseudo(pseudo);
 		this.jest = new Jest();
-		Game.getPlayers().add(this) ;
+		Game.players.add(this) ;
 		Game.getForMainPlay().put(this.getPseudo(), this);
 	}
 

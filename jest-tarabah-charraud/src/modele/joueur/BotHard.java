@@ -90,9 +90,9 @@ public class BotHard extends Player implements Difficulty {
 		if(Game.getNbPlayers()==3) {
 
 			if(nbCardOffer>4) {
-				while(Game.getPlayers().get(i)==this || Game.getPlayers().get(i).getOffer().size()!=2)  {
+				while(Game.players.get(i)==this || Game.players.get(i).getOffer().size()!=2)  {
 					i++;
-				}setVictime(Game.getPlayers().get(i).getPseudo());
+				}setVictime(Game.players.get(i).getPseudo());
 			}
 
 			else if(nbCardOffer==4 && this.getOffer().size()==2)
@@ -100,10 +100,10 @@ public class BotHard extends Player implements Difficulty {
 			}
 			else if(nbCardOffer==4 && this.getOffer().size()!=2)
 			{
-				while( Game.getPlayers().get(i)==this ||  Game.getPlayers().get(i).getOffer().size()!=2)  {
+				while( Game.players.get(i)==this ||  Game.players.get(i).getOffer().size()!=2)  {
 					i++;				
 				}
-				setVictime(Game.getPlayers().get(i).getPseudo());
+				setVictime(Game.players.get(i).getPseudo());
 			}
 
 		}
@@ -112,17 +112,17 @@ public class BotHard extends Player implements Difficulty {
 
 		if(Game.getNbPlayers()==4) {
 			if(nbCardOffer>5) {
-				while( Game.getPlayers().get(i)==this || Game.getPlayers().get(i).getOffer().size()!=2)  {
+				while( Game.players.get(i)==this || Game.players.get(i).getOffer().size()!=2)  {
 					i++;
-				}setVictime(Game.getPlayers().get(i).getPseudo());	
+				}setVictime(Game.players.get(i).getPseudo());	
 			}
 
 			else if(nbCardOffer==5 && this.getOffer().size()==2)
 			{setVictime(this.getPseudo());}
 			else {
-				while( Game.getPlayers().get(i)==this  || Game.getPlayers().get(i).getOffer().size()!=2)  {
+				while( Game.players.get(i)==this  || Game.players.get(i).getOffer().size()!=2)  {
 					i++;
-				}setVictime(Game.getPlayers().get(i).getPseudo());	
+				}setVictime(Game.players.get(i).getPseudo());	
 			}
 		}
 

@@ -341,10 +341,10 @@ public class Jest {
 	{ // A revoir avec Strategy ou visitor
 
 		System.out.println("\nJoueur "+ p.getPseudo() + " effectuons le décompte de vos points ! \n"
-				+ "Rappelons les cartes de votre jest : " + p.getJest().jestCards) ;
-		p.setNbPoint(count.visitJest(this)) ;
+				+ "Rappelons les cartes de votre jest : " + p.getJest().jestCards);
+		p.setNbPoint(count.visitJest(this));
 		System.out.println("Joueur "+ p.getPseudo() + " votre jest vaut " + p.getNbPoint() + " pts") ;
-		Game.getWinner().put(p.getPseudo(), p.getNbPoint()) ;
+		Game.getWinner().put(p.getPseudo(), p.getNbPoint());
 
 	}
 
