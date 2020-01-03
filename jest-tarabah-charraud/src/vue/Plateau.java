@@ -82,250 +82,100 @@ public class Plateau extends JPanel implements Observer{
 	
 	public Image verifierCarte(Card c){
 		Image carte = null;
-		if (c.getClass() == CarteClassique.class){
-			switch(c.getNumero()){
-				case CarteClassique.ZERO:
-					switch(c.getCouleur()){
-						case Carte.BLEU:
-							carte = piles.getCartes().get(28);
+			switch(c.getValue().getCardValue()){
+				case 1:
+					switch(c.getColor().getColorValue()){
+						case 1:
+							carte = deck.getCartes().get(1);
 							break;
-						case Carte.VERT:
-							carte = piles.getCartes().get(2);
+						case 2:
+							carte = deck.getCartes().get(5);
 							break;
-						case Carte.JAUNE:
-							carte = piles.getCartes().get(15);
+						case 3:
+							carte = deck.getCartes().get(9);
 							break;
-						case Carte.ROUGE:
-							carte = piles.getCartes().get(41);
-							break;
-					}
-					break;
-				case CarteClassique.UN:
-					switch(c.getCouleur()){
-						case Carte.BLEU:
-							carte = piles.getCartes().get(29);
-							break;
-						case Carte.VERT:
-							carte = piles.getCartes().get(3);
-							break;
-						case Carte.JAUNE:
-							carte = piles.getCartes().get(16);
-							break;
-						case Carte.ROUGE:
-							carte = piles.getCartes().get(42);
+						case 4:
+							carte = deck.getCartes().get(16);
 							break;
 					}
 					break;
-				case CarteClassique.DEUX:
-					switch(c.getCouleur()){
-						case Carte.BLEU:
-							carte = piles.getCartes().get(30);
-							break;
-						case Carte.VERT:
-							carte = piles.getCartes().get(4);
-							break;
-						case Carte.JAUNE:
-							carte = piles.getCartes().get(17);
-							break;
-						case Carte.ROUGE:
-							carte = piles.getCartes().get(43);
-							break;
-					}
-					break;
-				case CarteClassique.TROIS:
-					switch(c.getCouleur()){
-						case Carte.BLEU:
-							carte = piles.getCartes().get(31);
-							break;
-						case Carte.VERT:
-							carte = piles.getCartes().get(5);
-							break;
-						case Carte.JAUNE:
-							carte = piles.getCartes().get(18);
-							break;
-						case Carte.ROUGE:
-							carte = piles.getCartes().get(44);
-							break;
-					}
-					break;
-				case CarteClassique.QUATRE:
-					switch(c.getCouleur()){
-						case Carte.BLEU:
-							carte = piles.getCartes().get(32);
-							break;
-						case Carte.VERT:
-							carte = piles.getCartes().get(6);
-							break;
-						case Carte.JAUNE:
-							carte = piles.getCartes().get(19);
-							break;
-						case Carte.ROUGE:
-							carte = piles.getCartes().get(45);
-							break;
-					}
-					break;
-				case CarteClassique.CINQ:
-					switch(c.getCouleur()){
-						case Carte.BLEU:
-							carte = piles.getCartes().get(33);
-							break;
-						case Carte.VERT:
-							carte = piles.getCartes().get(7);
-							break;
-						case Carte.JAUNE:
-							carte = piles.getCartes().get(20);
-							break;
-						case Carte.ROUGE:
-							carte = piles.getCartes().get(46);
-							break;
-					}
-					break;
-				case CarteClassique.SIX:
-					switch(c.getCouleur()){
-						case Carte.BLEU:
-							carte = piles.getCartes().get(34);
-							break;
-						case Carte.VERT:
-							carte = piles.getCartes().get(8);
-							break;
-						case Carte.JAUNE:
-							carte = piles.getCartes().get(21);
-							break;
-						case Carte.ROUGE:
-							carte = piles.getCartes().get(47);
-							break;
-					}
-					break;
-				case CarteClassique.SEPT:
-					switch(c.getCouleur()){
-						case Carte.BLEU:
-							carte = piles.getCartes().get(35);
-							break;
-						case Carte.VERT:
-							carte = piles.getCartes().get(9);
-							break;
-						case Carte.JAUNE:
-							carte = piles.getCartes().get(22);
-							break;
-						case Carte.ROUGE:
-							carte = piles.getCartes().get(48);
-							break;
-					}
-					break;
-				case CarteClassique.HUIT:
-					switch(c.getCouleur()){
-						case Carte.BLEU:
-							carte = piles.getCartes().get(36);
-							break;
-						case Carte.VERT:
-							carte = piles.getCartes().get(10);
-							break;
-						case Carte.JAUNE:
-							carte = piles.getCartes().get(23);
-							break;
-						case Carte.ROUGE:
-							carte = piles.getCartes().get(49);
-							break;
-					}
-					break;
-				case CarteClassique.NEUF:
-					switch(c.getCouleur()){
-						case Carte.BLEU:
-							carte = piles.getCartes().get(37);
-							break;
-						case Carte.VERT:
-							carte = piles.getCartes().get(11);
-							break;
-						case Carte.JAUNE:
-							carte = piles.getCartes().get(24);
-							break;
-						case Carte.ROUGE:
-							carte = piles.getCartes().get(50);
-							break;
-					}
-					break;
-				}
-			}
-			if (c.getClass() == CartePasseTour.class){
-			switch(c.getCouleur()){
-				case Carte.BLEU:
-					carte = piles.getCartes().get(38);
-					break;
-				case Carte.VERT:
-					carte = piles.getCartes().get(12);
-					break;
-				case Carte.JAUNE:
-					carte = piles.getCartes().get(25);
-					break;
-				case Carte.ROUGE:
-					carte = piles.getCartes().get(51);
-					break;
-				}
-			}
-			if (c.getClass() == CarteInverseSens.class){
-				switch(c.getCouleur()){
-					case Carte.BLEU:
-						carte = piles.getCartes().get(39);
+					case 2:
+						switch(c.getColor().getColorValue()){
+							case 1:
+								carte = deck.getCartes().get(1);
+								break;
+							case 2:
+								carte = deck.getCartes().get(5);
+								break;
+							case 3:
+								carte = deck.getCartes().get(9);
+								break;
+							case 4:
+								carte = deck.getCartes().get(16);
+								break;
+						}
 						break;
-					case Carte.VERT:
-						carte = piles.getCartes().get(13);
-						break;
-					case Carte.JAUNE:
-						carte = piles.getCartes().get(26);
-						break;
-					case Carte.ROUGE:
-						carte = piles.getCartes().get(52);
-						break;
-				}
-			}
-			if (c.getClass() == CartePlus2.class){
-				switch(c.getCouleur()){
-					case Carte.BLEU:
-						carte = piles.getCartes().get(40);
-						break;
-					case Carte.VERT:
-						carte = piles.getCartes().get(14);
-						break;
-					case Carte.JAUNE:
-						carte = piles.getCartes().get(27);
-						break;
-					case Carte.ROUGE:
-						carte = piles.getCartes().get(53);
-						break;
-				}
-			}
-			if (c.getClass() == CarteJoker.class){
-				carte = piles.getCartes().get(1);
-			}
-			if (c.getClass() == CartePlus4.class){
-				carte = piles.getCartes().get(0);
-			}
+						case 3:
+							switch(c.getColor().getColorValue()){
+								case 1:
+									carte = deck.getCartes().get(1);
+									break;
+								case 2:
+									carte = deck.getCartes().get(5);
+									break;
+								case 3:
+									carte = deck.getCartes().get(9);
+									break;
+								case 4:
+									carte = deck.getCartes().get(16);
+									break;
+							}
+							break;
+						case 4:
+							switch(c.getColor().getColorValue()){
+								case 1:
+									carte = deck.getCartes().get(1);
+									break;
+								case 2:
+									carte = deck.getCartes().get(5);
+									break;
+								case 3:
+									carte = deck.getCartes().get(9);
+									break;
+								case 4:
+									carte = deck.getCartes().get(16);
+									break;
+							}
+							break;
+				
+					}break;
+					
+			
+			
 		return carte;
 	}
 	
-	public void afficherCartes(Joueur joueur){
-		ListIterator<PanelJoueur> ipp = this.pp.listIterator();
+	public void afficherCartes(Player joueur){
+		ListIterator<PlayerPanel> ipp = this.pp.listIterator();
 		while (ipp.hasNext()){
-			PanelJoueur j = ipp.next();
-			if (j.getNomJoueur() == joueur.getNomJoueur()){
-				ListIterator<Carte> iCartes = joueur.getCartesEnMain().listIterator();
-				while (iCartes.hasNext()){
-					j.piocher(this.verifierCarte(iCartes.next()));
+			PlayerPanel j = ipp.next();
+			if (j.getNomJoueur() == joueur.getPseudo()){
+				/*afficher carte comme dans le programme console*/
 				}
 			}
 		}
 	}
 	
 	public void afficherJoueurCommence(){
-		ListIterator<PanelJoueur> ipp = pp.listIterator();
+		ListIterator<PlayerPanel> ipp = pp.listIterator();
 		while (ipp.hasNext()){
 			ipp.next().setCartesVisibles(true);
 		}
-		ListIterator<Joueur> iJoueurs = partie.getJoueurs().listIterator();
+		ListIterator<Player> iJoueurs = partie.players.listIterator();
 		while (iJoueurs.hasNext()){
 			this.afficherCartes(iJoueurs.next());
 		}
-		JOptionPane.showMessageDialog(null, partie.getJoueurCommence().getNomJoueur() + " commence cette manche !", "Qui Commence ?", JOptionPane.INFORMATION_MESSAGE);
+		JOptionPane.showMessageDialog(null, partie.getVictime() + " commence cette manche !", "Qui Commence ?", JOptionPane.INFORMATION_MESSAGE);
 		while (ipp.hasPrevious()){
 			ipp.previous().retirerTout();
 		}
@@ -333,61 +183,56 @@ public class Plateau extends JPanel implements Observer{
 	}
 	
 	public void afficherDistribution(){
-		ListIterator<PanelJoueur> ipp = pp.listIterator();
+		ListIterator<PlayerPanel> ipp = pp.listIterator();
 		while (ipp.hasNext()){
 			ipp.next().setCartesVisibles(false);
 		}
-		ListIterator<Joueur> iJoueurs = partie.getJoueurs().listIterator();
+		ListIterator<Player> iJoueurs = partie.players.listIterator();
 		while (iJoueurs.hasNext()){
 			this.afficherCartes(iJoueurs.next());
 		}
-		this.piles.getTalon().add(verifierCarte(partie.getTalon().getPile().getLast()));
 		this.frame.setContentPane(this);
 	}
 	
 	public void choisirCarte(){
 		this.changerVisibiliteCartes(true);
-		String[] reponse ={"Piocher","Jouer"};
+		String[] reponse ={"1","2"};
 		int choix = (int) JOptionPane.showOptionDialog(null, 
-			      "Voulez vous piocher ou poser une carte ?",
-			      "Piocher ou poser ?",
+			      "Quelle carte voulez-vous prendre  ?",
+			      "choisir une carte ?",
 			      JOptionPane.YES_NO_OPTION,
 			      JOptionPane.QUESTION_MESSAGE,
 			      null,
 			      reponse,
 			      null);
-		if(choix == 0){
-			controleur.controlePioche();
-			this.actualiserPlateau();
-		}
 		if(choix == 1){
-			Carte carte = (Carte) JOptionPane.showInputDialog(null, "Quelle carte voulez vous jouer ?", "C'est votre tour " + partie.getJoueurJoue(), JOptionPane.QUESTION_MESSAGE, null, partie.getJoueurJoue().getCartesEnMain().toArray(), null);
-			controleur.controleCarte(carte);
+			player.upsideDown(1);
+			
+		}
+		if(choix == 2){
+			player.upsideDown(2);
 		}
 		controleur.controleUNO();
 		this.changerVisibiliteCartes(false);
 	}
 	
-	public void supprimerJeu(Joueur joueur){
-		ListIterator<PanelJoueur> ipp = pp.listIterator();
+	public void supprimerJeu(Player joueur){
+		ListIterator<PlayerPanel> ipp = pp.listIterator();
 		while (ipp.hasNext()){
-			PanelJoueur pp = ipp.next();
-			if (pp.getNomJoueur() == joueur.getNomJoueur()){
+			PlayerPanel pp = ipp.next();
+			if (pp.getNomJoueur() == joueur.getPseudo()){
 				pp.getJeu().removeAll(pp.getJeu());
 			}
 		}
 	}
 	
 	public void actualiserPlateau(){
-		ListIterator<Joueur> iJoueur = partie.getJoueurs().listIterator();
+		ListIterator<Player> iJoueur = partie.players.listIterator();
 		while (iJoueur.hasNext()){
-			Joueur j = iJoueur.next();
+			Player j = iJoueur.next();
 			this.supprimerJeu(j);
 			this.afficherCartes(j);
 		}
-		this.piles.getTalon().removeAll(piles.getTalon());
-		this.piles.getTalon().add(this.verifierCarte(partie.getTalon().getPile().getLast()));
-		this.frame.setContentPane(this);
 	}
 	
 	public void choisirCouleur(){
@@ -396,10 +241,10 @@ public class Plateau extends JPanel implements Observer{
 	}
 	
 	public void changerVisibiliteCartes(Boolean visibles){
-		ListIterator<PanelJoueur> ipp = pp.listIterator();
+		ListIterator<PlayerPanel> ipp = pp.listIterator();
 		while (ipp.hasNext()){
-			PanelJoueur pp = ipp.next();
-			if (pp.getNomJoueur() == partie.getJoueurJoue().getNomJoueur()){
+			PlayerPanel pp = ipp.next();
+			if (pp.getNomJoueur() == partie.getIsPlaying().getNomJoueur()){
 				pp.setCartesVisibles(visibles);
 			}
 		}
@@ -426,9 +271,9 @@ public class Plateau extends JPanel implements Observer{
 
 	public void update(Observable o, Object arg) {
 		if (arg == "joueurs"){
-			this.afficherJoueurs(partie.getJoueurs().size());
+			this.afficherJoueurs(partie.players.size());
 		}
-		if (arg == "piles"){
+		if (arg == "deck"){
 			this.afficherPiles();
 		}
 		if (arg == "joueurcommence"){
@@ -437,9 +282,7 @@ public class Plateau extends JPanel implements Observer{
 		if (arg == "distribuer"){
 			this.afficherDistribution();
 		}
-		if (arg == "passerTour"){
-			JOptionPane.showMessageDialog(null, "Le tour de " + partie.getJoueurJoue() + " est passe !", "A qui de jouer ?", JOptionPane.INFORMATION_MESSAGE);
-		}
+
 		if (arg == "declareJoueur"){
 			String[] action = {"Dire contre UNO", "Ne rien faire"};
 		    int reponseCO=JOptionPane.showOptionDialog(null, 
@@ -484,11 +327,11 @@ public class Plateau extends JPanel implements Observer{
 		return frame;
 	}
 
-	public PanelJoueur getppJoue() {
-		return ppJoue;
+	public PlayerPanel getppJoue() {
+		return getppJoue();
 	}
 
-	public void setppJoue(PanelJoueur ppJoue) {
-		this.ppJoue = ppJoue;
+	public void setppJoue(PlayerPanel ppJoue) {
+		this.pppoue = ppJoue;
 	}
 }

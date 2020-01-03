@@ -31,6 +31,7 @@ import modele.game.CountClassique;
 import modele.game.CountInversion;
 import modele.tas.DrawDeck;
 import modele.tas.Jest;
+import vue.PlayerPanel;
 
 import java.util.Map.Entry;
 import java.util.NavigableMap;
@@ -93,6 +94,8 @@ public class Game {
 	ArrayList<Integer> choicePlayers= new ArrayList<Integer>();
 	
 	public static ArrayList<String> upsideChoice = new ArrayList<String>() ; 
+	
+	private  String victime;
 
 
 	// La c'est la distribution des cartes, ou finalement j'invoque la méthode takecards et donc le joueur prend 2 cartes, et créé son offer
@@ -218,7 +221,7 @@ public class Game {
 	}
 
 
-	public void determinateFirstPlayer() { // Code  pour comparer dans countJest, dans cette méthode, et dans stealCards
+	public String determinateFirstPlayer() { // Code  pour comparer dans countJest, dans cette méthode, et dans stealCards
 		int highestCardValue = 0;
 		int highestColorValue = 0;
 		for (Iterator<Player> it = Game.players.iterator(); it.hasNext();) 
@@ -229,14 +232,14 @@ public class Game {
 				{
 					highestCardValue = p.getHand()[i].getValue().getCardValue();
 					highestColorValue = p.getHand()[i].getColor().getColorValue();
-					Player.setVictime(p.getPseudo());
+					victime=(p.getPseudo());
 
 				}
 
 				if((highestCardValue == p.getHand()[i].getValue().getCardValue()) && (highestColorValue <  p.getHand()[i].getColor().getColorValue()))
 				{
 					highestColorValue =  p.getHand()[i].getColor().getColorValue();
-					Player.setVictime(p.getPseudo());
+					victime=(p.getPseudo());
 				}
 
 			}
@@ -244,7 +247,8 @@ public class Game {
 
 
 		}
-		System.out.println(Player.getVictime() +" commence la partie");
+		System.out.println(victime +" commence la partie");
+		return victime;
 	}
 
 
@@ -340,11 +344,11 @@ public class Game {
 			this.determinateFirstPlayer(); // on détermine le premier Joueur
 
 			for(int j =0; j<nbPlayers;j++) {  // le reste suit selon la méthode stealCard(input)
-				ForMainPlay.get(Player.getVictime()).stealCard(input2);	 // Les manip de chaque joueur pendant le tour 
+				ForMainPlay.get(victime).stealCard(input2);	 // Les manip de chaque joueur pendant le tour 
 			}
 
 			for(int i=0; i<Game.nbPlayers;i++) {
-				Game.players.get(i).isAThief=false;
+				players.get(i).HasStolen=false;
 			}
 
 			this.mainCollectCards(); // On ramasse les cartes et on les rebalance dans le jeu pour recommencer 
@@ -618,6 +622,18 @@ public class Game {
 	public static HashMap<String, Integer> getWinner() {
 		// TODO Auto-generated method stub
 		return winner;
+	}
+
+
+	public String getVictime() {
+		// TODO Auto-generated method stub
+		return victime;
+	}
+
+
+	public String getIsPlaying() {
+		// TODO Auto-generated method stub
+		return // le joueur entrain de jouer
 	}
 
 

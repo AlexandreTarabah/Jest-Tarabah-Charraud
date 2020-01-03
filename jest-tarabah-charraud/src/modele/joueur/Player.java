@@ -26,7 +26,7 @@ public class Player
 
 	static HashMap<String,HashMap<String,Card>> listOffer = new HashMap<String, HashMap<String, Card>>();
 
-	private boolean HasStolen=false;
+	public boolean HasStolen=false;
 	
 	private Card[] hand = new Card[2] ;
 
@@ -34,7 +34,7 @@ public class Player
 
 	boolean firstPlayer = false;
 
-	private static  String victime;
+	private  String victime;
 
 	private int nbPoint;
 
@@ -166,10 +166,10 @@ public class Player
 
 
 		if(Game.getNbPlayers() == 3 && nbCardOffer>3)
-		{System.out.println(Game.getForMainPlay().get(Player.getVictime()).pseudo + " à vous de jouer\n ");
+		{System.out.println(Game.getForMainPlay().get(victime).pseudo + " à vous de jouer\n ");
 		}else
 			if(Game.getNbPlayers()==4 && nbCardOffer>4)
-			{System.out.println(Game.getForMainPlay().get(Player.getVictime()).pseudo + " à vous de jouer\n ");}
+			{System.out.println(Game.getForMainPlay().get(victime).pseudo + " à vous de jouer\n ");}
 
 
 
@@ -226,7 +226,7 @@ public class Player
 
 
 
-	public static String getVictime() {
+	public  String getVictime() {
 		return victime;
 	}
 
@@ -351,7 +351,7 @@ public class Player
 
 
 	public static void setVictime(String victime) {
-		Player.victime = victime;
+		victime = victime;
 	}
 
 
@@ -371,12 +371,6 @@ public class Player
 	public void setHasStolen(boolean hasStolen) {
 		HasStolen = hasStolen;
 	}
-
-
-
-
-
-
 
 
 }
