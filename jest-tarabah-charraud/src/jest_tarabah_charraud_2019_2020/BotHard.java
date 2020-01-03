@@ -76,7 +76,7 @@ public class BotHard extends Player implements Difficulty {
 
 		System.out.println("Qui sera votre victime ? Rentrer le pseudo d'un joueur\n ");
 		try {
-			Thread.sleep(1000);
+			Thread.sleep(100);
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -130,7 +130,7 @@ public class BotHard extends Player implements Difficulty {
 
 		System.out.println("Quelle carte voulez-vous lui dérober ?\n ");
 		try {
-			Thread.sleep(1000);
+			Thread.sleep(100);
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

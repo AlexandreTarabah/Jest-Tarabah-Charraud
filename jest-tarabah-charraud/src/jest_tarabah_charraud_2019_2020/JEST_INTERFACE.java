@@ -41,7 +41,7 @@ public class JEST_INTERFACE {
 	
 	private void initialize() {
 		frame = new JFrame();
-		frame.setBounds(100, 100, 943, 467);
+		frame.setBounds(100, 100, 1228, 698);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		 frame.getContentPane().setLayout(null);
 		 String[] numberplayers = {"0","1","2","3","4"};
