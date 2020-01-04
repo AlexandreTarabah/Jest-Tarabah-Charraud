@@ -49,6 +49,7 @@ public class Player
 		this.jest = new Jest();
 		g.players.add(this);
 		g.ForMainPlay.put(this.getPseudo(), this);
+		
 	}
 
 

@@ -89,7 +89,7 @@ public class Game extends Observable implements Runnable {
 
 	boolean currentPlay;
 
-	public boolean extension = true;
+	public boolean extension = false;
 
 
 	public HashMap<String,Integer> winner = new HashMap<String,Integer>();
@@ -169,46 +169,21 @@ public Game() {
 
 
 
-	public void initializeGame(Game g,Scanner input) {
-
-		choiceVar.add(1);
-		choiceVar.add(2);
-
-		for(int i=0; i<5;i++) {
-			choicePlayers.add(i);
-		}
-		upsideChoice.add("down");
-		upsideChoice.add("up");
-
-
-		System.out.println("Bonjour jeunes gens ! Voulez-faire une partie avec ou sans extension ? \n"
-				+ "1 - Avec\n"
-				+ "2 - Sans");
-		int choice=0;
-		while(choiceVar.contains(choice)==false) {
-			choice = readInt(input,"Entrez un nombre compris entre 1 et 2 : ", "Non, Recommencez : ");
-		}
-		if(choice==2)
-		{g.extension=false;} // if(choice==2) // On choisit si on joue avec ou sans extension, ce qui va impacter new DrawDeck(g)
-		players = new ArrayList<Player>();
-		listOffer = new HashMap<>();
-		drawdeck = new DrawDeck(g);
-		drawdeck.shuffle();
-	}
+	
 
 	public void createTrophies(Game g) { // On instancie les trophées a partir du DrawDeckn en fonction des parametres 
 		if(extension==false) 
 		{
-			if(nbPlayers==3)
+			if(g.nbPlayers==3)
 			{
 				for(int i=0; i<2;i++) 
 				{
 					g.trophyCards[i]= g.drawdeck.takeCards() ;
 				}
 			}
-			else if(nbPlayers==4)
+			else if(g.nbPlayers==4)
 			{
-				trophyCards[0]=g.drawdeck.takeCards() ;
+				trophyCards[0]=g.drawdeck.takeCards();
 			}	
 		}
 	}
@@ -270,6 +245,7 @@ public Game() {
 		this.difficulty = d;
 		this.nbBots = nb;
 		this.nbRealPlayers = nrp;
+		this.nbPlayers=nb+nrp;
 		this.determinerNombreJoueurs();
 	}
 
@@ -317,9 +293,6 @@ public Game() {
 	}
 
 	public void playRounds() {
-
-		Scanner input2 = new Scanner(System.in);
-
 		int choice=0;
 
 
@@ -346,7 +319,7 @@ public Game() {
 
 
 			this.determinateFirstPlayer();
-			this.notifyObservers("determinateFirstPlayer");// on détermine le premier Joueur
+			this.notifyObservers("PremierJoueurCommence");// on détermine le premier Joueur
 
 
 
@@ -595,12 +568,8 @@ public Game() {
 		this.drawdeck.shuffle();
 
 
-
-
-
 		this.createTrophies(this); //METTRE DANS MAIN JESTINTERFACE
 
-		System.out.println(Arrays.deepToString(this.trophyCards) + "\n"); // Création 2 labels 
 
 		this.playRounds(); 
 
@@ -609,7 +578,7 @@ public Game() {
 		this.countPoints();
 
 
-		this.winnerDetermination() ; 	
+		this.winnerDetermination(); 	
 
 
 
