@@ -152,7 +152,7 @@ public class Plateau extends JPanel implements Observer{
 							}
 							break;
 				
-					}break;
+					} break ;
 					
 			
 			
@@ -198,26 +198,9 @@ public class Plateau extends JPanel implements Observer{
 		this.frame.setContentPane(this);
 	}
 	
-	public void choisirCarte(Player player){
+	public void upsideDown(Player player){
 		this.changerVisibiliteCartes(true);
-		String[] reponse ={"1","2"};
-		int choix = (int) JOptionPane.showOptionDialog(null, 
-			      "Quelle carte voulez-vous prendre  ?",
-			      "choisir une carte ?",
-			      JOptionPane.YES_NO_OPTION,
-			      JOptionPane.QUESTION_MESSAGE,
-			      null,
-			      reponse,
-			      null);
-		if(choix == 1){
-			player.upsideDown(1);
-			
-		}
-		if(choix == 2){
-			player.upsideDown(2);
-		}
-		controleur.controleUNO();
-		this.changerVisibiliteCartes(false);
+		// retourner la carte choisie sur le plateau
 	}
 	
 	public void supprimerJeu(Player joueur){
@@ -272,6 +255,21 @@ public class Plateau extends JPanel implements Observer{
 	      e.printStackTrace();
 	    }
 	}
+	
+	public void stealCards(Game g) {
+		String players[];
+		for(int i=0; i<g.getNbPlayers();i++) {
+			 players[i]=g.players.get(i).getPseudo();
+		}
+				Object[] choiceCard = {1,2};
+				String choiceVictime = JOptionPane.showInputDialog(null, 
+						"choisissez votre victime", "le titre", JOptionPane.QUESTION_MESSAGE);
+			    
+			    String choiceCardVictime=JOptionPane.showInputDialog(null, 
+						"choisissez la carte à volé", "le titre", JOptionPane.QUESTION_MESSAGE);
+			    	controleur.methodeStealCard(choiceVictime,choiceCardVictime);
+		
+	}
 
 	public void update(Observable o, Object arg) {
 		if (arg == "joueurs"){
@@ -287,47 +285,29 @@ public class Plateau extends JPanel implements Observer{
 			this.afficherDistribution();
 		}
 		if(arg=="upsideDown") {
-			int[] action = {1,2};
-		    int reponseCO=JOptionPane.showOptionDialog(null, 
-		      "C'est le tour de "+ partie.getIsPlaying()+ "\nQuelle carte retourner ?",
+			Object[] action = {1,2};
+		    int reponseUD=JOptionPane.showOptionDialog(null, 
+		      "C'est le tour de "+ partie.getIsPlaying().getPseudo()+ "\nQuelle carte retourner ?",
 		      "Action",
 		      JOptionPane.YES_NO_OPTION,
 		      JOptionPane.QUESTION_MESSAGE,
 		      null,
 		      action,
 		      action[1]);
-		    controleur.methodecontrolupsideDown();
+
+		    	controleur.methodecontrolupsideDown(reponseUD,partie.getIsPlaying());
 			
 		}
 		
-		if(arg=="stealCard") {
-			int[] action = {1,2};
-		    int reponseCO=JOptionPane.showOptionDialog(null, 
-		      "C'est le tour de "+ partie.getIsPlaying()+ "\nQuelle carte retourner ?",
-		      "Action",
-		      JOptionPane.YES_NO_OPTION,
-		      JOptionPane.QUESTION_MESSAGE,
-		      null,
-		      action,
-		      action[1]);
-		    	controleur.controleContreUNO();
+		if(arg=="stealCards") {
+			
 			
 		}
 
-		if (arg == "declareJoueur"){
-			String[] action = {"Dire contre UNO", "Ne rien faire"};
-		    int reponseCO=JOptionPane.showOptionDialog(null, 
-		      "C'est le tour de "+ partie.getJoueurJoue()+ "\nQue faire ?",
-		      "Action",
-		      JOptionPane.YES_NO_OPTION,
-		      JOptionPane.QUESTION_MESSAGE,
-		      null,
-		      action,
-		      action[1]);
-		    if(reponseCO==0){
-		    	controleur.controleContreUNO();
+		if (arg == "déterminateFirstPlayer"){
+			this.afficherJoueurCommence();
 		    }
-		}
+		
 		if (arg == "joue"){
 			this.choisirCarte();
 		}

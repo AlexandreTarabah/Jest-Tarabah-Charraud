@@ -1,0 +1,26 @@
+package controleur;
+
+import java.awt.event.ActionEvent;
+
+import javax.swing.AbstractAction;
+
+import vue.FenetreSaisie;
+
+public class GetAction extends AbstractAction {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	private FenetreSaisie fenetre;
+	
+	public GetAction(FenetreSaisie fenetre, String texte){
+		super(texte);
+		
+		this.fenetre = fenetre;
+	}
+	
+	public void actionPerformed(ActionEvent e) { 
+		String texteUtilisateur = fenetre.getTextField().getText();
+		fenetre.getLabel().setText(texteUtilisateur);
+	} 
+}

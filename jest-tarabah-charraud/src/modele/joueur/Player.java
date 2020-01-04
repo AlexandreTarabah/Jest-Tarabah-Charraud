@@ -6,6 +6,7 @@ import java.util.Set;
 import modele.carte.Card;
 import modele.game.Game;
 import modele.tas.Jest;
+import vue.FenetreSaisie;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -17,7 +18,8 @@ import java.util.Map.Entry;
 
 public class Player 
 {
-
+	private Player isPlaying;
+	
 	private String pseudo;
 
 	public boolean isAThief;
@@ -55,7 +57,7 @@ public class Player
 
 
 
-	public void stealCard(Scanner input, Game g) {
+	public void stealCard(String choiceVictime,String choiceStolenCard, Game g) {
 		int nbCardOffer=0;
 		for(Entry<String, HashMap<String, Card>> map : listOffer.entrySet()) {
 
@@ -64,55 +66,14 @@ public class Player
 		}
 
 
-		System.out.println("Qui sera votre victime ? Rentrer le pseudo d'un joueur\n ");
-		setVictime(input.next());
-
-
-
-		while(listOffer.containsKey(getVictime())==false) {
-			System.out.println("Veuillez rentrer un joueur existant\n");
-			setVictime(input.next());
-		}
-
-
-		while(this.listOffer.get(getVictime()).size()<2) {
-			System.out.println("Offre de la victime incomplète, veuillez saisir une offre complete\n"); // vérification que l'offre est bien complète
-			setVictime(input.next());
-		}
-
-
-		if(g.getNbPlayers()==3) {
-			if(nbCardOffer>4) {
-				while( this.getPseudo().equals(getVictime()))  {
-					System.out.println(this.getPseudo());
-					System.out.println(" n'oubliez pas que vous pouvez vous volez uniquement si vous êtes le dernier joueur\n Rentrer un pseudo\n");
-					setVictime(input.next());					
-				}
-			}
-		}else 
-
-			if(g.getNbPlayers()==4) {
-				if(nbCardOffer>5) {
-					while( this.getPseudo().equals(getVictime()))  {
-						System.out.println(this.getPseudo());
-						System.out.println(" n'oubliez pas que vous pouvez vous volez uniquement si vous êtes le dernier joueur\n Rentrer un pseudo\n");
-						setVictime(input.next());					
-					}
-				}
-			}
-
-
+		victime = choiceVictime;
 
 
 
 		System.out.println("Quelle carte voulez-vous lui dérober ?\n ");
 
-		String stolenCard = input.next();
-			while(g.getUpsideChoice().contains(stolenCard)==false)
-			{
-				System.out.println("Veuillez rentrer down ou up");
-				stolenCard=input.next();
-			}	
+		String stolenCard = choiceStolenCard;
+		
 
 		this.jest.jestCards.add(this.listOffer.get(getVictime()).get(stolenCard));
 		this.listOffer.get(getVictime()).remove(stolenCard);// méthode AddJest() implementé dans Jest.
@@ -123,7 +84,7 @@ public class Player
 
 
 			if(g.getNbPlayers()==3) {
-				for (HashMap.Entry<String,Player> mapentry : Game.getForMainPlay().entrySet()) {
+				for (HashMap.Entry<String,Player> mapentry : g.getForMainPlay().entrySet()) {
 					if (mapentry.getValue().getOffer().size()==2) {
 
 						setVictime(mapentry.getKey());
@@ -131,12 +92,12 @@ public class Player
 					}
 				}
 			}else
-				if(Game.getNbPlayers()==4) {
+				if(g.getNbPlayers()==4) {
 
 					int highestCardValue = 0;
 					int highestColorValue = 0;
 
-					for (HashMap.Entry<String,Player> mapentry2 : Game.getForMainPlay().entrySet()) {
+					for (HashMap.Entry<String,Player> mapentry2 : g.getForMainPlay().entrySet()) {
 						if (mapentry2.getValue().getOffer().size()==2) {
 							if(highestCardValue <  mapentry2.getValue().getOffer().get("up").getValue().getCardValue())
 							{
@@ -158,21 +119,6 @@ public class Player
 
 		nbCardOffer-=1;
 		Iterator it = this.jest.jestCards.iterator();
-		while(it.hasNext())
-		{
-			System.out.println("Vous avez ajouté à votre Jest " + it.next()+" "+"\n");
-		}
-
-
-		if(Game.getNbPlayers() == 3 && nbCardOffer>3)
-		{System.out.println(Game.getForMainPlay().get(victime).pseudo + " à vous de jouer\n ");
-		}else
-			if(Game.getNbPlayers()==4 && nbCardOffer>4)
-			{System.out.println(Game.getForMainPlay().get(victime).pseudo + " à vous de jouer\n ");}
-
-
-
-
 	}
 
 
@@ -186,11 +132,9 @@ public class Player
 
 
 
-	public String setPseudo(Scanner input) 
+	public String setPseudo(FenetreSaisie saisie) 
 	{
-		System.out.println("Entrez le nom du joueur : ");
-		String pseudo = input.nextLine() ;
-		this.pseudo = pseudo ;
+		this.pseudo = saisie.getLabel().getText() ;
 		return pseudo;
 
 	}
@@ -238,7 +182,7 @@ public class Player
 
 	// la c'est la méthode pour 
 	public void upsideDown(Player this, int choice) 
-	{		
+	{		this.isPlaying=this;
 
 		int numC = choice; // demande au joueur de rentrer un numéro entre 1 et 2
 	
@@ -345,7 +289,7 @@ public class Player
 
 
 
-
+	
 
 
 	public boolean isHasStolen() {
@@ -353,7 +297,9 @@ public class Player
 	}
 
 
-
+	public Player getIsPlaying() {
+		return isPlaying;
+	}
 
 
 

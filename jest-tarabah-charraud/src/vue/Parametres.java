@@ -12,7 +12,7 @@ public class Parametres extends JFrame{
 	 */
 	private static final long serialVersionUID = 1L;
 	
-	private HomePanel pp;
+	private HomePanel hp;
 	private JButton validation;
 	private JRadioButton botDown;
 	private JRadioButton botHard;
@@ -33,7 +33,7 @@ public class Parametres extends JFrame{
 	    this.setLocationRelativeTo(null);               
 	    this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	    
-	    pp = new HomePanel();
+	    hp = new HomePanel();
 	    difficulty = new JPanel();
 	    virtual = new JPanel();
 	    real = new JPanel();
@@ -43,9 +43,11 @@ public class Parametres extends JFrame{
 		validation.setActionCommand("jouer");
 		
 		difficultyGroup = new ButtonGroup();
+		
 		botDown = new JRadioButton("Facile");
 		botDown.setFont(font);
 		botDown.setOpaque(false);
+		
 		botHard = new JRadioButton("Moyen");
 		botHard.setFont(font);
 		botHard.setOpaque(false);
@@ -62,8 +64,8 @@ public class Parametres extends JFrame{
 		lNbrReal = new JLabel("Joueurs Reels : ");
 		lNbrReal.setFont(font);
 		
-		for (int i=0;i<10;i++){nbrReal.addItem(i+1);}
-		for (int i=0;i<10;i++){nbrVirtual.addItem(i);}
+		for (int i=0;i<4;i++){nbrReal.addItem(i+1);}
+		for (int i=0;i<4;i++){nbrVirtual.addItem(i+1);}
 		
 		difficultyGroup.add(botDown);
 		difficultyGroup.add(botHard);
@@ -82,26 +84,26 @@ public class Parametres extends JFrame{
 		real.add(nbrReal);
 		real.setOpaque(false);
 		
-		pp.setLayout(new GridBagLayout());
+		hp.setLayout(new GridBagLayout());
 		GridBagConstraints gbc = new GridBagConstraints();
 	    gbc.insets = new Insets(10,10,10,10);
 	    
 	    gbc.gridx = 0;
 	    gbc.gridy = 0;
-	    pp.add(virtual, gbc);
+	    hp.add(virtual, gbc);
 	    
 	    gbc.gridy = 1;
-	    pp.add(real, gbc);
+	    hp.add(real, gbc);
 	    
 	    gbc.gridy = 2;
-	    pp.add(difficulty, gbc);
+	    hp.add(difficulty, gbc);
 	    
 	    gbc.ipadx = 100;
 	    gbc.ipady = 10;
 	    gbc.gridy = 3;
-		pp.add(validation, gbc);
+		hp.add(validation, gbc);
 		
-	    this.setContentPane(pp);
+	    this.setContentPane(hp);
 	}
 	
 	public int getDifficulte(){

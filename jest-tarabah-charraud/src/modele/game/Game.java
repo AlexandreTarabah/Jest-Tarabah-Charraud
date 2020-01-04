@@ -31,11 +31,13 @@ import modele.game.CountClassique;
 import modele.game.CountInversion;
 import modele.tas.DrawDeck;
 import modele.tas.Jest;
+import vue.FenetreSaisie;
 import vue.PlayerPanel;
 
 import java.util.Map.Entry;
 import java.util.NavigableMap;
 import java.util.Observable;
+import java.util.Observer;
 
 
 
@@ -67,10 +69,13 @@ import java.util.Observable;
 
 public class Game extends Observable {
 
-	protected  int nbPlayers;
+	public  int nbPlayers;
 	protected  int nbBots;
 	protected  int nbRealPlayers;
 	protected int difficulty;
+
+	Player isPlaying;
+
 
 	Card[] trophyCards = new Card[2] ;
 
@@ -92,22 +97,19 @@ public class Game extends Observable {
 	boolean variante = false;
 
 
-	// Liste de vérif pour les choix proposer a l'utilisateur : 
-
 	public static ArrayList<Integer> choiceVar= new ArrayList<Integer>();
-
 
 
 	ArrayList<Integer> choicePlayers= new ArrayList<Integer>();
 
-
-	public static ArrayList<String> upsideChoice = new ArrayList<String>() ; 
-
+	public ArrayList<String> upsideChoice = new ArrayList<String>() ; 
+	
 
 	private  String victime;
 
 	public Object [][] scores;
 
+	private ArrayList<Observer> listObserver = new ArrayList<Observer>();
 
 	// La c'est la distribution des cartes, ou finalement j'invoque la méthode takecards et donc le joueur prend 2 cartes, et créé son offer
 
@@ -145,7 +147,6 @@ public class Game extends Observable {
 
 	public HashMap<String, Player> getForMainPlay() {
 		return ForMainPlay;
-
 	}
 
 	public static int readInt(Scanner scanner, String prompt, String promptOnError) { // Methode qui permet de vérifier qu'on rentre bien un entier
@@ -193,8 +194,6 @@ public class Game extends Observable {
 		drawdeck.shuffle();
 	}
 
-
-
 	public void createTrophies(Game g) { // On instancie les trophées a partir du DrawDeckn en fonction des parametres 
 		if(extension==false) 
 		{
@@ -216,7 +215,7 @@ public class Game extends Observable {
 	public void addPlayer(Player p, Scanner input) {
 		if(currentPlay==false) {
 
-			p.setPseudo(input);
+			p.setPseudo(new FenetreSaisie());
 			players.add(p);
 			ForMainPlay.put(p.getPseudo(), p);
 
@@ -265,9 +264,9 @@ public class Game extends Observable {
 	}
 
 
-	public void reglerParametres(int d, int nvp, int nrp){
+	public void reglerParametres(int d, int nb, int nrp){
 		this.difficulty = d;
-		this.nbBots = nvp;
+		this.nbBots = nb;
 		this.nbRealPlayers = nrp;
 		this.determinerNombreJoueurs();
 	}
@@ -278,19 +277,20 @@ public class Game extends Observable {
 	public void determinerNombreJoueurs(){
 		if (this.difficulty==1) {
 			for (int i=0;i<this.nbBots;i++){
-				Player joueur = new BotDown(joueur.setPseudo(input),this);
-				this.players.add(joueur);
+				Player joueur = new Player(Integer.toString(i), this);
+				joueur.setPseudo(new FenetreSaisie()) ;
 				this.ForMainPlay.put(joueur.getPseudo(), joueur);
 			}
 		}else 
 			for(int i=0;i<this.nbBots;i++) {
-				Player joueur = new BotHard(joueur.setPseudo(input,this));
-				this.players.add(joueur);
+				Player joueur = new Player(Integer.toString(i), this);
+				joueur.setPseudo(new FenetreSaisie()) ;
 				this.ForMainPlay.put(joueur.getPseudo(), joueur);
 			}
 
 		for (int i=0;i<this.nbRealPlayers;i++){
-			Player joueur = new Player(joueur.setPseudo(input), this);
+			Player joueur = new Player(Integer.toString(i), this);
+			joueur.setPseudo(new FenetreSaisie()) ;
 			this.players.add(joueur);
 			this.ForMainPlay.put(joueur.getPseudo(), joueur);
 		}
@@ -315,7 +315,13 @@ public class Game extends Observable {
 	public void playRounds() {
 		Scanner input2 = new Scanner(System.in);
 
+
 		int choice=0;
+
+
+		String choiceVictime="";
+		String choiceStolenCard="";
+
 
 		while(this.drawdeck.getSize() != 0) // On repète le processus jusqu'a temps qu'on ait plu de carte
 		{
@@ -325,22 +331,32 @@ public class Game extends Observable {
 			Iterator<Player> it = players.iterator();
 			while(it.hasNext()) {
 				Player p = it.next();
+				p=isPlaying;
 				this.notifyObservers("upsideDown");
-				p.upsideDown(choice);
+				this.notifyObservers("ActualiserMain");
 			}
+
+			
+			
+			this.determinateFirstPlayer();
+			this.notifyObservers("determinateFirstPlayer");// on détermine le premier Joueur
+
 
 
 			this.determinateFirstPlayer(); // on détermine le premier Joueur
 
+
 			for(int j =0; j<nbPlayers;j++) {  // le reste suit selon la méthode stealCard(input)
-				this.ForMainPlay.get(victime).stealCard(input2, this);	 // Les manip de chaque joueur pendant le tour 
+				this.notifyObservers("stealCards");
+				this.ForMainPlay.get(victime).stealCard(choiceVictime,choiceStolenCard, this);	 // Les manip de chaque joueur pendant le tour 
 			}
 
 			for(int i=0; i<this.nbPlayers;i++) {
 				players.get(i).HasStolen=false;
 			}
 
-			this.mainCollectCards(); // On ramasse les cartes et on les rebalance dans le jeu pour recommencer 
+			this.mainCollectCards();
+			this.notifyObservers("collectCards");// On ramasse les cartes et on les rebalance dans le jeu pour recommencer 
 
 		}
 
@@ -564,12 +580,8 @@ public class Game extends Observable {
 
 	public void run() {
 
+
 		Scanner input = new Scanner(System.in);
-
-		this.initializeGame(this, input); 
-
-		this.configureGameplay(input);
-
 
 
 
@@ -577,6 +589,8 @@ public class Game extends Observable {
 		this.listOffer = new HashMap<>();
 		this.drawdeck = new DrawDeck(this);
 		this.drawdeck.shuffle();
+
+
 
 
 
@@ -593,7 +607,7 @@ public class Game extends Observable {
 
 		this.winnerDetermination() ; 	
 
-		this.winnerDetermination(); 
+
 
 	}
 
@@ -636,10 +650,24 @@ public class Game extends Observable {
 	}
 
 
-	public String getIsPlaying() {
-		// TODO Auto-generated method stub
-		return "joue" ; // le joueur entrain de jouer
+
+	public Player getIsPlaying() {
+		return isPlaying;
+	}
+	
+	public void addObserver(Observer obs) {
+	    this.listObserver.add(obs);
+	}
+
+	public void notifyObservers(Object arg) {
+		for (Observer obs : listObserver){
+			obs.update(this, arg);
+		}
+	}
+
+	public void deleteObserver(Observer o) {
+	    listObserver.remove(o);
 	}
 
 
-} // ARMAGEDDON 
+}// ARMAGEDDON 
