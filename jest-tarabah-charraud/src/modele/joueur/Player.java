@@ -175,14 +175,14 @@ public class Player
 
 
 	// la c'est la méthode pour 
-	public void upsideDown(Player this, int choice) 
+	public void upsideDown(int choice) 
 	{		this.isPlaying=this;
 
-		int numC = choice; // demande au joueur de rentrer un numéro entre 1 et 2
+		int numC = choice + 1; // demande au joueur de rentrer un numéro entre 1 et 2
 	
 
-		((Map<String, Card>) getOffer()).put("down", getHand()[numC-1]); // -1 car le tableau commence à l'indice 0, je caste l'offer  
-		((Map<String, Card>) getOffer()).put("up", getHand()[numC%2]); // avec le modulo 2 on obtient la case manquante, je caste l'offer
+		((Map<String, Card>) offer).put("down", this.getHand()[numC-1]); // -1 car le tableau commence à l'indice 0, je caste l'offer  
+		((Map<String, Card>) offer).put("up", this.getHand()[numC%2]); // avec le modulo 2 on obtient la case manquante, je caste l'offer
 		/* et la on affiche le pseudo du player en paramètre, avec get(Down) et la value de la carte, et la couleur
 		 */
 

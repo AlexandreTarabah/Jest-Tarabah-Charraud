@@ -21,19 +21,19 @@ public class Plateau extends JPanel implements Observer{
 	 */
 	private static final long serialVersionUID = 1L;
 
-	private Game partie;
+	private Game game;
 	private Controleur controleur;
 
 	private JFrame frame;
-	private PlayerPanel pppoue;
+	private PlayerPanel plp;
 	private DrawDeckPanel deck;
 	private ArrayList<PlayerPanel> pp = new ArrayList<PlayerPanel>();
 
 	public Plateau(Game p, Controleur c){
 		super();
 
-		this.partie = p;
-		this.partie.addObserver(this);
+		this.game = p;
+		this.game.addObserver(this);
 		this.controleur = c;
 
 		this.frame = new JFrame();
@@ -59,7 +59,7 @@ public class Plateau extends JPanel implements Observer{
 	}
 
 	public void afficherJoueurs(int nbrJoueurs){
-		ListIterator<Player> iJoueurs = partie.players.listIterator();
+		ListIterator<Player> iJoueurs = game.players.listIterator();
 		while (iJoueurs.hasNext()){
 			pp.add(new PlayerPanel(iJoueurs.next()));
 		}
@@ -193,11 +193,11 @@ public class Plateau extends JPanel implements Observer{
 		while (ipp.hasNext()){
 			ipp.next().setCartesVisibles(true);
 		}
-		ListIterator<Player> iJoueurs = partie.players.listIterator();
+		ListIterator<Player> iJoueurs = game.players.listIterator();
 		while (iJoueurs.hasNext()){
 			this.afficherCartes(iJoueurs.next());
 		}
-		JOptionPane.showMessageDialog(null, partie.getVictime() + " commence cette manche !", "Qui Commence ?", JOptionPane.INFORMATION_MESSAGE);
+		JOptionPane.showMessageDialog(null, game.getVictime() + " commence cette manche !", "Qui Commence ?", JOptionPane.INFORMATION_MESSAGE);
 		while (ipp.hasPrevious()){
 			ipp.previous().retirerTout();
 		}
@@ -209,7 +209,7 @@ public class Plateau extends JPanel implements Observer{
 		while (ipp.hasNext()){
 			ipp.next().setCartesVisibles(false);
 		}
-		ListIterator<Player> iJoueurs = partie.players.listIterator();
+		ListIterator<Player> iJoueurs = game.players.listIterator();
 		while (iJoueurs.hasNext()){
 			this.afficherCartes(iJoueurs.next());
 		}
@@ -228,7 +228,7 @@ public class Plateau extends JPanel implements Observer{
 	}
 
 	public void actualiserPlateau(){
-		ListIterator<Player> iJoueur = partie.players.listIterator();
+		ListIterator<Player> iJoueur = game.players.listIterator();
 		while (iJoueur.hasNext()){
 			Player j = iJoueur.next();
 			this.supprimerJeu(j);
@@ -241,7 +241,7 @@ public class Plateau extends JPanel implements Observer{
 		ListIterator<PlayerPanel> ipp = pp.listIterator();
 		while (ipp.hasNext()){
 			PlayerPanel pp = ipp.next();
-			if (pp.getNomJoueur() == partie.getIsPlaying().getPseudo()){
+			if (pp.getNomJoueur() == game.getIsPlaying().getPseudo()){
 				pp.setCartesVisibles(visibles);
 			}
 		}
@@ -281,7 +281,7 @@ public class Plateau extends JPanel implements Observer{
 
 	public void update(Observable o, Object arg) {
 		if (arg == "joueurs"){
-			this.afficherJoueurs(partie.players.size());
+			this.afficherJoueurs(game.players.size());
 		}
 		if (arg == "piles"){
 			this.afficherPiles();
@@ -295,7 +295,7 @@ public class Plateau extends JPanel implements Observer{
 		if(arg=="upsideDown") {
 			Object[] action = {1,2};
 			int reponseUD=JOptionPane.showOptionDialog(null, 
-					"C'est le tour de "+ partie.getIsPlaying().getPseudo()+ "\nQuelle carte retourner ?",
+					"C'est le tour de "+ game.getIsPlaying().getPseudo()+ "\nQuelle carte retourner ?",
 					"Action",
 					JOptionPane.YES_NO_OPTION,
 					JOptionPane.QUESTION_MESSAGE,
@@ -304,27 +304,20 @@ public class Plateau extends JPanel implements Observer{
 					action[1]);
 
 
-			controleur.methodecontrolupsideDown(reponseUD,partie.getIsPlaying());
+			controleur.methodecontrolupsideDown(reponseUD,game.getIsPlaying());
 
+		    	// this.actualiserMain(reponseUD);
 
-
-		    	controleur.methodecontrolupsideDown(reponseUD,partie.getIsPlaying());
-		    	this.actualiserMain(reponseUD);
-			
-
-
-			controleur.methodecontrolupsideDown(reponseUD,partie.getIsPlaying());
-			this.actualiserMain(reponseUD);
 		}
 
 		if(arg=="stealCards") {
 
-			this.stealCards(partie);
+			this.stealCards(game);
 
 
 		}
 
-		if (arg == "déterminateFirstPlayer"){
+		if (arg == "determinateFirstPlayer"){
 			this.afficherJoueurCommence();
 		}
 
@@ -345,11 +338,11 @@ public class Plateau extends JPanel implements Observer{
 		return frame;
 	}
 
-	public PlayerPanel getpppoue() {
-		return getpppoue();
+	public PlayerPanel getplp() {
+		return plp;
 	}
 
-	public void setpppoue(PlayerPanel pppoue) {
-		this.pppoue = pppoue;
+	public void setplp(PlayerPanel plp) {
+		this.plp = plp;
 	}
 }

@@ -90,7 +90,7 @@ public class Game extends Observable implements Runnable {
 
 	boolean currentPlay;
 
-	public boolean extension = true;
+	public boolean extension = false;
 
 
 	public HashMap<String,Integer> winner = new HashMap<String,Integer>();
@@ -114,7 +114,10 @@ public class Game extends Observable implements Runnable {
 
 	// La c'est la distribution des cartes, ou finalement j'invoque la méthode takecards et donc le joueur prend 2 cartes, et créé son offer
 
-	
+	public Game() {
+
+	}
+
 	public void distribute() {
 
 		this.currentPlay=true;
@@ -197,6 +200,7 @@ public class Game extends Observable implements Runnable {
 	}
 
 	public void createTrophies(Game g) { // On instancie les trophées a partir du DrawDeckn en fonction des parametres 
+
 		if(extension==false) 
 		{
 			if(nbPlayers==3)
@@ -270,6 +274,7 @@ public class Game extends Observable implements Runnable {
 		this.difficulty = d;
 		this.nbBots = nb;
 		this.nbRealPlayers = nrp;
+		this.nbPlayers = nb + nrp ;
 		this.determinerNombreJoueurs();
 	}
 
@@ -318,8 +323,6 @@ public class Game extends Observable implements Runnable {
 
 	public void playRounds() {
 
-		Scanner input2 = new Scanner(System.in);
-
 		int choice=0;
 
 
@@ -339,7 +342,10 @@ public class Game extends Observable implements Runnable {
 				if(p instanceof BotDown || p instanceof BotHard) {
 					p.upsideDown(choice);
 				}
-				this.notifyObservers("upsideDown");
+				else
+				{
+					this.notifyObservers("upsideDown");
+				}
 				this.notifyObservers("ActualiserMain");
 			}
 
@@ -590,18 +596,9 @@ public class Game extends Observable implements Runnable {
 
 	public void run() {
 
-
-		Scanner input = new Scanner(System.in);
-
-
-
-		this.players = new ArrayList<Player>();
 		this.listOffer = new HashMap<>();
 		this.drawdeck = new DrawDeck(this);
 		this.drawdeck.shuffle();
-
-
-
 
 
 		this.createTrophies(this); //METTRE DANS MAIN JESTINTERFACE
