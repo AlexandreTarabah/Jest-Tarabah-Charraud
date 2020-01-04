@@ -134,6 +134,8 @@ public class Game extends Observable implements Runnable {
 					for(int i=0; i<2;i++) {
 						p.getHand().add(drawdeck.takeCards());
 					}
+					isPlaying=p;
+					this.notifyObservers("afficherCartes");
 					; // place une carte en position i dans la
 					// main du joueur (qui est un tableau)
 
@@ -301,6 +303,7 @@ public class Game extends Observable implements Runnable {
 	}
 
 	public void playRounds() {
+		this.notifyObservers("piles");
 
 		int choice=0;
 
@@ -312,7 +315,6 @@ public class Game extends Observable implements Runnable {
 		while(this.drawdeck.getSize() != 0) // On repète le processus jusqu'a temps qu'on ait plu de carte
 		{
 			this.distribute(); // distribuer les cartes 
-
 			// UPSIDE DOWN DE CHAQUE JOUEUR		
 			Iterator<Player> it = players.iterator();
 			while(it.hasNext()) {
@@ -328,9 +330,7 @@ public class Game extends Observable implements Runnable {
 				}
 				this.notifyObservers("ActualiserMain");
 			}
-			this.notifyObservers("upsideDown");
-
-		}this.notifyObservers("ActualiserMain");
+			
 
 
 
@@ -360,7 +360,7 @@ public class Game extends Observable implements Runnable {
 
 	}
 
-
+	}
 
 
 	public void giveTrophy() {

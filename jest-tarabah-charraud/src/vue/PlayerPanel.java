@@ -32,13 +32,7 @@ public class PlayerPanel extends JPanel{
 		this.setJeu(new LinkedList<Image>());
 		this.cp = new CardPanel(jeu);
 		this.add(cp);
-		
-		this.cp = new CardPanel(jeu);
-		this.add(cp);
-		
-		if (joueur instanceof BotDown || joueur instanceof BotHard){
-			this.virtuel = true;
-		}
+	
 		
 		this.nomJoueur = joueur.getPseudo();
 		this.nomJoueurLabel = new JLabel(nomJoueur);
