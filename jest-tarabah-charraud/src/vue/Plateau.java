@@ -86,7 +86,7 @@ public class Plateau extends JPanel implements Observer{
 
 	public Image verifierCarte(Card c){
 		Image carte = null;
-<<<<<<< HEAD
+
 		switch(c.getValue().getCardValue()){
 		case 1:
 			switch(c.getColor().getColorValue()){
@@ -154,88 +154,12 @@ public class Plateau extends JPanel implements Observer{
 			break;
 
 		}
-
-=======
-			switch(c.getValue().getCardValue()){
-				case 1:
-					switch(c.getColor().getColorValue()){
-						case 1:
-							carte= deck.getCartes().get(0);
-							break;
-						case 2:
-							carte = deck.getCartes().get(4);
-							break;
-						case 3:
-							carte = deck.getCartes().get(8);
-							break;
-						case 4:
-							carte = deck.getCartes().get(12);
-							break;
-					}
-					break;
-					case 2:
-						switch(c.getColor().getColorValue()){
-							case 1:
-								carte = deck.getCartes().get(1);
-								break;
-							case 2:
-								carte = deck.getCartes().get(5);
-								break;
-							case 3:
-								carte = deck.getCartes().get(9);
-								break;
-							case 4:
-								carte = deck.getCartes().get(13);
-								break;
-						}
-						break;
-						case 3:
-							switch(c.getColor().getColorValue()){
-								case 1:
-									carte = deck.getCartes().get(2);
-									break;
-								case 2:
-									carte = deck.getCartes().get(6);
-									break;
-								case 3:
-									carte = deck.getCartes().get(10);
-									break;
-								case 4:
-									carte = deck.getCartes().get(14);
-									break;
-							}
-							break;
-						case 4:
-							switch(c.getColor().getColorValue()){
-								case 1:
-									carte = deck.getCartes().get(3);
-									break;
-								case 2:
-									carte = deck.getCartes().get(7);
-									break;
-								case 3:
-									carte = deck.getCartes().get(11);
-									break;
-								case 4:
-									carte = deck.getCartes().get(15);
-									break;
-							}
-							break;
-				
-
-					}
-
-	
-
 					
-			
-			
->>>>>>> branch 'master' of https://github.com/AlexandreTarabah/Jest-Tarabah-Charraud
 		return carte;
 
 
 	}
-
+	
 
 
 
@@ -248,11 +172,11 @@ public class Plateau extends JPanel implements Observer{
 				/*afficher carte comme dans le programme console*/
 			}
 		}
-<<<<<<< HEAD
+
 	}
 
 
-=======
+
 	
 	public void actualiserMain(int reponseUD) {
 		ListIterator<PlayerPanel> ipp = pp.listIterator();
@@ -263,7 +187,7 @@ public class Plateau extends JPanel implements Observer{
 	}
 	
 	
->>>>>>> branch 'master' of https://github.com/AlexandreTarabah/Jest-Tarabah-Charraud
+
 	public void afficherJoueurCommence(){
 		ListIterator<PlayerPanel> ipp = pp.listIterator();
 		while (ipp.hasNext()){
@@ -335,7 +259,7 @@ public class Plateau extends JPanel implements Observer{
 
 	public void paintComponent(Graphics g){
 		try {
-			Image img = ImageIO.read(new File("UNO_Plateau.jpg"));
+			Image img = ImageIO.read(new File("Jest_Home.jpg"));
 			g.drawImage(img, 0, 0, this.getWidth(), this.getHeight(), this);
 		} catch (IOException e) {
 			e.printStackTrace();
@@ -379,14 +303,14 @@ public class Plateau extends JPanel implements Observer{
 					action,
 					action[1]);
 
-<<<<<<< HEAD
+
 			controleur.methodecontrolupsideDown(reponseUD,partie.getIsPlaying());
 
-=======
+
 		    	controleur.methodecontrolupsideDown(reponseUD,partie.getIsPlaying());
 		    	this.actualiserMain(reponseUD);
 			
->>>>>>> branch 'master' of https://github.com/AlexandreTarabah/Jest-Tarabah-Charraud
+
 		}
 
 		if(arg=="stealCards") {
@@ -404,18 +328,13 @@ public class Plateau extends JPanel implements Observer{
 		if (arg == "actualiserPlateau"){
 			this.actualiserPlateau();
 		}
-<<<<<<< HEAD
+
 
 
 
 	}
 
-=======
-		
-		
-		}
-	
->>>>>>> branch 'master' of https://github.com/AlexandreTarabah/Jest-Tarabah-Charraud
+
 
 	public JFrame getFrame() {
 		return frame;

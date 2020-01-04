@@ -33,54 +33,54 @@ public class DrawDeckPanel extends JPanel{
 	
 	public void genererCartes(){
 		try {
-			Image joker = ImageIO.read(new File("Joker.PNG"));
+			Image joker = ImageIO.read(new File("img/Joker.jpg"));
 			cartes.add(joker);
 			
 			
-			Image unCoeur = ImageIO.read(new File("AsCoeur.PNG"));
+			Image unCoeur = ImageIO.read(new File("img/AsCoeur.jpg"));
 			cartes.add(unCoeur);
-			Image deuxCoeur = ImageIO.read(new File("DeuxCoeur.PNG"));
+			Image deuxCoeur = ImageIO.read(new File("img/DeuxCoeur.jpg"));
 			cartes.add(deuxCoeur);
-			Image troisCoeur = ImageIO.read(new File("TroisCoeur.PNG"));
+			Image troisCoeur = ImageIO.read(new File("img/TroisCoeur.jpg"));
 			cartes.add(troisCoeur);
-			Image quatreCoeur = ImageIO.read(new File("QuatreCoeur.PNG"));
+			Image quatreCoeur = ImageIO.read(new File("img/QuatreCoeur.jpg"));
 			cartes.add(quatreCoeur);
 			
 			
 			
-			Image unTrefle = ImageIO.read(new File("UnTrefle.PNG"));
+			Image unTrefle = ImageIO.read(new File("img/UnTrefle.jpg"));
 			cartes.add(unTrefle);
-			Image deuxTrefle = ImageIO.read(new File("DeuxTrefle.PNG"));
+			Image deuxTrefle = ImageIO.read(new File("img/DeuxTrefle.jpg"));
 			cartes.add(deuxTrefle);
-			Image troisTrefle = ImageIO.read(new File("TroisTrefle.PNG"));
+			Image troisTrefle = ImageIO.read(new File("img/TroisTrefle.jpg"));
 			cartes.add(troisTrefle);
-			Image quatreTrefle = ImageIO.read(new File("QuatreTrefle.PNG"));
+			Image quatreTrefle = ImageIO.read(new File("img/QuatreTrefle.jpg"));
 			cartes.add(quatreTrefle);
 			
 			
 			
 			
 
-			Image unCarreau = ImageIO.read(new File("AsCarreau.PNG"));
+			Image unCarreau = ImageIO.read(new File("img/AsCarreau.jpg"));
 			cartes.add(unCarreau);
-			Image deuxCarreau = ImageIO.read(new File("DeuxCarreau.PNG"));
+			Image deuxCarreau = ImageIO.read(new File("img/DeuxCarreau.jpg"));
 			cartes.add(deuxCarreau);
-			Image troisCarreau = ImageIO.read(new File("TroisCarreau.PNG"));
+			Image troisCarreau = ImageIO.read(new File("img/TroisCarreau.jpg"));
 			cartes.add(troisCarreau);
-			Image quatreCarreau = ImageIO.read(new File("QuatreCarreau.PNG"));
+			Image quatreCarreau = ImageIO.read(new File("img/QuatreCarreau.jpg"));
 			cartes.add(quatreCarreau);
 			
 			
 			
 			
 			
-			Image unPique = ImageIO.read(new File("AsPique.PNG"));
+			Image unPique = ImageIO.read(new File("img/AsPique.jpg"));
 			cartes.add(unPique);
-			Image deuxPique = ImageIO.read(new File("DeuxPique.PNG"));
+			Image deuxPique = ImageIO.read(new File("img/DeuxPique.jpg"));
 			cartes.add(deuxPique);
-			Image troisPique = ImageIO.read(new File("TroisPique.PNG"));
+			Image troisPique = ImageIO.read(new File("img/TroisPique.jpg"));
 			cartes.add(troisPique);
-			Image quatrePique = ImageIO.read(new File("QuatrePique.PNG"));
+			Image quatrePique = ImageIO.read(new File("img/QuatrePique.jpg"));
 			cartes.add(quatrePique);
 			
 		}
