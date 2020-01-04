@@ -47,7 +47,7 @@ public class CardPanel extends JPanel {
 	public void paintComponent(Graphics g){
 		Image dos = null;
 		try {
-			dos = ImageIO.read(new File("Joker.jpg"));
+			dos = ImageIO.read(new File("img/Joker.png"));
 		} catch (IOException e) {
 			e.printStackTrace();
 		}

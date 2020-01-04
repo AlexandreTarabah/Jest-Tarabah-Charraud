@@ -91,7 +91,7 @@ import vue.Regles;
 	}
 
 	public void methodecontrolupsideDown( int reponseUD,  Player player) {
-		player.upsideDown(reponseUD+1);
+		player.upsideDown(reponseUD);
 		
 	}
 
