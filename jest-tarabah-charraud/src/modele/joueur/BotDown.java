@@ -9,6 +9,7 @@ import modele.carte.Card;
 import modele.game.Game;
 
 public class BotDown extends Player implements Difficulty {
+	boolean isBot=true;
 
 	public BotDown(String pseudo, Game g) {
 		super(pseudo, g);

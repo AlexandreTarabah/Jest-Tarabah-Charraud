@@ -9,6 +9,7 @@ import modele.carte.Card;
 import modele.game.Game;
 
 public class BotHard extends Player implements Difficulty {
+	boolean isBot=true;
 
 	public BotHard(String pseudo,Game g) {
 		super(pseudo, g);
