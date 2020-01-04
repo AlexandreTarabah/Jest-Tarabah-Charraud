@@ -148,7 +148,9 @@ public class Game extends Observable implements Runnable {
 	public HashMap<String, Player> getForMainPlay() {
 		return ForMainPlay;
 	}
-
+public Game() {
+	
+}
 	public static int readInt(Scanner scanner, String prompt, String promptOnError) { // Methode qui permet de vérifier qu'on rentre bien un entier
 
 		System.out.print(prompt);
