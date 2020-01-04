@@ -5,6 +5,7 @@ import java.awt.event.*;
 import javax.swing.JOptionPane;
 
 import modele.game.Game;
+import modele.joueur.Player;
 import vue.Home;
 import vue.Parametres;
 import vue.Plateau;
@@ -61,7 +62,7 @@ import vue.Regles;
 			 if (parametres.getDifficulte() == 0){
 				 JOptionPane.showMessageDialog(null, "Vous n'avez pas choisi la difficultŽ !", "Erreur", JOptionPane.ERROR_MESSAGE);
 			 }
-			 else if ((parametres.getNbrVirtuels() + parametres.getNbrReels()) > 10 || (parametres.getNbrVirtuels() + parametres.getNbrReels()) < 2){
+			 else if ((parametres.getNbrVirtuels() + parametres.getNbrReels()) > 4 || (parametres.getNbrVirtuels() + parametres.getNbrReels()) < 1){
 				 JOptionPane.showMessageDialog(null, "Le nombre de joueurs choisi n'est pas correct !", "Erreur", JOptionPane.ERROR_MESSAGE);
 			 }
 			 else{
@@ -151,5 +152,44 @@ import vue.Regles;
 		else{
 			plateau.afficherNouvelleManche();
 		}
+	}
+
+	public void methodecontrolupsideDown(int reponseUD, Player player) {
+		player.upsideDown(reponseUD);
+		
+	}
+
+
+	public void methodeStealCard(String choiceVictime, String choiceCardVictime) {
+		while(game.listOffer.containsKey(choiceVictime)==false) {
+			JOptionPane 
+		}
+
+
+		while(game.listOffer.get(choiceVictime).size()<2) {
+			
+		}
+
+
+		if(Game.nbPlayers==3) {
+			if(nbCardOffer>4) {
+				while( this.pseudo.equals(victime))  {
+					System.out.println(this.pseudo);
+					System.out.println(" n'oubliez pas que vous pouvez vous volez uniquement si vous êtes le dernier joueur\n Rentrer un pseudo\n");
+					victime=input.next();					
+				}
+			}
+		}else 
+
+			if(Game.nbPlayers==4) {
+				if(nbCardOffer>5) {
+					while( this.pseudo.equals(victime))  {
+						System.out.println(this.pseudo);
+						System.out.println(" n'oubliez pas que vous pouvez vous volez uniquement si vous êtes le dernier joueur\n Rentrer un pseudo\n");
+						victime=input.next();					
+					}
+				}
+			}
+		
 	}
 }

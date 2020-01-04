@@ -36,6 +36,7 @@ import vue.PlayerPanel;
 import java.util.Map.Entry;
 import java.util.NavigableMap;
 import java.util.Observable;
+import java.util.Observer;
 
 
 
@@ -71,6 +72,7 @@ public class Game extends Observable {
 	protected  int nbBots;
 	protected  int nbRealPlayers;
 	protected int difficulty;
+	Player isPlaying;
 	
 	Card[] trophyCards = new Card[2] ;
 
@@ -100,6 +102,7 @@ public class Game extends Observable {
 	
 	private  String victime;
 
+	private ArrayList<Observer> listObserver = new ArrayList<Observer>();
 
 	// La c'est la distribution des cartes, ou finalement j'invoque la méthode takecards et donc le joueur prend 2 cartes, et créé son offer
 
@@ -280,6 +283,8 @@ public class Game extends Observable {
 	public void playRounds() {
 		Scanner input2 = new Scanner(System.in);
 		int choice=0;
+		String choiceVictime="";
+		String choiceStolenCard="";
 		
 		while(this.drawdeck.getSize() != 0) // On repète le processus jusqu'a temps qu'on ait plu de carte
 		{
@@ -289,22 +294,26 @@ public class Game extends Observable {
 			Iterator<Player> it = players.iterator();
 			while(it.hasNext()) {
 				Player p = it.next();
+				p=isPlaying;
 				this.notifyObservers("upsideDown");
-				p.upsideDown(choice);
+				this.notifyObservers("ActualiserMain");
 			}
 			
 			
-			this.determinateFirstPlayer(); // on détermine le premier Joueur
+			this.determinateFirstPlayer();
+			this.notifyObservers("determinateFirstPlayer");// on détermine le premier Joueur
 
 			for(int j =0; j<nbPlayers;j++) {  // le reste suit selon la méthode stealCard(input)
-				this.ForMainPlay.get(victime).stealCard(input2, this);	 // Les manip de chaque joueur pendant le tour 
+				this.notifyObservers("stealCards");
+				this.ForMainPlay.get(victime).stealCard(choiceVictime,choiceStolenCard, this);	 // Les manip de chaque joueur pendant le tour 
 			}
 
 			for(int i=0; i<this.nbPlayers;i++) {
 				players.get(i).HasStolen=false;
 			}
 
-			this.mainCollectCards(); // On ramasse les cartes et on les rebalance dans le jeu pour recommencer 
+			this.mainCollectCards();
+			this.notifyObservers("collectCards")// On ramasse les cartes et on les rebalance dans le jeu pour recommencer 
 
 		}
 		
@@ -583,9 +592,22 @@ public class Game extends Observable {
 	}
 
 
-	public String getIsPlaying() {
-		// TODO Auto-generated method stub
-		return // le joueur entrain de jouer
+	public Player getIsPlaying() {
+		return isPlaying;
+	}
+	
+	public void addObserver(Observer obs) {
+	    this.listObserver.add(obs);
+	}
+
+	public void notifyObservers(Object arg) {
+		for (Observer obs : listObserver){
+			obs.update(this, arg);
+		}
+	}
+
+	public void deleteObserver(Observer o) {
+	    listObserver.remove(o);
 	}
 
 
