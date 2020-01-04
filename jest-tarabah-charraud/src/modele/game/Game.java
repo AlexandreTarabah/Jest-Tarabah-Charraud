@@ -587,12 +587,6 @@ public class Game extends Observable implements Runnable {
 
 
 	public void run() {
-
-
-		Scanner input = new Scanner(System.in);
-
-
-
 		this.players = new ArrayList<Player>();
 		this.listOffer = new HashMap<>();
 		this.drawdeck = new DrawDeck(this);

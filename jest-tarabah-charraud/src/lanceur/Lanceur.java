@@ -16,7 +16,6 @@ public class Lanceur {
             UIManager.getCrossPlatformLookAndFeelClassName());
 		} 
 		catch (Exception e) {
-
 		}
 		Controleur controleur = new Controleur();
 		Game game = new Game();
