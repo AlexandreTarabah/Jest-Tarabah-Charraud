@@ -11,6 +11,10 @@ import javax.swing.JTextField;
 import controleur.GetAction;
 
 public class FenetreSaisie extends JFrame{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private JTextField textField;
 	private JLabel label;
 	

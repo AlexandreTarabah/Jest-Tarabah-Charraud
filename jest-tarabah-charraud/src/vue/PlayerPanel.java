@@ -30,6 +30,8 @@ public class PlayerPanel extends JPanel{
 		this.setOpaque(false);
 		this.setLayout(new BorderLayout());
 		this.setJeu(new LinkedList<Image>());
+		this.cp = new CardPanel(jeu);
+		this.add(cp);
 		
 		this.cp = new CardPanel(jeu);
 		this.add(cp);
@@ -82,10 +84,11 @@ public class PlayerPanel extends JPanel{
 	}
 
 	public CardPanel getcp() {
+
 		return cp;
 	}
 
-	public void setcp(CardPanel cp) {
+	public void setPc(CardPanel cp) {
 		this.cp = cp;
 	}
 	

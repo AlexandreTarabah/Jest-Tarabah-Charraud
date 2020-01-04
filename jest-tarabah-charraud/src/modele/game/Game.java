@@ -126,12 +126,15 @@ public class Game extends Observable implements Runnable {
 		{		
 
 
-			for (int i=0 ; i < 2 ; i++) // Supposons qu'on distribue les cartes une à une
+			// Supposons qu'on distribue les cartes une à une
 			{
 				for (Iterator<Player> it = players.iterator(); it.hasNext();) 
 				{
 					Player p = (Player) it.next();
-					p.setHand(i, drawdeck.takeCards()) ; // place une carte en position i dans la
+					for(Iterator<Card> it2 = p.getHand().listIterator();it.hasNext();) {
+						p.getHand().add(drawdeck.takeCards());
+					}
+					; // place une carte en position i dans la
 					// main du joueur (qui est un tableau)
 
 
@@ -172,47 +175,22 @@ public class Game extends Observable implements Runnable {
 
 
 
-	public void initializeGame(Game g,Scanner input) {
 
-		choiceVar.add(1);
-		choiceVar.add(2);
-
-		for(int i=0; i<5;i++) {
-			choicePlayers.add(i);
-		}
-		upsideChoice.add("down");
-		upsideChoice.add("up");
-
-
-		System.out.println("Bonjour jeunes gens ! Voulez-faire une partie avec ou sans extension ? \n"
-				+ "1 - Avec\n"
-				+ "2 - Sans");
-		int choice=0;
-		while(choiceVar.contains(choice)==false) {
-			choice = readInt(input,"Entrez un nombre compris entre 1 et 2 : ", "Non, Recommencez : ");
-		}
-		if(choice==2)
-		{g.extension=false;} // if(choice==2) // On choisit si on joue avec ou sans extension, ce qui va impacter new DrawDeck(g)
-		players = new ArrayList<Player>();
-		listOffer = new HashMap<>();
-		drawdeck = new DrawDeck(g);
-		drawdeck.shuffle();
-	}
 
 	public void createTrophies(Game g) { // On instancie les trophées a partir du DrawDeckn en fonction des parametres 
 
 		if(extension==false) 
 		{
-			if(nbPlayers==3)
+			if(g.nbPlayers==3)
 			{
 				for(int i=0; i<2;i++) 
 				{
 					g.trophyCards[i]= g.drawdeck.takeCards() ;
 				}
 			}
-			else if(nbPlayers==4)
+			else if(g.nbPlayers==4)
 			{
-				trophyCards[0]=g.drawdeck.takeCards() ;
+				trophyCards[0]=g.drawdeck.takeCards();
 			}	
 		}
 	}
@@ -246,17 +224,17 @@ public class Game extends Observable implements Runnable {
 		{
 			Player p = (Player) it.next();
 			for(int i=0;i<2;i++) {
-				if(highestCardValue <= p.getHand()[i].getValue().getCardValue())
+				if(highestCardValue <= p.getHand().get(i).getValue().getCardValue())
 				{
-					highestCardValue = p.getHand()[i].getValue().getCardValue();
-					highestColorValue = p.getHand()[i].getColor().getColorValue();
+					highestCardValue = p.getHand().get(i).getValue().getCardValue();
+					highestColorValue = p.getHand().get(i).getColor().getColorValue();
 					victime=(p.getPseudo());
 
 				}
 
-				if((highestCardValue == p.getHand()[i].getValue().getCardValue()) && (highestColorValue <  p.getHand()[i].getColor().getColorValue()))
+				if((highestCardValue == p.getHand().get(i).getValue().getCardValue()) && (highestColorValue <  p.getHand().get(i).getColor().getColorValue()))
 				{
-					highestColorValue =  p.getHand()[i].getColor().getColorValue();
+					highestColorValue =  p.getHand().get(i).getColor().getColorValue();
 					victime=(p.getPseudo());
 				}
 
@@ -274,7 +252,9 @@ public class Game extends Observable implements Runnable {
 		this.difficulty = d;
 		this.nbBots = nb;
 		this.nbRealPlayers = nrp;
+
 		this.nbPlayers = nb + nrp ;
+
 		this.determinerNombreJoueurs();
 	}
 
@@ -285,23 +265,22 @@ public class Game extends Observable implements Runnable {
 		if (this.difficulty==1) {
 			for (int i=0;i<this.nbBots;i++){
 
-				Player joueur = new Player(Integer.toString(i), this);
+				Player joueur = new BotDown(Integer.toString(i), this);
 				joueur.setPseudo(new FenetreSaisie()) ;
-				this.ForMainPlay.put(joueur.getPseudo(), joueur);
-			}
-		}else 
-			for(int i=0;i<this.nbBots;i++) {
-				Player joueur = new Player(Integer.toString(i), this);
-				joueur.setPseudo(new FenetreSaisie()) ;
-				this.ForMainPlay.put(joueur.getPseudo(), joueur); // A VOIR AVEC PLAYERPANEL 
 
 			}
+		}else 
+		{for(int i=0;i<this.nbBots;i++) {
+			Player joueur = new BotHard(Integer.toString(i), this);
+			joueur.setPseudo(new FenetreSaisie()) ;
+
+		}
+		}
 
 		for (int i=0;i<this.nbRealPlayers;i++){
 			Player joueur = new Player(Integer.toString(i), this);
 			joueur.setPseudo(new FenetreSaisie()) ;
-			this.players.add(joueur);
-			this.ForMainPlay.put(joueur.getPseudo(), joueur);
+
 		}
 		this.notifyObservers("joueurs");
 	}
@@ -339,6 +318,7 @@ public class Game extends Observable implements Runnable {
 			while(it.hasNext()) {
 				Player p = it.next();
 				isPlaying=p;
+
 				if(p instanceof BotDown || p instanceof BotHard) {
 					p.upsideDown(choice);
 				}
@@ -348,35 +328,40 @@ public class Game extends Observable implements Runnable {
 				}
 				this.notifyObservers("ActualiserMain");
 			}
+			this.notifyObservers("upsideDown");
+
+		}this.notifyObservers("ActualiserMain");
 
 
 
-			this.determinateFirstPlayer();
-			this.notifyObservers("determinateFirstPlayer");// on détermine le premier Joueur
+
+		this.determinateFirstPlayer();
+		this.notifyObservers("PremierJoueurCommence");// on détermine le premier Joueur
 
 
 
-			this.determinateFirstPlayer(); // on détermine le premier Joueur
+		this.determinateFirstPlayer(); // on détermine le premier Joueur
 
 
-			for(int j =0; j<nbPlayers;j++) {
-				isPlaying=this.ForMainPlay.get(victime);
-				if(this.ForMainPlay.get(victime) instanceof BotDown || this.ForMainPlay.get(victime) instanceof BotHard) {// le reste suit selon la méthode stealCard(input)
-					this.ForMainPlay.get(victime).stealCard(choiceVictime,choiceStolenCard, this);	 // Les manip de chaque joueur pendant le tour 
-				}else
-					this.notifyObservers("stealCards");
-			}
-
-			for(int i=0; i<this.nbPlayers;i++) {
-				players.get(i).HasStolen=false;
-			}
-
-			this.mainCollectCards();
-			this.notifyObservers("collectCards");// On ramasse les cartes et on les rebalance dans le jeu pour recommencer 
-
+		for(int j =0; j<nbPlayers;j++) {
+			isPlaying=this.ForMainPlay.get(victime);
+			if(this.ForMainPlay.get(victime) instanceof BotDown || this.ForMainPlay.get(victime) instanceof BotHard) {// le reste suit selon la méthode stealCard(input)
+				this.ForMainPlay.get(victime).stealCard(choiceVictime,choiceStolenCard, this);	 // Les manip de chaque joueur pendant le tour 
+			}else
+				this.notifyObservers("stealCards");
 		}
 
+		for(int i=0; i<this.nbPlayers;i++) {
+			players.get(i).HasStolen=false;
+		}
+
+		this.mainCollectCards();
+		this.notifyObservers("collectCards");// On ramasse les cartes et on les rebalance dans le jeu pour recommencer 
+
 	}
+
+
+
 
 	public void giveTrophy() {
 		ArrayList<Player> p = this.players ;
@@ -603,7 +588,6 @@ public class Game extends Observable implements Runnable {
 
 		this.createTrophies(this); //METTRE DANS MAIN JESTINTERFACE
 
-		System.out.println(Arrays.deepToString(this.trophyCards) + "\n"); // Création 2 labels 
 
 		this.playRounds(); 
 
@@ -612,7 +596,7 @@ public class Game extends Observable implements Runnable {
 		this.countPoints();
 
 
-		this.winnerDetermination() ; 	
+		this.winnerDetermination(); 	
 
 
 

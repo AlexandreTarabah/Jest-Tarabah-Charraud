@@ -31,8 +31,8 @@ public class BotHard extends Player implements Difficulty {
 
 
 
-		((Map<String, Card>) getOffer()).put("down", getHand()[numC-1]); // -1 car le tableau commence à l'indice 0, je caste l'offer  
-		((Map<String, Card>) getOffer()).put("up", getHand()[numC%2]); // avec le modulo 2 on obtient la case manquante, je caste l'offer
+		((Map<String, Card>) getOffer()).put("down", getHand().get(numC)); // -1 car le tableau commence à l'indice 0, je caste l'offer  
+		((Map<String, Card>) getOffer()).put("up", getHand().get(numC%2)); // avec le modulo 2 on obtient la case manquante, je caste l'offer
 		System.out.println(this.getPseudo()  + " a caché " + ((Map<String, Card>) getOffer()).get("down").getValue() + " de " + ((Map<String, Card>) getOffer()).get("down").getColor()+"\n");
 		/* et la on affiche le pseudo du player en paramètre, avec get(Down) et la value de la carte, et la couleur
 		 */
@@ -110,16 +110,16 @@ public class BotHard extends Player implements Difficulty {
 		}
 
 		String stolenCard =null;
-		int highestC = g.ForMainPlay.get(victime).getHand()[0].getColor().getColorValue();
-		int highestV = g.ForMainPlay.get(victime).getHand()[0].getValue().getCardValue();
-		if(highestC < g.ForMainPlay.get(victime).getHand()[1].getColor().getColorValue())
+		int highestC = g.ForMainPlay.get(victime).hand.get(0).getColor().getColorValue();
+		int highestV = g.ForMainPlay.get(victime).hand.get(0).getValue().getCardValue();
+		if(highestC < g.ForMainPlay.get(victime).hand.get(1).getColor().getColorValue())
 		{
 			stolenCard = "up";
 
 		}
-		else if (highestC == g.ForMainPlay.get(victime).getHand()[1].getColor().getColorValue())
+		else if (highestC == g.ForMainPlay.get(victime).hand.get(1).getColor().getColorValue())
 		{
-			if(highestV < g.ForMainPlay.get(victime).getHand()[1].getValue().getCardValue())
+			if(highestV < g.ForMainPlay.get(victime).hand.get(1).getValue().getCardValue())
 			{
 				stolenCard = "up";
 
@@ -129,7 +129,7 @@ public class BotHard extends Player implements Difficulty {
 				stolenCard = "down";
 			}
 		}
-		else if(highestC > g.ForMainPlay.get(victime).getHand()[1].getColor().getColorValue())
+		else if(highestC > g.ForMainPlay.get(victime).hand.get(1).getColor().getColorValue())
 		{
 			stolenCard = "down";
 		}

@@ -60,7 +60,7 @@ import vue.Regles;
 		 }
 		 if (e.getActionCommand() == "jouer"){
 			 if (parametres.getDifficulte() == 0){
-				 JOptionPane.showMessageDialog(null, "Vous n'avez pas choisi la difficultŽ !", "Erreur", JOptionPane.ERROR_MESSAGE);
+				 JOptionPane.showMessageDialog(null, "Vous n'avez pas choisi la difficulté !", "Erreur", JOptionPane.ERROR_MESSAGE);
 			 }
 			 else if ((parametres.getNbrVirtuels() + parametres.getNbrReels()) > 4 || (parametres.getNbrVirtuels() + parametres.getNbrReels()) < 1){
 				 JOptionPane.showMessageDialog(null, "Le nombre de joueurs choisi n'est pas correct !", "Erreur", JOptionPane.ERROR_MESSAGE);
@@ -90,8 +90,8 @@ import vue.Regles;
 		}
 	}
 
-	public void methodecontrolupsideDown(int reponseUD, Player player) {
-		player.upsideDown(reponseUD);
+	public void methodecontrolupsideDown( int reponseUD,  Player player) {
+		player.upsideDown(reponseUD+1);
 		
 	}
 

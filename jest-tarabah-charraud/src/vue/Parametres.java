@@ -5,6 +5,7 @@ import java.awt.*;
 import javax.swing.*;
 
 import controleur.Controleur;
+import modele.game.Game;
 
 public class Parametres extends JFrame{
 	/**
@@ -123,5 +124,8 @@ public class Parametres extends JFrame{
 	
 	public void setListener(Controleur controleur) {
 		validation.addActionListener(controleur);
+	}
+	public void reglerParametres(Game g) {
+		g.nbPlayers=this.getNbrReels()+this.getNbrVirtuels();
 	}
 }

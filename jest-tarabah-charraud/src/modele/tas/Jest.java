@@ -36,6 +36,9 @@ public class Jest {
 	int bestJest;
 
 	public List<Card> jestCards = new ArrayList<Card>();
+	
+	public Jest() {
+	}
 
 	/**
 	 * Le Jest invite le Trophy d'une trophyCards à déterminer son éligibilité

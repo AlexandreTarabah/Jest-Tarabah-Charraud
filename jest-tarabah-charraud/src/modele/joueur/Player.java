@@ -13,6 +13,7 @@ import java.util.Collections;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.LinkedList;
 import java.util.Map;
 import java.util.Map.Entry;
 
@@ -30,7 +31,7 @@ public class Player
 
 	public boolean HasStolen=false;
 	
-	private Card[] hand = new Card[2] ;
+	protected LinkedList<Card> hand = new LinkedList<Card>();
 
 	protected Jest jest ;
 
@@ -49,6 +50,7 @@ public class Player
 		this.jest = new Jest();
 		g.players.add(this);
 		g.ForMainPlay.put(this.getPseudo(), this);
+		
 	}
 
 
@@ -139,25 +141,10 @@ public class Player
 
 
 
-	public  void setHand(int i, Card card)
-	{
-		this.hand[i] = card;
 
-	}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+public LinkedList<Card> getHand() {
+	return hand;
+}
 
 
 
@@ -181,8 +168,9 @@ public class Player
 		int numC = choice + 1; // demande au joueur de rentrer un numéro entre 1 et 2
 	
 
-		((Map<String, Card>) offer).put("down", this.getHand()[numC-1]); // -1 car le tableau commence à l'indice 0, je caste l'offer  
-		((Map<String, Card>) offer).put("up", this.getHand()[numC%2]); // avec le modulo 2 on obtient la case manquante, je caste l'offer
+		((Map<String, Card>) offer).put("down", this.hand.get(numC-1)); // -1 car le tableau commence à l'indice 0, je caste l'offer  
+		((Map<String, Card>) offer).put("up", this.hand.get(numC%2)); // avec le modulo 2 on obtient la case manquante, je caste l'offer
+
 		/* et la on affiche le pseudo du player en paramètre, avec get(Down) et la value de la carte, et la couleur
 		 */
 
@@ -259,22 +247,7 @@ public class Player
 
 
 
-	public Card[] getHand() {
-		return hand;
-	}
-
-
-
-
-
-
-	public void setHand(Card[] hand) {
-		this.hand = hand;
-	}
-
-
-
-
+	
 
 
 	public static void setVictime(String victime) {
