@@ -16,10 +16,10 @@ public class CardPanel extends JPanel {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	
+
 	private LinkedList<Image> jeu;
 	private boolean cartesVisibles;
-	
+
 	public CardPanel(LinkedList<Image> j){
 		super();
 		this.jeu = j;
@@ -27,7 +27,7 @@ public class CardPanel extends JPanel {
 		this.setOpaque(false);
 		this.setLayout(null);
 	}
-	
+
 	public LinkedList<Image> getJeu() {
 		return jeu;
 	}
@@ -45,21 +45,10 @@ public class CardPanel extends JPanel {
 	}
 
 	public void paintComponent(Graphics g){
-		Image dos = null;
-		try {
-			dos = ImageIO.read(new File("img/Joker.png"));
-		} catch (IOException e) {
-			e.printStackTrace();
+
+		for(int i=0; i<2;i++) {
+			g.drawImage(jeu.get(i), i*30, 0, 80, 140, this);
 		}
-		ListIterator<Image> iJeu = jeu.listIterator();
-		while (iJeu.hasNext()){
-			if (cartesVisibles)
-				g.drawImage(iJeu.next(), (iJeu.previousIndex()*30), 0, 80, 140, this);
-			else{
-				iJeu.next();
-				g.drawImage(dos, (iJeu.previousIndex()*30), 0, 80, 140, this);
-			}
-			
-		}
+
 	}
 }

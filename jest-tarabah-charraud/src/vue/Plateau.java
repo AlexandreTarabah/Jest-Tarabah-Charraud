@@ -328,7 +328,9 @@ public class Plateau extends JPanel implements Observer{
 			this.actualiserPlateau();
 		}
 
-
+		if(arg=="afficherCartes") {
+			this.afficherCartes(game.getIsPlaying());
+		}
 
 
 

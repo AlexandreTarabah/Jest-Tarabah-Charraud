@@ -134,6 +134,8 @@ public class Game extends Observable implements Runnable {
 					for(int i=0; i<2;i++) {
 						p.getHand().add(drawdeck.takeCards());
 					}
+					isPlaying=p;
+					this.notifyObservers("afficherCartes");
 					; // place une carte en position i dans la
 					// main du joueur (qui est un tableau)
 
@@ -301,6 +303,7 @@ public class Game extends Observable implements Runnable {
 	}
 
 	public void playRounds() {
+		this.notifyObservers("piles");
 
 		int choice=0;
 
@@ -312,7 +315,6 @@ public class Game extends Observable implements Runnable {
 		while(this.drawdeck.getSize() != 0) // On repète le processus jusqu'a temps qu'on ait plu de carte
 		{
 			this.distribute(); // distribuer les cartes 
-
 			// UPSIDE DOWN DE CHAQUE JOUEUR		
 			Iterator<Player> it = players.iterator();
 			while(it.hasNext()) {
@@ -331,33 +333,31 @@ public class Game extends Observable implements Runnable {
 
 
 
-
-		this.determinateFirstPlayer();
-		this.notifyObservers("PremierJoueurCommence");// on détermine le premier Joueur
-
+			this.determinateFirstPlayer();
+			this.notifyObservers("PremierJoueurCommence");// on détermine le premier Joueur
 
 
-		this.determinateFirstPlayer(); // on détermine le premier Joueur
+
+			this.determinateFirstPlayer(); // on détermine le premier Joueur
 
 
-		for(int j =0; j<nbPlayers;j++) {
-			isPlaying=this.ForMainPlay.get(victime);
-			if(this.ForMainPlay.get(victime) instanceof BotDown || this.ForMainPlay.get(victime) instanceof BotHard) {// le reste suit selon la méthode stealCard(input)
-				this.ForMainPlay.get(victime).stealCard(choiceVictime,choiceStolenCard, this);	 // Les manip de chaque joueur pendant le tour 
-			}else
-				this.notifyObservers("stealCards");
-		}
+			for(int j =0; j<nbPlayers;j++) {
+				isPlaying=this.ForMainPlay.get(victime);
+				if(this.ForMainPlay.get(victime) instanceof BotDown || this.ForMainPlay.get(victime) instanceof BotHard) {// le reste suit selon la méthode stealCard(input)
+					this.ForMainPlay.get(victime).stealCard(choiceVictime,choiceStolenCard, this);	 // Les manip de chaque joueur pendant le tour 
+				}else
+					this.notifyObservers("stealCards");
+			}
 
-		for(int i=0; i<this.nbPlayers;i++) {
-			players.get(i).HasStolen=false;
-		}
+			for(int i=0; i<this.nbPlayers;i++) {
+				players.get(i).HasStolen=false;
+			}
 
-		this.mainCollectCards();
-		this.notifyObservers("collectCards");// On ramasse les cartes et on les rebalance dans le jeu pour recommencer 
+			this.mainCollectCards();
+			this.notifyObservers("collectCards");// On ramasse les cartes et on les rebalance dans le jeu pour recommencer 
 
 		}
 	}
-
 
 
 
