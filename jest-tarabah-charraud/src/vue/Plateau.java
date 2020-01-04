@@ -86,10 +86,7 @@ public class Plateau extends JPanel implements Observer{
 
 	public Image verifierCarte(Card c){
 		Image carte = null;
-<<<<<<< HEAD
 
-=======
->>>>>>> branch 'master' of https://github.com/AlexandreTarabah/Jest-Tarabah-Charraud
 		switch(c.getValue().getCardValue()){
 		case 1:
 			switch(c.getColor().getColorValue()){
@@ -156,12 +153,7 @@ public class Plateau extends JPanel implements Observer{
 			}
 			break;
 		}
-<<<<<<< HEAD
-					
-=======
 
-
->>>>>>> branch 'master' of https://github.com/AlexandreTarabah/Jest-Tarabah-Charraud
 		return carte;
 
 
@@ -180,18 +172,11 @@ public class Plateau extends JPanel implements Observer{
 				/*afficher carte comme dans le programme console*/
 			}
 		}
-<<<<<<< HEAD
 
-=======
->>>>>>> branch 'master' of https://github.com/AlexandreTarabah/Jest-Tarabah-Charraud
 	}
 
 
 
-<<<<<<< HEAD
-	
-=======
->>>>>>> branch 'master' of https://github.com/AlexandreTarabah/Jest-Tarabah-Charraud
 	public void actualiserMain(int reponseUD) {
 		ListIterator<PlayerPanel> ipp = pp.listIterator();
 		while (ipp.hasNext()){
@@ -199,12 +184,9 @@ public class Plateau extends JPanel implements Observer{
 		}
 
 	}
-<<<<<<< HEAD
-	
-	
-=======
 
->>>>>>> branch 'master' of https://github.com/AlexandreTarabah/Jest-Tarabah-Charraud
+	
+	
 
 	public void afficherJoueurCommence(){
 		ListIterator<PlayerPanel> ipp = pp.listIterator();
@@ -325,15 +307,14 @@ public class Plateau extends JPanel implements Observer{
 			controleur.methodecontrolupsideDown(reponseUD,partie.getIsPlaying());
 
 
-<<<<<<< HEAD
+
 		    	controleur.methodecontrolupsideDown(reponseUD,partie.getIsPlaying());
 		    	this.actualiserMain(reponseUD);
 			
 
-=======
+
 			controleur.methodecontrolupsideDown(reponseUD,partie.getIsPlaying());
 			this.actualiserMain(reponseUD);
->>>>>>> branch 'master' of https://github.com/AlexandreTarabah/Jest-Tarabah-Charraud
 		}
 
 		if(arg=="stealCards") {
@@ -351,10 +332,8 @@ public class Plateau extends JPanel implements Observer{
 		if (arg == "actualiserPlateau"){
 			this.actualiserPlateau();
 		}
-<<<<<<< HEAD
 
-=======
->>>>>>> branch 'master' of https://github.com/AlexandreTarabah/Jest-Tarabah-Charraud
+
 
 
 
