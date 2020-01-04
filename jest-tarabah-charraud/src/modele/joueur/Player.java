@@ -46,7 +46,6 @@ public class Player
 	{
 		this.pseudo=pseudo;
 		this.setOffer(new HashMap<String, Card>());
-		System.out.println("Entrez le nom du joueur : ");
 		this.jest = new Jest();
 		g.players.add(this);
 		g.ForMainPlay.put(this.getPseudo(), this);
@@ -114,7 +113,6 @@ public class Player
 		}
 
 		nbCardOffer-=1;
-		Iterator it = this.jest.jestCards.iterator();
 	}
 
 

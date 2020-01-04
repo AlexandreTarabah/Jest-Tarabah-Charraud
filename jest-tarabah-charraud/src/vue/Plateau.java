@@ -153,9 +153,9 @@ public class Plateau extends JPanel implements Observer{
 							break;
 				
 
-					} break ;
+					}
 
-	}
+	
 
 					
 			
