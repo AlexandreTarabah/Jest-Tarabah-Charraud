@@ -154,11 +154,6 @@ public class Game extends Observable {
 
 
 
-	public static HashMap<String, Player> getForMainPlay(Game g) {
-		
-		return g.ForMainPlay ;
-	}
-
 	public HashMap<String, Player> getForMainPlay() {
 		return ForMainPlay;
 	}
