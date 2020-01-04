@@ -66,13 +66,9 @@ import java.util.Observer;
  ------------------------------------------------------------------------------------------------------------------------------
  */
 
-<<<<<<< HEAD
-public class Game {
 
-	public static int nbPlayers;
-	protected static int nbBots;
-	protected static int nbRealPlayers;
-=======
+
+
 public class Game extends Observable {
 	
 	protected  int nbPlayers;
@@ -81,7 +77,7 @@ public class Game extends Observable {
 	protected int difficulty;
 	Player isPlaying;
 	
->>>>>>> branch 'master' of https://github.com/AlexandreTarabah/Jest-Tarabah-Charraud
+
 	Card[] trophyCards = new Card[2] ;
 
 	public HashMap<String,Player> ForMainPlay = new HashMap<String,Player>() ;
@@ -96,35 +92,27 @@ public class Game extends Observable {
 
 	public boolean extension = true;
 
-<<<<<<< HEAD
+
 	public HashMap<String,Integer> winner = new HashMap<String,Integer>();
-=======
-	public  HashMap<String,Integer> winner = new HashMap<String,Integer>();
->>>>>>> branch 'master' of https://github.com/AlexandreTarabah/Jest-Tarabah-Charraud
 
 	boolean variante = false;
-<<<<<<< HEAD
 
-	// Liste de vérif pour les choix proposer a l'utilisateur : 
 
-	public static ArrayList<Integer> choiceVar= new ArrayList<Integer>();
-=======
 	
 // Liste de vérif pour les choix proposer a l'utilisateur : 
 	
 	public ArrayList<Integer> choiceVar= new ArrayList<Integer>();
->>>>>>> branch 'master' of https://github.com/AlexandreTarabah/Jest-Tarabah-Charraud
+
 
 	ArrayList<Integer> choicePlayers= new ArrayList<Integer>();
-<<<<<<< HEAD
 
-	public static ArrayList<String> upsideChoice = new ArrayList<String>() ; 
 
-=======
+
+
 	
 	public ArrayList<String> upsideChoice = new ArrayList<String>() ; 
 	
->>>>>>> branch 'master' of https://github.com/AlexandreTarabah/Jest-Tarabah-Charraud
+
 	private  String victime;
 	
 	public Object [][] scores;
@@ -165,14 +153,14 @@ public class Game extends Observable {
 	}
 
 
-<<<<<<< HEAD
+
 	public static HashMap<String, Player> getForMainPlay(Game g) {
 		
 		return g.ForMainPlay ;
-=======
+	}
+
 	public HashMap<String, Player> getForMainPlay() {
 		return ForMainPlay;
->>>>>>> branch 'master' of https://github.com/AlexandreTarabah/Jest-Tarabah-Charraud
 	}
 
 	public static int readInt(Scanner scanner, String prompt, String promptOnError) { // Methode qui permet de vérifier qu'on rentre bien un entier
@@ -192,7 +180,7 @@ public class Game extends Observable {
 
 
 
-<<<<<<< HEAD
+
 	public void initializeGame(Game g,Scanner input) {
 
 		choiceVar.add(1);
@@ -219,9 +207,9 @@ public class Game extends Observable {
 		drawdeck = new DrawDeck(g);
 		drawdeck.shuffle();
 	}
-=======
+
 	
->>>>>>> branch 'master' of https://github.com/AlexandreTarabah/Jest-Tarabah-Charraud
+
 
 
 
@@ -344,14 +332,14 @@ public class Game extends Observable {
 
 	public void playRounds() {
 		Scanner input2 = new Scanner(System.in);
-<<<<<<< HEAD
 
-=======
+
+
 		int choice=0;
 		String choiceVictime="";
 		String choiceStolenCard="";
 		
->>>>>>> branch 'master' of https://github.com/AlexandreTarabah/Jest-Tarabah-Charraud
+
 		while(this.drawdeck.getSize() != 0) // On repète le processus jusqu'a temps qu'on ait plu de carte
 		{
 			this.distribute(); // distribuer les cartes 
@@ -364,16 +352,16 @@ public class Game extends Observable {
 				this.notifyObservers("upsideDown");
 				this.notifyObservers("ActualiserMain");
 			}
-<<<<<<< HEAD
+
 			
 			
 			this.determinateFirstPlayer();
 			this.notifyObservers("determinateFirstPlayer");// on détermine le premier Joueur
-=======
+
 
 
 			this.determinateFirstPlayer(); // on détermine le premier Joueur
->>>>>>> branch 'master' of https://github.com/AlexandreTarabah/Jest-Tarabah-Charraud
+
 
 			for(int j =0; j<nbPlayers;j++) {  // le reste suit selon la méthode stealCard(input)
 				this.notifyObservers("stealCards");
@@ -385,7 +373,7 @@ public class Game extends Observable {
 			}
 
 			this.mainCollectCards();
-			this.notifyObservers("collectCards")// On ramasse les cartes et on les rebalance dans le jeu pour recommencer 
+			this.notifyObservers("collectCards");// On ramasse les cartes et on les rebalance dans le jeu pour recommencer 
 
 		}
 
@@ -609,16 +597,12 @@ public class Game extends Observable {
 
 	public void run() {
 
-<<<<<<< HEAD
+
 
 		Scanner input = new Scanner(System.in);
 
-		this.initializeGame(this, input); 
-
-		this.configureGameplay(input);
 
 
-=======
 		
 		this.players = new ArrayList<Player>();
 		this.listOffer = new HashMap<>();
@@ -626,7 +610,7 @@ public class Game extends Observable {
 		this.drawdeck.shuffle();
 		
 		
->>>>>>> branch 'master' of https://github.com/AlexandreTarabah/Jest-Tarabah-Charraud
+
 		this.createTrophies(this); //METTRE DANS MAIN JESTINTERFACE
 
 		System.out.println(Arrays.deepToString(this.trophyCards) + "\n"); // Création 2 labels 
@@ -636,13 +620,13 @@ public class Game extends Observable {
 		this.giveTrophy();
 
 		this.countPoints();
-<<<<<<< HEAD
+
 
 		this.winnerDetermination() ; 
-=======
+
 		
 		this.winnerDetermination(); 
->>>>>>> branch 'master' of https://github.com/AlexandreTarabah/Jest-Tarabah-Charraud
+
 
 	}
 
@@ -670,8 +654,7 @@ public class Game extends Observable {
 		return choiceVar;
 	}
 
-<<<<<<< HEAD
-=======
+
 
 	public  HashMap<String, Integer> getWinner() {
 		// TODO Auto-generated method stub
@@ -679,14 +662,14 @@ public class Game extends Observable {
 	}
 
 
->>>>>>> branch 'master' of https://github.com/AlexandreTarabah/Jest-Tarabah-Charraud
+
 	public String getVictime() {
 		// TODO Auto-generated method stub
 		return victime;
 	}
 
 
-<<<<<<< HEAD
+
 	public Player getIsPlaying() {
 		return isPlaying;
 	}
@@ -703,13 +686,8 @@ public class Game extends Observable {
 
 	public void deleteObserver(Observer o) {
 	    listObserver.remove(o);
-=======
-	public String getIsPlaying() {
-		// TODO Auto-generated method stub
-		return "joue" ; // le joueur entrain de jouer
->>>>>>> branch 'master' of https://github.com/AlexandreTarabah/Jest-Tarabah-Charraud
 	}
 
 
 
-} // ARMAGEDDON 
+}// ARMAGEDDON 
