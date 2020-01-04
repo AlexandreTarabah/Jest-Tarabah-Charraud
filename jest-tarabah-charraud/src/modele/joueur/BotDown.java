@@ -68,18 +68,18 @@ public class BotDown extends Player implements Difficulty {
 			if(nbCardOffer>4) {
 				while(g.players.get(i)==this || g.players.get(i).getOffer().size()!=2)  {
 					i++;
-				}setVictime(g.players.get(i).getPseudo());
+				}g.setVictime(g.players.get(i).getPseudo());
 			}
 
 			else if(nbCardOffer==4 && this.getOffer().size()==2)
-			{setVictime(this.getPseudo());
+			{g.setVictime(this.getPseudo());
 			}
 			else if(nbCardOffer==4 && this.getOffer().size()!=2)
 			{
 				while( g.players.get(i)==this ||  g.players.get(i).getOffer().size()!=2)  {
 					i++;				
 				}
-				setVictime(g.players.get(i).getPseudo());
+				g.setVictime(g.players.get(i).getPseudo());
 			}
 
 		}
@@ -90,15 +90,15 @@ public class BotDown extends Player implements Difficulty {
 			if(nbCardOffer>5) {
 				while( g.players.get(i)==this || g.players.get(i).getOffer().size()!=2)  {
 					i++;
-				}setVictime(g.players.get(i).getPseudo());	
+				}g.setVictime(g.players.get(i).getPseudo());	
 			}
 
 			else if(nbCardOffer==5 && this.getOffer().size()==2)
-			{setVictime(this.getPseudo());}
+			{g.setVictime(this.getPseudo());}
 			else {
 				while( g.players.get(i)==this  || g.players.get(i).getOffer().size()!=2)  {
 					i++;
-				}setVictime(g.players.get(i).getPseudo());	
+				}g.setVictime(g.players.get(i).getPseudo());	
 			}
 		}
 
@@ -110,19 +110,19 @@ public class BotDown extends Player implements Difficulty {
 		}
 
 		String stolenCard ="down";
-		this.jest.jestCards.add(g.listOffer.get(getVictime()).get(stolenCard));
-		g.listOffer.get(getVictime()).remove(stolenCard);// méthode AddJest() implementé dans Jest.
+		this.jest.jestCards.add(g.listOffer.get(g.getVictime()).get(stolenCard));
+		g.listOffer.get(g.getVictime()).remove(stolenCard);// méthode AddJest() implementé dans Jest.
 
 		this.setHasStolen(true); 
 
-		if(g.getForMainPlay().get(getVictime()).isHasStolen()==true) { // Dans le cas ou le joueur vole le voleur précédent, on fixe la prochaine victime au joueur qui a l'offre complete. 
+		if(g.getForMainPlay().get(g.getVictime()).isHasStolen()==true) { // Dans le cas ou le joueur vole le voleur précédent, on fixe la prochaine victime au joueur qui a l'offre complete. 
 
 
 			if(g.getNbPlayers()==3) {
 				for (HashMap.Entry<String,Player> mapentry : g.getForMainPlay().entrySet()) {
 					if (mapentry.getValue().getOffer().size()==2) {
 
-						setVictime(mapentry.getKey());
+						g.setVictime(mapentry.getKey());
 
 					}
 				}
@@ -138,13 +138,13 @@ public class BotDown extends Player implements Difficulty {
 							{
 								highestCardValue = mapentry2.getValue().getOffer().get("up").getValue().getCardValue();
 								highestColorValue = mapentry2.getValue().getOffer().get("up").getColor().getColorValue();
-								setVictime(mapentry2.getKey());
+								g.setVictime(mapentry2.getKey());
 							}
 
 							if(highestCardValue == mapentry2.getValue().getOffer().get("up").getValue().getCardValue() && 
 									highestColorValue < mapentry2.getValue().getOffer().get("up").getColor().getColorValue()) {
 
-								setVictime(mapentry2.getKey());
+								g.setVictime(mapentry2.getKey());
 
 							}		
 						}

@@ -107,6 +107,7 @@ public class Game extends Observable implements Runnable {
 
 	public ArrayList<String> upsideChoice = new ArrayList<String>() ; 
 
+	public int nbCardOffer;
 
 	private  String victime;
 
@@ -656,6 +657,11 @@ public class Game extends Observable implements Runnable {
 
 	public void deleteObserver(Observer o) {
 		listObserver.remove(o);
+	}
+
+	public void setVictime(String choiceVictime) {
+		this.victime=choiceVictime;
+		
 	}
 
 }
