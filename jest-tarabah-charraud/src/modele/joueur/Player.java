@@ -24,7 +24,7 @@ public class Player
 
 	private HashMap<String, Card> offer;
 
-	static HashMap<String,HashMap<String,Card>> listOffer = new HashMap<String, HashMap<String, Card>>();
+	private HashMap<String,HashMap<String,Card>> listOffer = new HashMap<String, HashMap<String, Card>>();
 
 	public boolean HasStolen=false;
 	
@@ -34,21 +34,20 @@ public class Player
 
 	boolean firstPlayer = false;
 
-	private  String victime;
+	protected  String victime;
 
 	private int nbPoint;
 
 	//j'instancie l'objet offre, qui est aussi une collection de carte, dans le constructeur player ici 
 
-	public Player (Scanner input) 
+	public Player (String pseudo, Game g) 
 	{
+		this.pseudo=pseudo;
 		this.setOffer(new HashMap<String, Card>());
 		System.out.println("Entrez le nom du joueur : ");
-		String pseudo = input.next();
-		this.setPseudo(pseudo);
 		this.jest = new Jest();
-		Game.players.add(this) ;
-		Game.getForMainPlay().put(this.getPseudo(), this);
+		g.players.add(this);
+		g.ForMainPlay.put(this.getPseudo(), this);
 	}
 
 
@@ -56,7 +55,7 @@ public class Player
 
 
 
-	public void stealCard(Scanner input) {
+	public void stealCard(Scanner input, Game g) {
 		int nbCardOffer=0;
 		for(Entry<String, HashMap<String, Card>> map : listOffer.entrySet()) {
 
@@ -76,13 +75,13 @@ public class Player
 		}
 
 
-		while(Player.listOffer.get(getVictime()).size()<2) {
+		while(this.listOffer.get(getVictime()).size()<2) {
 			System.out.println("Offre de la victime incomplète, veuillez saisir une offre complete\n"); // vérification que l'offre est bien complète
 			setVictime(input.next());
 		}
 
 
-		if(Game.getNbPlayers()==3) {
+		if(g.getNbPlayers()==3) {
 			if(nbCardOffer>4) {
 				while( this.getPseudo().equals(getVictime()))  {
 					System.out.println(this.getPseudo());
@@ -92,7 +91,7 @@ public class Player
 			}
 		}else 
 
-			if(Game.getNbPlayers()==4) {
+			if(g.getNbPlayers()==4) {
 				if(nbCardOffer>5) {
 					while( this.getPseudo().equals(getVictime()))  {
 						System.out.println(this.getPseudo());
@@ -109,21 +108,21 @@ public class Player
 		System.out.println("Quelle carte voulez-vous lui dérober ?\n ");
 
 		String stolenCard = input.next();
-			while(Game.getUpsideChoice().contains(stolenCard)==false)
+			while(g.getUpsideChoice().contains(stolenCard)==false)
 			{
 				System.out.println("Veuillez rentrer down ou up");
 				stolenCard=input.next();
 			}	
 
-		this.jest.jestCards.add(Player.listOffer.get(getVictime()).get(stolenCard));
-		Player.listOffer.get(getVictime()).remove(stolenCard);// méthode AddJest() implementé dans Jest.
+		this.jest.jestCards.add(this.listOffer.get(getVictime()).get(stolenCard));
+		this.listOffer.get(getVictime()).remove(stolenCard);// méthode AddJest() implementé dans Jest.
 
 		this.setHasStolen(true); 
 
-		if(Game.getForMainPlay().get(getVictime()).isHasStolen()==true) { // Dans le cas ou le joueur vole le voleur précédent, on fixe la prochaine victime au joueur qui a l'offre complete. 
+		if(g.getForMainPlay().get(getVictime()).isHasStolen()==true) { // Dans le cas ou le joueur vole le voleur précédent, on fixe la prochaine victime au joueur qui a l'offre complete. 
 
 
-			if(Game.getNbPlayers()==3) {
+			if(g.getNbPlayers()==3) {
 				for (HashMap.Entry<String,Player> mapentry : Game.getForMainPlay().entrySet()) {
 					if (mapentry.getValue().getOffer().size()==2) {
 
@@ -238,28 +237,18 @@ public class Player
 
 
 	// la c'est la méthode pour 
-	public void upsideDown(Player p, Scanner input) 
+	public void upsideDown(Player this, int choice) 
 	{		
-		System.out.println("voici vos cartes joueur : " + this.getPseudo()+"\n");
-		for(int i=0; i<2;i++) {
-			System.out.println(getHand()[i].getValue() +" de "+ getHand()[i].getColor()); // on affiche les cartes du joueur
-		}
 
-		System.out.println("Quelle carte voulez-vous garder cachée?\n");
-
-		int numC = 0; // demande au joueur de rentrer un numéro entre 1 et 2
+		int numC = choice; // demande au joueur de rentrer un numéro entre 1 et 2
 	
-		while(Game.getChoiceVar().contains(numC)==false) {
-			numC = Game.readInt(input,"Entrez un nombre compris entre 1 et 2 : ", "Non, Recommencez : ");
-		}
 
 		((Map<String, Card>) getOffer()).put("down", getHand()[numC-1]); // -1 car le tableau commence à l'indice 0, je caste l'offer  
 		((Map<String, Card>) getOffer()).put("up", getHand()[numC%2]); // avec le modulo 2 on obtient la case manquante, je caste l'offer
-		System.out.println(this.getPseudo()  + " a caché " + ((Map<String, Card>) getOffer()).get("down").getValue() + " de " + ((Map<String, Card>) getOffer()).get("down").getColor()+"\n");
 		/* et la on affiche le pseudo du player en paramètre, avec get(Down) et la value de la carte, et la couleur
 		 */
 
-		Player.listOffer.put(this.getPseudo(), this.getOffer()); // on ajoute l'offre du player a la listOffer.
+		this.listOffer.put(this.getPseudo(), this.getOffer()); // on ajoute l'offre du player a la listOffer.
 
 	}
 

@@ -21,8 +21,8 @@ public class BotHard extends Player implements Difficulty {
 
 
 
-	public BotHard(Scanner input) {
-		super(input);
+	public BotHard(String pseudo, Game g) {
+		super(pseudo, g);
 		// TODO Auto-generated constructor stub
 	}
 
@@ -216,10 +216,10 @@ public class BotHard extends Player implements Difficulty {
 
 
 		if(Game.getNbPlayers() == 3 && nbCardOffer>3)
-		{System.out.println(Game.getForMainPlay().get(Player.getVictime()).getPseudo() + " à vous de jouer\n ");
+		{System.out.println(Game.getForMainPlay().get(victime).getPseudo() + " à vous de jouer\n ");
 		}else
 			if(Game.getNbPlayers()==4 && nbCardOffer>4)
-			{System.out.println(Game.getForMainPlay().get(Player.getVictime()).getPseudo() + " à vous de jouer\n ");}
+			{System.out.println(Game.getForMainPlay().get(victime).getPseudo() + " à vous de jouer\n ");}
 
 
 

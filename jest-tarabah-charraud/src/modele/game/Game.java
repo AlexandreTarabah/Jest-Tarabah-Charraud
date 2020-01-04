@@ -35,6 +35,7 @@ import vue.PlayerPanel;
 
 import java.util.Map.Entry;
 import java.util.NavigableMap;
+import java.util.Observable;
 
 
 
@@ -64,18 +65,20 @@ import java.util.NavigableMap;
  ------------------------------------------------------------------------------------------------------------------------------
  */
 
-public class Game {
+public class Game extends Observable {
 	
-	public static int nbPlayers;
-	protected static int nbBots;
-	protected static int nbRealPlayers;
+	protected  int nbPlayers;
+	protected  int nbBots;
+	protected  int nbRealPlayers;
+	protected int difficulty;
+	
 	Card[] trophyCards = new Card[2] ;
 
-	public static HashMap<String,Player> ForMainPlay = new HashMap<String,Player>() ;
+	public HashMap<String,Player> ForMainPlay = new HashMap<String,Player>() ;
 
-	public static ArrayList<Player> players = new ArrayList<Player>();
+	public ArrayList<Player> players = new ArrayList<Player>();
 
-	static HashMap<String, HashMap<String, Card>> listOffer= new HashMap<>();
+	public  HashMap<String, HashMap<String, Card>> listOffer= new HashMap<>();
 
 	private DrawDeck drawdeck;
 
@@ -83,17 +86,17 @@ public class Game {
 
 	public boolean extension = true;
 
-	public static HashMap<String,Integer> winner = new HashMap<String,Integer>();
+	public  HashMap<String,Integer> winner = new HashMap<String,Integer>();
 
 	boolean variante = false;
 	
 // Liste de vérif pour les choix proposer a l'utilisateur : 
 	
-	public static ArrayList<Integer> choiceVar= new ArrayList<Integer>();
+	public ArrayList<Integer> choiceVar= new ArrayList<Integer>();
 
 	ArrayList<Integer> choicePlayers= new ArrayList<Integer>();
 	
-	public static ArrayList<String> upsideChoice = new ArrayList<String>() ; 
+	public ArrayList<String> upsideChoice = new ArrayList<String>() ; 
 	
 	private  String victime;
 
@@ -132,7 +135,7 @@ public class Game {
 	}
 
 
-	public static HashMap<String, Player> getForMainPlay() {
+	public HashMap<String, Player> getForMainPlay() {
 		return ForMainPlay;
 	}
 
@@ -153,32 +156,7 @@ public class Game {
 
 
 
-	public void initializeGame(Game g,Scanner input) {
-
-		choiceVar.add(1);
-		choiceVar.add(2);
-
-		for(int i=0; i<5;i++) {
-			choicePlayers.add(i);
-		}
-		upsideChoice.add("down");
-		upsideChoice.add("up");
-
-
-		System.out.println("Bonjour jeunes gens ! Voulez-faire une partie avec ou sans extension ? \n"
-				+ "1 - Avec\n"
-				+ "2 - Sans");
-		int choice=0;
-		while(choiceVar.contains(choice)==false) {
-			choice = readInt(input,"Entrez un nombre compris entre 1 et 2 : ", "Non, Recommencez : ");
-		}
-		if(choice==2)
-			{g.extension=false;} // if(choice==2) // On choisit si on joue avec ou sans extension, ce qui va impacter new DrawDeck(g)
-		players = new ArrayList<Player>();
-		listOffer = new HashMap<>();
-		drawdeck = new DrawDeck(g);
-		drawdeck.shuffle();
-	}
+	
 
 
 
@@ -224,7 +202,7 @@ public class Game {
 	public String determinateFirstPlayer() { // Code  pour comparer dans countJest, dans cette méthode, et dans stealCards
 		int highestCardValue = 0;
 		int highestColorValue = 0;
-		for (Iterator<Player> it = Game.players.iterator(); it.hasNext();) 
+		for (Iterator<Player> it = this.players.iterator(); it.hasNext();) 
 		{
 			Player p = (Player) it.next();
 			for(int i=0;i<2;i++) {
@@ -247,87 +225,61 @@ public class Game {
 
 
 		}
-		System.out.println(victime +" commence la partie");
+		
 		return victime;
 	}
 
 
-	public void configureGameplay(Scanner input) {
-
-		System.out.println(" Combien voulez-vous de joueur rééls ?\n"
-				+ "Vous avez le choix entre 0 - 1 - 2 - 3 - 4 joueurs rééls");
-		int choiceNbPlayers=10;
-		while(choicePlayers.contains(choiceNbPlayers)==false) {
-			choiceNbPlayers = readInt(input,"Entrez un nombre compris entre 0 et 4 : ", "Non, Recommencez : ");
+	public void reglerParametres(int d, int nvp, int nrp){
+		this.difficulty = d;
+		this.nbBots = nvp;
+		this.nbRealPlayers = nrp;
+		this.determinerNombreJoueurs();
+	}
+	
+	/**
+	 * Cette méthode va créer les joueurs en conséquent des nombres de joueurs réels et virtuels voulu.
+	 */
+	public void determinerNombreJoueurs(){
+		if (this.difficulty==1) {
+			for (int i=0;i<this.nbBots;i++){
+				Player joueur = new BotDown(joueur.setPseudo(input),this);
+				this.players.add(joueur);
+				this.ForMainPlay.put(joueur.getPseudo(), joueur);
 		}
-		int k = 0;
-		while(k<choiceNbPlayers) // instanciation des joueurs rééls
-		{ 
-			new Player(input);
-			k++;
+			}else 
+			for(int i=0;i<this.nbBots;i++) {
+				Player joueur = new BotHard(joueur.setPseudo(input,this));
+				this.players.add(joueur);
+				this.ForMainPlay.put(joueur.getPseudo(), joueur);
+			}
+		
+		for (int i=0;i<this.nbRealPlayers;i++){
+			Player joueur = new Player(joueur.setPseudo(input), this);
+			this.players.add(joueur);
+			this.ForMainPlay.put(joueur.getPseudo(), joueur);
 		}
-
-
-
-		System.out.println("Combien voulez-vous de bot ?\n"
-				+ "Vous pouvez choisir de jouer jusqu'a "+ (4-choiceNbPlayers)+" Bots"); // CHoix nombre de bots
-		int choiceNbBot=10;
-		while((choiceNbBot<0 ||choiceNbBot>(4-choiceNbPlayers))) {
-			choiceNbBot = readInt(input,"Veuillez choisir un nombre pour compléter à 3 ou 4 joueurs", "Non, Recommencez : ");
-		}
-
-
-
-		System.out.println("Quelle difficulté de Bot ? \n"
-				+ "Vous pouvez Choisir entre \n \n"
-				+ " 1 - BotDown : bot Facile qui fait des choix randoms\n"
-				+ " 2 - BotHard : bot assez difficile qui fera toujours le bon choix");
-		int choiceDifficulty=0;
-		while(choiceVar.contains(choiceDifficulty)==false) {
-			choiceDifficulty = readInt(input,"Entrez un nombre compris entre 1 et 2 : ", "Non, Recommencez : ");
-		}
-		for(k=0;k<choiceNbBot;k++) // instanciation des bots 
-		{
-			if(choiceDifficulty==1) {
-				new BotDown(input);}
-			else
-				new BotHard(input);
-		}
-
-		nbPlayers = choiceNbBot + choiceNbPlayers;
-
-
-
-
-		System.out.println("Avec quelle variante voulez-vous jouer ?\n"
-				+ "1 - Variante Classique \n"
-				+ "2 - Variante inversion\n");
-		int choicevar=0;
-		while(choiceVar.contains(choicevar)==false) {
-			choicevar = readInt(input,"Entrez un nombre compris entre 1 et 2 : ", "Non, Recommencez : ");
-		}
-		if(choicevar==2)
-		{variante=true;}
+		this.notifyObservers("joueurs");
 	}
 
 
 
 
-	public void winnerDetermination() {
+	public Integer winnerDetermination() {
 
 		int maxValueInMap=(Collections.max(winner.values()));  // retourne la valeur max de la hashmap winner
 		for (Entry<String, Integer> entry : winner.entrySet()) {  
 			if (entry.getValue()==maxValueInMap) {
-				System.out.println(entry.getKey() + " a gagné !" ); // détermine a quelle clé cela appartient pour afficher le gagnant 
+				maxValueInMap=entry.getValue(); // détermine a quelle clé cela appartient pour afficher le gagnant 
 			}
 
 		}
-
-
+		return maxValueInMap;
 	}
 
 	public void playRounds() {
 		Scanner input2 = new Scanner(System.in);
+		int choice=0;
 		
 		while(this.drawdeck.getSize() != 0) // On repète le processus jusqu'a temps qu'on ait plu de carte
 		{
@@ -337,17 +289,18 @@ public class Game {
 			Iterator<Player> it = players.iterator();
 			while(it.hasNext()) {
 				Player p = it.next();
-				p.upsideDown(p, input2);
+				this.notifyObservers("upsideDown");
+				p.upsideDown(choice);
 			}
 			
 			
 			this.determinateFirstPlayer(); // on détermine le premier Joueur
 
 			for(int j =0; j<nbPlayers;j++) {  // le reste suit selon la méthode stealCard(input)
-				ForMainPlay.get(victime).stealCard(input2);	 // Les manip de chaque joueur pendant le tour 
+				this.ForMainPlay.get(victime).stealCard(input2, this);	 // Les manip de chaque joueur pendant le tour 
 			}
 
-			for(int i=0; i<Game.nbPlayers;i++) {
+			for(int i=0; i<this.nbPlayers;i++) {
 				players.get(i).HasStolen=false;
 			}
 
@@ -359,7 +312,7 @@ public class Game {
 
 	
 	public void giveTrophy() {
-		ArrayList<Player> p = Game.players ;
+		ArrayList<Player> p = this.players ;
 		Card[] t = this.trophyCards;
 
 		if(t[0] != null && t[1] != null) { // Si y'a l'extension et 3 joueurs y'a pas de trophées ducoup on passe.
@@ -456,9 +409,9 @@ public class Game {
 					Map<Player,Entry<Player, Integer>> bestJestColor = new HashMap<Player, Entry<Player, Integer>>();
 					Map<Player, Integer> bestJestPlayer = new HashMap<Player, Integer>();
 					Map.Entry<Player,Integer> myEntry = new AbstractMap.SimpleEntry<Player, Integer>(players.get(1), 0);
-					bestJestValue.put(players.get(1), myEntry) ;
-					bestJestColor.put(players.get(1), myEntry) ; 
-					bestJestPlayer.put(players.get(1), 0) ;
+					bestJestValue.put(players.get(1), myEntry);
+					bestJestColor.put(players.get(1), myEntry); 
+					bestJestPlayer.put(players.get(1), 0);
 					String result = "" ; 
 
 					for(int i = 0 ; i < p.size() ; i ++) // parcourt les joueurs
@@ -556,12 +509,12 @@ public class Game {
 			if (this.variante == false)
 			{
 				Count count = new CountClassique() ;
-				Game.players.get(i).getJest().acceptCount(count, Game.players.get(i)) ;
+				this.players.get(i).getJest().acceptCount(count, this.players.get(i)) ;
 			}
 			else 
 			{
 				Count count = new CountInversion() ;
-				Game.players.get(i).getJest().acceptCount(count,Game.players.get(i)) ;
+				this.players.get(i).getJest().acceptCount(count,this.players.get(i)) ;
 			}
 		}
 
@@ -573,11 +526,10 @@ public class Game {
 	public void run() {
 
 		
-		Scanner input = new Scanner(System.in);
-		
-		this.initializeGame(this, input); 
-		
-		this.configureGameplay(input);
+		this.players = new ArrayList<Player>();
+		this.listOffer = new HashMap<>();
+		this.drawdeck = new DrawDeck(this);
+		this.drawdeck.shuffle();
 		
 		
 		this.createTrophies(this); //METTRE DANS MAIN JESTINTERFACE
@@ -590,12 +542,12 @@ public class Game {
 		
 		this.countPoints();
 		
-		this.winnerDetermination() ; 
+		this.winnerDetermination(); 
 
 	}
 
 
-	public static int getNbPlayers() {
+	public  int getNbPlayers() {
 		// TODO Auto-generated method stub
 		return nbPlayers;
 	}
@@ -607,19 +559,19 @@ public class Game {
 	}
 
 
-	public static ArrayList<String> getUpsideChoice() {
+	public ArrayList<String> getUpsideChoice() {
 		// TODO Auto-generated method stub
 		return upsideChoice;
 	}
 
 
-	public static ArrayList<Integer> getChoiceVar() {
+	public  ArrayList<Integer> getChoiceVar() {
 		// TODO Auto-generated method stub
 		return choiceVar;
 	}
 
 
-	public static HashMap<String, Integer> getWinner() {
+	public  HashMap<String, Integer> getWinner() {
 		// TODO Auto-generated method stub
 		return winner;
 	}
