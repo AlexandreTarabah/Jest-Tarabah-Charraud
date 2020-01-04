@@ -36,6 +36,8 @@ import vue.PlayerPanel;
 
 import java.util.Map.Entry;
 
+import javax.swing.JOptionPane;
+
 import java.util.NavigableMap;
 import java.util.Observable;
 import java.util.Observer;
@@ -135,12 +137,11 @@ public class Game extends Observable implements Runnable {
 						p.getHand().add(drawdeck.takeCards());
 					}
 					isPlaying=p;
-					this.notifyObservers("afficherCartes");
 					; // place une carte en position i dans la
 					// main du joueur (qui est un tableau)
 
 
-				}
+				}this.notifyObservers("afficherCartes");
 			}
 		}
 
@@ -267,27 +268,23 @@ public class Game extends Observable implements Runnable {
 		if (this.difficulty==1) {
 			for (int i=0;i<this.nbBots;i++){
 
-				Player joueur = new BotDown(Integer.toString(i), this);
-				joueur.setPseudo(new FenetreSaisie()) ;
+				Player joueur = new BotDown(JOptionPane.showInputDialog("rentrer le pseudo du bot"), this);
 
 			}
 		}else 
 		{for(int i=0;i<this.nbBots;i++) {
-			Player joueur = new BotHard(Integer.toString(i), this);
-			joueur.setPseudo(new FenetreSaisie()) ;
+			Player joueur = new BotHard(JOptionPane.showInputDialog("rentrer le pseudo du bot"), this);
 
 		}
 		}
 
 		for (int i=0;i<this.nbRealPlayers;i++){
-			Player joueur = new Player(Integer.toString(i), this);
-			joueur.setPseudo(new FenetreSaisie()) ;
+			Player joueur = new Player(JOptionPane.showInputDialog("rentrer le pseudo d'un joueur"), this);
+
 
 		}
 		this.notifyObservers("joueurs");
 	}
-
-
 
 
 	public Integer winnerDetermination() {
@@ -302,7 +299,8 @@ public class Game extends Observable implements Runnable {
 		return maxValueInMap;
 	}
 
-	public void playRounds() {
+	public void playRounds() 
+	{
 		this.notifyObservers("piles");
 
 		int choice=0;
@@ -322,7 +320,7 @@ public class Game extends Observable implements Runnable {
 				isPlaying=p;
 
 				if(p instanceof BotDown || p instanceof BotHard) {
-					p.upsideDown(choice);
+					p.upsideDown(choice,this);
 				}
 				else
 				{
@@ -332,13 +330,7 @@ public class Game extends Observable implements Runnable {
 			}
 
 
-
 			this.determinateFirstPlayer();
-			this.notifyObservers("PremierJoueurCommence");// on détermine le premier Joueur
-
-
-
-			this.determinateFirstPlayer(); // on détermine le premier Joueur
 
 
 			for(int j =0; j<nbPlayers;j++) {

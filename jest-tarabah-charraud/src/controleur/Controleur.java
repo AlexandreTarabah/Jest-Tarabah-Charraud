@@ -91,7 +91,7 @@ import vue.Regles;
 	}
 
 	public void methodecontrolupsideDown( int reponseUD,  Player player) {
-		player.upsideDown(reponseUD);
+		player.upsideDown(reponseUD, game);
 		
 	}
 
@@ -115,7 +115,7 @@ import vue.Regles;
 
 		if(game.nbPlayers==3) {
 			if(game.listOffer.size()>4) {
-				while( game.getIsPlaying().equals(choiceVictime)) {
+				while( game.getIsPlaying().getPseudo().equals(choiceVictime)) {
 					
 					choiceVictime = JOptionPane.showInputDialog(null, "Vous ne pouvez pas vous choisir\n choisissez un joueur ", "erreur", JOptionPane.QUESTION_MESSAGE);
 									
@@ -125,7 +125,7 @@ import vue.Regles;
 
 			if(game.nbPlayers==4) {
 				if(game.listOffer.size()>5) {
-					while( game.getIsPlaying().equals(choiceVictime)) {
+					while( game.getIsPlaying().getPseudo().equals(choiceVictime)) {
 		
 						choiceVictime = JOptionPane.showInputDialog(null, "Vous ne pouvez pas vous choisir\n choisissez un joueur ", "erreur", JOptionPane.QUESTION_MESSAGE);
 										

@@ -20,7 +20,7 @@ import java.util.Map.Entry;
 public class Player 
 {
 	private Player isPlaying;
-	
+
 	private String pseudo;
 
 	public boolean isAThief;
@@ -30,7 +30,7 @@ public class Player
 	private HashMap<String,HashMap<String,Card>> listOffer = new HashMap<String, HashMap<String, Card>>();
 
 	public boolean HasStolen=false;
-	
+
 	protected LinkedList<Card> hand = new LinkedList<Card>();
 
 	protected Jest jest ;
@@ -50,11 +50,8 @@ public class Player
 		this.jest = new Jest();
 		g.players.add(this);
 		g.ForMainPlay.put(this.getPseudo(), this);
-		
+
 	}
-
-
-
 
 
 
@@ -70,7 +67,7 @@ public class Player
 		victime = choiceVictime;
 
 		String stolenCard = choiceCardVictime;
-		
+
 
 		this.jest.jestCards.add(this.listOffer.get(getVictime()).get(stolenCard));
 		this.listOffer.get(getVictime()).remove(stolenCard);// méthode AddJest() implementé dans Jest.
@@ -130,7 +127,7 @@ public class Player
 
 	public String setPseudo(FenetreSaisie saisie) 
 	{
-		this.pseudo = saisie.getLabel().getText() ;
+		this.pseudo = FenetreSaisie.getPseudo();
 		return pseudo;
 
 	}
@@ -142,9 +139,9 @@ public class Player
 
 
 
-public LinkedList<Card> getHand() {
-	return hand;
-}
+	public LinkedList<Card> getHand() {
+		return hand;
+	}
 
 
 
@@ -162,19 +159,20 @@ public LinkedList<Card> getHand() {
 
 
 	// la c'est la méthode pour 
-	public void upsideDown(int choice) 
+	public void upsideDown(int choice, Game g) 
 	{		this.isPlaying=this;
 
-		int numC = choice + 1; // demande au joueur de rentrer un numéro entre 1 et 2
-	
+	int numC =0;
+	numC =choice + 1; // demande au joueur de rentrer un numéro entre 1 et 2
 
-		((Map<String, Card>) offer).put("down", this.hand.get(numC-1)); // -1 car le tableau commence à l'indice 0, je caste l'offer  
-		((Map<String, Card>) offer).put("up", this.hand.get(numC%2)); // avec le modulo 2 on obtient la case manquante, je caste l'offer
 
-		/* et la on affiche le pseudo du player en paramètre, avec get(Down) et la value de la carte, et la couleur
-		 */
+	((Map<String, Card>) offer).put("down", this.hand.get(numC-1)); // -1 car le tableau commence à l'indice 0, je caste l'offer  
+	((Map<String, Card>) offer).put("up", this.hand.get(numC%2)); // avec le modulo 2 on obtient la case manquante, je caste l'offer
 
-		this.listOffer.put(this.getPseudo(), this.getOffer()); // on ajoute l'offre du player a la listOffer.
+	/* et la on affiche le pseudo du player en paramètre, avec get(Down) et la value de la carte, et la couleur
+	 */
+
+	g.listOffer.put(this.getPseudo(), this.getOffer()); // on ajoute l'offre du player a la listOffer.
 
 	}
 
@@ -247,7 +245,7 @@ public LinkedList<Card> getHand() {
 
 
 
-	
+
 
 
 	public static void setVictime(String victime) {
@@ -256,7 +254,7 @@ public LinkedList<Card> getHand() {
 
 
 
-	
+
 
 
 	public boolean isHasStolen() {
