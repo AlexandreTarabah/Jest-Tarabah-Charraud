@@ -328,9 +328,6 @@ public class Game extends Observable implements Runnable {
 				}
 				this.notifyObservers("ActualiserMain");
 			}
-			this.notifyObservers("upsideDown");
-
-		}this.notifyObservers("ActualiserMain");
 
 
 
@@ -358,6 +355,7 @@ public class Game extends Observable implements Runnable {
 		this.mainCollectCards();
 		this.notifyObservers("collectCards");// On ramasse les cartes et on les rebalance dans le jeu pour recommencer 
 
+		}
 	}
 
 

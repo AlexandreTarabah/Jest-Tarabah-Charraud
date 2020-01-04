@@ -288,6 +288,7 @@ public class Plateau extends JPanel implements Observer{
 		if (arg == "piles"){
 			this.afficherPiles();
 		}
+	
 		if (arg == "joueurcommence"){
 			this.afficherJoueurCommence();
 		}
