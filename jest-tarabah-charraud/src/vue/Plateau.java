@@ -90,16 +90,16 @@ public class Plateau extends JPanel implements Observer{
 				case 1:
 					switch(c.getColor().getColorValue()){
 						case 1:
-							carte = deck.getCartes().get(1);
+							carte= deck.getCartes().get(0);
 							break;
 						case 2:
-							carte = deck.getCartes().get(5);
+							carte = deck.getCartes().get(4);
 							break;
 						case 3:
-							carte = deck.getCartes().get(9);
+							carte = deck.getCartes().get(8);
 							break;
 						case 4:
-							carte = deck.getCartes().get(16);
+							carte = deck.getCartes().get(12);
 							break;
 					}
 					break;
@@ -115,39 +115,39 @@ public class Plateau extends JPanel implements Observer{
 								carte = deck.getCartes().get(9);
 								break;
 							case 4:
-								carte = deck.getCartes().get(16);
+								carte = deck.getCartes().get(13);
 								break;
 						}
 						break;
 						case 3:
 							switch(c.getColor().getColorValue()){
 								case 1:
-									carte = deck.getCartes().get(1);
+									carte = deck.getCartes().get(2);
 									break;
 								case 2:
-									carte = deck.getCartes().get(5);
+									carte = deck.getCartes().get(6);
 									break;
 								case 3:
-									carte = deck.getCartes().get(9);
+									carte = deck.getCartes().get(10);
 									break;
 								case 4:
-									carte = deck.getCartes().get(16);
+									carte = deck.getCartes().get(14);
 									break;
 							}
 							break;
 						case 4:
 							switch(c.getColor().getColorValue()){
 								case 1:
-									carte = deck.getCartes().get(1);
+									carte = deck.getCartes().get(3);
 									break;
 								case 2:
-									carte = deck.getCartes().get(5);
+									carte = deck.getCartes().get(7);
 									break;
 								case 3:
-									carte = deck.getCartes().get(9);
+									carte = deck.getCartes().get(11);
 									break;
 								case 4:
-									carte = deck.getCartes().get(16);
+									carte = deck.getCartes().get(15);
 									break;
 							}
 							break;
@@ -169,7 +169,13 @@ public class Plateau extends JPanel implements Observer{
 			}
 		}
 	
-	
+	public void actualiserMain() {
+		ListIterator<PlayerPanel> ipp = pp.listIterator();
+		while (ipp.hasNext()){
+			ipp.
+		}
+		
+	}
 	public void afficherJoueurCommence(){
 		ListIterator<PlayerPanel> ipp = pp.listIterator();
 		while (ipp.hasNext()){
