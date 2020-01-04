@@ -39,7 +39,7 @@ public class Regles extends JPanel{
 	    regles.setEditorKit(rtf);  
 	    FileInputStream fichier = null;
 		try {
-			fichier = new FileInputStream("Jest-Rules-v1.0.rtf");
+			fichier = new FileInputStream("file/Jest-Rules-v1.0.rtf");
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 		}  
