@@ -336,7 +336,7 @@ public class Jest {
 	}
 
 
-	public void acceptCount(Count count, Player p) 
+	public void acceptCount(Count count, Player p, Game g) 
 
 	{ // A revoir avec Strategy ou visitor
 
@@ -344,7 +344,7 @@ public class Jest {
 				+ "Rappelons les cartes de votre jest : " + p.getJest().jestCards);
 		p.setNbPoint(count.visitJest(this));
 		System.out.println("Joueur "+ p.getPseudo() + " votre jest vaut " + p.getNbPoint() + " pts") ;
-		Game.getWinner().put(p.getPseudo(), p.getNbPoint());
+		g.getWinner().put(p.getPseudo(), p.getNbPoint());
 
 	}
 

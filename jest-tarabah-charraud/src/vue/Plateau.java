@@ -152,7 +152,7 @@ public class Plateau extends JPanel implements Observer{
 							}
 							break;
 				
-					}break;
+					}
 					
 			
 			
@@ -198,10 +198,6 @@ public class Plateau extends JPanel implements Observer{
 		this.frame.setContentPane(this);
 	}
 	
-	public void upsideDown(Player player){
-		this.changerVisibiliteCartes(true);
-		// retourner la carte choisie sur le plateau
-	}
 	
 	public void supprimerJeu(Player joueur){
 		ListIterator<PlayerPanel> ipp = pp.listIterator();
@@ -222,10 +218,6 @@ public class Plateau extends JPanel implements Observer{
 		}
 	}
 	
-	public void choisirCouleur(){
-		String couleur = (String) JOptionPane.showInputDialog(null, "Quelle couleur choisissez vous ?", "Choix de couleur", JOptionPane.QUESTION_MESSAGE, null, Carte.COULEUR, Carte.COULEUR[0]);
-		controleur.controleCouleur(couleur);
-	}
 	
 	public void changerVisibiliteCartes(Boolean visibles){
 		ListIterator<PlayerPanel> ipp = pp.listIterator();
@@ -257,17 +249,15 @@ public class Plateau extends JPanel implements Observer{
 	}
 	
 	public void stealCards(Game g) {
-		String players[];
-		for(int i=0; i<g.getNbPlayers();i++) {
-			 players[i]=g.players.get(i).getPseudo();
-		}
-				Object[] choiceCard = {1,2};
+
 				String choiceVictime = JOptionPane.showInputDialog(null, 
 						"choisissez votre victime", "le titre", JOptionPane.QUESTION_MESSAGE);
 			    
 			    String choiceCardVictime=JOptionPane.showInputDialog(null, 
 						"choisissez la carte à volé", "le titre", JOptionPane.QUESTION_MESSAGE);
-			    	controleur.methodeStealCard(choiceVictime,choiceCardVictime);
+			    
+			    
+			    	controleur.methodeStealCard(choiceVictime,choiceCardVictime, null);
 		
 	}
 
@@ -300,6 +290,8 @@ public class Plateau extends JPanel implements Observer{
 		
 		if(arg=="stealCards") {
 			
+			this.stealCards(partie);
+			
 			
 		}
 
@@ -307,31 +299,15 @@ public class Plateau extends JPanel implements Observer{
 			this.afficherJoueurCommence();
 		    }
 		
-		if (arg == "joue"){
-			this.choisirCarte();
-		}
+		
 		if (arg == "actualiserPlateau"){
 			this.actualiserPlateau();
 		}
-		if (arg == "changementCouleur"){
-			this.choisirCouleur();
-			JOptionPane.showMessageDialog(null, "Nouvelle couleur du talon : " + partie.getTalon().afficherCouleurTalon(), "Couleur du talon", JOptionPane.INFORMATION_MESSAGE);
+		
+		
+		
 		}
-		if (arg == "afficherCouleur"){
-			JOptionPane.showMessageDialog(null, "Nouvelle couleur du talon : " + partie.getTalon().afficherCouleurTalon(), "Couleur du talon", JOptionPane.INFORMATION_MESSAGE);
-		}
-		if (arg == "demandeBluff"){
-			
-		}
-		if(arg == "afficheVainqueurEtScore"){
-			JOptionPane.showMessageDialog(null, "C'est " + partie.getVainqueurManche() + " qui gagne la manche !", "Information", JOptionPane.INFORMATION_MESSAGE);
-			this.actualiserPlateau();
-			Scores tabScores = new Scores(partie);
-			tabScores.setVisible(true);
-			this.afficherNouvelleManche();
-			tabScores.setVisible(false);
-		}
-	}
+	
 
 	public JFrame getFrame() {
 		return frame;

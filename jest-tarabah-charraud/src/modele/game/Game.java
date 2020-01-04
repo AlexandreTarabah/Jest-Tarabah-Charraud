@@ -69,9 +69,9 @@ import java.util.Observer;
 
 
 
-public class Game extends Observable {
+public class Game extends Observable implements Runnable {
 	
-	protected  int nbPlayers;
+	public  int nbPlayers;
 	protected  int nbBots;
 	protected  int nbRealPlayers;
 	protected int difficulty;
@@ -299,7 +299,7 @@ public class Game extends Observable {
 			for(int i=0;i<this.nbBots;i++) {
 				Player joueur = new BotHard(joueur.setPseudo(input,this));
 				this.players.add(joueur);
-				this.ForMainPlay.put(joueur.getPseudo(), joueur);
+				this.ForMainPlay.put(joueur.getPseudo(), joueur); // A VOIR AVEC PLAYERPANEL 
 			}
 		
 		for (int i=0;i<this.nbRealPlayers;i++){
@@ -326,10 +326,6 @@ public class Game extends Observable {
 	}
 
 	public void playRounds() {
-		Scanner input2 = new Scanner(System.in);
-
-
-
 		int choice=0;
 		String choiceVictime="";
 		String choiceStolenCard="";
@@ -344,6 +340,9 @@ public class Game extends Observable {
 			while(it.hasNext()) {
 				Player p = it.next();
 				p=isPlaying;
+				if(p instanceof BotDown || p instanceof BotHard) {
+					p.upsideDown(choice);
+				}
 				this.notifyObservers("upsideDown");
 				this.notifyObservers("ActualiserMain");
 			}
@@ -358,9 +357,11 @@ public class Game extends Observable {
 			this.determinateFirstPlayer(); // on détermine le premier Joueur
 
 
-			for(int j =0; j<nbPlayers;j++) {  // le reste suit selon la méthode stealCard(input)
-				this.notifyObservers("stealCards");
+			for(int j =0; j<nbPlayers;j++) {
+				if(this.ForMainPlay.get(victime) instanceof BotDown || this.ForMainPlay.get(victime) instanceof BotHard) {// le reste suit selon la méthode stealCard(input)
 				this.ForMainPlay.get(victime).stealCard(choiceVictime,choiceStolenCard, this);	 // Les manip de chaque joueur pendant le tour 
+			}else
+				this.notifyObservers("stealCards");
 			}
 
 			for(int i=0; i<this.nbPlayers;i++) {
@@ -385,7 +386,7 @@ public class Game extends Observable {
 				public int compare(Integer int1, Integer int2) {
 					return int1.compareTo(int2);
 				}
-			} ;
+			};
 
 			for(int j = 0 ; j < t.length ; j ++) // parcourt les trophies
 			{
@@ -573,12 +574,12 @@ public class Game extends Observable {
 			if (this.variante == false)
 			{
 				Count count = new CountClassique() ;
-				this.players.get(i).getJest().acceptCount(count, this.players.get(i)) ;
+				this.players.get(i).getJest().acceptCount(count, this.players.get(i),this);
 			}
 			else 
 			{
 				Count count = new CountInversion() ;
-				this.players.get(i).getJest().acceptCount(count,this.players.get(i)) ;
+				this.players.get(i).getJest().acceptCount(count,this.players.get(i),this);
 			}
 
 			this.scores[i][0] = this.players.get(i).getPseudo() ;

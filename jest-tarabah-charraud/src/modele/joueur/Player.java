@@ -56,7 +56,7 @@ public class Player
 
 
 
-	public void stealCard(String choiceVictime,String choiceStolenCard, Game g) {
+	public void stealCard(String choiceVictime,String choiceCardVictime, Game g) {
 		int nbCardOffer=0;
 		for(Entry<String, HashMap<String, Card>> map : listOffer.entrySet()) {
 
@@ -67,11 +67,7 @@ public class Player
 
 		victime = choiceVictime;
 
-
-
-		System.out.println("Quelle carte voulez-vous lui dérober ?\n ");
-
-		String stolenCard = choiceStolenCard;
+		String stolenCard = choiceCardVictime;
 		
 
 		this.jest.jestCards.add(this.listOffer.get(getVictime()).get(stolenCard));

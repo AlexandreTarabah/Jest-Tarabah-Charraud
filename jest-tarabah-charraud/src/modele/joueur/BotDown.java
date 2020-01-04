@@ -17,15 +17,7 @@ public class BotDown extends Player implements Difficulty {
 
 
 	@Override
-	public void upsideDown(Player p, Scanner input) {
-
-		System.out.println("voici vos cartes joueur : " + this.getPseudo()+"\n");
-		for(int i=0; i<2;i++) {
-			System.out.println(getHand()[i].getValue() +" de "+ getHand()[i].getColor()); // on affiche les cartes du joueur
-		}
-
-		System.out.println("Quelle carte voulez-vous garder cachée?\n");
-
+	public void upsideDown(int choice,Game g) {
 		int numC = 1 ; // demande au joueur de rentrer un numéro entre 1 et 2
 
 		try {
@@ -44,24 +36,24 @@ public class BotDown extends Player implements Difficulty {
 		/* et la on affiche le pseudo du player en paramètre, avec get(Down) et la value de la carte, et la couleur
 		 */
 
-		Player.listOffer.put(this.getPseudo(), this.getOffer()); // on ajoute l'offre du player a la listOffer.
+		g.listOffer.put(this.getPseudo(), this.getOffer()); // on ajoute l'offre du player a la listOffer.
 
 	}
 
 
 
 
-	public void stealCard(Scanner input)
+	public void stealCard(String choiceVictime,String choiceCardVictime, Game g)
 	{
 		int nbCardOffer=0;
-		for(Entry<String, HashMap<String, Card>> map : listOffer.entrySet()) {
+		for(Entry<String, HashMap<String, Card>> map : g.listOffer.entrySet()) {
 
 
 			{nbCardOffer = nbCardOffer+map.getValue().size();}
 		}
 
 
-		System.out.println("Qui sera votre victime ? Rentrer le pseudo d'un joueur\n ");
+		
 		try {
 			Thread.sleep(100);
 		} catch (InterruptedException e) {
@@ -70,12 +62,12 @@ public class BotDown extends Player implements Difficulty {
 		}
 		int i=0;
 
-		if(Game.getNbPlayers()==3) {
+		if(g.getNbPlayers()==3) {
 
 			if(nbCardOffer>4) {
-				while(Game.players.get(i)==this || Game.players.get(i).getOffer().size()!=2)  {
+				while(g.players.get(i)==this || g.players.get(i).getOffer().size()!=2)  {
 					i++;
-				}setVictime(Game.players.get(i).getPseudo());
+				}setVictime(g.players.get(i).getPseudo());
 			}
 
 			else if(nbCardOffer==4 && this.getOffer().size()==2)
@@ -83,36 +75,32 @@ public class BotDown extends Player implements Difficulty {
 			}
 			else if(nbCardOffer==4 && this.getOffer().size()!=2)
 			{
-				while( Game.players.get(i)==this ||  Game.players.get(i).getOffer().size()!=2)  {
+				while( g.players.get(i)==this ||  g.players.get(i).getOffer().size()!=2)  {
 					i++;				
 				}
-				setVictime(Game.players.get(i).getPseudo());
+				setVictime(g.players.get(i).getPseudo());
 			}
 
 		}
 
 
 
-		if(Game.getNbPlayers()==4) {
+		if(g.getNbPlayers()==4) {
 			if(nbCardOffer>5) {
-				while( Game.players.get(i)==this || Game.players.get(i).getOffer().size()!=2)  {
+				while( g.players.get(i)==this || g.players.get(i).getOffer().size()!=2)  {
 					i++;
-				}setVictime(Game.players.get(i).getPseudo());	
+				}setVictime(g.players.get(i).getPseudo());	
 			}
 
 			else if(nbCardOffer==5 && this.getOffer().size()==2)
 			{setVictime(this.getPseudo());}
 			else {
-				while( Game.players.get(i)==this  || Game.players.get(i).getOffer().size()!=2)  {
+				while( g.players.get(i)==this  || g.players.get(i).getOffer().size()!=2)  {
 					i++;
-				}setVictime(Game.players.get(i).getPseudo());	
+				}setVictime(g.players.get(i).getPseudo());	
 			}
 		}
 
-		System.out.println(getVictime());
-
-
-		System.out.println("Quelle carte voulez-vous lui dérober ?\n ");
 		try {
 			Thread.sleep(100);
 		} catch (InterruptedException e) {
@@ -121,17 +109,16 @@ public class BotDown extends Player implements Difficulty {
 		}
 
 		String stolenCard ="down";
-		System.out.println("down");
-		this.jest.jestCards.add(Player.listOffer.get(getVictime()).get(stolenCard));
-		Player.listOffer.get(getVictime()).remove(stolenCard);// méthode AddJest() implementé dans Jest.
+		this.jest.jestCards.add(g.listOffer.get(getVictime()).get(stolenCard));
+		g.listOffer.get(getVictime()).remove(stolenCard);// méthode AddJest() implementé dans Jest.
 
 		this.setHasStolen(true); 
 
-		if(Game.getForMainPlay().get(getVictime()).isHasStolen()==true) { // Dans le cas ou le joueur vole le voleur précédent, on fixe la prochaine victime au joueur qui a l'offre complete. 
+		if(g.getForMainPlay().get(getVictime()).isHasStolen()==true) { // Dans le cas ou le joueur vole le voleur précédent, on fixe la prochaine victime au joueur qui a l'offre complete. 
 
 
-			if(Game.getNbPlayers()==3) {
-				for (HashMap.Entry<String,Player> mapentry : Game.getForMainPlay().entrySet()) {
+			if(g.getNbPlayers()==3) {
+				for (HashMap.Entry<String,Player> mapentry : g.getForMainPlay().entrySet()) {
 					if (mapentry.getValue().getOffer().size()==2) {
 
 						setVictime(mapentry.getKey());
@@ -139,12 +126,12 @@ public class BotDown extends Player implements Difficulty {
 					}
 				}
 			}else
-				if(Game.getNbPlayers()==4) {
+				if(g.getNbPlayers()==4) {
 
 					int highestCardValue = 0;
 					int highestColorValue = 0;
 
-					for (HashMap.Entry<String,Player> mapentry2 : Game.getForMainPlay().entrySet()) {
+					for (HashMap.Entry<String,Player> mapentry2 : g.getForMainPlay().entrySet()) {
 						if (mapentry2.getValue().getOffer().size()==2) {
 							if(highestCardValue <  mapentry2.getValue().getOffer().get("up").getValue().getCardValue())
 							{
@@ -164,22 +151,6 @@ public class BotDown extends Player implements Difficulty {
 				}
 		}
 		nbCardOffer-=1;
-		Iterator<?> it = this.jest.jestCards.iterator();
-		while(it.hasNext())
-		{
-			System.out.println("Monsieur Bot, vous avez ajouté à votre Jest " + it.next()+" "+"\n");
-		}
-
-
-		if(Game.getNbPlayers() == 3 && nbCardOffer>3)
-		{System.out.println(Game.getForMainPlay().get(victime).getPseudo() + " à vous de jouer\n ");
-		}else
-			if(Game.getNbPlayers()==4 && nbCardOffer>4)
-			{System.out.println(Game.getForMainPlay().get(victime).getPseudo() + " à vous de jouer\n ");}
-
-
-
-
 	}
 
 }
