@@ -173,13 +173,15 @@ public class Plateau extends JPanel implements Observer{
 			}
 		}
 	
-	public void actualiserMain() {
+	public void actualiserMain(int reponseUD) {
 		ListIterator<PlayerPanel> ipp = pp.listIterator();
 		while (ipp.hasNext()){
-			ipp.
+			ipp.next().getJeu().get(reponseUD).getGraphics().drawRect(getX(), getY(), getWidth(), getHeight());
 		}
 		
 	}
+	
+	
 	public void afficherJoueurCommence(){
 		ListIterator<PlayerPanel> ipp = pp.listIterator();
 		while (ipp.hasNext()){
@@ -296,6 +298,7 @@ public class Plateau extends JPanel implements Observer{
 		      action[1]);
 
 		    	controleur.methodecontrolupsideDown(reponseUD,partie.getIsPlaying());
+		    	this.actualiserMain(reponseUD);
 			
 		}
 		
@@ -315,7 +318,9 @@ public class Plateau extends JPanel implements Observer{
 			this.actualiserPlateau();
 		}
 		
-		
+		if(arg=="actualiserMain") {
+			this.actualiserMain();
+		}
 		
 		}
 	
