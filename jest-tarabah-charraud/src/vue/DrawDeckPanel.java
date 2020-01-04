@@ -45,60 +45,55 @@ public class DrawDeckPanel extends JPanel{
 	
 	public void genererCartes(){
 		try {
-			Image joker = ImageIO.read(new File("Speciales/Joker.bmp"));
+			Image joker = ImageIO.read(new File("Joker.PNG"));
 			cartes.add(joker);
 			
 			
-			Image unCoeur = ImageIO.read(new File("Vert/Un Vert.bmp"));
+			Image unCoeur = ImageIO.read(new File("AsCoeur.PNG"));
 			cartes.add(unCoeur);
-			Image deuxCoeur = ImageIO.read(new File("Vert/Deux Vert.bmp"));
+			Image deuxCoeur = ImageIO.read(new File("DeuxCoeur.PNG"));
 			cartes.add(deuxCoeur);
-			Image troisCoeur = ImageIO.read(new File("Vert/Trois Vert.bmp"));
+			Image troisCoeur = ImageIO.read(new File("TroisCoeur.PNG"));
 			cartes.add(troisCoeur);
-			Image quatreCoeur = ImageIO.read(new File("Vert/Quatre Vert.bmp"));
+			Image quatreCoeur = ImageIO.read(new File("QuatreCoeur.PNG"));
 			cartes.add(quatreCoeur);
-			Image sixCoeur = ImageIO.read(new File("Jaune/Six Jaune.bmp"));
-			cartes.add(sixCoeur);
 			
 			
-			Image unTrefle = ImageIO.read(new File("Vert/Un Vert.bmp"));
-			cartes.add(unCoeur);
-			Image deuxTrefle = ImageIO.read(new File("Vert/Deux Vert.bmp"));
-			cartes.add(deuxCoeur);
-			Image troisTrefle = ImageIO.read(new File("Vert/Trois Vert.bmp"));
-			cartes.add(troisCoeur);
-			Image quatreTrefle = ImageIO.read(new File("Vert/Quatre Vert.bmp"));
-			cartes.add(quatreCoeur);
-			Image sixTrefle = ImageIO.read(new File("Jaune/Six Jaune.bmp"));
-			cartes.add(sixCoeur);
+			
+			Image unTrefle = ImageIO.read(new File("UnTrefle.PNG"));
+			cartes.add(untrefle);
+			Image deuxTrefle = ImageIO.read(new File("DeuxTrefle.PNG"));
+			cartes.add(deuxtrefle);
+			Image troisTrefle = ImageIO.read(new File("TroisTrefle.PNG"));
+			cartes.add(troistrefle);
+			Image quatreTrefle = ImageIO.read(new File("QuatreTrefle.PNG"));
+			cartes.add(quatretrefle);
+			
 			
 			
 			
 
-			Image unCarreau = ImageIO.read(new File("Vert/Un Vert.bmp"));
-			cartes.add(unCoeur);
-			Image deuxCarreau = ImageIO.read(new File("Vert/Deux Vert.bmp"));
-			cartes.add(deuxCoeur);
-			Image troisCarreau = ImageIO.read(new File("Vert/Trois Vert.bmp"));
-			cartes.add(troisCoeur);
-			Image quatreCarreau = ImageIO.read(new File("Vert/Quatre Vert.bmp"));
-			cartes.add(quatreCoeur);
-			Image sixCarreau = ImageIO.read(new File("Jaune/Six Jaune.bmp"));
-			cartes.add(sixCoeur);
+			Image unCarreau = ImageIO.read(new File("AsCarreau.PNG"));
+			cartes.add(unCarreau);
+			Image deuxCarreau = ImageIO.read(new File("DeuxCarreau.PNG"));
+			cartes.add(deuxCarreau);
+			Image troisCarreau = ImageIO.read(new File("TroisCarreau.PNG"));
+			cartes.add(troisCarreau);
+			Image quatreCarreau = ImageIO.read(new File("QuatreCarreau.PNG"));
+			cartes.add(quatreCarreau);
 			
 			
 			
 			
-			Image unPique = ImageIO.read(new File("Vert/Un Vert.bmp"));
-			cartes.add(unCoeur);
-			Image deuxPique = ImageIO.read(new File("Vert/Deux Vert.bmp"));
-			cartes.add(deuxCoeur);
-			Image troisPique = ImageIO.read(new File("Vert/Trois Vert.bmp"));
-			cartes.add(troisCoeur);
-			Image quatrePique = ImageIO.read(new File("Vert/Quatre Vert.bmp"));
-			cartes.add(quatreCoeur);
-			Image sixPique = ImageIO.read(new File("Jaune/Six Jaune.bmp"));
-			cartes.add(sixCoeur);
+			
+			Image unPique = ImageIO.read(new File("AsPique.PNG"));
+			cartes.add(unPique);
+			Image deuxPique = ImageIO.read(new File("DeuxPique.PNG"));
+			cartes.add(deuxPique);
+			Image troisPique = ImageIO.read(new File("TroisPique.PNG"));
+			cartes.add(troisPique);
+			Image quatrePique = ImageIO.read(new File("QuatrePique.PNG"));
+			cartes.add(quatrePique);
 			
 		}
 		catch (IOException e) {

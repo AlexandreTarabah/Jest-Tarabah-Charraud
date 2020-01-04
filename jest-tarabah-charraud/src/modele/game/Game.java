@@ -66,8 +66,8 @@ import java.util.Observer;
  Création d'une méthode readInt qui te fait tester jusqu'a temps que tu rentres un Int, ensuite vérification selon la demande des parametres réntrés.
  ------------------------------------------------------------------------------------------------------------------------------
  */
+public class Game extends Observable implements Runnable {
 
-public class Game extends Observable {
 
 	public  int nbPlayers;
 	protected  int nbBots;
@@ -103,7 +103,7 @@ public class Game extends Observable {
 	ArrayList<Integer> choicePlayers= new ArrayList<Integer>();
 
 	public ArrayList<String> upsideChoice = new ArrayList<String>() ; 
-	
+
 
 	private  String victime;
 
@@ -277,6 +277,7 @@ public class Game extends Observable {
 	public void determinerNombreJoueurs(){
 		if (this.difficulty==1) {
 			for (int i=0;i<this.nbBots;i++){
+
 				Player joueur = new Player(Integer.toString(i), this);
 				joueur.setPseudo(new FenetreSaisie()) ;
 				this.ForMainPlay.put(joueur.getPseudo(), joueur);
@@ -285,7 +286,8 @@ public class Game extends Observable {
 			for(int i=0;i<this.nbBots;i++) {
 				Player joueur = new Player(Integer.toString(i), this);
 				joueur.setPseudo(new FenetreSaisie()) ;
-				this.ForMainPlay.put(joueur.getPseudo(), joueur);
+				this.ForMainPlay.put(joueur.getPseudo(), joueur); // A VOIR AVEC PLAYERPANEL 
+
 			}
 
 		for (int i=0;i<this.nbRealPlayers;i++){
@@ -313,8 +315,8 @@ public class Game extends Observable {
 	}
 
 	public void playRounds() {
-		Scanner input2 = new Scanner(System.in);
 
+		Scanner input2 = new Scanner(System.in);
 
 		int choice=0;
 
@@ -331,13 +333,16 @@ public class Game extends Observable {
 			Iterator<Player> it = players.iterator();
 			while(it.hasNext()) {
 				Player p = it.next();
-				p=isPlaying;
+				isPlaying=p;
+				if(p instanceof BotDown || p instanceof BotHard) {
+					p.upsideDown(choice);
+				}
 				this.notifyObservers("upsideDown");
 				this.notifyObservers("ActualiserMain");
 			}
 
-			
-			
+
+
 			this.determinateFirstPlayer();
 			this.notifyObservers("determinateFirstPlayer");// on détermine le premier Joueur
 
@@ -346,9 +351,12 @@ public class Game extends Observable {
 			this.determinateFirstPlayer(); // on détermine le premier Joueur
 
 
-			for(int j =0; j<nbPlayers;j++) {  // le reste suit selon la méthode stealCard(input)
-				this.notifyObservers("stealCards");
-				this.ForMainPlay.get(victime).stealCard(choiceVictime,choiceStolenCard, this);	 // Les manip de chaque joueur pendant le tour 
+			for(int j =0; j<nbPlayers;j++) {
+				isPlaying=this.ForMainPlay.get(victime);
+				if(this.ForMainPlay.get(victime) instanceof BotDown || this.ForMainPlay.get(victime) instanceof BotHard) {// le reste suit selon la méthode stealCard(input)
+					this.ForMainPlay.get(victime).stealCard(choiceVictime,choiceStolenCard, this);	 // Les manip de chaque joueur pendant le tour 
+				}else
+					this.notifyObservers("stealCards");
 			}
 
 			for(int i=0; i<this.nbPlayers;i++) {
@@ -373,7 +381,7 @@ public class Game extends Observable {
 				public int compare(Integer int1, Integer int2) {
 					return int1.compareTo(int2);
 				}
-			} ;
+			};
 
 			for(int j = 0 ; j < t.length ; j ++) // parcourt les trophies
 			{
@@ -561,12 +569,12 @@ public class Game extends Observable {
 			if (this.variante == false)
 			{
 				Count count = new CountClassique() ;
-				this.players.get(i).getJest().acceptCount(count, this.players.get(i)) ;
+				this.players.get(i).getJest().acceptCount(count, this.players.get(i),this);
 			}
 			else 
 			{
 				Count count = new CountInversion() ;
-				this.players.get(i).getJest().acceptCount(count,this.players.get(i)) ;
+				this.players.get(i).getJest().acceptCount(count,this.players.get(i),this);
 			}
 
 			this.scores[i][0] = this.players.get(i).getPseudo() ;
@@ -654,9 +662,9 @@ public class Game extends Observable {
 	public Player getIsPlaying() {
 		return isPlaying;
 	}
-	
+
 	public void addObserver(Observer obs) {
-	    this.listObserver.add(obs);
+		this.listObserver.add(obs);
 	}
 
 	public void notifyObservers(Object arg) {
@@ -666,8 +674,8 @@ public class Game extends Observable {
 	}
 
 	public void deleteObserver(Observer o) {
-	    listObserver.remove(o);
+		listObserver.remove(o);
 	}
 
-
-}// ARMAGEDDON 
+}
+// ARMAGEDDON 

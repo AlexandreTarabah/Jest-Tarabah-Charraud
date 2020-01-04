@@ -5,7 +5,8 @@ import java.util.LinkedList;
 
 import javax.swing.*;
 
-
+import modele.joueur.BotDown;
+import modele.joueur.BotHard;
 import modele.joueur.Player;
 
 public class PlayerPanel extends JPanel{
@@ -16,7 +17,7 @@ public class PlayerPanel extends JPanel{
 	private static final long serialVersionUID = 1L;
 
 	private String nomJoueur;
-	private Boolean virtuel = true;
+	private Boolean virtuel = false;
 	private JLabel nomJoueurLabel;
 	private PlayerPanel pp;
 	private JButton uno;
@@ -30,8 +31,8 @@ public class PlayerPanel extends JPanel{
 		this.setLayout(new BorderLayout());
 		this.setJeu(new LinkedList<Image>());
 		
-		if (!joueur.isBot()){
-			this.virtuel = false;
+		if (joueur instanceof BotDown || joueur instanceof BotHard){
+			this.virtuel = true;
 		}
 		
 		this.nomJoueur = joueur.getPseudo();

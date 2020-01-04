@@ -130,16 +130,7 @@ import vue.Regles;
 		 }	
 	}
 
-	public void controleContreUNO(){
-		Joueur joueur = (Joueur)JOptionPane.showInputDialog(null, 
-			      "Quel joueur voulez vous contrer ?",
-			      "Contre UNO",
-			      JOptionPane.QUESTION_MESSAGE,
-			      null,
-			      game.getJoueurs().toArray(),
-			      game.getJoueurs().get(0));
-		joueur.contrerUno(joueur, game.getPioche());
-	}
+	
 	
 	public void nouvelleManche(int nm) {
 		if (nm == JOptionPane.OK_OPTION){
@@ -160,28 +151,46 @@ import vue.Regles;
 	}
 
 
+<<<<<<< HEAD
 	public void methodeStealCard(String choiceVictime, String choiceCardVictime) {
+=======
+	public void methodeStealCard(String choiceVictime, String choiceCardVictime,Player p) {
+		while(game.listOffer.containsKey(choiceVictime)==false) {
+			
+			choiceVictime = JOptionPane.showInputDialog(null, "Veuillez entrer un joueur existant", "erreur", JOptionPane.QUESTION_MESSAGE);
+		}
 
 
-		if(Game.nbPlayers==3) {
-			if(nbCardOffer>4) {
-				while( this.pseudo.equals(victime))  {
-					System.out.println(this.pseudo);
-					System.out.println(" n'oubliez pas que vous pouvez vous volez uniquement si vous êtes le dernier joueur\n Rentrer un pseudo\n");
-					victime=input.next();					
+		while(game.listOffer.get(choiceVictime).size()<2) {
+			
+			choiceVictime = JOptionPane.showInputDialog(null, "Veuillez entrer une offre complète", "erreur", JOptionPane.QUESTION_MESSAGE);
+			
+		}
+>>>>>>> branch 'master' of https://github.com/AlexandreTarabah/Jest-Tarabah-Charraud
+
+
+		if(game.nbPlayers==3) {
+			if(game.listOffer.size()>4) {
+				while( game.getIsPlaying().equals(choiceVictime)) {
+					
+					choiceVictime = JOptionPane.showInputDialog(null, "Vous ne pouvez pas vous choisir\n choisissez un joueur ", "erreur", JOptionPane.QUESTION_MESSAGE);
+									
 				}
 			}
 		}else 
 
-			if(Game.nbPlayers==4) {
-				if(nbCardOffer>5) {
-					while( this.pseudo.equals(victime))  {
-						System.out.println(this.pseudo);
-						System.out.println(" n'oubliez pas que vous pouvez vous volez uniquement si vous êtes le dernier joueur\n Rentrer un pseudo\n");
-						victime=input.next();					
+			if(game.nbPlayers==4) {
+				if(game.listOffer.size()>5) {
+					while( game.getIsPlaying().equals(choiceVictime)) {
+		
+						choiceVictime = JOptionPane.showInputDialog(null, "Vous ne pouvez pas vous choisir\n choisissez un joueur ", "erreur", JOptionPane.QUESTION_MESSAGE);
+										
 					}
 				}
 			}
+		p.stealCard(choiceVictime, choiceCardVictime, game);
+		choiceVictime=game.getVictime();
 		
 	}
+	
 }
