@@ -121,12 +121,15 @@ public class Game extends Observable implements Runnable {
 		{		
 
 
-			for (int i=0 ; i < 2 ; i++) // Supposons qu'on distribue les cartes une à une
+			 // Supposons qu'on distribue les cartes une à une
 			{
 				for (Iterator<Player> it = players.iterator(); it.hasNext();) 
 				{
 					Player p = (Player) it.next();
-					p.setHand(i, drawdeck.takeCards()) ; // place une carte en position i dans la
+					for(Iterator<Card> it2 = p.getHand().listIterator();it.hasNext();) {
+						p.getHand().add(drawdeck.takeCards());
+					}
+					 ; // place une carte en position i dans la
 					// main du joueur (qui est un tableau)
 
 
@@ -217,17 +220,17 @@ public Game() {
 		{
 			Player p = (Player) it.next();
 			for(int i=0;i<2;i++) {
-				if(highestCardValue <= p.getHand()[i].getValue().getCardValue())
+				if(highestCardValue <= p.getHand().get(i).getValue().getCardValue())
 				{
-					highestCardValue = p.getHand()[i].getValue().getCardValue();
-					highestColorValue = p.getHand()[i].getColor().getColorValue();
+					highestCardValue = p.getHand().get(i).getValue().getCardValue();
+					highestColorValue = p.getHand().get(i).getColor().getColorValue();
 					victime=(p.getPseudo());
 
 				}
 
-				if((highestCardValue == p.getHand()[i].getValue().getCardValue()) && (highestColorValue <  p.getHand()[i].getColor().getColorValue()))
+				if((highestCardValue == p.getHand().get(i).getValue().getCardValue()) && (highestColorValue <  p.getHand().get(i).getColor().getColorValue()))
 				{
-					highestColorValue =  p.getHand()[i].getColor().getColorValue();
+					highestColorValue =  p.getHand().get(i).getColor().getColorValue();
 					victime=(p.getPseudo());
 				}
 
@@ -256,23 +259,22 @@ public Game() {
 		if (this.difficulty==1) {
 			for (int i=0;i<this.nbBots;i++){
 
-				Player joueur = new Player(Integer.toString(i), this);
+				Player joueur = new BotDown(Integer.toString(i), this);
 				joueur.setPseudo(new FenetreSaisie()) ;
-				this.ForMainPlay.put(joueur.getPseudo(), joueur);
+				
 			}
 		}else 
-			for(int i=0;i<this.nbBots;i++) {
-				Player joueur = new Player(Integer.toString(i), this);
+			{for(int i=0;i<this.nbBots;i++) {
+				Player joueur = new BotHard(Integer.toString(i), this);
 				joueur.setPseudo(new FenetreSaisie()) ;
-				this.ForMainPlay.put(joueur.getPseudo(), joueur); // A VOIR AVEC PLAYERPANEL 
-
+				
+			}
 			}
 
 		for (int i=0;i<this.nbRealPlayers;i++){
 			Player joueur = new Player(Integer.toString(i), this);
 			joueur.setPseudo(new FenetreSaisie()) ;
-			this.players.add(joueur);
-			this.ForMainPlay.put(joueur.getPseudo(), joueur);
+			
 		}
 		this.notifyObservers("joueurs");
 	}
@@ -309,12 +311,10 @@ public Game() {
 			while(it.hasNext()) {
 				Player p = it.next();
 				isPlaying=p;
-				if(p instanceof BotDown || p instanceof BotHard) {
-					p.upsideDown(choice);
-				}
 				this.notifyObservers("upsideDown");
-				this.notifyObservers("ActualiserMain");
-			}
+				
+			}this.notifyObservers("ActualiserMain");
+		
 
 
 
@@ -342,8 +342,9 @@ public Game() {
 			this.notifyObservers("collectCards");// On ramasse les cartes et on les rebalance dans le jeu pour recommencer 
 
 		}
-
 	}
+
+	
 
 	public void giveTrophy() {
 		ArrayList<Player> p = this.players ;
@@ -562,7 +563,6 @@ public Game() {
 
 
 	public void run() {
-		this.players = new ArrayList<Player>();
 		this.listOffer = new HashMap<>();
 		this.drawdeck = new DrawDeck(this);
 		this.drawdeck.shuffle();

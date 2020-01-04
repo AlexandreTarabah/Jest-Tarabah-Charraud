@@ -163,16 +163,17 @@ public class Plateau extends JPanel implements Observer{
 
 
 
-	public void afficherCartes(Player joueur)
-	{
-		ListIterator<PlayerPanel> ipp = this.pp.listIterator();
-		while (ipp.hasNext()){
-			PlayerPanel j = ipp.next();
+	public void afficherCartes(Player joueur){
+		ListIterator<PlayerPanel> iPj = this.pp.listIterator();
+		while (iPj.hasNext()){
+			PlayerPanel j = iPj.next();
 			if (j.getNomJoueur() == joueur.getPseudo()){
-				/*afficher carte comme dans le programme console*/
+				ListIterator<Card> iCartes = joueur.getHand().listIterator();
+				while (iCartes.hasNext()){
+					j.prendreCarte(this.verifierCarte(iCartes.next()));
+				}
 			}
 		}
-
 	}
 
 
@@ -280,6 +281,7 @@ public class Plateau extends JPanel implements Observer{
 	}
 
 	public void update(Observable o, Object arg) {
+		
 		if (arg == "joueurs"){
 			this.afficherJoueurs(game.players.size());
 		}
@@ -304,17 +306,7 @@ public class Plateau extends JPanel implements Observer{
 					action[1]);
 
 
-			controleur.methodecontrolupsideDown(reponseUD,game.getIsPlaying());
-
-
-
-		    	controleur.methodecontrolupsideDown(reponseUD,game.getIsPlaying());
-		    	this.actualiserMain(reponseUD);
-			
-
-
-			controleur.methodecontrolupsideDown(reponseUD,game.getIsPlaying());
-			this.actualiserMain(reponseUD);
+			controleur.methodecontrolupsideDown(reponseUD,game.getIsPlaying());   	
 		}
 
 		if(arg=="stealCards") {
@@ -324,7 +316,7 @@ public class Plateau extends JPanel implements Observer{
 
 		}
 
-		if (arg == "déterminateFirstPlayer"){
+		if (arg == "determinateFirstPlayer"){
 			this.afficherJoueurCommence();
 		}
 

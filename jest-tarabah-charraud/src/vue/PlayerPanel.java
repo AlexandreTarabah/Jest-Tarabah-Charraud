@@ -19,7 +19,7 @@ public class PlayerPanel extends JPanel{
 	private String nomJoueur;
 	private Boolean virtuel = false;
 	private JLabel nomJoueurLabel;
-	private PlayerPanel pp;
+	private CardPanel cp;
 	private JButton uno;
 	private Font font = new Font("Courier", Font.BOLD, 20);
 	
@@ -30,6 +30,8 @@ public class PlayerPanel extends JPanel{
 		this.setOpaque(false);
 		this.setLayout(new BorderLayout());
 		this.setJeu(new LinkedList<Image>());
+		this.cp = new CardPanel(jeu);
+		this.add(cp);
 		
 		if (joueur instanceof BotDown || joueur instanceof BotHard){
 			this.virtuel = true;
@@ -63,7 +65,7 @@ public class PlayerPanel extends JPanel{
 	}
 
 	public void setCartesVisibles(Boolean visibles){
-		this.pp.setCartesVisibles(visibles);
+		this.cp.setCartesVisibles(visibles);
 	}
 
 	public LinkedList<Image> getJeu() {
@@ -78,12 +80,12 @@ public class PlayerPanel extends JPanel{
 		return nomJoueur;
 	}
 
-	public PlayerPanel getpp() {
-		return pp;
+	public CardPanel getPc() {
+		return cp;
 	}
 
-	public void setpp(PlayerPanel pp) {
-		this.pp = pp;
+	public void setPc(CardPanel cp) {
+		this.cp = cp;
 	}
 	
 	public Boolean isVirtuel() {
