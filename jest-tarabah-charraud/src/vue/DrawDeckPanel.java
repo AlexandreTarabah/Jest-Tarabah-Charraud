@@ -29,19 +29,7 @@ public class DrawDeckPanel extends JPanel{
 		this.genererCartes();
 	}
 	
-	public void paintComponent(Graphics g){
-		try {
-		      Image pioche = ImageIO.read(new File("Dos.bmp"));
-		      g.drawImage(pioche, 0, 0, 100, 180, this);
-		     /* try { 
-		    	   Image talon = this.talon.getLast();
-		    	     g.drawImage(talon, 120, 0, 100, 180, this);
-		      }
-		      catch (NoSuchElementException e) {}
-		} catch (IOException e) {
-		      e.printStackTrace();
-		}*/
-	}
+	
 	
 	public void genererCartes(){
 		try {
@@ -61,13 +49,13 @@ public class DrawDeckPanel extends JPanel{
 			
 			
 			Image unTrefle = ImageIO.read(new File("UnTrefle.PNG"));
-			cartes.add(untrefle);
+			cartes.add(unTrefle);
 			Image deuxTrefle = ImageIO.read(new File("DeuxTrefle.PNG"));
-			cartes.add(deuxtrefle);
+			cartes.add(deuxTrefle);
 			Image troisTrefle = ImageIO.read(new File("TroisTrefle.PNG"));
-			cartes.add(troistrefle);
+			cartes.add(troisTrefle);
 			Image quatreTrefle = ImageIO.read(new File("QuatreTrefle.PNG"));
-			cartes.add(quatretrefle);
+			cartes.add(quatreTrefle);
 			
 			
 			
