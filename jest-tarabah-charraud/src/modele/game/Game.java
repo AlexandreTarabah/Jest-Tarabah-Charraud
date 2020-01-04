@@ -35,6 +35,7 @@ import vue.FenetreSaisie;
 import vue.PlayerPanel;
 
 import java.util.Map.Entry;
+
 import java.util.NavigableMap;
 import java.util.Observable;
 import java.util.Observer;
@@ -113,6 +114,10 @@ public class Game extends Observable implements Runnable {
 
 	// La c'est la distribution des cartes, ou finalement j'invoque la méthode takecards et donc le joueur prend 2 cartes, et créé son offer
 
+	public Game() {
+
+	}
+
 	public void distribute() {
 
 		this.currentPlay=true;
@@ -121,7 +126,7 @@ public class Game extends Observable implements Runnable {
 		{		
 
 
-			 // Supposons qu'on distribue les cartes une à une
+			// Supposons qu'on distribue les cartes une à une
 			{
 				for (Iterator<Player> it = players.iterator(); it.hasNext();) 
 				{
@@ -129,7 +134,7 @@ public class Game extends Observable implements Runnable {
 					for(int i=0; i<2;i++) {
 						p.getHand().add(drawdeck.takeCards());
 					}
-					 ; // place une carte en position i dans la
+					; // place une carte en position i dans la
 					// main du joueur (qui est un tableau)
 
 
@@ -151,9 +156,7 @@ public class Game extends Observable implements Runnable {
 	public HashMap<String, Player> getForMainPlay() {
 		return ForMainPlay;
 	}
-public Game() {
-	
-}
+
 	public static int readInt(Scanner scanner, String prompt, String promptOnError) { // Methode qui permet de vérifier qu'on rentre bien un entier
 
 		System.out.print(prompt);
@@ -172,9 +175,10 @@ public Game() {
 
 
 
-	
+
 
 	public void createTrophies(Game g) { // On instancie les trophées a partir du DrawDeckn en fonction des parametres 
+
 		if(extension==false) 
 		{
 			if(g.nbPlayers==3)
@@ -248,7 +252,9 @@ public Game() {
 		this.difficulty = d;
 		this.nbBots = nb;
 		this.nbRealPlayers = nrp;
-		this.nbPlayers=nb+nrp;
+
+		this.nbPlayers = nb + nrp ;
+
 		this.determinerNombreJoueurs();
 	}
 
@@ -261,20 +267,20 @@ public Game() {
 
 				Player joueur = new BotDown(Integer.toString(i), this);
 				joueur.setPseudo(new FenetreSaisie()) ;
-				
+
 			}
 		}else 
-			{for(int i=0;i<this.nbBots;i++) {
-				Player joueur = new BotHard(Integer.toString(i), this);
-				joueur.setPseudo(new FenetreSaisie()) ;
-				
-			}
-			}
+		{for(int i=0;i<this.nbBots;i++) {
+			Player joueur = new BotHard(Integer.toString(i), this);
+			joueur.setPseudo(new FenetreSaisie()) ;
+
+		}
+		}
 
 		for (int i=0;i<this.nbRealPlayers;i++){
 			Player joueur = new Player(Integer.toString(i), this);
 			joueur.setPseudo(new FenetreSaisie()) ;
-			
+
 		}
 		this.notifyObservers("joueurs");
 	}
@@ -295,6 +301,7 @@ public Game() {
 	}
 
 	public void playRounds() {
+
 		int choice=0;
 
 
@@ -311,40 +318,50 @@ public Game() {
 			while(it.hasNext()) {
 				Player p = it.next();
 				isPlaying=p;
-				this.notifyObservers("upsideDown");
-				
-			}this.notifyObservers("ActualiserMain");
-		
 
-
-
-			this.determinateFirstPlayer();
-			this.notifyObservers("PremierJoueurCommence");// on détermine le premier Joueur
-
-
-
-			this.determinateFirstPlayer(); // on détermine le premier Joueur
-
-
-			for(int j =0; j<nbPlayers;j++) {
-				isPlaying=this.ForMainPlay.get(victime);
-				if(this.ForMainPlay.get(victime) instanceof BotDown || this.ForMainPlay.get(victime) instanceof BotHard) {// le reste suit selon la méthode stealCard(input)
-					this.ForMainPlay.get(victime).stealCard(choiceVictime,choiceStolenCard, this);	 // Les manip de chaque joueur pendant le tour 
-				}else
-					this.notifyObservers("stealCards");
+				if(p instanceof BotDown || p instanceof BotHard) {
+					p.upsideDown(choice);
+				}
+				else
+				{
+					this.notifyObservers("upsideDown");
+				}
+				this.notifyObservers("ActualiserMain");
 			}
+			this.notifyObservers("upsideDown");
 
-			for(int i=0; i<this.nbPlayers;i++) {
-				players.get(i).HasStolen=false;
-			}
+		}this.notifyObservers("ActualiserMain");
 
-			this.mainCollectCards();
-			this.notifyObservers("collectCards");// On ramasse les cartes et on les rebalance dans le jeu pour recommencer 
 
+
+
+		this.determinateFirstPlayer();
+		this.notifyObservers("PremierJoueurCommence");// on détermine le premier Joueur
+
+
+
+		this.determinateFirstPlayer(); // on détermine le premier Joueur
+
+
+		for(int j =0; j<nbPlayers;j++) {
+			isPlaying=this.ForMainPlay.get(victime);
+			if(this.ForMainPlay.get(victime) instanceof BotDown || this.ForMainPlay.get(victime) instanceof BotHard) {// le reste suit selon la méthode stealCard(input)
+				this.ForMainPlay.get(victime).stealCard(choiceVictime,choiceStolenCard, this);	 // Les manip de chaque joueur pendant le tour 
+			}else
+				this.notifyObservers("stealCards");
 		}
+
+		for(int i=0; i<this.nbPlayers;i++) {
+			players.get(i).HasStolen=false;
+		}
+
+		this.mainCollectCards();
+		this.notifyObservers("collectCards");// On ramasse les cartes et on les rebalance dans le jeu pour recommencer 
+
 	}
 
-	
+
+
 
 	public void giveTrophy() {
 		ArrayList<Player> p = this.players ;
@@ -563,6 +580,7 @@ public Game() {
 
 
 	public void run() {
+
 		this.listOffer = new HashMap<>();
 		this.drawdeck = new DrawDeck(this);
 		this.drawdeck.shuffle();

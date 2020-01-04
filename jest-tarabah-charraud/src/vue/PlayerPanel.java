@@ -33,6 +33,9 @@ public class PlayerPanel extends JPanel{
 		this.cp = new CardPanel(jeu);
 		this.add(cp);
 		
+		this.cp = new CardPanel(jeu);
+		this.add(cp);
+		
 		if (joueur instanceof BotDown || joueur instanceof BotHard){
 			this.virtuel = true;
 		}
@@ -80,7 +83,8 @@ public class PlayerPanel extends JPanel{
 		return nomJoueur;
 	}
 
-	public CardPanel getPc() {
+	public CardPanel getcp() {
+
 		return cp;
 	}
 

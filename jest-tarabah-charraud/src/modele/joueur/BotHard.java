@@ -110,16 +110,16 @@ public class BotHard extends Player implements Difficulty {
 		}
 
 		String stolenCard =null;
-		int highestC = g.ForMainPlay.get(victime).getHand()[0].getColor().getColorValue();
-		int highestV = g.ForMainPlay.get(victime).getHand()[0].getValue().getCardValue();
-		if(highestC < g.ForMainPlay.get(victime).getHand()[1].getColor().getColorValue())
+		int highestC = g.ForMainPlay.get(victime).hand.get(0).getColor().getColorValue();
+		int highestV = g.ForMainPlay.get(victime).hand.get(0).getValue().getCardValue();
+		if(highestC < g.ForMainPlay.get(victime).hand.get(1).getColor().getColorValue())
 		{
 			stolenCard = "up";
 
 		}
-		else if (highestC == g.ForMainPlay.get(victime).getHand()[1].getColor().getColorValue())
+		else if (highestC == g.ForMainPlay.get(victime).hand.get(1).getColor().getColorValue())
 		{
-			if(highestV < g.ForMainPlay.get(victime).getHand()[1].getValue().getCardValue())
+			if(highestV < g.ForMainPlay.get(victime).hand.get(1).getValue().getCardValue())
 			{
 				stolenCard = "up";
 
@@ -129,7 +129,7 @@ public class BotHard extends Player implements Difficulty {
 				stolenCard = "down";
 			}
 		}
-		else if(highestC > g.ForMainPlay.get(victime).getHand()[1].getColor().getColorValue())
+		else if(highestC > g.ForMainPlay.get(victime).hand.get(1).getColor().getColorValue())
 		{
 			stolenCard = "down";
 		}

@@ -158,7 +158,7 @@ public class Plateau extends JPanel implements Observer{
 
 
 	}
-	
+
 
 
 
@@ -186,8 +186,8 @@ public class Plateau extends JPanel implements Observer{
 
 	}
 
-	
-	
+
+
 
 	public void afficherJoueurCommence(){
 		ListIterator<PlayerPanel> ipp = pp.listIterator();
@@ -281,7 +281,7 @@ public class Plateau extends JPanel implements Observer{
 	}
 
 	public void update(Observable o, Object arg) {
-		
+
 		if (arg == "joueurs"){
 			this.afficherJoueurs(game.players.size());
 		}
@@ -305,8 +305,10 @@ public class Plateau extends JPanel implements Observer{
 					action,
 					action[1]);
 
+			controleur.methodecontrolupsideDown(reponseUD,game.getIsPlaying());
 
-			controleur.methodecontrolupsideDown(reponseUD,game.getIsPlaying());   	
+			// this.actualiserMain(reponseUD);
+
 		}
 
 		if(arg=="stealCards") {
