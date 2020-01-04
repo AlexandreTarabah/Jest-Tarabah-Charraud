@@ -34,8 +34,8 @@ import vue.Regles;
 	 }
 
 	 /* Permettra de connaitre la vue */
-	 public void setVue(Home h, Parametres p, Regles r, Plateau pl) {
-		 this.home= h;
+	 public void setVue(Home home, Parametres p, Regles r, Plateau pl) {
+		 this.home = home ;
 		 this.parametres = p;
 		 this.regles = r;
 		 this.plateau = pl;
@@ -150,10 +150,8 @@ import vue.Regles;
 		
 	}
 
-
-<<<<<<< HEAD
 	public void methodeStealCard(String choiceVictime, String choiceCardVictime) {
-=======
+
 	public void methodeStealCard(String choiceVictime, String choiceCardVictime,Player p) {
 		while(game.listOffer.containsKey(choiceVictime)==false) {
 			
@@ -166,8 +164,6 @@ import vue.Regles;
 			choiceVictime = JOptionPane.showInputDialog(null, "Veuillez entrer une offre complète", "erreur", JOptionPane.QUESTION_MESSAGE);
 			
 		}
->>>>>>> branch 'master' of https://github.com/AlexandreTarabah/Jest-Tarabah-Charraud
-
 
 		if(game.nbPlayers==3) {
 			if(game.listOffer.size()>4) {

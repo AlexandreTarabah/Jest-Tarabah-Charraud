@@ -15,7 +15,7 @@ public class Home extends JFrame{
 	private static final long serialVersionUID = 1L;
 	
 	private HomePanel hp;
-	private JButton nouvellePartie;
+	private JButton nouvellegame;
 	private JButton regles;
 	private JButton quitter;
 	
@@ -29,9 +29,9 @@ public class Home extends JFrame{
 	    
 	    Font font = new Font("Courier", Font.BOLD, 15);
 	    
-		this.nouvellePartie = new JButton("Nouvelle partie");
-		this.nouvellePartie.setFont(font);
-		this.nouvellePartie.setActionCommand("nouvellepartie");
+		this.nouvellegame = new JButton("Nouvelle game");
+		this.nouvellegame.setFont(font);
+		this.nouvellegame.setActionCommand("nouvellegame");
 		
 		this.regles = new JButton("Regles du jeu");
 		this.regles.setFont(font);
@@ -39,7 +39,7 @@ public class Home extends JFrame{
 		
 		this.quitter = new JButton("Quitter");
 		this.quitter.setFont(font);
-		this.quitter.setActionCommand("quitterpartie");
+		this.quitter.setActionCommand("quittergame");
 		
 	    this.hp.setLayout(new GridBagLayout());
 	    GridBagConstraints gbc = new GridBagConstraints();
@@ -49,7 +49,7 @@ public class Home extends JFrame{
 	    
 	    gbc.gridx = 0;
 	    gbc.gridy = 1;
-	    this.hp.add(nouvellePartie, gbc);
+	    this.hp.add(nouvellegame, gbc);
 	    
 	    gbc.gridy = 2;
 	    this.hp.add(regles, gbc);
@@ -62,7 +62,7 @@ public class Home extends JFrame{
 	}
 
 	public void setListener(Controleur controleur) {
-		nouvellePartie.addActionListener(controleur) ;
+		nouvellegame.addActionListener(controleur) ;
 		regles.addActionListener(controleur) ;
 		quitter.addActionListener(controleur) ;
 	}
