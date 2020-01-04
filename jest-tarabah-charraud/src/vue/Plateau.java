@@ -63,12 +63,6 @@ public class Plateau extends JPanel implements Observer{
 		while (iJoueurs.hasNext()){
 			pp.add(new PlayerPanel(iJoueurs.next()));
 		}
-		if (nbrJoueurs == 2){
-			pp.get(0).setBounds(500, 0, 500, 200);
-			this.add(pp.get(0));
-			pp.get(1).setBounds(500, 550, 500, 200);
-			this.add(pp.get(1));
-		}
 		if (nbrJoueurs == 3){
 			pp.get(0).setBounds(0, 0, 500, 200);
 			this.add(pp.get(0));
@@ -76,6 +70,16 @@ public class Plateau extends JPanel implements Observer{
 			this.add(pp.get(1));
 			pp.get(2).setBounds(500, 550, 500, 200);
 			this.add(pp.get(2));
+		}
+		if (nbrJoueurs == 4){
+			pp.get(0).setBounds(0, 300, 500, 200);
+			this.add(pp.get(0));
+			pp.get(1).setBounds(500, 0, 500, 200);
+			this.add(pp.get(1));
+			pp.get(2).setBounds(1000, 300, 500, 200);
+			this.add(pp.get(2));
+			pp.get(3).setBounds(500, 550, 500, 200);
+			this.add(pp.get(3));
 		}
 		this.frame.setContentPane(this);
 	}
@@ -164,7 +168,7 @@ public class Plateau extends JPanel implements Observer{
 				}
 			}
 		}
-	}
+	
 	
 	public void afficherJoueurCommence(){
 		ListIterator<PlayerPanel> ipp = pp.listIterator();
@@ -244,7 +248,7 @@ public class Plateau extends JPanel implements Observer{
 		ListIterator<PlayerPanel> ipp = pp.listIterator();
 		while (ipp.hasNext()){
 			PlayerPanel pp = ipp.next();
-			if (pp.getNomJoueur() == partie.getIsPlaying().getNomJoueur()){
+			if (pp.getNomJoueur() == partie.getIsPlaying().getPseudo()){
 				pp.setCartesVisibles(visibles);
 			}
 		}
@@ -273,7 +277,7 @@ public class Plateau extends JPanel implements Observer{
 		if (arg == "joueurs"){
 			this.afficherJoueurs(partie.players.size());
 		}
-		if (arg == "deck"){
+		if (arg == "piles"){
 			this.afficherPiles();
 		}
 		if (arg == "joueurcommence"){
@@ -281,6 +285,33 @@ public class Plateau extends JPanel implements Observer{
 		}
 		if (arg == "distribuer"){
 			this.afficherDistribution();
+		}
+		if(arg=="upsideDown") {
+			int[] action = {1,2};
+		    int reponseCO=JOptionPane.showOptionDialog(null, 
+		      "C'est le tour de "+ partie.getIsPlaying()+ "\nQuelle carte retourner ?",
+		      "Action",
+		      JOptionPane.YES_NO_OPTION,
+		      JOptionPane.QUESTION_MESSAGE,
+		      null,
+		      action,
+		      action[1]);
+		    	controleur.methodecontrolupsideDown();
+			
+		}
+		
+		if(arg=="stealCard") {
+			int[] action = {1,2};
+		    int reponseCO=JOptionPane.showOptionDialog(null, 
+		      "C'est le tour de "+ partie.getIsPlaying()+ "\nQuelle carte retourner ?",
+		      "Action",
+		      JOptionPane.YES_NO_OPTION,
+		      JOptionPane.QUESTION_MESSAGE,
+		      null,
+		      action,
+		      action[1]);
+		    	controleur.controleContreUNO();
+			
 		}
 
 		if (arg == "declareJoueur"){
@@ -327,11 +358,11 @@ public class Plateau extends JPanel implements Observer{
 		return frame;
 	}
 
-	public PlayerPanel getppJoue() {
-		return getppJoue();
+	public PlayerPanel getpppoue() {
+		return getpppoue();
 	}
 
-	public void setppJoue(PlayerPanel ppJoue) {
-		this.pppoue = ppJoue;
+	public void setpppoue(PlayerPanel pppoue) {
+		this.pppoue = pppoue;
 	}
 }

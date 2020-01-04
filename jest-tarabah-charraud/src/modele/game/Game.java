@@ -35,6 +35,7 @@ import vue.PlayerPanel;
 
 import java.util.Map.Entry;
 import java.util.NavigableMap;
+import java.util.Observable;
 
 
 
@@ -64,18 +65,28 @@ import java.util.NavigableMap;
  ------------------------------------------------------------------------------------------------------------------------------
  */
 
+<<<<<<< HEAD
 public class Game {
 
 	public static int nbPlayers;
 	protected static int nbBots;
 	protected static int nbRealPlayers;
+=======
+public class Game extends Observable {
+	
+	protected  int nbPlayers;
+	protected  int nbBots;
+	protected  int nbRealPlayers;
+	protected int difficulty;
+	
+>>>>>>> branch 'master' of https://github.com/AlexandreTarabah/Jest-Tarabah-Charraud
 	Card[] trophyCards = new Card[2] ;
 
 	public HashMap<String,Player> ForMainPlay = new HashMap<String,Player>() ;
 
 	public ArrayList<Player> players = new ArrayList<Player>();
 
-	static HashMap<String, HashMap<String, Card>> listOffer= new HashMap<>();
+	public  HashMap<String, HashMap<String, Card>> listOffer= new HashMap<>();
 
 	private DrawDeck drawdeck;
 
@@ -83,18 +94,35 @@ public class Game {
 
 	public boolean extension = true;
 
+<<<<<<< HEAD
 	public HashMap<String,Integer> winner = new HashMap<String,Integer>();
+=======
+	public  HashMap<String,Integer> winner = new HashMap<String,Integer>();
+>>>>>>> branch 'master' of https://github.com/AlexandreTarabah/Jest-Tarabah-Charraud
 
 	boolean variante = false;
+<<<<<<< HEAD
 
 	// Liste de vérif pour les choix proposer a l'utilisateur : 
 
 	public static ArrayList<Integer> choiceVar= new ArrayList<Integer>();
+=======
+	
+// Liste de vérif pour les choix proposer a l'utilisateur : 
+	
+	public ArrayList<Integer> choiceVar= new ArrayList<Integer>();
+>>>>>>> branch 'master' of https://github.com/AlexandreTarabah/Jest-Tarabah-Charraud
 
 	ArrayList<Integer> choicePlayers= new ArrayList<Integer>();
+<<<<<<< HEAD
 
 	public static ArrayList<String> upsideChoice = new ArrayList<String>() ; 
 
+=======
+	
+	public ArrayList<String> upsideChoice = new ArrayList<String>() ; 
+	
+>>>>>>> branch 'master' of https://github.com/AlexandreTarabah/Jest-Tarabah-Charraud
 	private  String victime;
 	
 	public Object [][] scores;
@@ -134,9 +162,14 @@ public class Game {
 	}
 
 
+<<<<<<< HEAD
 	public static HashMap<String, Player> getForMainPlay(Game g) {
 		
 		return g.ForMainPlay ;
+=======
+	public HashMap<String, Player> getForMainPlay() {
+		return ForMainPlay;
+>>>>>>> branch 'master' of https://github.com/AlexandreTarabah/Jest-Tarabah-Charraud
 	}
 
 	public static int readInt(Scanner scanner, String prompt, String promptOnError) { // Methode qui permet de vérifier qu'on rentre bien un entier
@@ -156,6 +189,7 @@ public class Game {
 
 
 
+<<<<<<< HEAD
 	public void initializeGame(Game g,Scanner input) {
 
 		choiceVar.add(1);
@@ -182,6 +216,9 @@ public class Game {
 		drawdeck = new DrawDeck(g);
 		drawdeck.shuffle();
 	}
+=======
+	
+>>>>>>> branch 'master' of https://github.com/AlexandreTarabah/Jest-Tarabah-Charraud
 
 
 
@@ -250,88 +287,66 @@ public class Game {
 
 
 		}
-		System.out.println(victime +" commence la partie");
+		
 		return victime;
 	}
 
 
-	public void configureGameplay(Scanner input) {
-
-		System.out.println(" Combien voulez-vous de joueur rééls ?\n"
-				+ "Vous avez le choix entre 0 - 1 - 2 - 3 - 4 joueurs rééls");
-		int choiceNbPlayers=10;
-		while(choicePlayers.contains(choiceNbPlayers)==false) {
-			choiceNbPlayers = readInt(input,"Entrez un nombre compris entre 0 et 4 : ", "Non, Recommencez : ");
+	public void reglerParametres(int d, int nvp, int nrp){
+		this.difficulty = d;
+		this.nbBots = nvp;
+		this.nbRealPlayers = nrp;
+		this.determinerNombreJoueurs();
+	}
+	
+	/**
+	 * Cette méthode va créer les joueurs en conséquent des nombres de joueurs réels et virtuels voulu.
+	 */
+	public void determinerNombreJoueurs(){
+		if (this.difficulty==1) {
+			for (int i=0;i<this.nbBots;i++){
+				Player joueur = new BotDown(joueur.setPseudo(input),this);
+				this.players.add(joueur);
+				this.ForMainPlay.put(joueur.getPseudo(), joueur);
 		}
-		int k = 0;
-		while(k<choiceNbPlayers) // instanciation des joueurs rééls
-		{ 
-			new Player(input);
-			k++;
+			}else 
+			for(int i=0;i<this.nbBots;i++) {
+				Player joueur = new BotHard(joueur.setPseudo(input,this));
+				this.players.add(joueur);
+				this.ForMainPlay.put(joueur.getPseudo(), joueur);
+			}
+		
+		for (int i=0;i<this.nbRealPlayers;i++){
+			Player joueur = new Player(joueur.setPseudo(input), this);
+			this.players.add(joueur);
+			this.ForMainPlay.put(joueur.getPseudo(), joueur);
 		}
-
-
-
-		System.out.println("Combien voulez-vous de bot ?\n"
-				+ "Vous pouvez choisir de jouer jusqu'a "+ (4-choiceNbPlayers)+" Bots"); // CHoix nombre de bots
-		int choiceNbBot=10;
-		while((choiceNbBot<0 ||choiceNbBot>(4-choiceNbPlayers))) {
-			choiceNbBot = readInt(input,"Veuillez choisir un nombre pour compléter à 3 ou 4 joueurs", "Non, Recommencez : ");
-		}
-
-
-
-		System.out.println("Quelle difficulté de Bot ? \n"
-				+ "Vous pouvez Choisir entre \n \n"
-				+ " 1 - BotDown : bot Facile qui fait des choix randoms\n"
-				+ " 2 - BotHard : bot assez difficile qui fera toujours le bon choix");
-		int choiceDifficulty=0;
-		while(choiceVar.contains(choiceDifficulty)==false) {
-			choiceDifficulty = readInt(input,"Entrez un nombre compris entre 1 et 2 : ", "Non, Recommencez : ");
-		}
-		for(k=0;k<choiceNbBot;k++) // instanciation des bots 
-		{
-			if(choiceDifficulty==1) {
-				new BotDown(input);}
-			else
-				new BotHard(input);
-		}
-
-		nbPlayers = choiceNbBot + choiceNbPlayers;
-
-
-
-
-		System.out.println("Avec quelle variante voulez-vous jouer ?\n"
-				+ "1 - Variante Classique \n"
-				+ "2 - Variante inversion\n");
-		int choicevar=0;
-		while(choiceVar.contains(choicevar)==false) {
-			choicevar = readInt(input,"Entrez un nombre compris entre 1 et 2 : ", "Non, Recommencez : ");
-		}
-		if(choicevar==2)
-		{variante=true;}
+		this.notifyObservers("joueurs");
 	}
 
 
 
 
-	public void winnerDetermination() {
+	public Integer winnerDetermination() {
 
 		int maxValueInMap=(Collections.max(winner.values()));  // retourne la valeur max de la hashmap winner
 		for (Entry<String, Integer> entry : winner.entrySet()) {  
 			if (entry.getValue()==maxValueInMap) {
-				System.out.println(entry.getKey() + " a gagné !" ); // détermine a quelle clé cela appartient pour afficher le gagnant 
+				maxValueInMap=entry.getValue(); // détermine a quelle clé cela appartient pour afficher le gagnant 
 			}
 
 		}
-
-
+		return maxValueInMap;
 	}
 
 	public void playRounds() {
 		Scanner input2 = new Scanner(System.in);
+<<<<<<< HEAD
 
+=======
+		int choice=0;
+		
+>>>>>>> branch 'master' of https://github.com/AlexandreTarabah/Jest-Tarabah-Charraud
 		while(this.drawdeck.getSize() != 0) // On repète le processus jusqu'a temps qu'on ait plu de carte
 		{
 			this.distribute(); // distribuer les cartes 
@@ -340,17 +355,18 @@ public class Game {
 			Iterator<Player> it = players.iterator();
 			while(it.hasNext()) {
 				Player p = it.next();
-				p.upsideDown(p, input2);
+				this.notifyObservers("upsideDown");
+				p.upsideDown(choice);
 			}
 
 
 			this.determinateFirstPlayer(); // on détermine le premier Joueur
 
 			for(int j =0; j<nbPlayers;j++) {  // le reste suit selon la méthode stealCard(input)
-				ForMainPlay.get(victime).stealCard(input2);	 // Les manip de chaque joueur pendant le tour 
+				this.ForMainPlay.get(victime).stealCard(input2, this);	 // Les manip de chaque joueur pendant le tour 
 			}
 
-			for(int i=0; i<Game.nbPlayers;i++) {
+			for(int i=0; i<this.nbPlayers;i++) {
 				players.get(i).HasStolen=false;
 			}
 
@@ -458,9 +474,9 @@ public class Game {
 					Map<Player,Entry<Player, Integer>> bestJestColor = new HashMap<Player, Entry<Player, Integer>>();
 					Map<Player, Integer> bestJestPlayer = new HashMap<Player, Integer>();
 					Map.Entry<Player,Integer> myEntry = new AbstractMap.SimpleEntry<Player, Integer>(players.get(1), 0);
-					bestJestValue.put(players.get(1), myEntry) ;
-					bestJestColor.put(players.get(1), myEntry) ; 
-					bestJestPlayer.put(players.get(1), 0) ;
+					bestJestValue.put(players.get(1), myEntry);
+					bestJestColor.put(players.get(1), myEntry); 
+					bestJestPlayer.put(players.get(1), 0);
 					String result = "" ; 
 
 					for(int i = 0 ; i < p.size() ; i ++) // parcourt les joueurs
@@ -578,6 +594,7 @@ public class Game {
 
 	public void run() {
 
+<<<<<<< HEAD
 
 		Scanner input = new Scanner(System.in);
 
@@ -586,6 +603,15 @@ public class Game {
 		this.configureGameplay(input);
 
 
+=======
+		
+		this.players = new ArrayList<Player>();
+		this.listOffer = new HashMap<>();
+		this.drawdeck = new DrawDeck(this);
+		this.drawdeck.shuffle();
+		
+		
+>>>>>>> branch 'master' of https://github.com/AlexandreTarabah/Jest-Tarabah-Charraud
 		this.createTrophies(this); //METTRE DANS MAIN JESTINTERFACE
 
 		System.out.println(Arrays.deepToString(this.trophyCards) + "\n"); // Création 2 labels 
@@ -595,13 +621,18 @@ public class Game {
 		this.giveTrophy();
 
 		this.countPoints();
+<<<<<<< HEAD
 
 		this.winnerDetermination() ; 
+=======
+		
+		this.winnerDetermination(); 
+>>>>>>> branch 'master' of https://github.com/AlexandreTarabah/Jest-Tarabah-Charraud
 
 	}
 
 
-	public static int getNbPlayers() {
+	public  int getNbPlayers() {
 		// TODO Auto-generated method stub
 		return nbPlayers;
 	}
@@ -613,17 +644,27 @@ public class Game {
 	}
 
 
-	public static ArrayList<String> getUpsideChoice() {
+	public ArrayList<String> getUpsideChoice() {
 		// TODO Auto-generated method stub
 		return upsideChoice;
 	}
 
 
-	public static ArrayList<Integer> getChoiceVar() {
+	public  ArrayList<Integer> getChoiceVar() {
 		// TODO Auto-generated method stub
 		return choiceVar;
 	}
 
+<<<<<<< HEAD
+=======
+
+	public  HashMap<String, Integer> getWinner() {
+		// TODO Auto-generated method stub
+		return winner;
+	}
+
+
+>>>>>>> branch 'master' of https://github.com/AlexandreTarabah/Jest-Tarabah-Charraud
 	public String getVictime() {
 		// TODO Auto-generated method stub
 		return victime;
