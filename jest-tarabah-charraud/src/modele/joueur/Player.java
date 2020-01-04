@@ -113,7 +113,6 @@ public class Player
 		}
 
 		nbCardOffer-=1;
-		Iterator it = this.jest.jestCards.iterator();
 	}
 
 
