@@ -108,13 +108,13 @@ import vue.Regles;
 
 		while(game.listOffer.get(choiceVictime).size()<2) {
 			
-			choiceVictime = JOptionPane.showInputDialog(null, "Veuillez entrer une offre complète", "erreur", JOptionPane.QUESTION_MESSAGE);
+			choiceVictime = JOptionPane.showInputDialog(null, "Veuillez entrer un joueur avec une offre complète", "erreur", JOptionPane.QUESTION_MESSAGE);
 			
 		}
 
 
 		if(game.nbPlayers==3) {
-			if(game.listOffer.size()>4) {
+			if(game.nbCardOffer>4) {
 				while( game.getIsPlaying().getPseudo().equals(choiceVictime)) {
 					
 					choiceVictime = JOptionPane.showInputDialog(null, "Vous ne pouvez pas vous choisir\n choisissez un joueur ", "erreur", JOptionPane.QUESTION_MESSAGE);
@@ -124,7 +124,7 @@ import vue.Regles;
 		}else 
 
 			if(game.nbPlayers==4) {
-				if(game.listOffer.size()>5) {
+				if(game.nbCardOffer>5) {
 					while( game.getIsPlaying().getPseudo().equals(choiceVictime)) {
 		
 						choiceVictime = JOptionPane.showInputDialog(null, "Vous ne pouvez pas vous choisir\n choisissez un joueur ", "erreur", JOptionPane.QUESTION_MESSAGE);
@@ -133,7 +133,7 @@ import vue.Regles;
 				}
 			}
 		p.stealCard(choiceVictime, choiceCardVictime, game);
-		choiceVictime=game.getVictime();
+		game.setVictime(choiceVictime);
 		
 	}
 	

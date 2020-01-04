@@ -84,6 +84,7 @@ public class DrawDeck {
 				drawdeck.add(player.getOffer().get("down"));
 			}else
 				drawdeck.add(player.getOffer().get("up"));
+			player.getOffer().clear();
 		}
 		else 
 		{

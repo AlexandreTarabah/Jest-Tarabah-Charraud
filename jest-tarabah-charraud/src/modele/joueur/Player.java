@@ -37,9 +37,9 @@ public class Player
 
 	boolean firstPlayer = false;
 
-	protected  String victime;
-
 	private int nbPoint;
+	
+public int nbCardOffer;
 
 	//j'instancie l'objet offre, qui est aussi une collection de carte, dans le constructeur player ici 
 
@@ -56,32 +56,32 @@ public class Player
 
 
 	public void stealCard(String choiceVictime,String choiceCardVictime, Game g) {
-		int nbCardOffer=0;
-		for(Entry<String, HashMap<String, Card>> map : listOffer.entrySet()) {
+		nbCardOffer=0;
+		for(Entry<String, HashMap<String, Card>> map : g.listOffer.entrySet()) {
 
 
 			{nbCardOffer = nbCardOffer+map.getValue().size();}
 		}
 
 
-		victime = choiceVictime;
+		g.setVictime(choiceVictime);
 
 		String stolenCard = choiceCardVictime;
 
 
-		this.jest.jestCards.add(this.listOffer.get(getVictime()).get(stolenCard));
-		this.listOffer.get(getVictime()).remove(stolenCard);// méthode AddJest() implementé dans Jest.
+		this.jest.jestCards.add(g.listOffer.get(g.getVictime()).get(stolenCard));
+		g.listOffer.get(g.getVictime()).remove(stolenCard);// méthode AddJest() implementé dans Jest.
 
 		this.setHasStolen(true); 
 
-		if(g.getForMainPlay().get(getVictime()).isHasStolen()==true) { // Dans le cas ou le joueur vole le voleur précédent, on fixe la prochaine victime au joueur qui a l'offre complete. 
+		if(g.getForMainPlay().get(g.getVictime()).isHasStolen()==true) { // Dans le cas ou le joueur vole le voleur précédent, on fixe la prochaine victime au joueur qui a l'offre complete. 
 
 
 			if(g.getNbPlayers()==3) {
 				for (HashMap.Entry<String,Player> mapentry : g.getForMainPlay().entrySet()) {
 					if (mapentry.getValue().getOffer().size()==2) {
 
-						setVictime(mapentry.getKey());
+						g.setVictime(mapentry.getKey());
 
 					}
 				}
@@ -97,13 +97,13 @@ public class Player
 							{
 								highestCardValue = mapentry2.getValue().getOffer().get("up").getValue().getCardValue();
 								highestColorValue = mapentry2.getValue().getOffer().get("up").getColor().getColorValue();
-								setVictime(mapentry2.getKey());
+								g.setVictime(mapentry2.getKey());
 							}
 
 							if(highestCardValue == mapentry2.getValue().getOffer().get("up").getValue().getCardValue() && 
 									highestColorValue < mapentry2.getValue().getOffer().get("up").getColor().getColorValue()) {
 
-								setVictime(mapentry2.getKey());
+								g.setVictime(mapentry2.getKey());
 
 							}		
 						}
@@ -147,14 +147,6 @@ public class Player
 
 
 
-	public  String getVictime() {
-		return victime;
-	}
-
-
-
-
-
 
 
 
@@ -166,6 +158,7 @@ public class Player
 	numC =choice + 1; // demande au joueur de rentrer un numéro entre 1 et 2
 
 
+<<<<<<< HEAD
 	((Map<String, Card>) offer).put("down", this.hand.get(numC-1)); // -1 car le tableau commence à l'indice 0, je caste l'offer  
 	((Map<String, Card>) offer).put("up", this.hand.get(numC%2)); // avec le modulo 2 on obtient la case manquante, je caste l'offer
 
@@ -173,6 +166,11 @@ public class Player
 	 */
 
 	g.listOffer.put(this.getPseudo(), this.getOffer()); // on ajoute l'offre du player a la listOffer.
+=======
+		/* et la on affiche le pseudo du player en paramètre, avec get(Down) et la value de la carte, et la couleur
+		 */
+		g.listOffer.put(this.getPseudo(), this.getOffer()); // on ajoute l'offre du player a la listOffer.
+>>>>>>> branch 'master' of https://github.com/AlexandreTarabah/Jest-Tarabah-Charraud
 
 	}
 
