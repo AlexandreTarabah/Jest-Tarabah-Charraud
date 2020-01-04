@@ -35,6 +35,7 @@ import vue.FenetreSaisie;
 import vue.PlayerPanel;
 
 import java.util.Map.Entry;
+
 import java.util.NavigableMap;
 import java.util.Observable;
 import java.util.Observer;
@@ -113,6 +114,7 @@ public class Game extends Observable implements Runnable {
 
 	// La c'est la distribution des cartes, ou finalement j'invoque la méthode takecards et donc le joueur prend 2 cartes, et créé son offer
 
+	
 	public void distribute() {
 
 		this.currentPlay=true;
