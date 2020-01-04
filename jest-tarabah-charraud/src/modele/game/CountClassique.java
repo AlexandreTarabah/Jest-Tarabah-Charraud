@@ -95,7 +95,7 @@ public class CountClassique implements Count {
 		value of your Jest by its face value.*/
 		else if(occurrencesHeart > 0 && occurrencesHeart < 4 && occurrencesJoker == 1)
 		{
-			System.out.println("Vous n'avez pas le Joker et seulement " + occurrencesHeart + " cartes de coeur ! Vous perdez de ce fait : ") ;
+			System.out.println("Vous avez le Joker et seulement " + occurrencesHeart + " cartes de coeur ! Vous perdez de ce fait : ") ;
 			for (Iterator<Card> it = jest.jestCards.iterator() ; it.hasNext();)
 			{
 				Card card = it.next() ;

@@ -65,15 +65,15 @@ import java.util.NavigableMap;
  */
 
 public class Game {
-	
+
 	public static int nbPlayers;
 	protected static int nbBots;
 	protected static int nbRealPlayers;
 	Card[] trophyCards = new Card[2] ;
 
-	public static HashMap<String,Player> ForMainPlay = new HashMap<String,Player>() ;
+	public HashMap<String,Player> ForMainPlay = new HashMap<String,Player>() ;
 
-	public static ArrayList<Player> players = new ArrayList<Player>();
+	public ArrayList<Player> players = new ArrayList<Player>();
 
 	static HashMap<String, HashMap<String, Card>> listOffer= new HashMap<>();
 
@@ -83,19 +83,21 @@ public class Game {
 
 	public boolean extension = true;
 
-	public static HashMap<String,Integer> winner = new HashMap<String,Integer>();
+	public HashMap<String,Integer> winner = new HashMap<String,Integer>();
 
 	boolean variante = false;
-	
-// Liste de vérif pour les choix proposer a l'utilisateur : 
-	
+
+	// Liste de vérif pour les choix proposer a l'utilisateur : 
+
 	public static ArrayList<Integer> choiceVar= new ArrayList<Integer>();
 
 	ArrayList<Integer> choicePlayers= new ArrayList<Integer>();
-	
+
 	public static ArrayList<String> upsideChoice = new ArrayList<String>() ; 
-	
+
 	private  String victime;
+	
+	public Object [][] scores;
 
 
 	// La c'est la distribution des cartes, ou finalement j'invoque la méthode takecards et donc le joueur prend 2 cartes, et créé son offer
@@ -132,8 +134,9 @@ public class Game {
 	}
 
 
-	public static HashMap<String, Player> getForMainPlay() {
-		return ForMainPlay;
+	public static HashMap<String, Player> getForMainPlay(Game g) {
+		
+		return g.ForMainPlay ;
 	}
 
 	public static int readInt(Scanner scanner, String prompt, String promptOnError) { // Methode qui permet de vérifier qu'on rentre bien un entier
@@ -173,7 +176,7 @@ public class Game {
 			choice = readInt(input,"Entrez un nombre compris entre 1 et 2 : ", "Non, Recommencez : ");
 		}
 		if(choice==2)
-			{g.extension=false;} // if(choice==2) // On choisit si on joue avec ou sans extension, ce qui va impacter new DrawDeck(g)
+		{g.extension=false;} // if(choice==2) // On choisit si on joue avec ou sans extension, ce qui va impacter new DrawDeck(g)
 		players = new ArrayList<Player>();
 		listOffer = new HashMap<>();
 		drawdeck = new DrawDeck(g);
@@ -224,7 +227,7 @@ public class Game {
 	public String determinateFirstPlayer() { // Code  pour comparer dans countJest, dans cette méthode, et dans stealCards
 		int highestCardValue = 0;
 		int highestColorValue = 0;
-		for (Iterator<Player> it = Game.players.iterator(); it.hasNext();) 
+		for (Iterator<Player> it = this.players.iterator(); it.hasNext();) 
 		{
 			Player p = (Player) it.next();
 			for(int i=0;i<2;i++) {
@@ -328,7 +331,7 @@ public class Game {
 
 	public void playRounds() {
 		Scanner input2 = new Scanner(System.in);
-		
+
 		while(this.drawdeck.getSize() != 0) // On repète le processus jusqu'a temps qu'on ait plu de carte
 		{
 			this.distribute(); // distribuer les cartes 
@@ -339,8 +342,8 @@ public class Game {
 				Player p = it.next();
 				p.upsideDown(p, input2);
 			}
-			
-			
+
+
 			this.determinateFirstPlayer(); // on détermine le premier Joueur
 
 			for(int j =0; j<nbPlayers;j++) {  // le reste suit selon la méthode stealCard(input)
@@ -354,12 +357,11 @@ public class Game {
 			this.mainCollectCards(); // On ramasse les cartes et on les rebalance dans le jeu pour recommencer 
 
 		}
-		
+
 	}
 
-	
 	public void giveTrophy() {
-		ArrayList<Player> p = Game.players ;
+		ArrayList<Player> p = this.players ;
 		Card[] t = this.trophyCards;
 
 		if(t[0] != null && t[1] != null) { // Si y'a l'extension et 3 joueurs y'a pas de trophées ducoup on passe.
@@ -515,7 +517,7 @@ public class Game {
 									bestJestCandidates1, bestJestValue, bestJestColor, bestJestCandidates1, myEntry) ;
 
 						}
-						
+
 						jokeDetecter = 0 ;
 
 					}
@@ -544,52 +546,56 @@ public class Game {
 			}
 
 		}
-		
+
 		System.out.println("\n") ;
-		
+
 	}
 
-	
+
+
 	public void countPoints() {
-		for (int i = 0 ; i < players.size() ; i ++)
+		for (int i = 0 ; i < this.players.size() ; i ++)
 		{	
 			if (this.variante == false)
 			{
 				Count count = new CountClassique() ;
-				Game.players.get(i).getJest().acceptCount(count, Game.players.get(i)) ;
+				this.players.get(i).getJest().acceptCount(count, this.players.get(i)) ;
 			}
 			else 
 			{
 				Count count = new CountInversion() ;
-				Game.players.get(i).getJest().acceptCount(count,Game.players.get(i)) ;
+				this.players.get(i).getJest().acceptCount(count,this.players.get(i)) ;
 			}
+
+			this.scores[i][0] = this.players.get(i).getPseudo() ;
+			this.scores[i][1] = this.players.get(i).getNbPoint()  ;
 		}
 
 		System.out.println("\n") ;
-		
+
 	}
-	
-	
+
+
 	public void run() {
 
-		
+
 		Scanner input = new Scanner(System.in);
-		
+
 		this.initializeGame(this, input); 
-		
+
 		this.configureGameplay(input);
-		
-		
+
+
 		this.createTrophies(this); //METTRE DANS MAIN JESTINTERFACE
 
 		System.out.println(Arrays.deepToString(this.trophyCards) + "\n"); // Création 2 labels 
 
 		this.playRounds(); 
-		
+
 		this.giveTrophy();
-		
+
 		this.countPoints();
-		
+
 		this.winnerDetermination() ; 
 
 	}
@@ -618,13 +624,6 @@ public class Game {
 		return choiceVar;
 	}
 
-
-	public static HashMap<String, Integer> getWinner() {
-		// TODO Auto-generated method stub
-		return winner;
-	}
-
-
 	public String getVictime() {
 		// TODO Auto-generated method stub
 		return victime;
@@ -633,9 +632,9 @@ public class Game {
 
 	public String getIsPlaying() {
 		// TODO Auto-generated method stub
-		return // le joueur entrain de jouer
+		return "joue" ; // le joueur entrain de jouer
 	}
 
 
-	
+
 } // ARMAGEDDON 

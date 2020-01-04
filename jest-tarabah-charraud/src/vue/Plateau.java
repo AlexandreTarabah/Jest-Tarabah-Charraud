@@ -194,7 +194,7 @@ public class Plateau extends JPanel implements Observer{
 		this.frame.setContentPane(this);
 	}
 	
-	public void choisirCarte(){
+	public void choisirCarte(Player player){
 		this.changerVisibiliteCartes(true);
 		String[] reponse ={"1","2"};
 		int choix = (int) JOptionPane.showOptionDialog(null, 
