@@ -151,6 +151,9 @@ import vue.Regles;
 	}
 
 
+<<<<<<< HEAD
+	public void methodeStealCard(String choiceVictime, String choiceCardVictime) {
+=======
 	public void methodeStealCard(String choiceVictime, String choiceCardVictime,Player p) {
 		while(game.listOffer.containsKey(choiceVictime)==false) {
 			
@@ -163,6 +166,7 @@ import vue.Regles;
 			choiceVictime = JOptionPane.showInputDialog(null, "Veuillez entrer une offre complète", "erreur", JOptionPane.QUESTION_MESSAGE);
 			
 		}
+>>>>>>> branch 'master' of https://github.com/AlexandreTarabah/Jest-Tarabah-Charraud
 
 
 		if(game.nbPlayers==3) {

@@ -31,6 +31,7 @@ import modele.game.CountClassique;
 import modele.game.CountInversion;
 import modele.tas.DrawDeck;
 import modele.tas.Jest;
+import vue.FenetreSaisie;
 import vue.PlayerPanel;
 
 import java.util.Map.Entry;
@@ -65,18 +66,16 @@ import java.util.Observer;
  Création d'une méthode readInt qui te fait tester jusqu'a temps que tu rentres un Int, ensuite vérification selon la demande des parametres réntrés.
  ------------------------------------------------------------------------------------------------------------------------------
  */
-
-
-
-
 public class Game extends Observable implements Runnable {
-	
+
+
 	public  int nbPlayers;
 	protected  int nbBots;
 	protected  int nbRealPlayers;
 	protected int difficulty;
+
 	Player isPlaying;
-	
+
 
 	Card[] trophyCards = new Card[2] ;
 
@@ -98,23 +97,16 @@ public class Game extends Observable implements Runnable {
 	boolean variante = false;
 
 
-	
-// Liste de vérif pour les choix proposer a l'utilisateur : 
-	
-	public ArrayList<Integer> choiceVar= new ArrayList<Integer>();
+	public static ArrayList<Integer> choiceVar= new ArrayList<Integer>();
 
 
 	ArrayList<Integer> choicePlayers= new ArrayList<Integer>();
 
-
-
-
-	
 	public ArrayList<String> upsideChoice = new ArrayList<String>() ; 
-	
+
 
 	private  String victime;
-	
+
 	public Object [][] scores;
 
 	private ArrayList<Observer> listObserver = new ArrayList<Observer>();
@@ -151,7 +143,6 @@ public class Game extends Observable implements Runnable {
 
 
 	}
-
 
 
 	public HashMap<String, Player> getForMainPlay() {
@@ -203,11 +194,6 @@ public class Game extends Observable implements Runnable {
 		drawdeck.shuffle();
 	}
 
-	
-
-
-
-
 	public void createTrophies(Game g) { // On instancie les trophées a partir du DrawDeckn en fonction des parametres 
 		if(extension==false) 
 		{
@@ -229,7 +215,7 @@ public class Game extends Observable implements Runnable {
 	public void addPlayer(Player p, Scanner input) {
 		if(currentPlay==false) {
 
-			p.setPseudo(input);
+			p.setPseudo(new FenetreSaisie());
 			players.add(p);
 			ForMainPlay.put(p.getPseudo(), p);
 
@@ -273,37 +259,40 @@ public class Game extends Observable implements Runnable {
 
 
 		}
-		
+
 		return victime;
 	}
 
 
-	public void reglerParametres(int d, int nvp, int nrp){
+	public void reglerParametres(int d, int nb, int nrp){
 		this.difficulty = d;
-		this.nbBots = nvp;
+		this.nbBots = nb;
 		this.nbRealPlayers = nrp;
 		this.determinerNombreJoueurs();
 	}
-	
+
 	/**
 	 * Cette méthode va créer les joueurs en conséquent des nombres de joueurs réels et virtuels voulu.
 	 */
 	public void determinerNombreJoueurs(){
 		if (this.difficulty==1) {
 			for (int i=0;i<this.nbBots;i++){
-				Player joueur = new BotDown(joueur.setPseudo(input),this);
-				this.players.add(joueur);
+
+				Player joueur = new Player(Integer.toString(i), this);
+				joueur.setPseudo(new FenetreSaisie()) ;
 				this.ForMainPlay.put(joueur.getPseudo(), joueur);
-		}
-			}else 
-			for(int i=0;i<this.nbBots;i++) {
-				Player joueur = new BotHard(joueur.setPseudo(input,this));
-				this.players.add(joueur);
-				this.ForMainPlay.put(joueur.getPseudo(), joueur); // A VOIR AVEC PLAYERPANEL 
 			}
-		
+		}else 
+			for(int i=0;i<this.nbBots;i++) {
+				Player joueur = new Player(Integer.toString(i), this);
+				joueur.setPseudo(new FenetreSaisie()) ;
+				this.ForMainPlay.put(joueur.getPseudo(), joueur); // A VOIR AVEC PLAYERPANEL 
+
+			}
+
 		for (int i=0;i<this.nbRealPlayers;i++){
-			Player joueur = new Player(joueur.setPseudo(input), this);
+			Player joueur = new Player(Integer.toString(i), this);
+			joueur.setPseudo(new FenetreSaisie()) ;
 			this.players.add(joueur);
 			this.ForMainPlay.put(joueur.getPseudo(), joueur);
 		}
@@ -326,10 +315,15 @@ public class Game extends Observable implements Runnable {
 	}
 
 	public void playRounds() {
+
+		Scanner input2 = new Scanner(System.in);
+
 		int choice=0;
+
+
 		String choiceVictime="";
 		String choiceStolenCard="";
-		
+
 
 		while(this.drawdeck.getSize() != 0) // On repète le processus jusqu'a temps qu'on ait plu de carte
 		{
@@ -347,8 +341,8 @@ public class Game extends Observable implements Runnable {
 				this.notifyObservers("ActualiserMain");
 			}
 
-			
-			
+
+
 			this.determinateFirstPlayer();
 			this.notifyObservers("determinateFirstPlayer");// on détermine le premier Joueur
 
@@ -358,11 +352,11 @@ public class Game extends Observable implements Runnable {
 
 
 			for(int j =0; j<nbPlayers;j++) {
-				 isPlaying=this.ForMainPlay.get(victime);
+				isPlaying=this.ForMainPlay.get(victime);
 				if(this.ForMainPlay.get(victime) instanceof BotDown || this.ForMainPlay.get(victime) instanceof BotHard) {// le reste suit selon la méthode stealCard(input)
-				this.ForMainPlay.get(victime).stealCard(choiceVictime,choiceStolenCard, this);	 // Les manip de chaque joueur pendant le tour 
-			}else
-				this.notifyObservers("stealCards");
+					this.ForMainPlay.get(victime).stealCard(choiceVictime,choiceStolenCard, this);	 // Les manip de chaque joueur pendant le tour 
+				}else
+					this.notifyObservers("stealCards");
 			}
 
 			for(int i=0; i<this.nbPlayers;i++) {
@@ -595,18 +589,18 @@ public class Game extends Observable implements Runnable {
 	public void run() {
 
 
-
 		Scanner input = new Scanner(System.in);
 
 
 
-		
 		this.players = new ArrayList<Player>();
 		this.listOffer = new HashMap<>();
 		this.drawdeck = new DrawDeck(this);
 		this.drawdeck.shuffle();
-		
-		
+
+
+
+
 
 		this.createTrophies(this); //METTRE DANS MAIN JESTINTERFACE
 
@@ -619,10 +613,8 @@ public class Game extends Observable implements Runnable {
 		this.countPoints();
 
 
-		this.winnerDetermination() ; 
+		this.winnerDetermination() ; 	
 
-		
-		this.winnerDetermination(); 
 
 
 	}
@@ -670,9 +662,9 @@ public class Game extends Observable implements Runnable {
 	public Player getIsPlaying() {
 		return isPlaying;
 	}
-	
+
 	public void addObserver(Observer obs) {
-	    this.listObserver.add(obs);
+		this.listObserver.add(obs);
 	}
 
 	public void notifyObservers(Object arg) {
@@ -682,9 +674,8 @@ public class Game extends Observable implements Runnable {
 	}
 
 	public void deleteObserver(Observer o) {
-	    listObserver.remove(o);
+		listObserver.remove(o);
 	}
 
-
-
-}// ARMAGEDDON 
+}
+// ARMAGEDDON 

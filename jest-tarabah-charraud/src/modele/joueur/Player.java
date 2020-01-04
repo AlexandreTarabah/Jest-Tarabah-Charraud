@@ -6,6 +6,7 @@ import java.util.Set;
 import modele.carte.Card;
 import modele.game.Game;
 import modele.tas.Jest;
+import vue.FenetreSaisie;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -127,11 +128,9 @@ public class Player
 
 
 
-	public String setPseudo(Scanner input) 
+	public String setPseudo(FenetreSaisie saisie) 
 	{
-		System.out.println("Entrez le nom du joueur : ");
-		String pseudo = input.nextLine() ;
-		this.pseudo = pseudo ;
+		this.pseudo = saisie.getLabel().getText() ;
 		return pseudo;
 
 	}
