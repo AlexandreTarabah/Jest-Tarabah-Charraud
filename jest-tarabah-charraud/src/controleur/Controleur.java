@@ -130,16 +130,7 @@ import vue.Regles;
 		 }	
 	}
 
-	public void controleContreUNO(){
-		Joueur joueur = (Joueur)JOptionPane.showInputDialog(null, 
-			      "Quel joueur voulez vous contrer ?",
-			      "Contre UNO",
-			      JOptionPane.QUESTION_MESSAGE,
-			      null,
-			      game.getJoueurs().toArray(),
-			      game.getJoueurs().get(0));
-		joueur.contrerUno(joueur, game.getPioche());
-	}
+	
 	
 	public void nouvelleManche(int nm) {
 		if (nm == JOptionPane.OK_OPTION){

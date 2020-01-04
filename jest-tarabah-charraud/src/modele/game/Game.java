@@ -339,7 +339,7 @@ public class Game extends Observable implements Runnable {
 			Iterator<Player> it = players.iterator();
 			while(it.hasNext()) {
 				Player p = it.next();
-				p=isPlaying;
+				isPlaying=p;
 				if(p instanceof BotDown || p instanceof BotHard) {
 					p.upsideDown(choice);
 				}
@@ -358,6 +358,7 @@ public class Game extends Observable implements Runnable {
 
 
 			for(int j =0; j<nbPlayers;j++) {
+				 isPlaying=this.ForMainPlay.get(victime);
 				if(this.ForMainPlay.get(victime) instanceof BotDown || this.ForMainPlay.get(victime) instanceof BotHard) {// le reste suit selon la méthode stealCard(input)
 				this.ForMainPlay.get(victime).stealCard(choiceVictime,choiceStolenCard, this);	 // Les manip de chaque joueur pendant le tour 
 			}else
