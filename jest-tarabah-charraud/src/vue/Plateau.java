@@ -318,9 +318,6 @@ public class Plateau extends JPanel implements Observer{
 			this.actualiserPlateau();
 		}
 		
-		if(arg=="actualiserMain") {
-			this.actualiserMain();
-		}
 		
 		}
 	
