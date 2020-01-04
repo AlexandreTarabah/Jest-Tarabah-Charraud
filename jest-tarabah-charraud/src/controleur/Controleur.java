@@ -76,13 +76,6 @@ import vue.Regles;
 		 
 	 }
 
-
-
-	
-
-	
-
-	
 	
 	public void nouvelleManche(int nm) {
 		if (nm == JOptionPane.OK_OPTION){
@@ -102,12 +95,15 @@ import vue.Regles;
 		
 	}
 
+<<<<<<< HEAD
 
 
 
 	
 
 
+=======
+>>>>>>> branch 'master' of https://github.com/AlexandreTarabah/Jest-Tarabah-Charraud
 	public void methodeStealCard(String choiceVictime, String choiceCardVictime,Player p) {
 		while(game.listOffer.containsKey(choiceVictime)==false) {
 			
