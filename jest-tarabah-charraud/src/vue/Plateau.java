@@ -296,7 +296,7 @@ public class Plateau extends JPanel implements Observer{
 		      null,
 		      action,
 		      action[1]);
-		    	controleur.methodecontrolupsideDown();
+		    controleur.methodecontrolupsideDown();
 			
 		}
 		
