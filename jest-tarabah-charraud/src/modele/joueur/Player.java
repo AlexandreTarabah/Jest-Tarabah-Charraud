@@ -130,7 +130,7 @@ public class Player
 
 	public String setPseudo(FenetreSaisie saisie) 
 	{
-		this.pseudo = saisie.getLabel().getText() ;
+		this.pseudo = FenetreSaisie.getPseudo();
 		return pseudo;
 
 	}
@@ -162,10 +162,11 @@ public LinkedList<Card> getHand() {
 
 
 	// la c'est la méthode pour 
-	public void upsideDown(int choice) 
+	public void upsideDown(int choice, Game g) 
 	{		this.isPlaying=this;
 
-		int numC = choice + 1; // demande au joueur de rentrer un numéro entre 1 et 2
+		int numC =0;
+		numC =choice + 1; // demande au joueur de rentrer un numéro entre 1 et 2
 	
 
 		((Map<String, Card>) offer).put("down", this.hand.get(numC-1)); // -1 car le tableau commence à l'indice 0, je caste l'offer  
@@ -174,7 +175,7 @@ public LinkedList<Card> getHand() {
 		/* et la on affiche le pseudo du player en paramètre, avec get(Down) et la value de la carte, et la couleur
 		 */
 
-		this.listOffer.put(this.getPseudo(), this.getOffer()); // on ajoute l'offre du player a la listOffer.
+		g.listOffer.put(this.getPseudo(), this.getOffer()); // on ajoute l'offre du player a la listOffer.
 
 	}
 

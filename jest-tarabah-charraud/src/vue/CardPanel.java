@@ -23,7 +23,7 @@ public class CardPanel extends JPanel {
 	public CardPanel(LinkedList<Image> j){
 		super();
 		this.jeu = j;
-		this.cartesVisibles = false;
+		this.cartesVisibles = true;
 		this.setOpaque(false);
 		this.setLayout(null);
 	}
@@ -45,9 +45,9 @@ public class CardPanel extends JPanel {
 	}
 
 	public void paintComponent(Graphics g){
-		
-		for(int i=0; i<2;i++) {
-				g.drawImage(jeu.get(i), i*30, 0, 80, 140, this);
+		ListIterator<Image> iJeu = jeu.listIterator();
+		while (iJeu.hasNext()){
+				g.drawImage(iJeu.next(), (iJeu.previousIndex()*30), 0, 80, 140, this);
 		}
 			
 		}

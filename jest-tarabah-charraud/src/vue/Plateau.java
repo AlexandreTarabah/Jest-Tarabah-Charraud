@@ -60,7 +60,7 @@ public class Plateau extends JPanel implements Observer{
 
 	public void afficherJoueurs(int nbrJoueurs){
 		ListIterator<Player> iJoueurs = game.players.listIterator();
-		while (iJoueurs.hasNext()){
+		while (iJoueurs.hasNext()){ 
 			pp.add(new PlayerPanel(iJoueurs.next()));
 		}
 		if (nbrJoueurs == 3){
@@ -267,7 +267,7 @@ public class Plateau extends JPanel implements Observer{
 		}
 	}
 
-	public void stealCards(Game g) {
+	public void stealCards(Game g,Player p) {
 
 		String choiceVictime = JOptionPane.showInputDialog(null, 
 				"choisissez votre victime", "le titre", JOptionPane.QUESTION_MESSAGE);
@@ -276,7 +276,7 @@ public class Plateau extends JPanel implements Observer{
 				"choisissez la carte à volé", "le titre", JOptionPane.QUESTION_MESSAGE);
 
 
-		controleur.methodeStealCard(choiceVictime,choiceCardVictime, null);
+		controleur.methodeStealCard(choiceVictime,choiceCardVictime, game.getIsPlaying());
 
 	}
 
@@ -313,7 +313,7 @@ public class Plateau extends JPanel implements Observer{
 
 		if(arg=="stealCards") {
 
-			this.stealCards(game);
+			this.stealCards(game,game.getIsPlaying());
 
 
 		}

@@ -51,6 +51,7 @@ public class PlayerPanel extends JPanel{
 
 	public void	prendreCarte(Image carte){
 		this.jeu.add(carte);
+		
 	}
 	
 	public void retirer(Image carte){
