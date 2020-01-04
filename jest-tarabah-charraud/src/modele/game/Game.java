@@ -131,7 +131,7 @@ public class Game extends Observable implements Runnable {
 				for (Iterator<Player> it = players.iterator(); it.hasNext();) 
 				{
 					Player p = (Player) it.next();
-					for(Iterator<Card> it2 = p.getHand().iterator();it2.hasNext();) {
+					for(int i=0; i<2;i++) {
 						p.getHand().add(drawdeck.takeCards());
 					}
 					; // place une carte en position i dans la

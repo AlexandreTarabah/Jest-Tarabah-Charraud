@@ -47,11 +47,8 @@ public class CardPanel extends JPanel {
 	public void paintComponent(Graphics g){
 		Image dos = null;
 		try {
-<<<<<<< HEAD
-			dos = ImageIO.read(new File("img/Joker.PNG"));
-=======
+
 			dos = ImageIO.read(new File("img/Joker.png"));
->>>>>>> branch 'master' of https://github.com/AlexandreTarabah/Jest-Tarabah-Charraud
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
