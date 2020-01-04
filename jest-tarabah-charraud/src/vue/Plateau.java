@@ -20,44 +20,44 @@ public class Plateau extends JPanel implements Observer{
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	
+
 	private Game partie;
 	private Controleur controleur;
-	
+
 	private JFrame frame;
 	private PlayerPanel pppoue;
 	private DrawDeckPanel deck;
 	private ArrayList<PlayerPanel> pp = new ArrayList<PlayerPanel>();
-	
+
 	public Plateau(Game p, Controleur c){
 		super();
 
 		this.partie = p;
 		this.partie.addObserver(this);
 		this.controleur = c;
-		
+
 		this.frame = new JFrame();
 		this.frame.setTitle("JEST");
 		this.frame.setSize(1500, 1000);
 		this.frame.setLocationRelativeTo(null);               
 		this.frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		
+
 		this.setLayout(null);
-		
+
 		this.frame.setContentPane(this);
 	}
-	
+
 	public void afficherJeu(PlayerPanel pp){
 		pp.setCartesVisibles(true);
 	}
-	
+
 	public void afficherPiles(){
 		this.deck = new DrawDeckPanel();
 		deck.setBounds(600, 320, 300, 200);
 		this.add(deck);
 		this.frame.setContentPane(this);
 	}
-	
+
 	public void afficherJoueurs(int nbrJoueurs){
 		ListIterator<Player> iJoueurs = partie.players.listIterator();
 		while (iJoueurs.hasNext()){
@@ -83,97 +83,97 @@ public class Plateau extends JPanel implements Observer{
 		}
 		this.frame.setContentPane(this);
 	}
-	
+
 	public Image verifierCarte(Card c){
 		Image carte = null;
-			switch(c.getValue().getCardValue()){
-				case 1:
-					switch(c.getColor().getColorValue()){
-						case 1:
-							carte = deck.getCartes().get(1);
-							break;
-						case 2:
-							carte = deck.getCartes().get(5);
-							break;
-						case 3:
-							carte = deck.getCartes().get(9);
-							break;
-						case 4:
-							carte = deck.getCartes().get(16);
-							break;
-					}
-					break;
-					case 2:
-						switch(c.getColor().getColorValue()){
-							case 1:
-								carte = deck.getCartes().get(1);
-								break;
-							case 2:
-								carte = deck.getCartes().get(5);
-								break;
-							case 3:
-								carte = deck.getCartes().get(9);
-								break;
-							case 4:
-								carte = deck.getCartes().get(16);
-								break;
-						}
-						break;
-						case 3:
-							switch(c.getColor().getColorValue()){
-								case 1:
-									carte = deck.getCartes().get(1);
-									break;
-								case 2:
-									carte = deck.getCartes().get(5);
-									break;
-								case 3:
-									carte = deck.getCartes().get(9);
-									break;
-								case 4:
-									carte = deck.getCartes().get(16);
-									break;
-							}
-							break;
-						case 4:
-							switch(c.getColor().getColorValue()){
-								case 1:
-									carte = deck.getCartes().get(1);
-									break;
-								case 2:
-									carte = deck.getCartes().get(5);
-									break;
-								case 3:
-									carte = deck.getCartes().get(9);
-									break;
-								case 4:
-									carte = deck.getCartes().get(16);
-									break;
-							}
-							break;
-				
-<<<<<<< HEAD
-					} break ;
-=======
-					}
->>>>>>> branch 'master' of https://github.com/AlexandreTarabah/Jest-Tarabah-Charraud
-					
-			
-			
+		switch(c.getValue().getCardValue()){
+		case 1:
+			switch(c.getColor().getColorValue()){
+			case 1:
+				carte = deck.getCartes().get(1);
+				break;
+			case 2:
+				carte = deck.getCartes().get(5);
+				break;
+			case 3:
+				carte = deck.getCartes().get(9);
+				break;
+			case 4:
+				carte = deck.getCartes().get(16);
+				break;
+			}
+			break;
+		case 2:
+			switch(c.getColor().getColorValue()){
+			case 1:
+				carte = deck.getCartes().get(1);
+				break;
+			case 2:
+				carte = deck.getCartes().get(5);
+				break;
+			case 3:
+				carte = deck.getCartes().get(9);
+				break;
+			case 4:
+				carte = deck.getCartes().get(16);
+				break;
+			}
+			break;
+		case 3:
+			switch(c.getColor().getColorValue()){
+			case 1:
+				carte = deck.getCartes().get(1);
+				break;
+			case 2:
+				carte = deck.getCartes().get(5);
+				break;
+			case 3:
+				carte = deck.getCartes().get(9);
+				break;
+			case 4:
+				carte = deck.getCartes().get(16);
+				break;
+			}
+			break;
+		case 4:
+			switch(c.getColor().getColorValue()){
+			case 1:
+				carte = deck.getCartes().get(1);
+				break;
+			case 2:
+				carte = deck.getCartes().get(5);
+				break;
+			case 3:
+				carte = deck.getCartes().get(9);
+				break;
+			case 4:
+				carte = deck.getCartes().get(16);
+				break;
+			}
+			break;
+
+		}
+
 		return carte;
+
+
 	}
-	
+
+
+
+
+
 	public void afficherCartes(Player joueur){
 		ListIterator<PlayerPanel> ipp = this.pp.listIterator();
 		while (ipp.hasNext()){
 			PlayerPanel j = ipp.next();
 			if (j.getNomJoueur() == joueur.getPseudo()){
 				/*afficher carte comme dans le programme console*/
-				}
 			}
 		}
-	
-	
+	}
+
+
 	public void afficherJoueurCommence(){
 		ListIterator<PlayerPanel> ipp = pp.listIterator();
 		while (ipp.hasNext()){
@@ -189,7 +189,7 @@ public class Plateau extends JPanel implements Observer{
 		}
 		this.frame.setContentPane(this);
 	}
-	
+
 	public void afficherDistribution(){
 		ListIterator<PlayerPanel> ipp = pp.listIterator();
 		while (ipp.hasNext()){
@@ -201,8 +201,8 @@ public class Plateau extends JPanel implements Observer{
 		}
 		this.frame.setContentPane(this);
 	}
-	
-	
+
+
 	public void supprimerJeu(Player joueur){
 		ListIterator<PlayerPanel> ipp = pp.listIterator();
 		while (ipp.hasNext()){
@@ -212,7 +212,7 @@ public class Plateau extends JPanel implements Observer{
 			}
 		}
 	}
-	
+
 	public void actualiserPlateau(){
 		ListIterator<Player> iJoueur = partie.players.listIterator();
 		while (iJoueur.hasNext()){
@@ -221,8 +221,8 @@ public class Plateau extends JPanel implements Observer{
 			this.afficherCartes(j);
 		}
 	}
-	
-	
+
+
 	public void changerVisibiliteCartes(Boolean visibles){
 		ListIterator<PlayerPanel> ipp = pp.listIterator();
 		while (ipp.hasNext()){
@@ -233,36 +233,36 @@ public class Plateau extends JPanel implements Observer{
 		}
 		this.frame.setContentPane(this);
 	}
-	
+
 	public void afficherScore(){
-		
+
 	}
-	
+
 	public void afficherNouvelleManche(){
 		int nm = JOptionPane.showConfirmDialog(null, "Voulez-vous faire une autre manche ?", "Autre Manche ?", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
 		controleur.nouvelleManche(nm);
 	}
-	
+
 	public void paintComponent(Graphics g){
-	    try {
-	      Image img = ImageIO.read(new File("UNO_Plateau.jpg"));
-	      g.drawImage(img, 0, 0, this.getWidth(), this.getHeight(), this);
-	    } catch (IOException e) {
-	      e.printStackTrace();
-	    }
+		try {
+			Image img = ImageIO.read(new File("UNO_Plateau.jpg"));
+			g.drawImage(img, 0, 0, this.getWidth(), this.getHeight(), this);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
-	
+
 	public void stealCards(Game g) {
 
-				String choiceVictime = JOptionPane.showInputDialog(null, 
-						"choisissez votre victime", "le titre", JOptionPane.QUESTION_MESSAGE);
-			    
-			    String choiceCardVictime=JOptionPane.showInputDialog(null, 
-						"choisissez la carte à volé", "le titre", JOptionPane.QUESTION_MESSAGE);
-			    
-			    
-			    	controleur.methodeStealCard(choiceVictime,choiceCardVictime, null);
-		
+		String choiceVictime = JOptionPane.showInputDialog(null, 
+				"choisissez votre victime", "le titre", JOptionPane.QUESTION_MESSAGE);
+
+		String choiceCardVictime=JOptionPane.showInputDialog(null, 
+				"choisissez la carte à volé", "le titre", JOptionPane.QUESTION_MESSAGE);
+
+
+		controleur.methodeStealCard(choiceVictime,choiceCardVictime, null);
+
 	}
 
 	public void update(Observable o, Object arg) {
@@ -280,39 +280,39 @@ public class Plateau extends JPanel implements Observer{
 		}
 		if(arg=="upsideDown") {
 			Object[] action = {1,2};
-		    int reponseUD=JOptionPane.showOptionDialog(null, 
-		      "C'est le tour de "+ partie.getIsPlaying().getPseudo()+ "\nQuelle carte retourner ?",
-		      "Action",
-		      JOptionPane.YES_NO_OPTION,
-		      JOptionPane.QUESTION_MESSAGE,
-		      null,
-		      action,
-		      action[1]);
+			int reponseUD=JOptionPane.showOptionDialog(null, 
+					"C'est le tour de "+ partie.getIsPlaying().getPseudo()+ "\nQuelle carte retourner ?",
+					"Action",
+					JOptionPane.YES_NO_OPTION,
+					JOptionPane.QUESTION_MESSAGE,
+					null,
+					action,
+					action[1]);
 
-		    	controleur.methodecontrolupsideDown(reponseUD,partie.getIsPlaying());
-			
+			controleur.methodecontrolupsideDown(reponseUD,partie.getIsPlaying());
+
 		}
-		
+
 		if(arg=="stealCards") {
-			
+
 			this.stealCards(partie);
-			
-			
+
+
 		}
 
 		if (arg == "déterminateFirstPlayer"){
 			this.afficherJoueurCommence();
-		    }
-		
-		
+		}
+
+
 		if (arg == "actualiserPlateau"){
 			this.actualiserPlateau();
 		}
-		
-		
-		
-		}
-	
+
+
+
+	}
+
 
 	public JFrame getFrame() {
 		return frame;
