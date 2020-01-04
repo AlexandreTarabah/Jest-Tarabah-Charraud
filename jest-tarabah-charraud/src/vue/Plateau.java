@@ -152,11 +152,11 @@ public class Plateau extends JPanel implements Observer{
 							}
 							break;
 				
-<<<<<<< HEAD
+
 					} break ;
-=======
-					}
->>>>>>> branch 'master' of https://github.com/AlexandreTarabah/Jest-Tarabah-Charraud
+
+	}
+
 					
 			
 			

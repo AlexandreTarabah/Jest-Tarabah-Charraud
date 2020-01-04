@@ -73,62 +73,14 @@ import vue.Regles;
 				 manche.start();
 			 }
 		 }
-		 if (e.getActionCommand() == "affichercartes"){
-			 plateau.afficherJeu(plateau.getPjJoue());
-		 }
 		 
 	 }
 
-	public void controleCarte(Carte carte) {
-		if (carte.determinerCarteJouable(game.getTalon())){
-			game.getJoueurJoue().poserCarte(carte, game.getTalon(), game.getPioche(), game);
-		}
-		else {
-			JOptionPane.showMessageDialog(null, "La carte que vous avez choisi n'est pas jouable !", "Mauvaise carte", JOptionPane.ERROR_MESSAGE);
-			plateau.choisirCarte();
-		}
-	}
+
+
 	
-	public void controlePioche(){
-		game.getPioche().verifieTalon(game.getTalon(), 1);
-		game.getPioche().distribuerCarte(game.getJoueurJoue(), 1);
-	}
 
-	public void controleCouleur(String couleur) {
-		if (couleur.equals(null)){
-			plateau.choisirCouleur();
-		}
-		else{
-			if (couleur.equals("Noir")){
-				plateau.choisirCouleur();
-			}
-			else if (couleur.equals("Bleu")){
-				game.getTalon().setCouleurTalon(Carte.BLEU);
-			}
-			else if (couleur.equals("Rouge")){
-				game.getTalon().setCouleurTalon(Carte.ROUGE);
-			}
-			else if (couleur.equals("Jaune")){
-				game.getTalon().setCouleurTalon(Carte.JAUNE);
-			}
-			else{
-				game.getTalon().setCouleurTalon(Carte.VERT);
-			}
-		}
-	}
-
-	public void controleUNO() {
-		if (game.getJoueurJoue().getCartesEnMain().size()==1){
-			 int reponseUNO = JOptionPane.showConfirmDialog(null, 
-				        "Voulez-vous dire Uno ?", 
-				        "UNO", 
-				        JOptionPane.YES_NO_OPTION, 
-				        JOptionPane.QUESTION_MESSAGE);
-				if(reponseUNO == JOptionPane.OK_OPTION){
-					game.getJoueurJoue().direUno();
-				}
-		 }	
-	}
+	
 
 	
 	
@@ -151,9 +103,9 @@ import vue.Regles;
 	}
 
 
-<<<<<<< HEAD
-	public void methodeStealCard(String choiceVictime, String choiceCardVictime) {
-=======
+
+	
+
 	public void methodeStealCard(String choiceVictime, String choiceCardVictime,Player p) {
 		while(game.listOffer.containsKey(choiceVictime)==false) {
 			
@@ -166,7 +118,7 @@ import vue.Regles;
 			choiceVictime = JOptionPane.showInputDialog(null, "Veuillez entrer une offre complète", "erreur", JOptionPane.QUESTION_MESSAGE);
 			
 		}
->>>>>>> branch 'master' of https://github.com/AlexandreTarabah/Jest-Tarabah-Charraud
+
 
 
 		if(game.nbPlayers==3) {
