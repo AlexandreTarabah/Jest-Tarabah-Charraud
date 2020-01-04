@@ -17,7 +17,6 @@ public class BotDown extends Player implements Difficulty {
 	}
 
 
-	@Override
 	public void upsideDown(int choice,Game g) {
 		int numC = 1 ; // demande au joueur de rentrer un numéro entre 1 et 2
 

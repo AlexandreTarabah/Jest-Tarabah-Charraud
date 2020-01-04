@@ -356,7 +356,9 @@ public class Game extends Observable implements Runnable {
 
 		this.mainCollectCards();
 		this.notifyObservers("collectCards");// On ramasse les cartes et on les rebalance dans le jeu pour recommencer 
-
+		for(int i=0;i<this.nbPlayers;i++) {
+			this.players.get(i).getHand().clear();
+		}
 	}
 
 	}
@@ -556,7 +558,7 @@ public class Game extends Observable implements Runnable {
 
 
 	public void countPoints() {
-		for (int i = 0 ; i < this.players.size() ; i ++)
+		for (int i = 0 ; i < this.players.size(); i ++)
 		{	
 			if (this.variante == false)
 			{
@@ -569,7 +571,7 @@ public class Game extends Observable implements Runnable {
 				this.players.get(i).getJest().acceptCount(count,this.players.get(i),this);
 			}
 
-			this.scores[i][0] = this.players.get(i).getPseudo() ;
+			this.scores[i][0] = this.players.get(i).getPseudo();
 			this.scores[i][1] = this.players.get(i).getNbPoint()  ;
 		}
 
