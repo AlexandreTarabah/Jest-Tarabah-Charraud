@@ -359,6 +359,7 @@ public class Game extends Observable implements Runnable {
 			}
 		
 		}
+<<<<<<< HEAD
 
 
 
@@ -371,7 +372,13 @@ public class Game extends Observable implements Runnable {
 		for(int i=0;i<this.nbPlayers;i++) {
 			this.players.get(i).getHand().clear();
 		}
+=======
+>>>>>>> branch 'master' of https://github.com/AlexandreTarabah/Jest-Tarabah-Charraud
 	}
+<<<<<<< HEAD
+=======
+
+>>>>>>> branch 'master' of https://github.com/AlexandreTarabah/Jest-Tarabah-Charraud
 
 
 	
