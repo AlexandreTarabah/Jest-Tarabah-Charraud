@@ -57,7 +57,10 @@ public class CardPanel extends JPanel {
 		while (iJeu.hasNext()){
 			g.drawImage(iJeu.next(), (iJeu.previousIndex()*30), 0, 80, 140, this);
 		}*/
+<<<<<<< HEAD
 
+=======
+>>>>>>> branch 'master' of https://github.com/AlexandreTarabah/Jest-Tarabah-Charraud
 
 	}
 
