@@ -31,6 +31,9 @@ public class PlayerPanel extends JPanel{
 		this.setLayout(new BorderLayout());
 		this.setJeu(new LinkedList<Image>());
 	
+		if (joueur instanceof Player){
+			this.virtuel = false;
+		}
 		
 		this.nomJoueur = joueur.getPseudo();
 		this.nomJoueurLabel = new JLabel(nomJoueur);
@@ -82,8 +85,7 @@ public class PlayerPanel extends JPanel{
 	}
 
 	public void setCp(LinkedList<Image> jeu) {
-		this.cp = new CardPanel(jeu);
-		this.add(cp);
+		this.cp = new CardPanel(jeu) ;
 	}
 	
 	public Boolean isVirtuel() {
