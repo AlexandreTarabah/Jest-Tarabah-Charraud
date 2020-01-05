@@ -143,8 +143,7 @@ public class Game extends Observable implements Runnable {
 					; // place une carte en position i dans la
 					// main du joueur (qui est un tableau)
 
-
-				}this.notifyObservers("afficherCartes");
+				}
 			}
 		}
 
@@ -324,6 +323,8 @@ public class Game extends Observable implements Runnable {
 			while(it.hasNext()) {
 				Player p = it.next();
 				isPlaying=p;
+				
+				this.notifyObservers("afficherCartes");
 
 				if(p instanceof BotDown || p instanceof BotHard) {
 					p.upsideDown(choice,this);
@@ -332,7 +333,6 @@ public class Game extends Observable implements Runnable {
 				{
 					this.notifyObservers("upsideDown");
 				}
-				this.notifyObservers("ActualiserMain");
 			}
 
 
@@ -359,6 +359,22 @@ public class Game extends Observable implements Runnable {
 			}
 		
 
+<<<<<<< HEAD
+=======
+		}
+
+
+
+		for(int i=0; i<this.nbPlayers;i++) {
+			players.get(i).HasStolen=false;
+		}
+
+		this.mainCollectCards();
+		this.notifyObservers("collectCards");// On ramasse les cartes et on les rebalance dans le jeu pour recommencer 
+		for(int i=0;i<this.nbPlayers;i++) {
+			this.players.get(i).getHand().clear();
+		}
+>>>>>>> branch 'master' of https://github.com/AlexandreTarabah/Jest-Tarabah-Charraud
 	}
 
 	}
@@ -660,7 +676,7 @@ public class Game extends Observable implements Runnable {
 
 	public void setVictime(String choiceVictime) {
 		this.victime=choiceVictime;
-		
+
 	}
 
 	public Object[] getTabPseudo() {
