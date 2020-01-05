@@ -84,7 +84,7 @@ public class Plateau extends JPanel implements Observer{
 		this.frame.setContentPane(this);
 	}
 
-	
+
 	public void afficherCartes(Player joueur){
 		ListIterator<PlayerPanel> iPj = this.pp.listIterator();
 		while (iPj.hasNext()){
@@ -93,17 +93,21 @@ public class Plateau extends JPanel implements Observer{
 				ListIterator<Card> iCartes = joueur.getHand().listIterator();
 				while (iCartes.hasNext()){
 					j.prendreCarte(this.verifierCarte(iCartes.next()));
+
 				}
-				
-				j.setCp(j.getJeu());
-				frame.add(j.getCp());
-				frame.setVisible(true);
+				j.setCp(j.getJeu()); // ci-dessous code pour cartes dans fenetre externe
+				/*JFrame votreMain = new JFrame("Votre Main joueur " + joueur.getPseudo());
+				votreMain.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);*/
+				this.frame.setContentPane(j.getCp()) ;
+				this.frame.setVisible(true);
+				/* votreMain.setSize(300, 200);
+				votreMain.setVisible(true); */
 			}
 		}
 	}
-	
+
 	public Image verifierCarte(Card c){
-		
+
 		Image carte = null;
 
 		switch(c.getValue().getCardValue()){
@@ -270,7 +274,7 @@ public class Plateau extends JPanel implements Observer{
 	}
 
 	public void stealCards(Game g,Player p) {
-String choiceVictime = JOptionPane.showInputDialog(null, "choisissez votre victime"+game.getIsPlaying().getPseudo(), "Input",JOptionPane.INFORMATION_MESSAGE);
+		String choiceVictime = JOptionPane.showInputDialog(null, "choisissez votre victime"+game.getIsPlaying().getPseudo(), "Input",JOptionPane.INFORMATION_MESSAGE);
 		Object[] choixList = { "down", "up" };
 		Object choixFait = JOptionPane.showInputDialog(null, "Choisissez la carte a volé", "Input",JOptionPane.INFORMATION_MESSAGE, null,choixList, choixList[0]);
 		String choiceCardVictime = choixFait.toString();
@@ -289,7 +293,7 @@ String choiceVictime = JOptionPane.showInputDialog(null, "choisissez votre victi
 		if (arg == "piles"){
 			this.afficherPiles();
 		}
-	
+
 		if (arg == "joueurcommence"){
 			this.afficherJoueurCommence();
 		}

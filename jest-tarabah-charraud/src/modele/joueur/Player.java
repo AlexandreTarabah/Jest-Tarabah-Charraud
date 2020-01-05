@@ -157,10 +157,7 @@ public int nbCardOffer;
 	int numC =0;
 	numC =choice + 1; // demande au joueur de rentrer un numéro entre 1 et 2
 
-<<<<<<< HEAD
-=======
 
->>>>>>> branch 'master' of https://github.com/AlexandreTarabah/Jest-Tarabah-Charraud
 	((Map<String, Card>) offer).put("down", this.hand.get(numC-1)); // -1 car le tableau commence à l'indice 0, je caste l'offer  
 	((Map<String, Card>) offer).put("up", this.hand.get(numC%2)); // avec le modulo 2 on obtient la case manquante, je caste l'offer
 
@@ -169,13 +166,11 @@ public int nbCardOffer;
 
 	g.listOffer.put(this.getPseudo(), this.getOffer()); // on ajoute l'offre du player a la listOffer.
 
-<<<<<<< HEAD
+
 		/* et la on affiche le pseudo du player en paramètre, avec get(Down) et la value de la carte, et la couleur
 		 */
 		g.listOffer.put(this.getPseudo(), this.getOffer()); // on ajoute l'offre du player a la listOffer.
 
-=======
->>>>>>> branch 'master' of https://github.com/AlexandreTarabah/Jest-Tarabah-Charraud
 
 	}
 

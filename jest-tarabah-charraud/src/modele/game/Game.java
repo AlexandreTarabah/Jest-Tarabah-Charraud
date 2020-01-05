@@ -366,15 +366,12 @@ public class Game extends Observable implements Runnable {
 			players.get(i).HasStolen=false;
 		}
 
-<<<<<<< HEAD
 		this.mainCollectCards();
 		this.notifyObservers("collectCards");// On ramasse les cartes et on les rebalance dans le jeu pour recommencer 
 		for(int i=0;i<this.nbPlayers;i++) {
 			this.players.get(i).getHand().clear();
 		}
 	}
-=======
->>>>>>> branch 'master' of https://github.com/AlexandreTarabah/Jest-Tarabah-Charraud
 
 
 	
