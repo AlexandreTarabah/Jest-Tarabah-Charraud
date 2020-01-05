@@ -13,7 +13,6 @@ public class Parametres extends JFrame{
 	 */
 	private static final long serialVersionUID = 1L;
 	
-	private HomePanel hp;
 	private JButton validation;
 	private JRadioButton botDown;
 	private JRadioButton botHard;
@@ -26,6 +25,7 @@ public class Parametres extends JFrame{
 	private JLabel lDifficulty;
 	private JLabel lNbrVirtual;
 	private JLabel lNbrReal;
+	private ParametresPanel parp;
 	
 	public Parametres(){
 		super();
@@ -34,7 +34,8 @@ public class Parametres extends JFrame{
 	    this.setLocationRelativeTo(null);               
 	    this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	    
-	    hp = new HomePanel();
+	    this.parp = new ParametresPanel();
+	    
 	    difficulty = new JPanel();
 	    virtual = new JPanel();
 	    real = new JPanel();
@@ -85,26 +86,26 @@ public class Parametres extends JFrame{
 		real.add(nbrReal);
 		real.setOpaque(false);
 		
-		hp.setLayout(new GridBagLayout());
+		parp.setLayout(new GridBagLayout());
 		GridBagConstraints gbc = new GridBagConstraints();
 	    gbc.insets = new Insets(10,10,10,10);
 	    
 	    gbc.gridx = 0;
 	    gbc.gridy = 0;
-	    hp.add(virtual, gbc);
+	    parp.add(virtual, gbc);
 	    
 	    gbc.gridy = 1;
-	    hp.add(real, gbc);
+	    parp.add(real, gbc);
 	    
 	    gbc.gridy = 2;
-	    hp.add(difficulty, gbc);
+	    parp.add(difficulty, gbc);
 	    
 	    gbc.ipadx = 100;
 	    gbc.ipady = 10;
 	    gbc.gridy = 3;
-		hp.add(validation, gbc);
+		parp.add(validation, gbc);
 		
-	    this.setContentPane(hp);
+	    this.setContentPane(parp);
 	}
 	
 	public int getDifficulte(){

@@ -96,10 +96,7 @@ public class Plateau extends JPanel implements Observer{
 				}
 				
 				j.setCp(j.getJeu());
-				JFrame frame = new JFrame("Votre main");
-				frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 				frame.add(j.getCp());
-				frame.setSize(300, 200);
 				frame.setVisible(true);
 			}
 		}
@@ -265,7 +262,7 @@ public class Plateau extends JPanel implements Observer{
 
 	public void paintComponent(Graphics g){
 		try {
-			Image img = ImageIO.read(new File("img/JEST_Home.png"));
+			Image img = ImageIO.read(new File("img/fond-grunge-vert.jpg"));
 			g.drawImage(img, 0, 0, this.getWidth(), this.getHeight(), this);
 		} catch (IOException e) {
 			e.printStackTrace();
