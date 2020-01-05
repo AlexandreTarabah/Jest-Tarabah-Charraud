@@ -404,7 +404,7 @@ public class Game extends Observable implements Runnable {
 					System.out.println(result+ " et " + t[j]);
 
 				}
-
+// bb
 
 				else if(t[j].getTrophy() instanceof TrophyLowest) // si c'est des trophyHighest
 				{
