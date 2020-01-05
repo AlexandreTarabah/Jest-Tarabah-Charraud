@@ -90,6 +90,7 @@ public class Plateau extends JPanel implements Observer{
 		while (iPj.hasNext()){
 			PlayerPanel j = iPj.next(); 
 			if (j.getNomJoueur() == joueur.getPseudo()){
+				j.getJeu().clear();
 				ListIterator<Card> iCartes = joueur.getHand().listIterator();
 				while (iCartes.hasNext()){
 					j.prendreCarte(this.verifierCarte(iCartes.next()));
@@ -123,7 +124,7 @@ public class Plateau extends JPanel implements Observer{
 				carte = deck.getCartes().get(9);
 				break;
 			case 4:
-				carte = deck.getCartes().get(16);
+				carte = deck.getCartes().get(13);
 				break;
 			}
 			break;

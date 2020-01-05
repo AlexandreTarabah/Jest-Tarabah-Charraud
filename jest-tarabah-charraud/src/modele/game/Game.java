@@ -356,6 +356,7 @@ public class Game extends Observable implements Runnable {
 			// On ramasse les cartes et on les rebalance dans le jeu pour recommencer 
 			for(int i=0;i<this.nbPlayers;i++) {
 				this.players.get(i).getHand().clear();
+				this.players.get(i).getOffer().clear();
 			}
 		
 		}
