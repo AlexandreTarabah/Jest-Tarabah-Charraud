@@ -94,7 +94,13 @@ public class Plateau extends JPanel implements Observer{
 				while (iCartes.hasNext()){
 					j.prendreCarte(this.verifierCarte(iCartes.next()));
 				}
-				j.setVisible(true);
+				
+				j.setCp(j.getJeu());
+				JFrame frame = new JFrame("Votre main");
+				frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+				frame.add(j.getCp());
+				frame.setSize(300, 200);
+				frame.setVisible(true);
 			}
 		}
 	}
@@ -282,7 +288,8 @@ public class Plateau extends JPanel implements Observer{
 
 	public void update(Observable o, Object arg) {
 
-		if (arg == "joueurs"){
+		if (arg == "joueurs")
+		{
 			this.afficherJoueurs(game.players.size());
 		}
 		if (arg == "piles"){

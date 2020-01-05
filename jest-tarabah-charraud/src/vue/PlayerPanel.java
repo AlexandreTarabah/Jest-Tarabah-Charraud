@@ -30,8 +30,6 @@ public class PlayerPanel extends JPanel{
 		this.setOpaque(false);
 		this.setLayout(new BorderLayout());
 		this.setJeu(new LinkedList<Image>());
-		this.cp = new CardPanel(jeu);
-		this.add(cp);
 	
 		
 		this.nomJoueur = joueur.getPseudo();
@@ -78,13 +76,14 @@ public class PlayerPanel extends JPanel{
 		return nomJoueur;
 	}
 
-	public CardPanel getcp() {
+	public CardPanel getCp() {
 
 		return cp;
 	}
 
-	public void setPc(CardPanel cp) {
-		this.cp = cp;
+	public void setCp(LinkedList<Image> jeu) {
+		this.cp = new CardPanel(jeu);
+		this.add(cp);
 	}
 	
 	public Boolean isVirtuel() {
