@@ -100,15 +100,10 @@ import vue.Regles;
 
 
 	public void methodeStealCard(String choiceVictime, String choiceCardVictime,Player p) {
-		while(game.listOffer.containsKey(choiceVictime)==false) {
+		
+		while(game.listOffer.containsKey(choiceVictime)==false && game.listOffer.get(choiceVictime).size()<2) {
 			
-			choiceVictime = JOptionPane.showInputDialog(null, "Veuillez entrer un joueur existant", "erreur", JOptionPane.QUESTION_MESSAGE);
-		}
-
-
-		while(game.listOffer.get(choiceVictime).size()<2) {
-			
-			choiceVictime = JOptionPane.showInputDialog(null, "Veuillez entrer un joueur avec une offre complète", "erreur", JOptionPane.QUESTION_MESSAGE);
+			choiceVictime = JOptionPane.showInputDialog(null, "Veuillez entrer une offre valable", "erreur", JOptionPane.QUESTION_MESSAGE);
 			
 		}
 

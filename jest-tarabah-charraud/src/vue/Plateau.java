@@ -267,10 +267,7 @@ public class Plateau extends JPanel implements Observer{
 	}
 
 	public void stealCards(Game g,Player p) {
-
-		String choiceVictime = JOptionPane.showInputDialog(null, 
-				"choisissez votre victime joueur "+game.getIsPlaying().getPseudo(), "vole de carte", JOptionPane.QUESTION_MESSAGE);
-
+String choiceVictime = JOptionPane.showInputDialog(null, "Choisissez", "Input",JOptionPane.INFORMATION_MESSAGE);
 		Object[] choixList = { "down", "up" };
 		Object choixFait = JOptionPane.showInputDialog(null, "Choisissez", "Input",JOptionPane.INFORMATION_MESSAGE, null,choixList, choixList[0]);
 		String choiceCardVictime = choixFait.toString();

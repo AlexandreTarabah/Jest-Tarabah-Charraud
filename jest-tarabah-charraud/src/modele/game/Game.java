@@ -114,6 +114,8 @@ public class Game extends Observable implements Runnable {
 	public Object [][] scores;
 
 	private ArrayList<Observer> listObserver = new ArrayList<Observer>();
+	
+	private String[] tabPseudo;
 
 	// La c'est la distribution des cartes, ou finalement j'invoque la méthode takecards et donc le joueur prend 2 cartes, et créé son offer
 
@@ -135,7 +137,7 @@ public class Game extends Observable implements Runnable {
 				{
 					Player p = (Player) it.next();
 					for(int i=0; i<2;i++) {
-						p.getHand().add(drawdeck.takeCards());
+						p.getHand().add(i, drawdeck.takeCards());
 					}
 					isPlaying=p;
 					; // place une carte en position i dans la
@@ -270,6 +272,7 @@ public class Game extends Observable implements Runnable {
 			for (int i=0;i<this.nbBots;i++){
 
 				Player joueur = new BotDown(JOptionPane.showInputDialog("rentrer le pseudo du bot"), this);
+				
 
 			}
 		}else 
@@ -285,6 +288,8 @@ public class Game extends Observable implements Runnable {
 
 		}
 		this.notifyObservers("joueurs");
+		
+		 
 	}
 
 
@@ -347,25 +352,16 @@ public class Game extends Observable implements Runnable {
 			}
 
 			this.mainCollectCards();
-			this.notifyObservers("collectCards");// On ramasse les cartes et on les rebalance dans le jeu pour recommencer 
+			this.notifyObservers("collectCards");
+			// On ramasse les cartes et on les rebalance dans le jeu pour recommencer 
+			for(int i=0;i<this.nbPlayers;i++) {
+				this.players.get(i).getHand().clear();
+			}
+		
 
-		}
-<<<<<<< HEAD
-=======
-
-		for(int i=0; i<this.nbPlayers;i++) {
-			players.get(i).HasStolen=false;
-		}
-
-		this.mainCollectCards();
-		this.notifyObservers("collectCards");// On ramasse les cartes et on les rebalance dans le jeu pour recommencer 
-		for(int i=0;i<this.nbPlayers;i++) {
-			this.players.get(i).getHand().clear();
-		}
->>>>>>> branch 'master' of https://github.com/AlexandreTarabah/Jest-Tarabah-Charraud
 	}
 
-
+	}
 
 	public void giveTrophy() {
 		ArrayList<Player> p = this.players ;
@@ -574,8 +570,6 @@ public class Game extends Observable implements Runnable {
 				this.players.get(i).getJest().acceptCount(count,this.players.get(i),this);
 			}
 
-			this.scores[i][0] = this.players.get(i).getPseudo();
-			this.scores[i][1] = this.players.get(i).getNbPoint()  ;
 		}
 
 		System.out.println("\n") ;
@@ -669,5 +663,16 @@ public class Game extends Observable implements Runnable {
 		
 	}
 
-}
+	public Object[] getTabPseudo() {
+		return tabPseudo;
+	}
+
+	public void setTabPseudo(String[] tabPseudo) {
+		this.tabPseudo = tabPseudo;
+	}
+
+	
+	}
+
+
 // ARMAGEDDON 

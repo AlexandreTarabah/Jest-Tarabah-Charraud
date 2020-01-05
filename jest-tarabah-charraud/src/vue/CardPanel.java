@@ -49,23 +49,8 @@ public class CardPanel extends JPanel {
 
 		super.paintComponent(g);
 		for(int i=0; i<2;i++) {
-			g.drawImage(jeu.get(i), i*60, 0, 80, 140, this);
+			g.drawImage(jeu.get(i), i*30, 0, 80, 140, this);
 		}
-		
-		JFrame frame = new JFrame("Votre main");
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-
-		CardPanel panel = new CardPanel(jeu);
-
-		frame.add(panel);
-
-		frame.setSize(300, 200);
-		frame.setVisible(true);
-
-		/*ListIterator<Image> iJeu = jeu.listIterator();
-		while (iJeu.hasNext()){
-			g.drawImage(iJeu.next(), (iJeu.previousIndex()*30), 0, 80, 140, this);
-		}*/
 
 	}
 
