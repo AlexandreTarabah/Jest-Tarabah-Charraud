@@ -12,7 +12,6 @@ import controleur.Controleur;
 import modele.carte.*;
 import modele.joueur.*;
 import modele.game.Game;
-import vue.*;
 
 public class Plateau extends JPanel implements Observer{
 
@@ -90,21 +89,9 @@ public class Plateau extends JPanel implements Observer{
 		while (iPj.hasNext()){
 			PlayerPanel j = iPj.next();
 			if (j.getNomJoueur() == joueur.getPseudo()){
-<<<<<<< HEAD
-
-=======
-<<<<<<< HEAD
-=======
-<<<<<<< HEAD
->>>>>>> branch 'master' of https://github.com/AlexandreTarabah/Jest-Tarabah-Charraud
 				j.getJeu().clear(); 
 
 				j.getJeu().clear();
-<<<<<<< HEAD
-=======
->>>>>>> branch 'master' of https://github.com/AlexandreTarabah/Jest-Tarabah-Charraud
->>>>>>> branch 'master' of https://github.com/AlexandreTarabah/Jest-Tarabah-Charraud
->>>>>>> branch 'master' of https://github.com/AlexandreTarabah/Jest-Tarabah-Charraud
 				ListIterator<Card> iCartes = joueur.getHand().listIterator();
 				while (iCartes.hasNext()){
 					j.prendreCarte(this.verifierCarte(iCartes.next()));
@@ -112,7 +99,7 @@ public class Plateau extends JPanel implements Observer{
 			}
 		}
 	}
-	
+
 
 	public Image verifierCarte(Card c){
 
@@ -249,7 +236,7 @@ public class Plateau extends JPanel implements Observer{
 			Player j = iJoueur.next();
 			this.supprimerJeu(j);
 			this.afficherCartes(j);
-			
+
 		}
 	}
 
@@ -268,11 +255,11 @@ public class Plateau extends JPanel implements Observer{
 	public void afficherScores()
 	{
 		this.frame.setVisible(false);
-		
+
 		Scores scores = new Scores(this.game);
 		scores.setVisible(true) ;
-		
-		
+
+
 
 	}
 
@@ -295,8 +282,8 @@ public class Plateau extends JPanel implements Observer{
 		Object[] choixList = { "down", "up" };
 		Object choixFait = JOptionPane.showInputDialog(null, "Choisissez la carte a volé ", "Input",JOptionPane.INFORMATION_MESSAGE, null,choixList, choixList[0]);
 		try {
-		String choiceCardVictime = choixFait.toString();
-		controleur.methodeStealCard(choiceVictime,choiceCardVictime, game.getIsPlaying());
+			String choiceCardVictime = choixFait.toString();
+			controleur.methodeStealCard(choiceVictime,choiceCardVictime, game.getIsPlaying());
 		}catch(Exception e) {
 			JOptionPane.showMessageDialog(null, "Veuillez Rentrer un joueur");
 		}
@@ -354,7 +341,7 @@ public class Plateau extends JPanel implements Observer{
 
 		if(arg=="afficherCartes") {
 			this.actualiserPlateau();
-			
+
 		}
 
 		if(arg=="scores") {
