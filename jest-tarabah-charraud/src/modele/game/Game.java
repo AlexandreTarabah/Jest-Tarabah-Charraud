@@ -119,7 +119,7 @@ public class Game extends Observable implements Runnable {
 
 	private String[] tabPseudo;
 
-	// La c'est la distribution des cartes, ou finalement j'invoque la méthode takecards et donc le joueur prend 2 cartes, et créé son offer
+	// La c'est la distribution des cartes, ou finalement j'invoque la méthode takecards et donc le joueur prend 2 cartes, et créé son offer 
 
 	public Game() {
 
