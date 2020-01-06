@@ -90,14 +90,7 @@ public class Plateau extends JPanel implements Observer{
 		while (iPj.hasNext()){
 			PlayerPanel j = iPj.next();
 			if (j.getNomJoueur() == joueur.getPseudo()){
-<<<<<<< HEAD
-=======
-<<<<<<< HEAD
-				j.getJeu().clear(); 
-=======
-				j.getJeu().clear();
->>>>>>> branch 'master' of https://github.com/AlexandreTarabah/Jest-Tarabah-Charraud
->>>>>>> branch 'master' of https://github.com/AlexandreTarabah/Jest-Tarabah-Charraud
+
 				ListIterator<Card> iCartes = joueur.getHand().listIterator();
 				while (iCartes.hasNext()){
 					j.prendreCarte(this.verifierCarte(iCartes.next()));
@@ -231,7 +224,6 @@ public class Plateau extends JPanel implements Observer{
 			PlayerPanel pp = ipp.next();
 			if (pp.getNomJoueur() == joueur.getPseudo()){
 				pp.getJeu().removeAll(pp.getJeu());
-				pp.revalidate();
 			}
 		}
 	}

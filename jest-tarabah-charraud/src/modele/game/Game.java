@@ -325,15 +325,14 @@ public class Game extends Observable implements Runnable {
 			while(it.hasNext()) {
 				Player p = it.next();
 				isPlaying=p;
-<<<<<<< HEAD
+
 				
 				
 				
-=======
+
 
 				this.notifyObservers("afficherCartes");
 
->>>>>>> branch 'master' of https://github.com/AlexandreTarabah/Jest-Tarabah-Charraud
 				if(p instanceof BotDown || p instanceof BotHard) {
 					p.upsideDown(choice,this);
 					this.notifyObservers("afficherCartes");
@@ -366,19 +365,18 @@ public class Game extends Observable implements Runnable {
 				this.players.get(i).getHand().clear();
 				this.players.get(i).getOffer().clear();
 			}
-<<<<<<< HEAD
+
 
 		}
 
-=======
+
 		
 		}
->>>>>>> branch 'master' of https://github.com/AlexandreTarabah/Jest-Tarabah-Charraud
-	}
-<<<<<<< HEAD
-=======
 
->>>>>>> branch 'master' of https://github.com/AlexandreTarabah/Jest-Tarabah-Charraud
+
+
+
+
 
 
 
