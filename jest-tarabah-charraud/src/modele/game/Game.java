@@ -31,7 +31,6 @@ import modele.game.CountClassique;
 import modele.game.CountInversion;
 import modele.tas.DrawDeck;
 import modele.tas.Jest;
-import vue.FenetreSaisie;
 import vue.PlayerPanel;
 
 import java.util.Map.Entry;
@@ -203,16 +202,7 @@ public class Game extends Observable implements Runnable {
 	}
 
 
-	public void addPlayer(Player p, Scanner input) {
-		if(currentPlay==false) {
-
-			p.setPseudo(new FenetreSaisie());
-			players.add(p);
-			ForMainPlay.put(p.getPseudo(), p);
-
-
-		}
-	}
+	
 
 
 	public void mainCollectCards()

@@ -17,8 +17,8 @@ public class Parametres extends JFrame{
 	private JRadioButton botDown;
 	private JRadioButton botHard;
 	private ButtonGroup difficultyGroup;
-	private JComboBox nbrReal;
-	private JComboBox nbrVirtual;
+	private JComboBox<Integer> nbrReal;
+	private JComboBox<Integer> nbrVirtual;
 	private JPanel difficulty;
 	private JPanel virtual;
 	private JPanel real;
@@ -54,8 +54,8 @@ public class Parametres extends JFrame{
 		botHard.setFont(font);
 		botHard.setOpaque(false);
 		
-		nbrReal = new JComboBox();
-		nbrVirtual = new JComboBox();
+		nbrReal = new JComboBox<Integer>();
+		nbrVirtual = new JComboBox<Integer>();
 		
 		lDifficulty = new JLabel("Difficulte : ");
 		lDifficulty.setFont(font);
