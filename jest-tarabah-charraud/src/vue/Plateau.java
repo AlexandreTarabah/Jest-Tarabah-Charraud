@@ -219,7 +219,13 @@ public class Plateau extends JPanel implements Observer{
 			while (iPj.hasNext()){
 				PlayerPanel j = iPj.next();
 				if (j.getNomJoueur() == joueur.getPseudo()){
-					j.getJeu().get(0).getGraphics().drawImage("", x, y, observer);
+					try {
+						j.getJeu().remove(0);
+						j.getJeu().get(0).getGraphics().drawImage(ImageIO.read(new File("img/Dos.jpg")), 80, 0, 80, 140, this);
+					} catch (IOException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
 					this.revalidate();
 					this.repaint();
 					}	
@@ -231,7 +237,13 @@ public class Plateau extends JPanel implements Observer{
 			while (iPj.hasNext()){
 				PlayerPanel j = iPj.next();
 				if (j.getNomJoueur() == joueur.getPseudo()){
-					j.getJeu().remove(reponseUD);
+					j.getJeu().remove(0);
+					try {
+						j.getJeu().get(0).getGraphics().drawImage(ImageIO.read(new File("img/Dos.jpg")), 0, 0, 80, 140, this);
+					} catch (IOException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
 					this.revalidate();
 					this.repaint();
 					}
