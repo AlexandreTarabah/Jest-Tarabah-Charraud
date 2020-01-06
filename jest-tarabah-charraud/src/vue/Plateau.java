@@ -221,6 +221,8 @@ public class Plateau extends JPanel implements Observer{
 				if (j.getNomJoueur() == joueur.getPseudo()){
 					try {
 						j.getJeu().remove(0);
+						this.revalidate();
+						this.repaint();
 						j.getJeu().get(0).getGraphics().drawImage(ImageIO.read(new File("img/Dos.jpg")), 80, 0, 80, 140, this);
 					} catch (IOException e) {
 						// TODO Auto-generated catch block
