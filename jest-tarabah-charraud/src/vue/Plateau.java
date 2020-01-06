@@ -29,6 +29,7 @@ public class Plateau extends JPanel implements Observer{
 	private DrawDeckPanel deck;
 	private ArrayList<PlayerPanel> pp = new ArrayList<PlayerPanel>();
 
+
 	public Plateau(Game p, Controleur c){
 		super();
 
@@ -45,6 +46,7 @@ public class Plateau extends JPanel implements Observer{
 		this.setLayout(null);
 
 		this.frame.setContentPane(this);
+
 	}
 
 	public void afficherJeu(PlayerPanel pp){
@@ -88,6 +90,14 @@ public class Plateau extends JPanel implements Observer{
 		while (iPj.hasNext()){
 			PlayerPanel j = iPj.next();
 			if (j.getNomJoueur() == joueur.getPseudo()){
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+				j.getJeu().clear(); 
+=======
+				j.getJeu().clear();
+>>>>>>> branch 'master' of https://github.com/AlexandreTarabah/Jest-Tarabah-Charraud
+>>>>>>> branch 'master' of https://github.com/AlexandreTarabah/Jest-Tarabah-Charraud
 				ListIterator<Card> iCartes = joueur.getHand().listIterator();
 				while (iCartes.hasNext()){
 					j.prendreCarte(this.verifierCarte(iCartes.next()));
@@ -248,7 +258,14 @@ public class Plateau extends JPanel implements Observer{
 		this.frame.setContentPane(this);
 	}
 
-	public void afficherScore(){
+	public void afficherScores()
+	{
+		this.frame.setVisible(false);
+		
+		Scores scores = new Scores(this.game);
+		scores.setVisible(true) ;
+		
+		
 
 	}
 
@@ -331,6 +348,10 @@ public class Plateau extends JPanel implements Observer{
 		if(arg=="afficherCartes") {
 			this.actualiserPlateau();
 			
+		}
+
+		if(arg=="scores") {
+			this.afficherScores();
 		}
 
 

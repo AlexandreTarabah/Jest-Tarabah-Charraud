@@ -7,6 +7,7 @@ import vue.Home;
 import vue.Parametres;
 import vue.Plateau;
 import vue.Regles;
+import vue.Scores;
 
 
 public class Lanceur {
