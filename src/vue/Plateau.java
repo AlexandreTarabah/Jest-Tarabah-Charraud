@@ -317,7 +317,7 @@ public class Plateau extends JPanel implements Observer{
 			e.printStackTrace();
 		}
 	}
-
+//ok
 	public void stealCards(Game g,Player p) {
 		String choiceVictime = JOptionPane.showInputDialog(null, "choisissez votre victime "+game.getIsPlaying().getPseudo(), "Input",JOptionPane.INFORMATION_MESSAGE);
 		Object[] choixList = { "down", "up" };
