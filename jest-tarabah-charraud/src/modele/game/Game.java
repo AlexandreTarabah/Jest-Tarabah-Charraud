@@ -228,17 +228,20 @@ public class Game extends Observable implements Runnable {
 			this.distribute(); // distribuer les cartes 
 			// UPSIDE DOWN DE CHAQUE JOUEUR		
 			Iterator<Player> it = players.iterator();
+			this.notifyObservers("actualiserPlateau");
 			while(it.hasNext()) {
 				Player p = it.next();
 				isPlaying=p;
 				
 				if(p instanceof BotDown || p instanceof BotHard) {
+					
 					p.upsideDown(choice,this);
-					this.notifyObservers("actualiserPlateau");
+					this.notifyObservers("actualiserUpsideDown");
+					
 				}
 				else
 				{
-					this.notifyObservers("actualiserPlateau");
+					
 					this.notifyObservers("upsideDown");
 					
 				}

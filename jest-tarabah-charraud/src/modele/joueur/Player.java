@@ -17,8 +17,8 @@ public class Player
 
 	protected HashMap<String, Card> offer;
 
-	private HashMap<String,HashMap<String,Card>> listOffer = new HashMap<String, HashMap<String, Card>>();
-
+	protected String stolenCard;
+	
 	public boolean HasStolen=false;
 
 	protected LinkedList<Card> hand = new LinkedList<Card>();
@@ -215,7 +215,9 @@ public int nbCardOffer;
 	}
 
 
-
+public String getStolenCard() {
+	return stolenCard;
+}
 
 
 

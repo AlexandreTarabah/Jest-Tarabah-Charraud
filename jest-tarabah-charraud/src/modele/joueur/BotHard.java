@@ -1,15 +1,13 @@
 package modele.joueur;
-
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.Map;
-import java.util.Scanner;
 import java.util.Map.Entry;
 import modele.carte.Card;
 import modele.game.Game;
 
 public class BotHard extends Player implements Difficulty {
 	boolean isBot=true;
+	String stolenCard;
 
 	public BotHard(String pseudo,Game g) {
 		super(pseudo, g);
@@ -103,13 +101,13 @@ public class BotHard extends Player implements Difficulty {
 		}
 
 		try {
-			Thread.sleep(100);
+			Thread.sleep(1000);
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 
-		String stolenCard =null;
+		 stolenCard =null;
 		int highestC = g.ForMainPlay.get(choiceVictime).hand.get(0).getColor().getColorValue();
 		int highestV = g.ForMainPlay.get(choiceVictime).hand.get(0).getValue().getCardValue();
 		if(highestC < g.ForMainPlay.get(choiceVictime).hand.get(1).getColor().getColorValue())
@@ -177,6 +175,9 @@ public class BotHard extends Player implements Difficulty {
 				nbCardOffer-=1;
 
 		}
+	public String getStolenCard() {
+		return stolenCard;
+	}
 	}
 
 

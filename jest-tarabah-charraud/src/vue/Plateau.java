@@ -84,8 +84,6 @@ public class Plateau extends JPanel implements Observer{
 		while (iPj.hasNext()){
 			PlayerPanel j = iPj.next();
 			if (j.getNomJoueur() == joueur.getPseudo()){
-				j.getJeu().clear(); 
-
 				j.getJeu().clear();
 				ListIterator<Card> iCartes = joueur.getHand().listIterator();
 				while (iCartes.hasNext()){
@@ -177,15 +175,74 @@ public class Plateau extends JPanel implements Observer{
 
 
 
-	public void actualiserMain(int reponseUD) {
-		ListIterator<PlayerPanel> ipp = pp.listIterator();
-		while (ipp.hasNext()){
-			ipp.next().getJeu().get(reponseUD).getGraphics().drawRect(getX(), getY(), getWidth(), getHeight());
+	public void actualiserStealCards(Player joueur, int reponseUD, String choiceCardVictime) {
+		
+	if(joueur instanceof BotDown || joueur instanceof BotHard ) {
+		ListIterator<PlayerPanel> iPj = this.pp.listIterator();
+		while (iPj.hasNext()){
+			PlayerPanel j = iPj.next();
+			if (j.getNomJoueur() == joueur.getPseudo()){
+				if(joueur.getStolenCard().equals("down")) {
+					j.getJeu().remove(0);
+				}
+				else {
+					j.getJeu().remove(1);
+				}
+				this.revalidate();
+				this.repaint();
+				}	
+			}
 		}
-
+	else
+	{
+		ListIterator<PlayerPanel> iPj = this.pp.listIterator();
+		while (iPj.hasNext()){
+			PlayerPanel j = iPj.next();
+			if (j.getNomJoueur() == joueur.getPseudo()){
+				if(choiceCardVictime.equals("down")) {
+					j.getJeu().remove(0);
+				}
+				else {
+					j.getJeu().remove(1);
+				}
+				this.revalidate();
+				this.repaint();
+				}
+			}
+		}
 	}
-
 	
+		
+	public void actualiserUpsideDown(Player joueur, int reponseUD) {
+		if(joueur instanceof BotDown || joueur instanceof BotHard ) {
+			ListIterator<PlayerPanel> iPj = this.pp.listIterator();
+			while (iPj.hasNext()){
+				PlayerPanel j = iPj.next();
+				if (j.getNomJoueur() == joueur.getPseudo()){
+					j.getJeu().remove(0);
+					this.revalidate();
+					this.repaint();
+					}	
+				}
+			}
+		else
+		{
+			ListIterator<PlayerPanel> iPj = this.pp.listIterator();
+			while (iPj.hasNext()){
+				PlayerPanel j = iPj.next();
+				if (j.getNomJoueur() == joueur.getPseudo()){
+					j.getJeu().remove(reponseUD);
+					this.revalidate();
+					this.repaint();
+					}
+				}
+			}
+		}
+		
+	
+
+
+
 
 
 	public void supprimerJeu(Player joueur){
@@ -272,6 +329,8 @@ public class Plateau extends JPanel implements Observer{
 					action[1]);
 
 			controleur.methodecontrolupsideDown(reponseUD,game.getIsPlaying());
+			
+			this.actualiserUpsideDown(game.getIsPlaying(), reponseUD);
 
 			// this.actualiserMain(reponseUD);
 
@@ -280,12 +339,13 @@ public class Plateau extends JPanel implements Observer{
 		if(arg=="stealCards") {
 
 			this.stealCards(game,game.getIsPlaying());
-
-
 		}
 
-
-
+			if(arg == "actualiserUpsideDown") {
+				this.actualiserUpsideDown(game.getIsPlaying(), 0);
+			}
+			
+		
 
 		if (arg == "actualiserPlateau"){
 			this.actualiserPlateau();
@@ -295,7 +355,7 @@ public class Plateau extends JPanel implements Observer{
 			this.afficherScores();
 		}
 
-
+		
 
 	}
 

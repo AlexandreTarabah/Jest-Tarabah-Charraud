@@ -10,6 +10,7 @@ import modele.game.Game;
 
 public class BotDown extends Player implements Difficulty {
 	boolean isBot=true;
+	private String stolenCard;
 
 	public BotDown(String pseudo, Game g) {
 		super(pseudo, g);
@@ -21,7 +22,7 @@ public class BotDown extends Player implements Difficulty {
 		int numC = 1 ; // demande au joueur de rentrer un numéro entre 1 et 2
 
 		try {
-			Thread.sleep(100);
+			Thread.sleep(1000);
 			System.out.println(numC);
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
@@ -108,7 +109,7 @@ public class BotDown extends Player implements Difficulty {
 			e.printStackTrace();
 		}
 
-		String stolenCard ="down";
+	 stolenCard ="down";
 		this.jest.jestCards.add(g.listOffer.get(g.getVictime()).get(stolenCard));
 		g.listOffer.get(g.getVictime()).remove(stolenCard);// méthode AddJest() implementé dans Jest.
 
@@ -151,6 +152,10 @@ public class BotDown extends Player implements Difficulty {
 				}
 		}
 		nbCardOffer-=1;
+	}
+	
+	public String getStolenCard() {
+		return stolenCard;
 	}
 
 }
