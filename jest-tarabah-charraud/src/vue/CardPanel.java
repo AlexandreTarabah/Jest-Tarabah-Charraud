@@ -54,17 +54,11 @@ public class CardPanel extends JPanel {
 
 	public void paintComponent(Graphics g){
 
-		Image dos = null;
-		try {
-			dos = ImageIO.read(new File("img/Joker.png"));
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
 		ListIterator<Image> iJeu = jeu.listIterator();
 		while (iJeu.hasNext()){
 
 			
-				g.drawImage(iJeu.next(), (10 + iJeu.previousIndex()*30), 10, 80, 140, this);
+				g.drawImage(iJeu.next(), (iJeu.previousIndex()*30), 10, 80, 140, this);
 		
 
 		}

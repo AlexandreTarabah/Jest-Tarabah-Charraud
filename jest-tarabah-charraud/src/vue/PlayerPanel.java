@@ -4,8 +4,6 @@ import java.awt.*;
 import java.util.LinkedList;
 
 import javax.swing.*;
-import modele.joueur.BotDown;
-import modele.joueur.BotHard;
 import modele.joueur.Player;
 
 public class PlayerPanel extends JFrame{

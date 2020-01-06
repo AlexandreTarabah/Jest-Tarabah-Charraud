@@ -326,13 +326,6 @@ public class Game extends Observable implements Runnable {
 				Player p = it.next();
 				isPlaying=p;
 
-				
-				
-				this.notifyObservers("afficherCartes");
-
-
-				
-
 				if(p instanceof BotDown || p instanceof BotHard) {
 					p.upsideDown(choice,this);
 					this.notifyObservers("afficherCartes");
