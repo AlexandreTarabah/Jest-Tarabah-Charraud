@@ -358,11 +358,21 @@ public class Game extends Observable implements Runnable {
 			// On ramasse les cartes et on les rebalance dans le jeu pour recommencer 
 			for(int i=0;i<this.nbPlayers;i++) {
 				this.players.get(i).getHand().clear();
+				this.players.get(i).getOffer().clear();
 			}
+<<<<<<< HEAD
 
 		}
 
+=======
+		
+		}
+>>>>>>> branch 'master' of https://github.com/AlexandreTarabah/Jest-Tarabah-Charraud
 	}
+<<<<<<< HEAD
+=======
+
+>>>>>>> branch 'master' of https://github.com/AlexandreTarabah/Jest-Tarabah-Charraud
 
 
 
@@ -407,7 +417,7 @@ public class Game extends Observable implements Runnable {
 					System.out.println(result+ " et " + t[j]);
 
 				}
-
+// bb
 
 				else if(t[j].getTrophy() instanceof TrophyLowest) // si c'est des trophyHighest
 				{
