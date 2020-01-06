@@ -66,8 +66,8 @@ public class Parametres extends JFrame{
 		lNbrReal = new JLabel("Joueurs Reels : ");
 		lNbrReal.setFont(font);
 		
-		for (int i=0;i<4;i++){nbrReal.addItem(i+1);}
-		for (int i=0;i<4;i++){nbrVirtual.addItem(i+1);}
+		for (int i=0;i<5;i++){nbrReal.addItem(i+1);}
+		for (int i=0;i<5;i++){nbrVirtual.addItem(i+1);}
 		
 		difficultyGroup.add(botDown);
 		difficultyGroup.add(botHard);

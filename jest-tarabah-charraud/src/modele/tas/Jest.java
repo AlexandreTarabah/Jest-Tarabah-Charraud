@@ -2,6 +2,7 @@ package modele.tas;
 
 import java.util.AbstractMap;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashMap;
@@ -339,7 +340,7 @@ public class Jest {
 	}
 
 
-	public void acceptCount(Count count, Player p, Game g) 
+	public void acceptCount(Count count, Player p, Game g, int i) 
 
 	{ // A revoir avec Strategy ou visitor
 
@@ -348,8 +349,12 @@ public class Jest {
 		p.setNbPoint(count.visitJest(this));
 		System.out.println("Joueur "+ p.getPseudo() + " votre jest vaut " + p.getNbPoint() + " pts") ;
 		g.getWinner().put(p.getPseudo(), p.getNbPoint());
-
+		
+		g.scoresTransition.add(p.getPseudo()) ;
+		g.scoresTransition.add(Integer.toString(p.getNbPoint())) ;
+		
 	}
+ 
 
 }
 

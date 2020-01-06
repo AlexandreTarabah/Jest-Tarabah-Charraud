@@ -29,6 +29,7 @@ public class Plateau extends JPanel implements Observer{
 	private DrawDeckPanel deck;
 	private ArrayList<PlayerPanel> pp = new ArrayList<PlayerPanel>();
 
+
 	public Plateau(Game p, Controleur c){
 		super();
 
@@ -45,6 +46,7 @@ public class Plateau extends JPanel implements Observer{
 		this.setLayout(null);
 
 		this.frame.setContentPane(this);
+
 	}
 
 	public void afficherJeu(PlayerPanel pp){
@@ -90,10 +92,10 @@ public class Plateau extends JPanel implements Observer{
 		while (iPj.hasNext()){
 			PlayerPanel j = iPj.next(); 
 			if (j.getNomJoueur() == joueur.getPseudo()){
+				j.getJeu().clear(); 
 				ListIterator<Card> iCartes = joueur.getHand().listIterator();
 				while (iCartes.hasNext()){
 					j.prendreCarte(this.verifierCarte(iCartes.next()));
-
 				}
 				j.setCp(j.getJeu()); // ci-dessous code pour cartes dans fenetre externe
 				/*JFrame votreMain = new JFrame("Votre Main joueur " + joueur.getPseudo());
@@ -123,52 +125,52 @@ public class Plateau extends JPanel implements Observer{
 				carte = deck.getCartes().get(9);
 				break;
 			case 4:
-				carte = deck.getCartes().get(16);
+				carte = deck.getCartes().get(13);
 				break;
 			}
 			break;
 		case 2:
 			switch(c.getColor().getColorValue()){
 			case 1:
-				carte = deck.getCartes().get(1);
+				carte = deck.getCartes().get(2);
 				break;
 			case 2:
-				carte = deck.getCartes().get(5);
+				carte = deck.getCartes().get(6);
 				break;
 			case 3:
-				carte = deck.getCartes().get(9);
+				carte = deck.getCartes().get(10);
 				break;
 			case 4:
-				carte = deck.getCartes().get(16);
+				carte = deck.getCartes().get(14);
 				break;
 			}
 			break;
 		case 3:
 			switch(c.getColor().getColorValue()){
 			case 1:
-				carte = deck.getCartes().get(1);
+				carte = deck.getCartes().get(3);
 				break;
 			case 2:
-				carte = deck.getCartes().get(5);
+				carte = deck.getCartes().get(7);
 				break;
 			case 3:
-				carte = deck.getCartes().get(9);
+				carte = deck.getCartes().get(11);
 				break;
 			case 4:
-				carte = deck.getCartes().get(16);
+				carte = deck.getCartes().get(15);
 				break;
 			}
 			break;
 		case 4:
 			switch(c.getColor().getColorValue()){
 			case 1:
-				carte = deck.getCartes().get(1);
+				carte = deck.getCartes().get(4);
 				break;
 			case 2:
-				carte = deck.getCartes().get(5);
+				carte = deck.getCartes().get(8);
 				break;
 			case 3:
-				carte = deck.getCartes().get(9);
+				carte = deck.getCartes().get(12);
 				break;
 			case 4:
 				carte = deck.getCartes().get(16);
@@ -255,7 +257,14 @@ public class Plateau extends JPanel implements Observer{
 		this.frame.setContentPane(this);
 	}
 
-	public void afficherScore(){
+	public void afficherScores()
+	{
+		this.frame.setVisible(false);
+		
+		Scores scores = new Scores(this.game);
+		scores.setVisible(true) ;
+		
+		
 
 	}
 
@@ -335,6 +344,10 @@ public class Plateau extends JPanel implements Observer{
 
 		if(arg=="afficherCartes") {
 			this.afficherCartes(game.getIsPlaying());
+		}
+
+		if(arg=="scores") {
+			this.afficherScores();
 		}
 
 

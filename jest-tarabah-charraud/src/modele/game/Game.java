@@ -111,10 +111,12 @@ public class Game extends Observable implements Runnable {
 
 	private  String victime;
 
-	public Object [][] scores;
+	public Object [][] scores ;
+
+	public ArrayList<String> scoresTransition = new ArrayList<String>();
 
 	private ArrayList<Observer> listObserver = new ArrayList<Observer>();
-	
+
 	private String[] tabPseudo;
 
 	// La c'est la distribution des cartes, ou finalement j'invoque la méthode takecards et donc le joueur prend 2 cartes, et créé son offer
@@ -271,7 +273,7 @@ public class Game extends Observable implements Runnable {
 			for (int i=0;i<this.nbBots;i++){
 
 				Player joueur = new BotDown(JOptionPane.showInputDialog("rentrer le pseudo du bot"), this);
-				
+
 
 			}
 		}else 
@@ -287,8 +289,8 @@ public class Game extends Observable implements Runnable {
 
 		}
 		this.notifyObservers("joueurs");
-		
-		 
+
+
 	}
 
 
@@ -323,7 +325,7 @@ public class Game extends Observable implements Runnable {
 			while(it.hasNext()) {
 				Player p = it.next();
 				isPlaying=p;
-				
+
 				this.notifyObservers("afficherCartes");
 
 				if(p instanceof BotDown || p instanceof BotHard) {
@@ -357,31 +359,14 @@ public class Game extends Observable implements Runnable {
 			for(int i=0;i<this.nbPlayers;i++) {
 				this.players.get(i).getHand().clear();
 			}
-		
-		}
-<<<<<<< HEAD
 
-
-
-		for(int i=0; i<this.nbPlayers;i++) {
-			players.get(i).HasStolen=false;
 		}
 
-		this.mainCollectCards();
-		this.notifyObservers("collectCards");// On ramasse les cartes et on les rebalance dans le jeu pour recommencer 
-		for(int i=0;i<this.nbPlayers;i++) {
-			this.players.get(i).getHand().clear();
-		}
-=======
->>>>>>> branch 'master' of https://github.com/AlexandreTarabah/Jest-Tarabah-Charraud
 	}
-<<<<<<< HEAD
-=======
-
->>>>>>> branch 'master' of https://github.com/AlexandreTarabah/Jest-Tarabah-Charraud
 
 
-	
+
+
 
 	public void giveTrophy() {
 		ArrayList<Player> p = this.players ;
@@ -582,117 +567,145 @@ public class Game extends Observable implements Runnable {
 			if (this.variante == false)
 			{
 				Count count = new CountClassique() ;
-				this.players.get(i).getJest().acceptCount(count, this.players.get(i),this);
+				this.players.get(i).getJest().acceptCount(count, this.players.get(i),this, i);
+
 			}
 			else 
 			{
 				Count count = new CountInversion() ;
-				this.players.get(i).getJest().acceptCount(count,this.players.get(i),this);
+				this.players.get(i).getJest().acceptCount(count,this.players.get(i),this, i);
+
 			}
 
 		}
 
-		System.out.println("\n") ;
-
-	}
-
-
-	public void run() {
-
-		this.listOffer = new HashMap<>();
-		this.drawdeck = new DrawDeck(this);
-		this.drawdeck.shuffle();
-
-
-		this.createTrophies(this); //METTRE DANS MAIN JESTINTERFACE
-
-
-		this.playRounds(); 
-
-		this.giveTrophy();
-
-		this.countPoints();
-
-
-		this.winnerDetermination(); 	
-
-
-
-	}
-
-
-	public  int getNbPlayers() {
-		// TODO Auto-generated method stub
-		return nbPlayers;
-	}
-
-
-	public boolean isExtension() {
-		// TODO Auto-generated method stub
-		return extension;
-	}
-
-
-	public ArrayList<String> getUpsideChoice() {
-		// TODO Auto-generated method stub
-		return upsideChoice;
-	}
-
-
-	public  ArrayList<Integer> getChoiceVar() {
-		// TODO Auto-generated method stub
-		return choiceVar;
-	}
-
-
-
-	public  HashMap<String, Integer> getWinner() {
-		// TODO Auto-generated method stub
-		return winner;
-	}
-
-
-
-	public String getVictime() {
-		// TODO Auto-generated method stub
-		return victime;
-	}
-
-
-
-	public Player getIsPlaying() {
-		return isPlaying;
-	}
-
-	public void addObserver(Observer obs) {
-		this.listObserver.add(obs);
-	}
-
-	public void notifyObservers(Object arg) {
-		for (Observer obs : listObserver){
-			obs.update(this, arg);
+		if (nbPlayers == 4)
+		{
+			this.scores = new Object[][] {
+				{scoresTransition.get(0), scoresTransition.get(1)},
+				{scoresTransition.get(2), scoresTransition.get(3)},
+				{scoresTransition.get(4), scoresTransition.get(5)},
+				{scoresTransition.get(6), scoresTransition.get(7)},
+			} ;
+			
 		}
+		
+		if (nbPlayers == 3)
+		{
+			this.scores = new Object[][] {
+				{scoresTransition.get(0), scoresTransition.get(1)},
+				{scoresTransition.get(2), scoresTransition.get(3)},
+				{scoresTransition.get(4), scoresTransition.get(5)},
+			} ;
+			
+		}
+		
+		this.notifyObservers("scores");
+
+		System.out.println("\n") ;
+		
+
+		}
+
+
+		public void run() {
+
+			this.listOffer = new HashMap<>();
+			this.drawdeck = new DrawDeck(this);
+			this.drawdeck.shuffle();
+
+
+			this.createTrophies(this); //METTRE DANS MAIN JESTINTERFACE
+
+
+			this.playRounds(); 
+
+			this.giveTrophy();
+
+			this.countPoints();
+
+
+			this.winnerDetermination(); 	
+
+		}
+
+
+		public  int getNbPlayers() {
+			// TODO Auto-generated method stub
+			return nbPlayers;
+		}
+
+
+		public boolean isExtension() {
+			// TODO Auto-generated method stub
+			return extension;
+		}
+
+
+		public ArrayList<String> getUpsideChoice() {
+			// TODO Auto-generated method stub
+			return upsideChoice;
+		}
+
+
+		public  ArrayList<Integer> getChoiceVar() {
+			// TODO Auto-generated method stub
+			return choiceVar;
+		}
+
+
+
+		public  HashMap<String, Integer> getWinner() {
+			// TODO Auto-generated method stub
+			return winner;
+		}
+
+		public  Object[][] getScores() {
+			// TODO Auto-generated method stub
+			return scores;
+		}
+
+
+		public String getVictime() {
+			// TODO Auto-generated method stub
+			return victime;
+		}
+
+
+
+		public Player getIsPlaying() {
+			return isPlaying;
+		}
+
+		public void addObserver(Observer obs) {
+			this.listObserver.add(obs);
+		}
+
+		public void notifyObservers(Object arg) {
+			for (Observer obs : listObserver){
+				obs.update(this, arg);
+			}
+		}
+
+		public void deleteObserver(Observer o) {
+			listObserver.remove(o);
+		}
+
+		public void setVictime(String choiceVictime) {
+			this.victime=choiceVictime;
+
+		}
+
+		public Object[] getTabPseudo() {
+			return tabPseudo;
+		}
+
+		public void setTabPseudo(String[] tabPseudo) {
+			this.tabPseudo = tabPseudo;
+		}
+
+
 	}
 
-	public void deleteObserver(Observer o) {
-		listObserver.remove(o);
-	}
 
-	public void setVictime(String choiceVictime) {
-		this.victime=choiceVictime;
-
-	}
-
-	public Object[] getTabPseudo() {
-		return tabPseudo;
-	}
-
-	public void setTabPseudo(String[] tabPseudo) {
-		this.tabPseudo = tabPseudo;
-	}
-
-	
-	}
-
-
-// ARMAGEDDON 
+	// ARMAGEDDON 
