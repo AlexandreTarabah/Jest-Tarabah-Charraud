@@ -102,7 +102,7 @@ public class Game extends Observable implements Runnable {
 
 	public static ArrayList<Integer> choiceVar= new ArrayList<Integer>();
 
-// cc
+// cc 
 	ArrayList<Integer> choicePlayers= new ArrayList<Integer>();
 
 	public ArrayList<String> upsideChoice = new ArrayList<String>() ; 
