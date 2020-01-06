@@ -27,8 +27,12 @@ public class Scores extends JFrame {
 		String[] entetes = {"Pseudo", "Scores"};
 
 		JTable tableau = new JTable(g.scores, entetes);
+		
+		this.setBackground(Color.YELLOW); 
 
 		getContentPane().add(new JScrollPane(tableau), BorderLayout.CENTER);
+		
+		
 
 	}
 
