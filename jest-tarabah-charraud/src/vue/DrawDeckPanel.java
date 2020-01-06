@@ -47,20 +47,6 @@ public class DrawDeckPanel extends JPanel{
 			cartes.add(quatreCoeur);
 			
 			
-			
-			Image unTrefle = ImageIO.read(new File("img/AsTrefle.png"));
-			cartes.add(unTrefle);
-			Image deuxTrefle = ImageIO.read(new File("img/DeuxTrefle.png"));
-			cartes.add(deuxTrefle);
-			Image troisTrefle = ImageIO.read(new File("img/TroisTrefle.png"));
-			cartes.add(troisTrefle);
-			Image quatreTrefle = ImageIO.read(new File("img/QuatreTrefle.png"));
-			cartes.add(quatreTrefle);
-			
-			
-			
-			
-
 			Image unCarreau = ImageIO.read(new File("img/AsCarreau.png"));
 			cartes.add(unCarreau);
 			Image deuxCarreau = ImageIO.read(new File("img/DeuxCarreau.png"));
@@ -70,7 +56,14 @@ public class DrawDeckPanel extends JPanel{
 			Image quatreCarreau = ImageIO.read(new File("img/QuatreCarreau.png"));
 			cartes.add(quatreCarreau);
 			
-			
+			Image unTrefle = ImageIO.read(new File("img/AsTrefle.png"));
+			cartes.add(unTrefle);
+			Image deuxTrefle = ImageIO.read(new File("img/DeuxTrefle.png"));
+			cartes.add(deuxTrefle);
+			Image troisTrefle = ImageIO.read(new File("img/TroisTrefle.png"));
+			cartes.add(troisTrefle);
+			Image quatreTrefle = ImageIO.read(new File("img/QuatreTrefle.png"));
+			cartes.add(quatreTrefle);
 			
 			
 			

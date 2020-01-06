@@ -61,6 +61,11 @@ public class CardPanel extends JPanel {
 		}
 		ListIterator<Image> iJeu = jeu.listIterator();
 		while (iJeu.hasNext()){
+<<<<<<< HEAD
+			
+				g.drawImage(iJeu.next(), (iJeu.previousIndex()*30), 0, 80, 140, this);
+		
+=======
 			if (cartesVisibles)
 			{
 				g.drawImage(iJeu.next(), (iJeu.previousIndex()*200 + 525), 300, 120, 180, this);
@@ -70,6 +75,7 @@ public class CardPanel extends JPanel {
 				iJeu.next();
 				g.drawImage(dos, (iJeu.previousIndex()*200 + 525), 300, 120, 180, this);
 			}
+>>>>>>> branch 'master' of https://github.com/AlexandreTarabah/Jest-Tarabah-Charraud
 			
 		}
 		
