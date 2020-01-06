@@ -79,18 +79,7 @@ import vue.Scores;
 	 }
 
 	
-	public void nouvelleManche(int nm) {
-		if (nm == JOptionPane.OK_OPTION){
-			Thread manche = new Thread(game);
-			manche.start();
-		}
-		else if (nm == JOptionPane.NO_OPTION){
-			System.exit(0);
-		}
-		else{
-			plateau.afficherNouvelleManche();
-		}
-	}
+	
 
 	public void methodecontrolupsideDown( int reponseUD,  Player player) {
 		player.upsideDown(reponseUD, game);
