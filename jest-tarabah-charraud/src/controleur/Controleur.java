@@ -10,7 +10,7 @@ import vue.Home;
 import vue.Parametres;
 import vue.Plateau;
 import vue.Regles;
-import vue.Scores;
+
 
 /* On implémente ActionListener qui permet de traiter les événements du bouton */
  public class Controleur implements ActionListener {

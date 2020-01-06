@@ -65,9 +65,6 @@ public class PlayerPanel extends JPanel{
 		this.jeu.removeAll(jeu);
 	}
 
-	public void setCartesVisibles(Boolean visibles){
-		this.cp.setCartesVisibles(visibles);
-	}
 
 	public LinkedList<Image> getJeu() {
 		return jeu;

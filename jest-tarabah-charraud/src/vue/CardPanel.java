@@ -1,8 +1,8 @@
 package vue;
 
-import java.awt.BorderLayout;
+
 import java.awt.Graphics;
-import java.awt.GridLayout;
+
 import java.awt.Image;
 import java.io.File;
 import java.io.IOException;
@@ -10,7 +10,7 @@ import java.util.LinkedList;
 import java.util.ListIterator;
 
 import javax.imageio.ImageIO;
-import javax.swing.JFrame;
+
 import javax.swing.JPanel;
 
 public class CardPanel extends JPanel {
@@ -43,13 +43,6 @@ public class CardPanel extends JPanel {
 		this.jeu = jeu;
 	}
 
-	public boolean isCartesVisibles() {
-		return cartesVisibles;
-	}
-
-	public void setCartesVisibles(boolean visible) {
-		this.cartesVisibles = visible;
-	}
 
 	public void paintComponent(Graphics g){
 

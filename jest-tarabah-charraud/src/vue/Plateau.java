@@ -48,9 +48,6 @@ public class Plateau extends JPanel implements Observer{
 
 	}
 
-	public void afficherJeu(PlayerPanel pp){
-		pp.setCartesVisibles(true);
-	}
 
 	public void afficherPiles(){
 		this.deck = new DrawDeckPanel();
@@ -190,36 +187,7 @@ public class Plateau extends JPanel implements Observer{
 
 	}
 
-
-
-
-	public void afficherJoueurCommence(){
-		ListIterator<PlayerPanel> ipp = pp.listIterator();
-		while (ipp.hasNext()){
-			ipp.next().setCartesVisibles(true);
-		}
-		ListIterator<Player> iJoueurs = game.players.listIterator();
-		while (iJoueurs.hasNext()){
-			this.afficherCartes(iJoueurs.next());
-		}
-		JOptionPane.showMessageDialog(null, game.getVictime() + " commence cette manche !", "Qui Commence ?", JOptionPane.INFORMATION_MESSAGE);
-		while (ipp.hasPrevious()){
-			ipp.previous().retirerTout();
-		}
-		this.frame.setContentPane(this);
-	}
-
-	public void afficherDistribution(){
-		ListIterator<PlayerPanel> ipp = pp.listIterator();
-		while (ipp.hasNext()){
-			ipp.next().setCartesVisibles(false);
-		}
-		ListIterator<Player> iJoueurs = game.players.listIterator();
-		while (iJoueurs.hasNext()){
-			this.afficherCartes(iJoueurs.next());
-		}
-		this.frame.setContentPane(this);
-	}
+	
 
 
 	public void supprimerJeu(Player joueur){
@@ -247,16 +215,6 @@ public class Plateau extends JPanel implements Observer{
 	}
 
 
-	public void changerVisibiliteCartes(Boolean visibles){
-		ListIterator<PlayerPanel> ipp = pp.listIterator();
-		while (ipp.hasNext()){
-			PlayerPanel pp = ipp.next();
-			if (pp.getNomJoueur() == game.getIsPlaying().getPseudo()){
-				pp.setCartesVisibles(visibles);
-			}
-		}
-		this.frame.setContentPane(this);
-	}
 
 	public void afficherScores()
 	{
@@ -269,10 +227,7 @@ public class Plateau extends JPanel implements Observer{
 
 	}
 
-	public void afficherNouvelleManche(){
-		int nm = JOptionPane.showConfirmDialog(null, "Voulez-vous faire une autre manche ?", "Autre Manche ?", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
-		controleur.nouvelleManche(nm);
-	}
+	
 
 	public void paintComponent(Graphics g){
 		try {
@@ -306,12 +261,7 @@ public class Plateau extends JPanel implements Observer{
 			this.afficherPiles();
 		}
 
-		if (arg == "joueurcommence"){
-			this.afficherJoueurCommence();
-		}
-		if (arg == "distribuer"){
-			this.afficherDistribution();
-		}
+		
 		if(arg=="upsideDown") {
 			Object[] action = {1,2};
 			int reponseUD=JOptionPane.showOptionDialog(null, 
@@ -336,9 +286,7 @@ public class Plateau extends JPanel implements Observer{
 
 		}
 
-		if (arg == "determinateFirstPlayer"){
-			this.afficherJoueurCommence();
-		}
+
 
 
 		if (arg == "actualiserPlateau"){
