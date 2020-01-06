@@ -1,6 +1,7 @@
 package vue;
 
 import java.awt.*;
+import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.util.*;
@@ -175,44 +176,65 @@ public class Plateau extends JPanel implements Observer{
 
 
 
-	public void actualiserStealCards(Player joueur, String choiceCardVictime) {
+	public void actualiserStealCards(Player joueur, String victime, String choiceCardVictime) throws IOException {
 		
 	if(joueur instanceof BotDown || joueur instanceof BotHard ) {
 		ListIterator<PlayerPanel> iPj = this.pp.listIterator();
 		while (iPj.hasNext()){
 			PlayerPanel j = iPj.next();
-			if (j.getNomJoueur() == joueur.getPseudo()){
-				if(joueur.getStolenCard().equals("down")) {
-					j.getJeu().remove(0);
+			if (j.getNomJoueur() == victime){
+				ListIterator<Player> players = game.players.listIterator();
+				while(players.hasNext()) {
+					Player p = players.next();
+					if(p.getPseudo()==victime) {
+					if(game.getIsPlaying().getStolenCard().equals("down")) {
+						j.getJeu().remove(1);
+					}
+					else {
+						j.getJeu().remove(0);
+					}
+					}
 				}
-				else {
-					j.getJeu().remove(1);
-				}
-				this.revalidate();
-				this.repaint();
-				}	
 			}
 		}
+	}
+				
 	else
 	{
 		ListIterator<PlayerPanel> iPj = this.pp.listIterator();
 		while (iPj.hasNext()){
 			PlayerPanel j = iPj.next();
-			if (j.getNomJoueur() == joueur.getPseudo()){
-				if(choiceCardVictime.equals("down")) {
+			if (j.getNomJoueur() == victime){
+				ListIterator<Player> players = game.players.listIterator();
+				while(players.hasNext()) {
+					Player p = players.next();
+					if(p.getPseudo()==victime) {
+					if(p.equals("down")) {
 					j.getJeu().remove(0);
 				}
 				else {
 					j.getJeu().remove(1);
 				}
-				this.revalidate();
-				this.repaint();
+				
+						}
+					}
 				}
 			}
 		}
+	this.revalidate();
+	this.repaint();
 	}
+						
+					
+				
+			
+		
+	
 	
 		
+	
+	
+	
 	public void actualiserUpsideDown(Player joueur, int reponseUD) {
 		if(joueur instanceof BotDown || joueur instanceof BotHard ) {
 			ListIterator<PlayerPanel> iPj = this.pp.listIterator();
@@ -271,6 +293,16 @@ public class Plateau extends JPanel implements Observer{
 			}
 		}
 	}
+	
+	public void supprimerTousLesJeux(){
+		ListIterator<PlayerPanel> ipp = pp.listIterator();
+		while (ipp.hasNext()){
+			PlayerPanel pp = ipp.next();
+				pp.getJeu().removeAll(pp.getJeu());
+				pp.revalidate();
+			}
+		}
+	
 
 	public void actualiserPlateau()
 	{
@@ -316,7 +348,7 @@ public class Plateau extends JPanel implements Observer{
 		try {
 			String choiceCardVictime = choixFait.toString();
 			controleur.methodeStealCard(choiceVictime,choiceCardVictime, game.getIsPlaying());
-			this.actualiserStealCards(game.getIsPlaying(),choiceCardVictime);
+			this.actualiserStealCards(game.getIsPlaying(),game.getVictime(),choiceCardVictime);
 		}catch(Exception e) {
 			JOptionPane.showMessageDialog(null, "Veuillez Rentrer un joueur");
 		}
@@ -359,7 +391,12 @@ public class Plateau extends JPanel implements Observer{
 		}
 		
 		if(arg=="actualiserStealCards") {
-			this.actualiserStealCards(game.getIsPlaying(),null);
+			try {
+				this.actualiserStealCards(game.getIsPlaying(),game.getVictime(),null);
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
 
 			if(arg == "actualiserUpsideDown") {
@@ -374,7 +411,9 @@ public class Plateau extends JPanel implements Observer{
 			this.afficherScores();
 		}
 
-		
+		if(arg=="supprimerJeu") {
+			this.supprimerTousLesJeux();
+		}
 
 	}
 
@@ -390,5 +429,27 @@ public class Plateau extends JPanel implements Observer{
 
 	public void setplp(PlayerPanel plp) {
 		this.plp = plp;
+	}
+	
+	public static boolean compareImages(BufferedImage imgA, BufferedImage imgB) {
+	    // Les deux images doivent avoir la même tailles
+	    if (imgA.getWidth() == imgB.getWidth() && imgA.getHeight() == imgB.getHeight()) {
+	        int width = imgA.getWidth();
+	        int height = imgA.getHeight();
+	 
+	        // Boucle sur chaque pixel de l'image
+	        for (int y = 0; y < height; y++) {
+	            for (int x = 0; x < width; x++) {
+	                // comparaison des deux pixels
+	                if (imgA.getRGB(x, y) != imgB.getRGB(x, y)) {
+	                    return false;
+	                }
+	            }
+	        }
+	    } else {
+	        return false;
+	    }
+	 
+	    return true;
 	}
 }

@@ -259,8 +259,10 @@ public class Game extends Observable implements Runnable {
 				if(this.ForMainPlay.get(victime) instanceof BotDown || this.ForMainPlay.get(victime) instanceof BotHard) {// le reste suit selon la méthode stealCard(input)
 					this.ForMainPlay.get(victime).stealCard(choiceVictime,choiceStolenCard, this);
 					this.notifyObservers("actualiserStealCards");// Les manip de chaque joueur pendant le tour 
+					System.out.println(isPlaying.getStolenCard());
 				}else
 					this.notifyObservers("stealCards");
+				
 			}
 
 			
@@ -273,7 +275,7 @@ public class Game extends Observable implements Runnable {
 			
 			this.mainCollectCards();
 			
-			this.notifyObservers("actualiserPlateau");
+			this.notifyObservers("supprimerJeu");
 			// On ramasse les cartes et on les rebalance dans le jeu pour recommencer 
 			for(int i=0;i<this.nbPlayers;i++) {
 				this.players.get(i).getHand().clear();

@@ -10,7 +10,6 @@ import modele.game.Game;
 
 public class BotDown extends Player implements Difficulty {
 	boolean isBot=true;
-	private String stolenCard;
 
 	public BotDown(String pseudo, Game g) {
 		super(pseudo, g);
@@ -152,6 +151,7 @@ public class BotDown extends Player implements Difficulty {
 				}
 		}
 		nbCardOffer-=1;
+	
 	}
 	
 	public String getStolenCard() {
