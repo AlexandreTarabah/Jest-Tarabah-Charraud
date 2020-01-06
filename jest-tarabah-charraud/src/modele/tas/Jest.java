@@ -288,7 +288,7 @@ public class Jest {
 						bestJestPlayer.clear();
 						bestJestPlayer.put(p, jestValue) ;
 					}
-
+//nimp
 					else if(entryV.getValue().getValue() == entry.getValue() && entryP.getKey() != entry.getKey())
 					{
 						if(entryC.getValue().getValue() < entry1.getValue())
