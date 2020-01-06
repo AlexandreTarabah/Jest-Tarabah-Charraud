@@ -360,20 +360,11 @@ public class Game extends Observable implements Runnable {
 				this.players.get(i).getHand().clear();
 				this.players.get(i).getOffer().clear();
 			}
-<<<<<<< HEAD
 
 		}
 
-=======
 		
 		}
->>>>>>> branch 'master' of https://github.com/AlexandreTarabah/Jest-Tarabah-Charraud
-	}
-<<<<<<< HEAD
-=======
-
->>>>>>> branch 'master' of https://github.com/AlexandreTarabah/Jest-Tarabah-Charraud
-
 
 
 
