@@ -43,7 +43,7 @@ public class PlayerPanel extends JFrame{
 	public JButton getUno() {
 		return uno;
 	}
-
+	// 
 	public void setUno(JButton uno) {
 		this.uno = uno;
 	}

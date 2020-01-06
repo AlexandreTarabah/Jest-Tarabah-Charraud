@@ -33,7 +33,7 @@ public class DrawDeck {
 
 
 	// la je créé le drawdeck qui est une liste de cartes.
-
+	// 
 
 
 	public DrawDeck(Game g) {

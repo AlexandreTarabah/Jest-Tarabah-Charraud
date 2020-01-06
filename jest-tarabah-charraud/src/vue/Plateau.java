@@ -364,7 +364,7 @@ public class Plateau extends JPanel implements Observer{
 
 
 	}
-
+	// 
 
 
 	public JFrame getFrame() {

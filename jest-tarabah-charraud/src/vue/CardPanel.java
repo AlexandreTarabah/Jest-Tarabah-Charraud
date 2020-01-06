@@ -65,7 +65,7 @@ public class CardPanel extends JPanel {
 
 	}
 		
-		
+	// 
 		/* super.paintComponent(g);
 		for(int i=0; i<2;i++) {
 			g.drawImage(jeu.get(i), i*30, 0, 80, 140, this);
