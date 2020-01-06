@@ -53,8 +53,6 @@ public class Plateau extends JPanel implements Observer{
 
 	public void afficherPiles(){
 		this.deck = new DrawDeckPanel();
-		deck.setBounds(600, 320, 300, 200);
-		this.add(deck);
 		this.frame.setContentPane(this);
 	}
 
@@ -88,24 +86,16 @@ public class Plateau extends JPanel implements Observer{
 	public void afficherCartes(Player joueur){
 		ListIterator<PlayerPanel> iPj = this.pp.listIterator();
 		while (iPj.hasNext()){
-			PlayerPanel j = iPj.next(); 
+			PlayerPanel j = iPj.next();
 			if (j.getNomJoueur() == joueur.getPseudo()){
-				j.getJeu().clear();
 				ListIterator<Card> iCartes = joueur.getHand().listIterator();
 				while (iCartes.hasNext()){
 					j.prendreCarte(this.verifierCarte(iCartes.next()));
-
 				}
-				j.setCp(j.getJeu()); // ci-dessous code pour cartes dans fenetre externe
-				/*JFrame votreMain = new JFrame("Votre Main joueur " + joueur.getPseudo());
-				votreMain.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);*/
-				this.frame.setContentPane(j.getCp()) ;
-				this.frame.setVisible(true);
-				/* votreMain.setSize(300, 200);
-				votreMain.setVisible(true); */
 			}
 		}
 	}
+	
 
 	public Image verifierCarte(Card c){
 
@@ -131,45 +121,45 @@ public class Plateau extends JPanel implements Observer{
 		case 2:
 			switch(c.getColor().getColorValue()){
 			case 1:
-				carte = deck.getCartes().get(1);
+				carte = deck.getCartes().get(2);
 				break;
 			case 2:
-				carte = deck.getCartes().get(5);
+				carte = deck.getCartes().get(6);
 				break;
 			case 3:
-				carte = deck.getCartes().get(9);
+				carte = deck.getCartes().get(10);
 				break;
 			case 4:
-				carte = deck.getCartes().get(16);
+				carte = deck.getCartes().get(14);
 				break;
 			}
 			break;
 		case 3:
 			switch(c.getColor().getColorValue()){
 			case 1:
-				carte = deck.getCartes().get(1);
+				carte = deck.getCartes().get(3);
 				break;
 			case 2:
-				carte = deck.getCartes().get(5);
+				carte = deck.getCartes().get(7);
 				break;
 			case 3:
-				carte = deck.getCartes().get(9);
+				carte = deck.getCartes().get(11);
 				break;
 			case 4:
-				carte = deck.getCartes().get(16);
+				carte = deck.getCartes().get(15);
 				break;
 			}
 			break;
 		case 4:
 			switch(c.getColor().getColorValue()){
 			case 1:
-				carte = deck.getCartes().get(1);
+				carte = deck.getCartes().get(4);
 				break;
 			case 2:
-				carte = deck.getCartes().get(5);
+				carte = deck.getCartes().get(8);
 				break;
 			case 3:
-				carte = deck.getCartes().get(9);
+				carte = deck.getCartes().get(12);
 				break;
 			case 4:
 				carte = deck.getCartes().get(16);
@@ -231,6 +221,7 @@ public class Plateau extends JPanel implements Observer{
 			PlayerPanel pp = ipp.next();
 			if (pp.getNomJoueur() == joueur.getPseudo()){
 				pp.getJeu().removeAll(pp.getJeu());
+				pp.revalidate();
 			}
 		}
 	}
@@ -241,6 +232,7 @@ public class Plateau extends JPanel implements Observer{
 			Player j = iJoueur.next();
 			this.supprimerJeu(j);
 			this.afficherCartes(j);
+			
 		}
 	}
 
@@ -275,13 +267,15 @@ public class Plateau extends JPanel implements Observer{
 	}
 
 	public void stealCards(Game g,Player p) {
-		String choiceVictime = JOptionPane.showInputDialog(null, "choisissez votre victime"+game.getIsPlaying().getPseudo(), "Input",JOptionPane.INFORMATION_MESSAGE);
+		String choiceVictime = JOptionPane.showInputDialog(null, "choisissez votre victime "+game.getIsPlaying().getPseudo(), "Input",JOptionPane.INFORMATION_MESSAGE);
 		Object[] choixList = { "down", "up" };
-		Object choixFait = JOptionPane.showInputDialog(null, "Choisissez la carte a volé", "Input",JOptionPane.INFORMATION_MESSAGE, null,choixList, choixList[0]);
+		Object choixFait = JOptionPane.showInputDialog(null, "Choisissez la carte a volé ", "Input",JOptionPane.INFORMATION_MESSAGE, null,choixList, choixList[0]);
+		try {
 		String choiceCardVictime = choixFait.toString();
-
-
 		controleur.methodeStealCard(choiceVictime,choiceCardVictime, game.getIsPlaying());
+		}catch(Exception e) {
+			JOptionPane.showMessageDialog(null, "Veuillez Rentrer un joueur");
+		}
 
 	}
 
@@ -304,7 +298,7 @@ public class Plateau extends JPanel implements Observer{
 		if(arg=="upsideDown") {
 			Object[] action = {1,2};
 			int reponseUD=JOptionPane.showOptionDialog(null, 
-					"C'est le tour de "+ game.getIsPlaying().getPseudo()+ "\nQuelle carte retourner ?",
+					"C'est le tour de "+" "+ game.getIsPlaying().getPseudo()+ " \n Quelle carte retourner ?",
 					"Action",
 					JOptionPane.YES_NO_OPTION,
 					JOptionPane.QUESTION_MESSAGE,
@@ -335,7 +329,8 @@ public class Plateau extends JPanel implements Observer{
 		}
 
 		if(arg=="afficherCartes") {
-			this.afficherCartes(game.getIsPlaying());
+			this.actualiserPlateau();
+			
 		}
 
 

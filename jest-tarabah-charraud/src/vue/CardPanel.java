@@ -61,12 +61,9 @@ public class CardPanel extends JPanel {
 		}
 		ListIterator<Image> iJeu = jeu.listIterator();
 		while (iJeu.hasNext()){
-			if (cartesVisibles)
-				g.drawImage(iJeu.next(), (iJeu.previousIndex()*200 + 525), 300, 120, 180, this);
-			else{
-				iJeu.next();
-				g.drawImage(dos, (iJeu.previousIndex()*200 + 525), 300, 120, 180, this);
-			}
+			
+				g.drawImage(iJeu.next(), (iJeu.previousIndex()*30), 0, 80, 140, this);
+		
 			
 		}
 		

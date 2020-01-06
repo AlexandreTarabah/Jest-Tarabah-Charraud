@@ -40,6 +40,8 @@ public class PlayerPanel extends JPanel{
 		this.nomJoueurLabel.setFont(font);
 		this.nomJoueurLabel.setForeground(Color.RED);
 		this.add(nomJoueurLabel, BorderLayout.NORTH);
+		this.cp= new CardPanel(jeu);
+		this.add(cp);
 	}
 
 	public JButton getUno() {
@@ -85,7 +87,7 @@ public class PlayerPanel extends JPanel{
 	}
 
 	public void setCp(LinkedList<Image> jeu) {
-		this.cp = new CardPanel(jeu) ;
+		this.cp= new CardPanel(jeu);
 	}
 	
 	public Boolean isVirtuel() {
@@ -95,4 +97,6 @@ public class PlayerPanel extends JPanel{
 	public void setVirtuel(Boolean virtuel) {
 		this.virtuel = virtuel;
 	}
+
+	
 }

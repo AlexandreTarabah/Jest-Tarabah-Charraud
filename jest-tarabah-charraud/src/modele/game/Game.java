@@ -324,21 +324,21 @@ public class Game extends Observable implements Runnable {
 				Player p = it.next();
 				isPlaying=p;
 				
-				this.notifyObservers("afficherCartes");
-
+				
+				
 				if(p instanceof BotDown || p instanceof BotHard) {
 					p.upsideDown(choice,this);
+					this.notifyObservers("afficherCartes");
 				}
 				else
 				{
 					this.notifyObservers("upsideDown");
+					this.notifyObservers("afficherCartes");
 				}
 			}
-
-
+			
 			this.determinateFirstPlayer();
-
-
+			
 			for(int j =0; j<nbPlayers;j++) {
 				isPlaying=this.ForMainPlay.get(victime);
 				if(this.ForMainPlay.get(victime) instanceof BotDown || this.ForMainPlay.get(victime) instanceof BotHard) {// le reste suit selon la méthode stealCard(input)
@@ -352,7 +352,7 @@ public class Game extends Observable implements Runnable {
 			}
 
 			this.mainCollectCards();
-			this.notifyObservers("collectCards");
+			this.notifyObservers("afficherCartes");
 			// On ramasse les cartes et on les rebalance dans le jeu pour recommencer 
 			for(int i=0;i<this.nbPlayers;i++) {
 				this.players.get(i).getHand().clear();
