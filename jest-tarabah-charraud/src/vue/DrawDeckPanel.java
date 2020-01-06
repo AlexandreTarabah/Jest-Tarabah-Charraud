@@ -1,12 +1,10 @@
 package vue;
 
 import java.awt.BorderLayout;
-import java.awt.Graphics;
 import java.awt.Image;
 import java.io.File;
 import java.io.IOException;
 import java.util.LinkedList;
-import java.util.NoSuchElementException;
 
 import javax.imageio.ImageIO;
 import javax.swing.JPanel;
@@ -19,7 +17,6 @@ public class DrawDeckPanel extends JPanel{
 	private static final long serialVersionUID = 1L;
 	
 	private LinkedList<Image> cartes;
-	private LinkedList<Image> talon;
 	
 	public DrawDeckPanel(){
 		super();
