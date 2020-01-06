@@ -4,12 +4,11 @@ import java.awt.*;
 import java.util.LinkedList;
 
 import javax.swing.*;
-
 import modele.joueur.BotDown;
 import modele.joueur.BotHard;
 import modele.joueur.Player;
 
-public class PlayerPanel extends JPanel{
+public class PlayerPanel extends JFrame{
 
 	/**
 	 * 
@@ -27,10 +26,11 @@ public class PlayerPanel extends JPanel{
 	
 	public PlayerPanel(Player joueur){
 		super();
-		this.setOpaque(false);
+		this.setSize(200,250);
 		this.setLayout(new BorderLayout());
 		this.setJeu(new LinkedList<Image>());
-	
+		this.cp = new CardPanel(jeu);
+		this.add(cp,BorderLayout.CENTER);
 		if (joueur instanceof Player){
 			this.virtuel = false;
 		}
@@ -39,9 +39,7 @@ public class PlayerPanel extends JPanel{
 		this.nomJoueurLabel = new JLabel(nomJoueur);
 		this.nomJoueurLabel.setFont(font);
 		this.nomJoueurLabel.setForeground(Color.RED);
-		this.add(nomJoueurLabel, BorderLayout.NORTH);
-		this.cp= new CardPanel(jeu);
-		this.add(cp);
+		this.add(nomJoueurLabel,BorderLayout.NORTH);
 	}
 
 	public JButton getUno() {

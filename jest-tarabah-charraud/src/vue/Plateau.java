@@ -39,7 +39,7 @@ public class Plateau extends JPanel implements Observer{
 
 		this.frame = new JFrame();
 		this.frame.setTitle("JEST");
-		this.frame.setSize(1500, 1000);
+		this.frame.setSize(Toolkit.getDefaultToolkit().getScreenSize());
 		this.frame.setLocationRelativeTo(null);               
 		this.frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
@@ -59,29 +59,44 @@ public class Plateau extends JPanel implements Observer{
 	}
 
 	public void afficherJoueurs(int nbrJoueurs){
+		Dimension a =  Toolkit.getDefaultToolkit().getScreenSize();
+		System.out.println(a.height +" " + a.width);
 		ListIterator<Player> iJoueurs = game.players.listIterator();
 		while (iJoueurs.hasNext()){ 
 			pp.add(new PlayerPanel(iJoueurs.next()));
 		}
 		if (nbrJoueurs == 3){
-			pp.get(0).setBounds(0, 0, 500, 200);
-			this.add(pp.get(0));
-			pp.get(1).setBounds(700, 0, 500, 200);
-			this.add(pp.get(1));
-			pp.get(2).setBounds(500, 550, 500, 200);
-			this.add(pp.get(2));
+			
+			pp.get(0).setLocation(a.width/2-100, 0);
+			pp.get(0).setVisible(true);
+			
+			
+			
+			pp.get(1).setLocation(a.width-200, a.height/2);
+			pp.get(1).setVisible(true);
+			
+			
+			pp.get(2).setLocation(a.width/2,a.height-250);
+			pp.get(2).setVisible(true);
+			
 		}
 		if (nbrJoueurs == 4){
-			pp.get(0).setBounds(0, 300, 500, 200);
-			this.add(pp.get(0));
-			pp.get(1).setBounds(500, 0, 500, 200);
-			this.add(pp.get(1));
-			pp.get(2).setBounds(1000, 300, 500, 200);
-			this.add(pp.get(2));
-			pp.get(3).setBounds(500, 550, 500, 200);
-			this.add(pp.get(3));
+			pp.get(0).setLocation(a.width/2-100, 20);
+			pp.get(0).setVisible(true);
+			
+			
+			
+			pp.get(1).setLocation(a.width-200, a.height/2);
+			pp.get(1).setVisible(true);
+			
+			
+			pp.get(2).setLocation(a.width/2-100,a.height-250);
+			pp.get(2).setVisible(true);
+			
+			pp.get(3).setLocation(0, a.height/2);
+			pp.get(3).setVisible(true);
+			
 		}
-		this.frame.setContentPane(this);
 	}
 
 
@@ -269,7 +284,7 @@ public class Plateau extends JPanel implements Observer{
 	public void paintComponent(Graphics g){
 		try {
 			Image img = ImageIO.read(new File("img/fond-grunge-vert.jpg"));
-			g.drawImage(img, 0, 0, this.getWidth(), this.getHeight(), this);
+			g.drawImage(img, 0, 0, Toolkit.getDefaultToolkit().getScreenSize().width, Toolkit.getDefaultToolkit().getScreenSize().height, this);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}

@@ -328,7 +328,7 @@ public class Game extends Observable implements Runnable {
 
 				
 				
-				
+				this.notifyObservers("afficherCartes");
 
 
 				

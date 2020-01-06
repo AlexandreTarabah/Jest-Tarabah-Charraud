@@ -29,6 +29,7 @@ public class CardPanel extends JPanel {
 		this.cartesVisibles = true;
 		this.setOpaque(true);
 		this.setLayout(null);
+		
 	}
 
 	public CardPanel() {
@@ -63,7 +64,7 @@ public class CardPanel extends JPanel {
 		while (iJeu.hasNext()){
 
 			
-				g.drawImage(iJeu.next(), (iJeu.previousIndex()*30), 0, 80, 140, this);
+				g.drawImage(iJeu.next(), (10 + iJeu.previousIndex()*30), 10, 80, 140, this);
 		
 
 		}
