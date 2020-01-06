@@ -1,18 +1,8 @@
 package modele.joueur;
-import java.util.Scanner;
-
-import java.util.Set;
-
 import modele.carte.Card;
 import modele.game.Game;
 import modele.tas.Jest;
-import vue.FenetreSaisie;
-
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Arrays;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.Map;
 import java.util.Map.Entry;
@@ -117,12 +107,6 @@ public int nbCardOffer;
 
 
 
-	public String setPseudo(FenetreSaisie saisie) 
-	{
-		this.pseudo = FenetreSaisie.getPseudo();
-		return pseudo;
-
-	}
 
 
 

@@ -1,9 +1,6 @@
 package modele.tas;
-
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Iterator;
-
 import modele.joueur.Player;
 import modele.carte.Card;
 import modele.carte.Joker;

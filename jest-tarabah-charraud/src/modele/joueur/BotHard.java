@@ -68,18 +68,18 @@ public class BotHard extends Player implements Difficulty {
 			if(nbCardOffer>4) {
 				while(g.players.get(i)==this || g.players.get(i).getOffer().size()!=2)  {
 					i++;
-				}setVictime(g.players.get(i).getPseudo());
+				}g.setVictime(g.players.get(i).getPseudo());
 			}
 
 			else if(nbCardOffer==4 && this.getOffer().size()==2)
-			{setVictime(this.getPseudo());
+			{g.setVictime(this.getPseudo());
 			}
 			else if(nbCardOffer==4 && this.getOffer().size()!=2)
 			{
 				while( g.players.get(i)==this ||  g.players.get(i).getOffer().size()!=2)  {
 					i++;				
 				}
-				setVictime(g.players.get(i).getPseudo());
+				g.setVictime(g.players.get(i).getPseudo());
 			}
 
 		}
@@ -90,15 +90,15 @@ public class BotHard extends Player implements Difficulty {
 			if(nbCardOffer>5) {
 				while( g.players.get(i)==this || g.players.get(i).getOffer().size()!=2)  {
 					i++;
-				}setVictime(g.players.get(i).getPseudo());	
+				}g.setVictime(g.players.get(i).getPseudo());	
 			}
 
 			else if(nbCardOffer==5 && this.getOffer().size()==2)
-			{setVictime(this.getPseudo());}
+			{g.setVictime(this.getPseudo());}
 			else {
 				while( g.players.get(i)==this  || g.players.get(i).getOffer().size()!=2)  {
 					i++;
-				}setVictime(g.players.get(i).getPseudo());	
+				}g.setVictime(g.players.get(i).getPseudo());	
 			}
 		}
 
@@ -173,10 +173,11 @@ public class BotHard extends Player implements Difficulty {
 						}
 					}
 				}
-		}
-		nbCardOffer-=1;
+			}
+				nbCardOffer-=1;
 
-}}
+		}
+	}
 
 
 

@@ -234,16 +234,17 @@ public class Game extends Observable implements Runnable {
 				
 				if(p instanceof BotDown || p instanceof BotHard) {
 					p.upsideDown(choice,this);
-					
+					this.notifyObservers("actualiserPlateau");
 				}
 				else
 				{
+					this.notifyObservers("actualiserPlateau");
 					this.notifyObservers("upsideDown");
 					
 				}
 			}
 			
-			this.notifyObservers("actualiserPlateau");
+			
 			
 			this.determinateFirstPlayer();
 			
