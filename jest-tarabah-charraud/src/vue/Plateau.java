@@ -108,6 +108,9 @@ public class Plateau extends JPanel implements Observer{
 		switch(c.getValue().getCardValue()){
 		case 1:
 			switch(c.getColor().getColorValue()){
+			case 0:
+				carte = deck.getCartes().get(0);
+				break ;
 			case 1:
 				carte = deck.getCartes().get(1);
 				break;
@@ -230,12 +233,15 @@ public class Plateau extends JPanel implements Observer{
 		}
 	}
 
-	public void actualiserPlateau(){
+	public void actualiserPlateau()
+	{
 		ListIterator<Player> iJoueur = game.players.listIterator();
 		while (iJoueur.hasNext()){
 			Player j = iJoueur.next();
 			this.supprimerJeu(j);
 			this.afficherCartes(j);
+			this.revalidate();
+			this.repaint();
 
 		}
 	}
@@ -337,11 +343,6 @@ public class Plateau extends JPanel implements Observer{
 
 		if (arg == "actualiserPlateau"){
 			this.actualiserPlateau();
-		}
-
-		if(arg=="afficherCartes") {
-			this.actualiserPlateau();
-
 		}
 
 		if(arg=="scores") {

@@ -327,16 +327,16 @@ public class Game extends Observable implements Runnable {
 				isPlaying=p;
 
 
-				this.notifyObservers("afficherCartes");
+				this.notifyObservers("actualiserPlateau");
 
 				if(p instanceof BotDown || p instanceof BotHard) {
 					p.upsideDown(choice,this);
-					this.notifyObservers("afficherCartes");
+					this.notifyObservers("actualiserPlateau");
 				}
 				else
 				{
 					this.notifyObservers("upsideDown");
-					this.notifyObservers("afficherCartes");
+					this.notifyObservers("actualiserPlateau");
 				}
 			}
 			
@@ -355,7 +355,7 @@ public class Game extends Observable implements Runnable {
 			}
 
 			this.mainCollectCards();
-			this.notifyObservers("afficherCartes");
+			this.notifyObservers("actualiserPlateau");
 			// On ramasse les cartes et on les rebalance dans le jeu pour recommencer 
 			for(int i=0;i<this.nbPlayers;i++) {
 				this.players.get(i).getHand().clear();
