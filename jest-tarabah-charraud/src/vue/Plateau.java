@@ -177,7 +177,7 @@ public class Plateau extends JPanel implements Observer{
 
 		return carte;
 
-
+//yo
 	}
 
 
