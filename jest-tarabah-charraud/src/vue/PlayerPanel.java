@@ -1,12 +1,7 @@
 package vue;
-
 import java.awt.*;
 import java.util.LinkedList;
-
 import javax.swing.*;
-
-import modele.joueur.BotDown;
-import modele.joueur.BotHard;
 import modele.joueur.Player;
 
 public class PlayerPanel extends JPanel{
@@ -20,8 +15,7 @@ public class PlayerPanel extends JPanel{
 	private Boolean virtuel = false;
 	private JLabel nomJoueurLabel;
 	private CardPanel cp;
-	private JButton uno;
-	private Font font = new Font("Courier", Font.BOLD, 20);
+	private Font font = new Font("Times", Font.BOLD, 20);
 	
 	private LinkedList<Image> jeu;
 	
@@ -38,19 +32,12 @@ public class PlayerPanel extends JPanel{
 		this.nomJoueur = joueur.getPseudo();
 		this.nomJoueurLabel = new JLabel(nomJoueur);
 		this.nomJoueurLabel.setFont(font);
-		this.nomJoueurLabel.setForeground(Color.RED);
+		this.nomJoueurLabel.setForeground(Color.WHITE);
 		this.add(nomJoueurLabel, BorderLayout.NORTH);
 		this.cp= new CardPanel(jeu);
 		this.add(cp);
 	}
 
-	public JButton getUno() {
-		return uno;
-	}
-
-	public void setUno(JButton uno) {
-		this.uno = uno;
-	}
 
 	public void	prendreCarte(Image carte){
 		this.jeu.add(carte);
