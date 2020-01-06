@@ -1,28 +1,15 @@
 package modele.game;
 import java.util.AbstractMap;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashMap;
-import java.util.InputMismatchException;
 import java.util.Iterator;
-import java.util.LinkedList;
-import java.util.List;
 import java.util.Map;
 import java.util.Scanner;
-import java.util.Set;
 import java.util.TreeMap;
-
 import modele.carte.Card;
-import modele.carte.Joker;
-import modele.carte.MapValueComparator;
-import modele.carte.TrophyBestJest;
-import modele.carte.TrophyBestJestNoJoke;
-import modele.carte.TrophyHighest;
-import modele.carte.TrophyJoker;
-import modele.carte.TrophyLowest;
-import modele.carte.TrophyMajority;
+import modele.carte.*;
 import modele.joueur.BotDown;
 import modele.joueur.BotHard;
 import modele.joueur.Player;
@@ -31,43 +18,12 @@ import modele.game.CountClassique;
 import modele.game.CountInversion;
 import modele.tas.DrawDeck;
 import modele.tas.Jest;
-import vue.PlayerPanel;
-
 import java.util.Map.Entry;
-
 import javax.swing.JOptionPane;
-
-import java.util.NavigableMap;
 import java.util.Observable;
 import java.util.Observer;
 
 
-
-
-/*			 COMMENTAIRE 
- * ----------------------------------------------------------------------------------------------------------------
- Premiere version du jeu avec Bots + extension (Famille de 6)
- si extension=true {
- Si(nbPlayers=3)
- trophyCards=null;
- Si(nbPlayers=4)
- trophyCards=1;
- }
-
- création d'une méthode createTrophies() pour instancier les bons nombres de trophées selon les conditions préalables.
-
- le main ressemble maintenant a : 
- initialize Game(extension ou non)  
- chooseGamePlay(3 ou 4 joueurs/bots) 
- createTrophies; 
- et la boucle while pour faire tourner 
-
- Tu remarqueras un petit (t!=null) avant toute la partie trophée, puisque si on joue a 3 avec extension on a pas de trophées, ca évite
- les pointeurs null exceptions 
-
- Création d'une méthode readInt qui te fait tester jusqu'a temps que tu rentres un Int, ensuite vérification selon la demande des parametres réntrés.
- ------------------------------------------------------------------------------------------------------------------------------
- */
 public class Game extends Observable implements Runnable {
 
 
@@ -75,48 +31,36 @@ public class Game extends Observable implements Runnable {
 	protected  int nbBots;
 	protected  int nbRealPlayers;
 	protected int difficulty;
-
-	Player isPlaying;
-
-
+	public int nbCardOffer;
+	boolean currentPlay;
+	public boolean extension = false;
+	boolean variante = false;
+	
+	
+	private String[] tabPseudo;
+	private  String victime;
+	
+	
+	private Player isPlaying;
 	Card[] trophyCards = new Card[2] ;
+	private DrawDeck drawdeck;
+	public Object [][] scores ;
 
-	public HashMap<String,Player> ForMainPlay = new HashMap<String,Player>() ;
 
 	public ArrayList<Player> players = new ArrayList<Player>();
-
-	public  HashMap<String, HashMap<String, Card>> listOffer= new HashMap<>();
-
-	private DrawDeck drawdeck;
-
-	boolean currentPlay;
-
-	public boolean extension = false;
-
-
-	public HashMap<String,Integer> winner = new HashMap<String,Integer>();
-
-	boolean variante = false;
-
-
-	public static ArrayList<Integer> choiceVar= new ArrayList<Integer>();
-
-
-	ArrayList<Integer> choicePlayers= new ArrayList<Integer>();
-
+	
 	public ArrayList<String> upsideChoice = new ArrayList<String>() ; 
-
-	public int nbCardOffer;
-
-	private  String victime;
-
-	public Object [][] scores ;
 
 	public ArrayList<String> scoresTransition = new ArrayList<String>();
 
 	private ArrayList<Observer> listObserver = new ArrayList<Observer>();
 
-	private String[] tabPseudo;
+
+	public  HashMap<String, HashMap<String, Card>> listOffer= new HashMap<>();
+
+	public HashMap<String,Integer> winner = new HashMap<String,Integer>();
+	
+	public HashMap<String,Player> ForMainPlay = new HashMap<String,Player>() ;
 
 	// La c'est la distribution des cartes, ou finalement j'invoque la méthode takecards et donc le joueur prend 2 cartes, et créé son offer
 
@@ -147,40 +91,7 @@ public class Game extends Observable implements Runnable {
 				}
 			}
 		}
-
-		else
-
-		{
-			// insérer méthode de fin de jeu
-		}
-
-
-
 	}
-
-
-	public HashMap<String, Player> getForMainPlay() {
-		return ForMainPlay;
-	}
-
-	public static int readInt(Scanner scanner, String prompt, String promptOnError) { // Methode qui permet de vérifier qu'on rentre bien un entier
-
-		System.out.print(prompt);
-
-		while ( !scanner.hasNextInt() ) {
-			System.out.print(promptOnError);
-			scanner.nextLine(); // vidage saisie incorrect
-		}
-
-		final int input = scanner.nextInt();
-		scanner.nextLine(); // vidage buffer
-		return input;
-
-	}
-
-
-
-
 
 
 	public void createTrophies(Game g) { // On instancie les trophées a partir du DrawDeckn en fonction des parametres 
@@ -245,6 +156,7 @@ public class Game extends Observable implements Runnable {
 	}
 
 
+	
 	public void reglerParametres(int d, int nb, int nrp){
 		this.difficulty = d;
 		this.nbBots = nb;
@@ -255,9 +167,7 @@ public class Game extends Observable implements Runnable {
 		this.determinerNombreJoueurs();
 	}
 
-	/**
-	 * Cette méthode va créer les joueurs en conséquent des nombres de joueurs réels et virtuels voulu.
-	 */
+	
 	public void determinerNombreJoueurs(){
 		if (this.difficulty==1) {
 			for (int i=0;i<this.nbBots;i++){
@@ -295,18 +205,24 @@ public class Game extends Observable implements Runnable {
 		}
 		return maxValueInMap;
 	}
+	
+	
 
+	
+	
 	public void playRounds() 
 	{
 		this.notifyObservers("piles");
-
+		
+		
+		
 		int choice=0;
-
-
 		String choiceVictime="";
 		String choiceStolenCard="";
 
 
+		
+		
 		while(this.drawdeck.getSize() != 0) // On repète le processus jusqu'a temps qu'on ait plu de carte
 		{
 			this.distribute(); // distribuer les cartes 
@@ -315,22 +231,24 @@ public class Game extends Observable implements Runnable {
 			while(it.hasNext()) {
 				Player p = it.next();
 				isPlaying=p;
-
-
-				this.notifyObservers("actualiserPlateau");
-
+				
 				if(p instanceof BotDown || p instanceof BotHard) {
 					p.upsideDown(choice,this);
-					this.notifyObservers("actualiserPlateau");
+					
 				}
 				else
 				{
 					this.notifyObservers("upsideDown");
-					this.notifyObservers("actualiserPlateau");
+					
 				}
 			}
 			
+			this.notifyObservers("actualiserPlateau");
+			
 			this.determinateFirstPlayer();
+			
+			
+			
 			
 			for(int j =0; j<nbPlayers;j++) {
 				isPlaying=this.ForMainPlay.get(victime);
@@ -340,26 +258,30 @@ public class Game extends Observable implements Runnable {
 					this.notifyObservers("stealCards");
 			}
 
+			
+			
 			for(int i=0; i<this.nbPlayers;i++) {
 				players.get(i).HasStolen=false;
 			}
 
+			
+			
 			this.mainCollectCards();
+			
 			this.notifyObservers("actualiserPlateau");
 			// On ramasse les cartes et on les rebalance dans le jeu pour recommencer 
 			for(int i=0;i<this.nbPlayers;i++) {
 				this.players.get(i).getHand().clear();
 				this.players.get(i).getOffer().clear();
+				}
 			}
-
-		}
-
-		
 		}
 
 
 
 
+	
+	
 	public void giveTrophy() {
 		ArrayList<Player> p = this.players ;
 		Card[] t = this.trophyCards;
@@ -399,7 +321,6 @@ public class Game extends Observable implements Runnable {
 					System.out.println(result+ " et " + t[j]);
 
 				}
-// bb
 
 				else if(t[j].getTrophy() instanceof TrophyLowest) // si c'est des trophyHighest
 				{
@@ -599,6 +520,8 @@ public class Game extends Observable implements Runnable {
 
 		}
 
+	
+	
 
 		public void run() {
 
@@ -607,7 +530,7 @@ public class Game extends Observable implements Runnable {
 			this.drawdeck.shuffle();
 
 
-			this.createTrophies(this); //METTRE DANS MAIN JESTINTERFACE
+			this.createTrophies(this); 
 
 
 			this.playRounds(); 
@@ -640,12 +563,6 @@ public class Game extends Observable implements Runnable {
 		}
 
 
-		public  ArrayList<Integer> getChoiceVar() {
-			// TODO Auto-generated method stub
-			return choiceVar;
-		}
-
-
 
 		public  HashMap<String, Integer> getWinner() {
 			// TODO Auto-generated method stub
@@ -668,6 +585,28 @@ public class Game extends Observable implements Runnable {
 		public Player getIsPlaying() {
 			return isPlaying;
 		}
+		
+		
+		
+		public void setVictime(String choiceVictime) {
+			this.victime=choiceVictime;
+
+		}
+
+		public Object[] getTabPseudo() {
+			return tabPseudo;
+		}
+
+		public void setTabPseudo(String[] tabPseudo) {
+			this.tabPseudo = tabPseudo;
+		}
+		
+		public HashMap<String, Player> getForMainPlay() {
+			return ForMainPlay;
+		}
+		
+		
+		
 
 		public void addObserver(Observer obs) {
 			this.listObserver.add(obs);
@@ -682,21 +621,6 @@ public class Game extends Observable implements Runnable {
 		public void deleteObserver(Observer o) {
 			listObserver.remove(o);
 		}
-
-		public void setVictime(String choiceVictime) {
-			this.victime=choiceVictime;
-
-		}
-
-		public Object[] getTabPseudo() {
-			return tabPseudo;
-		}
-
-		public void setTabPseudo(String[] tabPseudo) {
-			this.tabPseudo = tabPseudo;
-		}
-
-
 	}
 
 

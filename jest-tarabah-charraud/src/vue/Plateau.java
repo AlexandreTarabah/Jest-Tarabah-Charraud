@@ -47,7 +47,10 @@ public class Plateau extends JPanel implements Observer{
 	}
 
 
-
+	public void afficherPiles(){
+		this.deck = new DrawDeckPanel();
+		this.frame.setContentPane(this);
+	}
 
 	public void afficherJoueurs(int nbrJoueurs){
 		ListIterator<Player> iJoueurs = game.players.listIterator();
@@ -252,6 +255,10 @@ public class Plateau extends JPanel implements Observer{
 		{
 			this.afficherJoueurs(game.players.size());
 		}
+		if (arg == "piles"){
+			this.afficherPiles();
+		}
+
 		
 		if(arg=="upsideDown") {
 			Object[] action = {1,2};
