@@ -29,7 +29,6 @@ public class CardPanel extends JPanel {
 		this.cartesVisibles = true;
 		this.setOpaque(true);
 		this.setLayout(null);
-		
 	}
 
 	public CardPanel() {
@@ -54,24 +53,33 @@ public class CardPanel extends JPanel {
 
 	public void paintComponent(Graphics g){
 
+		Image dos = null;
+		try {
+			dos = ImageIO.read(new File("img/Joker.png"));
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 		ListIterator<Image> iJeu = jeu.listIterator();
 		while (iJeu.hasNext()){
 
-			
-				g.drawImage(iJeu.next(), (iJeu.previousIndex()*30), 10, 80, 140, this);
-		
+
+			g.drawImage(iJeu.next(), (iJeu.previousIndex()*80), 0, 80, 140, this);
 
 		}
 
-	}
-		
-	// 
 		/* super.paintComponent(g);
 		for(int i=0; i<2;i++) {
 			g.drawImage(jeu.get(i), i*30, 0, 80, 140, this);
 		} */ 
 
 	}
+
+}
+
+
+
+
+
 
 
 

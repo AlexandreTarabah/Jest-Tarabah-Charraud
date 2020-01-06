@@ -102,7 +102,7 @@ public class Game extends Observable implements Runnable {
 
 	public static ArrayList<Integer> choiceVar= new ArrayList<Integer>();
 
-// cc  
+
 	ArrayList<Integer> choicePlayers= new ArrayList<Integer>();
 
 	public ArrayList<String> upsideChoice = new ArrayList<String>() ; 
@@ -119,7 +119,7 @@ public class Game extends Observable implements Runnable {
 
 	private String[] tabPseudo;
 
-	// La c'est la distribution des cartes, ou finalement j'invoque la méthode takecards et donc le joueur prend 2 cartes, et créé son offer 
+	// La c'est la distribution des cartes, ou finalement j'invoque la méthode takecards et donc le joueur prend 2 cartes, et créé son offer
 
 	public Game() {
 
@@ -326,14 +326,17 @@ public class Game extends Observable implements Runnable {
 				Player p = it.next();
 				isPlaying=p;
 
+
+				this.notifyObservers("actualiserPlateau");
+
 				if(p instanceof BotDown || p instanceof BotHard) {
 					p.upsideDown(choice,this);
-					this.notifyObservers("afficherCartes");
+					this.notifyObservers("actualiserPlateau");
 				}
 				else
 				{
 					this.notifyObservers("upsideDown");
-					this.notifyObservers("afficherCartes");
+					this.notifyObservers("actualiserPlateau");
 				}
 			}
 			
@@ -352,25 +355,17 @@ public class Game extends Observable implements Runnable {
 			}
 
 			this.mainCollectCards();
-			this.notifyObservers("afficherCartes");
+			this.notifyObservers("actualiserPlateau");
 			// On ramasse les cartes et on les rebalance dans le jeu pour recommencer 
 			for(int i=0;i<this.nbPlayers;i++) {
 				this.players.get(i).getHand().clear();
 				this.players.get(i).getOffer().clear();
 			}
 
-
 		}
-
 
 		
 		}
-
-
-
-
-
-
 
 
 

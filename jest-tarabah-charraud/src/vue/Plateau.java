@@ -12,7 +12,6 @@ import controleur.Controleur;
 import modele.carte.*;
 import modele.joueur.*;
 import modele.game.Game;
-import vue.*;
 
 public class Plateau extends JPanel implements Observer{
 
@@ -39,7 +38,7 @@ public class Plateau extends JPanel implements Observer{
 
 		this.frame = new JFrame();
 		this.frame.setTitle("JEST");
-		this.frame.setSize(Toolkit.getDefaultToolkit().getScreenSize());
+		this.frame.setSize(1500, 1000);
 		this.frame.setLocationRelativeTo(null);               
 		this.frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
@@ -59,44 +58,29 @@ public class Plateau extends JPanel implements Observer{
 	}
 
 	public void afficherJoueurs(int nbrJoueurs){
-		Dimension a =  Toolkit.getDefaultToolkit().getScreenSize();
-		System.out.println(a.height +" " + a.width);
 		ListIterator<Player> iJoueurs = game.players.listIterator();
 		while (iJoueurs.hasNext()){ 
 			pp.add(new PlayerPanel(iJoueurs.next()));
 		}
 		if (nbrJoueurs == 3){
-			
-			pp.get(0).setLocation(a.width/2-100, 0);
-			pp.get(0).setVisible(true);
-			
-			
-			
-			pp.get(1).setLocation(a.width-200, a.height/2);
-			pp.get(1).setVisible(true);
-			
-			
-			pp.get(2).setLocation(a.width/2,a.height-250);
-			pp.get(2).setVisible(true);
-			
+			pp.get(0).setBounds(0, 0, 500, 200);
+			this.add(pp.get(0));
+			pp.get(1).setBounds(700, 0, 500, 200);
+			this.add(pp.get(1));
+			pp.get(2).setBounds(500, 550, 500, 200);
+			this.add(pp.get(2));
 		}
 		if (nbrJoueurs == 4){
-			pp.get(0).setLocation(a.width/2-100, 20);
-			pp.get(0).setVisible(true);
-			
-			
-			
-			pp.get(1).setLocation(a.width-200, a.height/2);
-			pp.get(1).setVisible(true);
-			
-			
-			pp.get(2).setLocation(a.width/2-100,a.height-250);
-			pp.get(2).setVisible(true);
-			
-			pp.get(3).setLocation(0, a.height/2);
-			pp.get(3).setVisible(true);
-			
+			pp.get(0).setBounds(0, 300, 500, 200);
+			this.add(pp.get(0));
+			pp.get(1).setBounds(500, 0, 500, 200);
+			this.add(pp.get(1));
+			pp.get(2).setBounds(1000, 300, 500, 200);
+			this.add(pp.get(2));
+			pp.get(3).setBounds(500, 550, 500, 200);
+			this.add(pp.get(3));
 		}
+		this.frame.setContentPane(this);
 	}
 
 
@@ -105,7 +89,9 @@ public class Plateau extends JPanel implements Observer{
 		while (iPj.hasNext()){
 			PlayerPanel j = iPj.next();
 			if (j.getNomJoueur() == joueur.getPseudo()){
+				j.getJeu().clear(); 
 
+				j.getJeu().clear();
 				ListIterator<Card> iCartes = joueur.getHand().listIterator();
 				while (iCartes.hasNext()){
 					j.prendreCarte(this.verifierCarte(iCartes.next()));
@@ -113,7 +99,7 @@ public class Plateau extends JPanel implements Observer{
 			}
 		}
 	}
-	
+
 
 	public Image verifierCarte(Card c){
 
@@ -122,6 +108,9 @@ public class Plateau extends JPanel implements Observer{
 		switch(c.getValue().getCardValue()){
 		case 1:
 			switch(c.getColor().getColorValue()){
+			case 0:
+				carte = deck.getCartes().get(0);
+				break ;
 			case 1:
 				carte = deck.getCartes().get(1);
 				break;
@@ -239,17 +228,21 @@ public class Plateau extends JPanel implements Observer{
 			PlayerPanel pp = ipp.next();
 			if (pp.getNomJoueur() == joueur.getPseudo()){
 				pp.getJeu().removeAll(pp.getJeu());
+				pp.revalidate();
 			}
 		}
 	}
 
-	public void actualiserPlateau(){
+	public void actualiserPlateau()
+	{
 		ListIterator<Player> iJoueur = game.players.listIterator();
 		while (iJoueur.hasNext()){
 			Player j = iJoueur.next();
 			this.supprimerJeu(j);
 			this.afficherCartes(j);
-			
+			this.revalidate();
+			this.repaint();
+
 		}
 	}
 
@@ -268,11 +261,11 @@ public class Plateau extends JPanel implements Observer{
 	public void afficherScores()
 	{
 		this.frame.setVisible(false);
-		
+
 		Scores scores = new Scores(this.game);
 		scores.setVisible(true) ;
-		
-		
+
+
 
 	}
 
@@ -284,7 +277,7 @@ public class Plateau extends JPanel implements Observer{
 	public void paintComponent(Graphics g){
 		try {
 			Image img = ImageIO.read(new File("img/fond-grunge-vert.jpg"));
-			g.drawImage(img, 0, 0, Toolkit.getDefaultToolkit().getScreenSize().width, Toolkit.getDefaultToolkit().getScreenSize().height, this);
+			g.drawImage(img, 0, 0, this.getWidth(), this.getHeight(), this);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -295,8 +288,8 @@ public class Plateau extends JPanel implements Observer{
 		Object[] choixList = { "down", "up" };
 		Object choixFait = JOptionPane.showInputDialog(null, "Choisissez la carte a volé ", "Input",JOptionPane.INFORMATION_MESSAGE, null,choixList, choixList[0]);
 		try {
-		String choiceCardVictime = choixFait.toString();
-		controleur.methodeStealCard(choiceVictime,choiceCardVictime, game.getIsPlaying());
+			String choiceCardVictime = choixFait.toString();
+			controleur.methodeStealCard(choiceVictime,choiceCardVictime, game.getIsPlaying());
 		}catch(Exception e) {
 			JOptionPane.showMessageDialog(null, "Veuillez Rentrer un joueur");
 		}
@@ -352,11 +345,6 @@ public class Plateau extends JPanel implements Observer{
 			this.actualiserPlateau();
 		}
 
-		if(arg=="afficherCartes") {
-			this.actualiserPlateau();
-			
-		}
-
 		if(arg=="scores") {
 			this.afficherScores();
 		}
@@ -364,7 +352,7 @@ public class Plateau extends JPanel implements Observer{
 
 
 	}
-	// 
+
 
 
 	public JFrame getFrame() {

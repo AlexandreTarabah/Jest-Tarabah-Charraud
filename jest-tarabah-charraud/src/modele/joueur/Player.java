@@ -117,14 +117,6 @@ public int nbCardOffer;
 
 
 
-
-
-
-
-
-
-
-
 	public String setPseudo(FenetreSaisie saisie) 
 	{
 		this.pseudo = FenetreSaisie.getPseudo();
@@ -165,6 +157,10 @@ public int nbCardOffer;
 	 */
 
 	g.listOffer.put(this.getPseudo(), this.getOffer()); // on ajoute l'offre du player a la listOffer.
+
+
+		/* et la on affiche le pseudo du player en paramètre, avec get(Down) et la value de la carte, et la couleur
+		 */
 
 
 
