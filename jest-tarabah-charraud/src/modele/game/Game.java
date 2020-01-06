@@ -331,7 +331,7 @@ public class Game extends Observable implements Runnable {
 				
 
 
-				this.notifyObservers("afficherCartes");
+				
 
 				if(p instanceof BotDown || p instanceof BotHard) {
 					p.upsideDown(choice,this);
