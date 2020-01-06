@@ -257,7 +257,8 @@ public class Game extends Observable implements Runnable {
 			for(int j =0; j<nbPlayers;j++) {
 				isPlaying=this.ForMainPlay.get(victime);
 				if(this.ForMainPlay.get(victime) instanceof BotDown || this.ForMainPlay.get(victime) instanceof BotHard) {// le reste suit selon la méthode stealCard(input)
-					this.ForMainPlay.get(victime).stealCard(choiceVictime,choiceStolenCard, this);	 // Les manip de chaque joueur pendant le tour 
+					this.ForMainPlay.get(victime).stealCard(choiceVictime,choiceStolenCard, this);
+					this.notifyObservers("actualiserStealCards");// Les manip de chaque joueur pendant le tour 
 				}else
 					this.notifyObservers("stealCards");
 			}
