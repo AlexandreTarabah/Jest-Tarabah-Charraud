@@ -110,7 +110,7 @@ import vue.Regles;
 		
 		
 		if(game.nbPlayers==3) {
-			if(game.nbCardOffer>4) {
+			if(nbCardOffer>4) {
 				while(game.listOffer.containsKey(choiceVictime)==false || game.listOffer.get(choiceVictime).size()<2 || choiceVictime==null || game.getIsPlaying().getPseudo().equals(choiceVictime)) {
 					
 					choiceVictime = JOptionPane.showInputDialog(null, "Choix incorrect ", "erreur", JOptionPane.QUESTION_MESSAGE);
@@ -120,7 +120,7 @@ import vue.Regles;
 		}else 
 
 			if(game.nbPlayers==4) {
-				if(game.nbCardOffer>5) {
+				if(nbCardOffer>5) {
 					while(game.listOffer.containsKey(choiceVictime)==false || game.listOffer.get(choiceVictime).size()<2 || choiceVictime==null || game.getIsPlaying().getPseudo().equals(choiceVictime)) {
 		
 						choiceVictime = JOptionPane.showInputDialog(null, "Choix incorrect ", "erreur", JOptionPane.QUESTION_MESSAGE);

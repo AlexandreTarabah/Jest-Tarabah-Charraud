@@ -190,7 +190,7 @@ public class Plateau extends JPanel implements Observer{
 		ListIterator<PlayerPanel> iPj = this.pp.listIterator();
 		while (iPj.hasNext()){
 			PlayerPanel j = iPj.next();
-			if (j.getNomJoueur() == joueur.getPseudo()){
+			if (j.getNomJoueur() == game.getVictime()){
 				if(joueur.getStolenCard().equals("down")) {
 					j.getJeu().remove(0);
 				}
@@ -207,7 +207,7 @@ public class Plateau extends JPanel implements Observer{
 		ListIterator<PlayerPanel> iPj = this.pp.listIterator();
 		while (iPj.hasNext()){
 			PlayerPanel j = iPj.next();
-			if (j.getNomJoueur() == joueur.getPseudo()){
+			if (j.getNomJoueur() == game.getVictime()){
 				if(choiceCardVictime.equals("down")) {
 					j.getJeu().remove(0);
 				}
