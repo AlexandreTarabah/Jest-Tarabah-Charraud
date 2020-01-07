@@ -256,7 +256,8 @@ public class Game extends Observable implements Runnable {
 
 
 
-			for(int j =0; j<nbPlayers;j++) {
+			for(int j =0; j<nbPlayers;j++) 
+			{
 				isPlaying=this.ForMainPlay.get(victime);
 				if(this.ForMainPlay.get(victime) instanceof BotDown || this.ForMainPlay.get(victime) instanceof BotHard) {// le reste suit selon la méthode stealCard(input)
 					this.ForMainPlay.get(victime).stealCard(choiceVictime,choiceStolenCard, this);
@@ -623,7 +624,7 @@ public class Game extends Observable implements Runnable {
 
 	public void notifyObservers(Object arg) {
 		for (Observer obs : listObserver){
-			obs.update(this, arg);
+
 		}
 	}
 
