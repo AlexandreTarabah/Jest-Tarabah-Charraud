@@ -67,7 +67,7 @@ import vue.Regles;
 			 if (parametres.getDifficulte() == 0){
 				 JOptionPane.showMessageDialog(null, "Vous n'avez pas choisi la difficulté !", "Erreur", JOptionPane.ERROR_MESSAGE);
 			 }
-			 else if ((parametres.getNbrVirtuels() + parametres.getNbrReels()) > 4 || (parametres.getNbrVirtuels() + parametres.getNbrReels()) < 1){
+			 else if ((parametres.getNbrVirtuels() + parametres.getNbrReels()) > 4 || (parametres.getNbrVirtuels() + parametres.getNbrReels()) < 3){
 				 JOptionPane.showMessageDialog(null, "Le nombre de joueurs choisi n'est pas correct !", "Erreur", JOptionPane.ERROR_MESSAGE);
 			 }
 			 else if ((parametres.getClassique().isSelected() == false && parametres.getInversion().isSelected() == false)){
