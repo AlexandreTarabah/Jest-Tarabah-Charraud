@@ -42,8 +42,6 @@ public class DrawDeckPanel extends JPanel{
 			cartes.add(troisCoeur);
 			Image quatreCoeur = ImageIO.read(new File("img/QuatreCoeur.png"));
 			cartes.add(quatreCoeur);
-			Image sixCoeur = ImageIO.read(new File("img/SixCoeur.png"));
-			cartes.add(sixCoeur);
 			
 			
 			Image unCarreau = ImageIO.read(new File("img/AsCarreau.png"));
@@ -54,8 +52,7 @@ public class DrawDeckPanel extends JPanel{
 			cartes.add(troisCarreau);
 			Image quatreCarreau = ImageIO.read(new File("img/QuatreCarreau.png"));
 			cartes.add(quatreCarreau);
-			Image sixCarreau = ImageIO.read(new File("img/SixCarreau.png"));
-			cartes.add(sixCarreau);
+			
 			
 			Image unTrefle = ImageIO.read(new File("img/AsTrefle.png"));
 			cartes.add(unTrefle);
@@ -65,9 +62,6 @@ public class DrawDeckPanel extends JPanel{
 			cartes.add(troisTrefle);
 			Image quatreTrefle = ImageIO.read(new File("img/QuatreTrefle.png"));
 			cartes.add(quatreTrefle);
-			Image sixTrefle = ImageIO.read(new File("img/SixTrefle.png"));
-			cartes.add(sixTrefle);
-			
 			
 			
 			Image unPique = ImageIO.read(new File("img/AsPique.png"));
@@ -78,6 +72,14 @@ public class DrawDeckPanel extends JPanel{
 			cartes.add(troisPique);
 			Image quatrePique = ImageIO.read(new File("img/QuatrePique.png"));
 			cartes.add(quatrePique);
+			
+			
+			Image sixCoeur = ImageIO.read(new File("img/SixCoeur.png"));
+			cartes.add(sixCoeur);
+			Image sixCarreau = ImageIO.read(new File("img/SixCarreau.png"));
+			cartes.add(sixCarreau);
+			Image sixTrefle = ImageIO.read(new File("img/SixTrefle.png"));
+			cartes.add(sixTrefle);
 			Image sixPique = ImageIO.read(new File("img/SixPique.png"));
 			cartes.add(sixPique);
 			
