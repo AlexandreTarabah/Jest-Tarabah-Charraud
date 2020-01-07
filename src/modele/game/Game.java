@@ -101,7 +101,7 @@ public class Game extends Observable implements Runnable {
 			{
 				for(int i=0; i<2;i++) 
 				{
-					g.trophyCards[i]= g.drawdeck.takeCards();
+					g.trophyCards[i] = g.drawdeck.takeCards();
 				}
 			}
 			else
@@ -239,17 +239,17 @@ public class Game extends Observable implements Runnable {
 
 					p.upsideDown(choice,this);
 					this.notifyObservers("actualiserUpsideDown");
-					
+
 				}
 				else
 				{
 
 					this.notifyObservers("upsideDown");
-					
+
 
 				}
 			}
-			
+
 
 
 			this.determinateFirstPlayer();
@@ -412,6 +412,7 @@ public class Game extends Observable implements Runnable {
 					Map.Entry<Player,Integer> myEntry = new AbstractMap.SimpleEntry<Player, Integer>(players.get(1), 0);
 					bestJestValue.put(players.get(1), myEntry) ;
 					bestJestColor.put(players.get(1), myEntry) ; 
+					bestJestPlayer.put(players.get(1), 1) ;
 					String result = "" ; 
 
 					int jokeDetecter = 0 ;
@@ -442,7 +443,7 @@ public class Game extends Observable implements Runnable {
 							jest.acceptTrophy(t[j].getTrophy()) ;
 
 							result = jest.winBestJest(p.get(i), t[j], bestJestCandidates, 
-									bestJestCandidates1, bestJestValue, bestJestColor, bestJestCandidates1, myEntry) ;
+									bestJestCandidates1, bestJestValue, bestJestColor, bestJestPlayer, myEntry) ;
 
 						}
 
