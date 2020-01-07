@@ -51,6 +51,7 @@ public int nbCardOffer;
 
 
 			{nbCardOffer = nbCardOffer+map.getValue().size();}
+			g.nbCardOffer=nbCardOffer;
 		}
 
 
@@ -236,6 +237,9 @@ public String getStolenCard() {
 		HasStolen = hasStolen;
 	}
 
+	public int getNbCardOffer() {
+		return nbCardOffer;
+	}
 
 
 }

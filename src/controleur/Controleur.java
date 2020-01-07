@@ -1,9 +1,12 @@
 package controleur;
 
 import java.awt.event.*;
+import java.util.HashMap;
+import java.util.Map.Entry;
 
 import javax.swing.JOptionPane;
 
+import modele.carte.Card;
 import modele.game.Game;
 import modele.joueur.Player;
 import vue.Home;
@@ -96,19 +99,21 @@ import vue.Regles;
 
 
 
-	public void methodeStealCard(String choiceVictime, String choiceCardVictime,Player p) {
-		while(game.listOffer.containsKey(choiceVictime)==false || game.listOffer.get(choiceVictime).size()<2 || choiceVictime==null) {
-			
-			choiceVictime = JOptionPane.showInputDialog(null, "Veuillez entrer un joueur existant", "erreur", JOptionPane.QUESTION_MESSAGE);
-			
-		}
+	public void methodeStealCard(String choiceVictime, String choiceCardVictime,Player p,Game g) {
+	
+		int nbCardOffer=0;
+		for(Entry<String, HashMap<String, Card>> map : g.listOffer.entrySet()) {
 
+
+			{nbCardOffer = nbCardOffer+map.getValue().size();}
+		}
+		
 		
 		if(game.nbPlayers==3) {
 			if(game.nbCardOffer>4) {
-				while( game.getIsPlaying().getPseudo().equals(choiceVictime)) {
+				while(game.listOffer.containsKey(choiceVictime)==false || game.listOffer.get(choiceVictime).size()<2 || choiceVictime==null || game.getIsPlaying().getPseudo().equals(choiceVictime)) {
 					
-					choiceVictime = JOptionPane.showInputDialog(null, "Vous ne pouvez pas vous choisir\n choisissez un joueur ", "erreur", JOptionPane.QUESTION_MESSAGE);
+					choiceVictime = JOptionPane.showInputDialog(null, "Choix incorrect ", "erreur", JOptionPane.QUESTION_MESSAGE);
 									
 				}
 			}
@@ -116,9 +121,9 @@ import vue.Regles;
 
 			if(game.nbPlayers==4) {
 				if(game.nbCardOffer>5) {
-					while( game.getIsPlaying().getPseudo().equals(choiceVictime)) {
+					while(game.listOffer.containsKey(choiceVictime)==false || game.listOffer.get(choiceVictime).size()<2 || choiceVictime==null || game.getIsPlaying().getPseudo().equals(choiceVictime)) {
 		
-						choiceVictime = JOptionPane.showInputDialog(null, "Vous ne pouvez pas vous choisir\n choisissez un joueur ", "erreur", JOptionPane.QUESTION_MESSAGE);
+						choiceVictime = JOptionPane.showInputDialog(null, "Choix incorrect ", "erreur", JOptionPane.QUESTION_MESSAGE);
 										
 					}
 				}

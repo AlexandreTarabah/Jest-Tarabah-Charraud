@@ -244,7 +244,7 @@ public class Game extends Observable implements Runnable {
 				{
 
 					this.notifyObservers("upsideDown");
-					this.notifyObservers("actualiserUpsideDown");
+					
 
 				}
 			}
@@ -567,6 +567,9 @@ public class Game extends Observable implements Runnable {
 	public ArrayList<String> getUpsideChoice() {
 		// TODO Auto-generated method stub
 		return upsideChoice;
+	}
+	public int getNbCardOffer() {
+		return nbCardOffer;
 	}
 
 
