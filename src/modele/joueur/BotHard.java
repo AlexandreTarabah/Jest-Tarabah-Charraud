@@ -108,16 +108,16 @@ public class BotHard extends Player implements Difficulty {
 		}
 
 		 stolenCard =null;
-		int highestC = g.ForMainPlay.get(choiceVictime).hand.get(0).getColor().getColorValue();
-		int highestV = g.ForMainPlay.get(choiceVictime).hand.get(0).getValue().getCardValue();
-		if(highestC < g.ForMainPlay.get(choiceVictime).hand.get(1).getColor().getColorValue())
+		int highestC = g.ForMainPlay.get(g.getVictime()).hand.get(0).getColor().getColorValue();
+		int highestV = g.ForMainPlay.get(g.getVictime()).hand.get(0).getValue().getCardValue();
+		if(highestC < g.ForMainPlay.get(g.getVictime()).hand.get(1).getColor().getColorValue())
 		{
 			stolenCard = "up";
 
 		}
-		else if (highestC == g.ForMainPlay.get(choiceVictime).hand.get(1).getColor().getColorValue())
+		else if (highestC == g.ForMainPlay.get(g.getVictime()).hand.get(1).getColor().getColorValue())
 		{
-			if(highestV < g.ForMainPlay.get(choiceVictime).hand.get(1).getValue().getCardValue())
+			if(highestV < g.ForMainPlay.get(g.getVictime()).hand.get(1).getValue().getCardValue())
 			{
 				stolenCard = "up";
 
@@ -127,23 +127,23 @@ public class BotHard extends Player implements Difficulty {
 				stolenCard = "down";
 			}
 		}
-		else if(highestC > g.ForMainPlay.get(choiceVictime).hand.get(1).getColor().getColorValue())
+		else if(highestC > g.ForMainPlay.get(g.getVictime()).hand.get(1).getColor().getColorValue())
 		{
 			stolenCard = "down";
 		}
-		this.jest.jestCards.add(g.listOffer.get(choiceVictime).get(stolenCard));
-		g.listOffer.get(choiceVictime).remove(stolenCard);// méthode AddJest() implementé dans Jest.
+		this.jest.jestCards.add(g.listOffer.get(g.getVictime()).get(stolenCard));
+		g.listOffer.get(g.getVictime()).remove(stolenCard);// méthode AddJest() implementé dans Jest.
 
 		this.HasStolen=true; 
 
-		if(g.getForMainPlay().get(choiceVictime).HasStolen==true) { // Dans le cas ou le joueur vole le voleur précédent, on fixe la prochaine victime au joueur qui a l'offre complete. 
+		if(g.getForMainPlay().get(g.getVictime()).HasStolen==true) { // Dans le cas ou le joueur vole le voleur précédent, on fixe la prochaine victime au joueur qui a l'offre complete. 
 
 
 			if(g.nbPlayers==3) {
 				for (HashMap.Entry<String,Player> mapentry : g.getForMainPlay().entrySet()) {
 					if (mapentry.getValue().getOffer().size()==2) {
 
-						choiceVictime=mapentry.getKey();
+						g.setVictime(mapentry.getKey());
 
 					}
 				}
@@ -159,13 +159,13 @@ public class BotHard extends Player implements Difficulty {
 							{
 								highestCardValue = mapentry2.getValue().getOffer().get("up").getValue().getCardValue();
 								highestColorValue = mapentry2.getValue().getOffer().get("up").getColor().getColorValue();
-								choiceVictime = mapentry2.getKey();
+								g.setVictime(mapentry2.getKey());
 							}
 
 							if(highestCardValue == mapentry2.getValue().getOffer().get("up").getValue().getCardValue() && 
 									highestColorValue < mapentry2.getValue().getOffer().get("up").getColor().getColorValue()) {
 
-								choiceVictime = mapentry2.getKey();
+								g.setVictime(mapentry2.getKey());
 
 							}		
 						}
