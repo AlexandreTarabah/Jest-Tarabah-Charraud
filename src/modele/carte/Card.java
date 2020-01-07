@@ -67,7 +67,7 @@ public class Card
 		}
 		else if (this.color == Color.heart)
 		{
-			this.trophy = new TrophyJoker() ;
+			this.trophy = new TrophyJoker();
 		}
 		else if (this.color == Color.diamond)
 		{

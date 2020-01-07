@@ -104,7 +104,8 @@ public class Game extends Observable implements Runnable {
 					g.trophyCards[i]= g.drawdeck.takeCards();
 				}
 			}
-			else if(g.nbPlayers==4)
+			else
+				if(g.nbPlayers==4)
 			{
 				trophyCards[0]=g.drawdeck.takeCards();
 			}	

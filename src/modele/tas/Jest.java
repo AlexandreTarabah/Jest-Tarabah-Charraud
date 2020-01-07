@@ -272,7 +272,7 @@ public class Jest {
 					bestJestColor.put(p, entry1) ;
 
 					bestJestPlayer.clear();
-					bestJestPlayer.put(p, jestValue) ; 
+					bestJestPlayer.put(p, jestValue); 
 				}
 
 				else if(entry.getValue() == jestValue && entryP.getKey() != entry.getKey())
