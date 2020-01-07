@@ -51,6 +51,7 @@ public class BotDown extends Player implements Difficulty {
 
 
 			{nbCardOffer = nbCardOffer+map.getValue().size();}
+			
 		}
 
 

@@ -317,14 +317,13 @@ public class Plateau extends JPanel implements Observer{
 			e.printStackTrace();
 		}
 	}
-//ok
 	public void stealCards(Game g,Player p) {
 		String choiceVictime = JOptionPane.showInputDialog(null, "choisissez votre victime "+game.getIsPlaying().getPseudo(), "Input",JOptionPane.INFORMATION_MESSAGE);
 		Object[] choixList = { "down", "up" };
 		Object choixFait = JOptionPane.showInputDialog(null, "Choisissez la carte a volé ", "Input",JOptionPane.INFORMATION_MESSAGE, null,choixList, choixList[0]);
 		try {
 			String choiceCardVictime = choixFait.toString();
-			controleur.methodeStealCard(choiceVictime,choiceCardVictime, game.getIsPlaying());
+			controleur.methodeStealCard(choiceVictime,choiceCardVictime, game.getIsPlaying(),game);
 			this.actualiserStealCards(game.getIsPlaying(),choiceCardVictime);
 		}catch(Exception e) {
 			JOptionPane.showMessageDialog(null, "Veuillez Rentrer un joueur");

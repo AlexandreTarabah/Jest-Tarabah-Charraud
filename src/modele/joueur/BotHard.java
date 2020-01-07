@@ -49,6 +49,7 @@ public class BotHard extends Player implements Difficulty {
 
 
 			{nbCardOffer = nbCardOffer+map.getValue().size();}
+			g.nbCardOffer=nbCardOffer;
 		}
 
 
