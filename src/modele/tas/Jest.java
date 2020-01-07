@@ -24,6 +24,7 @@ import modele.carte.Card;
 import modele.carte.Trophy;
 
 import java.util.Map.Entry;
+import java.util.Set;
 
 /**
  * Cette classe objectualise le Jest d'un joueur.
@@ -37,7 +38,7 @@ public class Jest {
 	int bestJest;
 
 	public List<Card> jestCards = new ArrayList<Card>();
-	
+
 	public Jest() {
 	}
 
@@ -255,15 +256,16 @@ public class Jest {
 			// parcourrons la map (contient un joueur) qui est candidat au trophy
 			Iterator<Entry<Player, Entry<Player, Integer>>> itrV = bestJestValue.entrySet().iterator();
 			Iterator<Entry<Player, Entry<Player, Integer>>> itrC = bestJestColor.entrySet().iterator();
-			Iterator<Entry<Player, Integer>> itrP = bestJestPlayer.entrySet().iterator();
 
 			while(itrV.hasNext() && itrC.hasNext())
 			{
 				Entry<Player, Entry<Player, Integer>> entryV = itrV.next();
 				Entry<Player, Entry<Player, Integer>> entryC = itrC.next();
-				Entry<Player, Integer> entryP = itrP.next();
 
-				if(entryP.getValue() < jestValue) 
+				int jestValueOnList = bestJestPlayer.get(((Player) bestJestPlayer.keySet().toArray()[0])) ;
+				Player playerOnList = ((Player) bestJestPlayer.keySet().toArray()[0]) ;
+
+				if(jestValueOnList < jestValue) 
 				{
 					bestJestValue.clear();
 					bestJestValue.put(p, entry) ;
@@ -275,7 +277,7 @@ public class Jest {
 					bestJestPlayer.put(p, jestValue) ; 
 				}
 
-				else if(entry.getValue() == jestValue && entryP.getKey() != entry.getKey())
+				else if(entry.getValue() == jestValue && playerOnList != entry.getKey())
 				{
 					if(entryV.getValue().getValue() < entry.getValue())
 					{
@@ -288,8 +290,8 @@ public class Jest {
 						bestJestPlayer.clear();
 						bestJestPlayer.put(p, jestValue) ;
 					}
-//nimp
-					else if(entryV.getValue().getValue() == entry.getValue() && entryP.getKey() != entry.getKey())
+					//nimp
+					else if(entryV.getValue().getValue() == entry.getValue() && playerOnList != entry.getKey())
 					{
 						if(entryC.getValue().getValue() < entry1.getValue())
 						{
@@ -349,12 +351,12 @@ public class Jest {
 		p.setNbPoint(count.visitJest(this));
 		System.out.println("Joueur "+ p.getPseudo() + " votre jest vaut " + p.getNbPoint() + " pts") ;
 		g.getWinner().put(p.getPseudo(), p.getNbPoint());
-		
+
 		g.scoresTransition.add(p.getPseudo()) ;
 		g.scoresTransition.add(Integer.toString(p.getNbPoint())) ;
-		
+
 	}
- 
+
 
 }
 
