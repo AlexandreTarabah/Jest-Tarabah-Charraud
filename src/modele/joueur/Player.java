@@ -18,7 +18,7 @@ public class Player
 	protected HashMap<String, Card> offer;
 
 	protected String stolenCard;
-	
+
 	public boolean HasStolen=false;
 
 	protected LinkedList<Card> hand = new LinkedList<Card>();
@@ -28,12 +28,12 @@ public class Player
 	boolean firstPlayer = false;
 
 	private int nbPoint;
-	
-public int nbCardOffer;
 
-private String choiceVictime;
+	public int nbCardOffer;
 
-protected String choiceVictimeBot;
+	private String choiceVictime;
+
+	protected String choiceVictimeBot;
 
 	//j'instancie l'objet offre, qui est aussi une collection de carte, dans le constructeur player ici 
 
@@ -60,7 +60,7 @@ protected String choiceVictimeBot;
 
 
 		g.setVictime(choiceVictime);
-		this.choiceVictime=choiceVictime;
+		this.choiceVictime=choiceVictime; // set la victime à mettre à jour visuellement et non dans la séquenciation
 
 		String stolenCard = choiceCardVictime;
 
@@ -149,8 +149,8 @@ protected String choiceVictimeBot;
 	g.listOffer.put(this.getPseudo(), this.getOffer()); // on ajoute l'offre du player a la listOffer.
 
 
-		/* et la on affiche le pseudo du player en paramètre, avec get(Down) et la value de la carte, et la couleur
-		 */
+	/* et la on affiche le pseudo du player en paramètre, avec get(Down) et la value de la carte, et la couleur
+	 */
 
 
 
@@ -221,9 +221,9 @@ protected String choiceVictimeBot;
 	}
 
 
-public String getStolenCard() {
-	return stolenCard;
-}
+	public String getStolenCard() {
+		return stolenCard;
+	}
 
 
 
