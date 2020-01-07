@@ -60,9 +60,9 @@ public class Plateau extends JPanel implements Observer{
 		if (nbrJoueurs == 3){
 			pp.get(0).setBounds(0, 0, 500, 200);
 			this.add(pp.get(0));
-			pp.get(1).setBounds(700, 0, 500, 200);
+			pp.get(1).setBounds(800, 0, 500, 200);
 			this.add(pp.get(1));
-			pp.get(2).setBounds(500, 550, 500, 200);
+			pp.get(2).setBounds(400, 550, 500, 200);
 			this.add(pp.get(2));
 		}
 		if (nbrJoueurs == 4){
