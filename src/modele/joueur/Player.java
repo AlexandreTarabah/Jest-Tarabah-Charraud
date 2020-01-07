@@ -31,6 +31,10 @@ public class Player
 	
 public int nbCardOffer;
 
+private String choiceVictime;
+
+protected String choiceVictimeBot;
+
 	//j'instancie l'objet offre, qui est aussi une collection de carte, dans le constructeur player ici 
 
 	public Player (String pseudo, Game g) 
@@ -56,6 +60,7 @@ public int nbCardOffer;
 
 
 		g.setVictime(choiceVictime);
+		this.choiceVictime=choiceVictime;
 
 		String stolenCard = choiceCardVictime;
 
@@ -63,12 +68,12 @@ public int nbCardOffer;
 		this.jest.jestCards.add(g.listOffer.get(g.getVictime()).get(stolenCard));
 		g.listOffer.get(g.getVictime()).remove(stolenCard);// méthode AddJest() implementé dans Jest.
 
-		this.setHasStolen(true); 
+		this.HasStolen=true; 
 
-		if(g.getForMainPlay().get(g.getVictime()).isHasStolen()==true) { // Dans le cas ou le joueur vole le voleur précédent, on fixe la prochaine victime au joueur qui a l'offre complete. 
+		if(g.getForMainPlay().get(g.getVictime()).HasStolen==true) { // Dans le cas ou le joueur vole le voleur précédent, on fixe la prochaine victime au joueur qui a l'offre complete. 
 
 
-			if(g.getNbPlayers()==3) {
+			if(g.nbPlayers==3) {
 				for (HashMap.Entry<String,Player> mapentry : g.getForMainPlay().entrySet()) {
 					if (mapentry.getValue().getOffer().size()==2) {
 
@@ -77,7 +82,7 @@ public int nbCardOffer;
 					}
 				}
 			}else
-				if(g.getNbPlayers()==4) {
+				if(g.nbPlayers==4) {
 
 					int highestCardValue = 0;
 					int highestColorValue = 0;
@@ -239,6 +244,20 @@ public String getStolenCard() {
 
 	public int getNbCardOffer() {
 		return nbCardOffer;
+	}
+
+
+
+	public String getChoiceVictime() {
+		// TODO Auto-generated method stub
+		return choiceVictime;
+	}
+
+
+
+	public String getChoiceVictimeBot() {
+		// TODO Auto-generated method stub
+		return choiceVictimeBot;
 	}
 
 

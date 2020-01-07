@@ -192,6 +192,7 @@ public class Plateau extends JPanel implements Observer{
 
 
 
+<<<<<<< HEAD
 	public void actualiserStealCards(Player joueur, String choiceCardVictime,Game g) {
 
 		if(joueur instanceof BotDown || joueur instanceof BotHard ) {
@@ -207,11 +208,29 @@ public class Plateau extends JPanel implements Observer{
 					}
 					this.revalidate();
 					this.repaint();
+=======
+	public void actualiserStealCards(Player joueur, String choiceCardVictime,String choiceVictime,Game g) {
+		
+	if(joueur instanceof BotDown || joueur instanceof BotHard ) {
+		ListIterator<PlayerPanel> iPj = this.pp.listIterator();
+		while (iPj.hasNext()){
+			PlayerPanel j = iPj.next();
+			if (j.getNomJoueur().equals(joueur.getChoiceVictimeBot())){
+				if(joueur.getStolenCard().equals("down")){
+					j.getJeu().remove(1);
+				}
+				else {
+					j.getJeu().remove(0);
+				}
+				this.revalidate();
+				this.repaint();
+>>>>>>> branch 'master' of https://github.com/AlexandreTarabah/Jest-Tarabah-Charraud
 
 				}	
 			}
 		}
 
+<<<<<<< HEAD
 		else
 		{
 			ListIterator<PlayerPanel> iPj = this.pp.listIterator();
@@ -226,6 +245,22 @@ public class Plateau extends JPanel implements Observer{
 					}
 					this.revalidate();
 					this.repaint();
+=======
+	else
+	{
+		ListIterator<PlayerPanel> iPj = this.pp.listIterator();
+		while (iPj.hasNext()){
+			PlayerPanel j = iPj.next();
+			if (j.getNomJoueur().equals(joueur.getChoiceVictime())){
+				if(choiceCardVictime.equals("down")) {
+					j.getJeu().remove(1);
+				}
+				else {
+					j.getJeu().remove(0);
+				}
+				this.revalidate();
+				this.repaint();
+>>>>>>> branch 'master' of https://github.com/AlexandreTarabah/Jest-Tarabah-Charraud
 
 				}
 			}
@@ -333,10 +368,17 @@ public class Plateau extends JPanel implements Observer{
 		String choiceVictime = JOptionPane.showInputDialog(null,game.getIsPlaying().getPseudo() + " rentrez le nom de votre victime : ", "Input",JOptionPane.INFORMATION_MESSAGE);
 		Object[] choixList = { "down", "up" };
 		Object choixFait = JOptionPane.showInputDialog(null, "Quelle carte voulez-vous voler à " + choiceVictime + " ? " , "Input",JOptionPane.INFORMATION_MESSAGE, null,choixList, choixList[0]);
+<<<<<<< HEAD
 
 		String choiceCardVictime = choixFait.toString();
 		controleur.methodeStealCard(choiceVictime,choiceCardVictime, game.getIsPlaying(),game);
 		this.actualiserStealCards(game.getIsPlaying(),choiceCardVictime,game);
+=======
+			String choiceCardVictime = choixFait.toString();
+			controleur.methodeStealCard(choiceVictime,choiceCardVictime, game.getIsPlaying(),game);
+			this.actualiserStealCards(game.getIsPlaying(),choiceCardVictime,game.getIsPlaying().getChoiceVictime(),game);
+		
+>>>>>>> branch 'master' of https://github.com/AlexandreTarabah/Jest-Tarabah-Charraud
 
 	}
 
@@ -376,7 +418,7 @@ public class Plateau extends JPanel implements Observer{
 		}
 		//hm
 		if(arg=="actualiserStealCards") {
-			this.actualiserStealCards(game.getIsPlaying(),null,game);
+			this.actualiserStealCards(game.getIsPlaying(),null,game.getIsPlaying().getChoiceVictime(),game);
 		}
 
 		if(arg == "actualiserUpsideDown") {

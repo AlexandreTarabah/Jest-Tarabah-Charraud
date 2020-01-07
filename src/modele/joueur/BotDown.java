@@ -115,7 +115,7 @@ public class BotDown extends Player implements Difficulty {
 		g.listOffer.get(g.getVictime()).remove(stolenCard);// méthode AddJest() implementé dans Jest.
 
 		this.setHasStolen(true); 
-
+		this.choiceVictimeBot = g.getVictime();
 		if(g.getForMainPlay().get(g.getVictime()).isHasStolen()==true) { // Dans le cas ou le joueur vole le voleur précédent, on fixe la prochaine victime au joueur qui a l'offre complete. 
 
 

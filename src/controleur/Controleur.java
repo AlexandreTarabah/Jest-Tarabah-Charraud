@@ -107,7 +107,42 @@ public class Controleur implements ActionListener {
 
 			{nbCardOffer = nbCardOffer+map.getValue().size();}
 		}
+<<<<<<< HEAD
+=======
+		
+		
+		if(game.nbPlayers==3) {
+			if(nbCardOffer>4) {
+				while(game.listOffer.containsKey(choiceVictime)==false || game.listOffer.get(choiceVictime).size()<2 || choiceVictime==null || game.getIsPlaying().getPseudo().equals(choiceVictime)) {
+					
+					choiceVictime = JOptionPane.showInputDialog(null, "Ce joueur s'est déjà fait dérobé ! ", "Choix incorrect ", JOptionPane.QUESTION_MESSAGE);
+									
+				}
+			}
+				else {
+					
+					if(nbCardOffer==4) {
+							if(game.getIsPlaying().getOffer().size()==2) {
+							while(game.listOffer.containsKey(choiceVictime)==false || game.listOffer.get(choiceVictime).size()<2 || choiceVictime==null) {
+								choiceVictime = JOptionPane.showInputDialog(null, "Ce joueur s'est déjà fait dérobé ! ", "Choix incorrect ", JOptionPane.QUESTION_MESSAGE);
+								
+							}
+							}else
+								{
+								if(game.getIsPlaying().getOffer().size()<2) {
+								
+									while(game.listOffer.containsKey(choiceVictime)==false || game.listOffer.get(choiceVictime).size()<2 || choiceVictime==null || game.getIsPlaying().getPseudo().equals(choiceVictime)) {
+										choiceVictime = JOptionPane.showInputDialog(null, "Ce joueur s'est déjà fait dérobé ! ", "Choix incorrect ", JOptionPane.QUESTION_MESSAGE);
+									
+									}
+								}
+							} 
+						}
+					}
+		}else 
+>>>>>>> branch 'master' of https://github.com/AlexandreTarabah/Jest-Tarabah-Charraud
 
+<<<<<<< HEAD
 
 		if(game.nbPlayers==3) 
 		{
@@ -128,7 +163,17 @@ public class Controleur implements ActionListener {
 					{
 						choiceVictime = JOptionPane.showInputDialog(null, "Vous êtes contraint à dérober votre propre offre !", "Choix incorrect ", JOptionPane.QUESTION_MESSAGE);
 
+=======
+			{ 
+			if(game.nbPlayers==4) {
+					if(nbCardOffer>5) {
+					while(game.listOffer.containsKey(choiceVictime)==false || game.listOffer.get(choiceVictime).size()<2 || choiceVictime==null || game.getIsPlaying().getPseudo().equals(choiceVictime)) {
+		
+						choiceVictime = JOptionPane.showInputDialog(null, "Choix incorrect ", "erreur", JOptionPane.QUESTION_MESSAGE);
+										
+>>>>>>> branch 'master' of https://github.com/AlexandreTarabah/Jest-Tarabah-Charraud
 					}
+<<<<<<< HEAD
 				}
 				
 				else if(game.getIsPlaying().getOffer().size()<2) 
@@ -177,9 +222,35 @@ public class Controleur implements ActionListener {
 
 		}
 		
+=======
+				}else
+					{ if(nbCardOffer==5) {
+						if(game.getIsPlaying().getOffer().size()==2) {
+							while(game.listOffer.containsKey(choiceVictime)==false || game.listOffer.get(choiceVictime).size()<2 || choiceVictime==null) {
+								choiceVictime = JOptionPane.showInputDialog(null, "Choix incorrect", "erreur", JOptionPane.QUESTION_MESSAGE);
+								
+							}
+							}else {
+								if(game.getIsPlaying().getOffer().size()<2) {
+									while(game.listOffer.containsKey(choiceVictime)==false || game.listOffer.get(choiceVictime).size()<2 || choiceVictime==null || game.getIsPlaying().getPseudo().equals(choiceVictime)) {
+										choiceVictime = JOptionPane.showInputDialog(null, "Choix incorrect ", "erreur", JOptionPane.QUESTION_MESSAGE);
+									
+												}	
+											}				
+										}
+									}
+								}
+							}
+						}
+>>>>>>> branch 'master' of https://github.com/AlexandreTarabah/Jest-Tarabah-Charraud
 		game.setVictime(choiceVictime);
+<<<<<<< HEAD
 
 		p.stealCard(choiceVictime, choiceCardVictime, game);
+=======
+		p.stealCard(choiceVictime, choiceCardVictime, game);
+	
+>>>>>>> branch 'master' of https://github.com/AlexandreTarabah/Jest-Tarabah-Charraud
 		
 	}
 
