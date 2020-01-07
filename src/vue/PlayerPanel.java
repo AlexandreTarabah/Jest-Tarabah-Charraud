@@ -15,7 +15,7 @@ public class PlayerPanel extends JPanel{
 	private Boolean virtuel = false;
 	private JLabel nomJoueurLabel;
 	private CardPanel cp;
-	private Font font = new Font("Times", Font.BOLD, 20);
+	private Font font = new Font("Times", Font.BOLD, 25);
 	
 	private LinkedList<Image> jeu;
 	

@@ -14,7 +14,6 @@ import modele.joueur.*;
 import modele.game.Game;
 
 public class Plateau extends JPanel implements Observer{
-
 	/**
 	 * 
 	 */
@@ -58,21 +57,21 @@ public class Plateau extends JPanel implements Observer{
 			pp.add(new PlayerPanel(iJoueurs.next()));
 		}
 		if (nbrJoueurs == 3){
-			pp.get(0).setBounds(0, 0, 500, 200);
+			pp.get(0).setBounds(100, 0, 500, 200);
 			this.add(pp.get(0));
-			pp.get(1).setBounds(800, 0, 500, 200);
+			pp.get(1).setBounds(1100, 0, 500, 200);
 			this.add(pp.get(1));
-			pp.get(2).setBounds(400, 550, 500, 200);
+			pp.get(2).setBounds(600, 500, 500, 200);
 			this.add(pp.get(2));
 		}
 		if (nbrJoueurs == 4){
-			pp.get(0).setBounds(0, 300, 500, 200);
+			pp.get(0).setBounds(100, 250, 500, 200);
 			this.add(pp.get(0));
-			pp.get(1).setBounds(500, 0, 500, 200);
+			pp.get(1).setBounds(600, 0, 500, 200);
 			this.add(pp.get(1));
-			pp.get(2).setBounds(1000, 300, 500, 200);
+			pp.get(2).setBounds(1100, 250, 500, 200);
 			this.add(pp.get(2));
-			pp.get(3).setBounds(500, 550, 500, 200);
+			pp.get(3).setBounds(600, 500, 500, 200);
 			this.add(pp.get(3));
 		}
 		this.frame.setContentPane(this);
@@ -325,20 +324,17 @@ public class Plateau extends JPanel implements Observer{
 			e.printStackTrace();
 		}
 	}
-<<<<<<< HEAD
-	//ok
-=======
->>>>>>> branch 'master' of https://github.com/AlexandreTarabah/Jest-Tarabah-Charraud
+
 	public void stealCards(Game g,Player p) {
-		String choiceVictime = JOptionPane.showInputDialog(null, "choisissez votre victime "+game.getIsPlaying().getPseudo(), "Input",JOptionPane.INFORMATION_MESSAGE);
+		String choiceVictime = JOptionPane.showInputDialog(null,game.getIsPlaying().getPseudo() + " rentrez le nom de votre victime : ", "Input",JOptionPane.INFORMATION_MESSAGE);
 		Object[] choixList = { "down", "up" };
-		Object choixFait = JOptionPane.showInputDialog(null, "Choisissez la carte a volé ", "Input",JOptionPane.INFORMATION_MESSAGE, null,choixList, choixList[0]);
+		Object choixFait = JOptionPane.showInputDialog(null, "Quelle carte voulez-vous voler à " + choiceVictime + " ? " , "Input",JOptionPane.INFORMATION_MESSAGE, null,choixList, choixList[0]);
 		try {
 			String choiceCardVictime = choixFait.toString();
 			controleur.methodeStealCard(choiceVictime,choiceCardVictime, game.getIsPlaying(),game);
 			this.actualiserStealCards(game.getIsPlaying(),choiceCardVictime);
 		}catch(Exception e) {
-			JOptionPane.showMessageDialog(null, "Veuillez Rentrer un joueur");
+			JOptionPane.showMessageDialog(null, "Veuillez rentrer le nom d'un joueur existant : ");
 		}
 
 	}
@@ -357,8 +353,8 @@ public class Plateau extends JPanel implements Observer{
 		if(arg=="upsideDown") {
 			Object[] action = {1,2};
 			int reponseUD=JOptionPane.showOptionDialog(null, 
-					"C'est le tour de "+" "+ game.getIsPlaying().getPseudo()+ " \n Quelle carte retourner ?",
-					"Action",
+					"C'est le tour de " + game.getIsPlaying().getPseudo()+ " \n Quelle carte souhaitez-vous retourner ? ",
+					"Faites une Offre ! ",
 					JOptionPane.YES_NO_OPTION,
 					JOptionPane.QUESTION_MESSAGE,
 					null,

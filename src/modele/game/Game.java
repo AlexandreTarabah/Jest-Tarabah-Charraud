@@ -173,19 +173,19 @@ public class Game extends Observable implements Runnable {
 		if (this.difficulty==1) {
 			for (int i=0;i<this.nbBots;i++){
 
-				Player joueur = new BotDown(JOptionPane.showInputDialog("rentrer le pseudo du bot"), this);
+				Player joueur = new BotDown(JOptionPane.showInputDialog(null, "Rentrez le pseudo du bot", "Nom du bot", JOptionPane.QUESTION_MESSAGE), this);
 
 
 			}
 		}else 
 		{for(int i=0;i<this.nbBots;i++) {
-			Player joueur = new BotHard(JOptionPane.showInputDialog("rentrer le pseudo du bot"), this);
+			Player joueur = new BotHard(JOptionPane.showInputDialog(null, "Rentrez le pseudo du bot", "Nom du bot", JOptionPane.QUESTION_MESSAGE), this);
 
 		}
 		}
 
 		for (int i=0;i<this.nbRealPlayers;i++){
-			Player joueur = new Player(JOptionPane.showInputDialog("rentrer le pseudo d'un joueur"), this);
+			Player joueur = new Player(JOptionPane.showInputDialog(null, "Rentrez le pseudo du joueur", "Nom du joueur", JOptionPane.QUESTION_MESSAGE), this);
 
 
 		}
