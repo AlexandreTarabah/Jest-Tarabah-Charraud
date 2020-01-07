@@ -192,14 +192,14 @@ public class Plateau extends JPanel implements Observer{
 
 
 
-	public void actualiserStealCards(Player joueur, String choiceCardVictime,Game g) {
+	public void actualiserStealCards(Player joueur, String choiceCardVictime,String choiceVictime,Game g) {
 		
 	if(joueur instanceof BotDown || joueur instanceof BotHard ) {
 		ListIterator<PlayerPanel> iPj = this.pp.listIterator();
 		while (iPj.hasNext()){
 			PlayerPanel j = iPj.next();
-			if (j.getNomJoueur().equals(g.getVictime())){
-				if(joueur.getStolenCard().equals("down")) {
+			if (j.getNomJoueur().equals(joueur.getChoiceVictimeBot())){
+				if(joueur.getStolenCard().equals("down")){
 					j.getJeu().remove(1);
 				}
 				else {
@@ -217,7 +217,7 @@ public class Plateau extends JPanel implements Observer{
 		ListIterator<PlayerPanel> iPj = this.pp.listIterator();
 		while (iPj.hasNext()){
 			PlayerPanel j = iPj.next();
-			if (j.getNomJoueur().equals(g.getVictime())){
+			if (j.getNomJoueur().equals(joueur.getChoiceVictime())){
 				if(choiceCardVictime.equals("down")) {
 					j.getJeu().remove(1);
 				}
@@ -333,13 +333,10 @@ public class Plateau extends JPanel implements Observer{
 		String choiceVictime = JOptionPane.showInputDialog(null,game.getIsPlaying().getPseudo() + " rentrez le nom de votre victime : ", "Input",JOptionPane.INFORMATION_MESSAGE);
 		Object[] choixList = { "down", "up" };
 		Object choixFait = JOptionPane.showInputDialog(null, "Quelle carte voulez-vous voler à " + choiceVictime + " ? " , "Input",JOptionPane.INFORMATION_MESSAGE, null,choixList, choixList[0]);
-		try {
 			String choiceCardVictime = choixFait.toString();
 			controleur.methodeStealCard(choiceVictime,choiceCardVictime, game.getIsPlaying(),game);
-			this.actualiserStealCards(game.getIsPlaying(),choiceCardVictime,game);
-		}catch(Exception e) {
-			JOptionPane.showMessageDialog(null, "Veuillez rentrer le nom d'un joueur existant : ");
-		}
+			this.actualiserStealCards(game.getIsPlaying(),choiceCardVictime,game.getIsPlaying().getChoiceVictime(),game);
+		
 
 	}
 
@@ -379,7 +376,7 @@ public class Plateau extends JPanel implements Observer{
 		}
 		//hm
 		if(arg=="actualiserStealCards") {
-			this.actualiserStealCards(game.getIsPlaying(),null,game);
+			this.actualiserStealCards(game.getIsPlaying(),null,game.getIsPlaying().getChoiceVictime(),game);
 		}
 
 		if(arg == "actualiserUpsideDown") {

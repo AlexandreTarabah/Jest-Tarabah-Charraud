@@ -118,33 +118,37 @@ import vue.Regles;
 				}
 			}
 				else {
+					
 					if(nbCardOffer==4) {
-						if(game.getIsPlaying().getOffer().size()==2) {
+							if(game.getIsPlaying().getOffer().size()==2) {
 							while(game.listOffer.containsKey(choiceVictime)==false || game.listOffer.get(choiceVictime).size()<2 || choiceVictime==null) {
 								choiceVictime = JOptionPane.showInputDialog(null, "Ce joueur s'est déjà fait dérobé ! ", "Choix incorrect ", JOptionPane.QUESTION_MESSAGE);
 								
-							}}else
+							}
+							}else
+								{
 								if(game.getIsPlaying().getOffer().size()<2) {
+								
 									while(game.listOffer.containsKey(choiceVictime)==false || game.listOffer.get(choiceVictime).size()<2 || choiceVictime==null || game.getIsPlaying().getPseudo().equals(choiceVictime)) {
 										choiceVictime = JOptionPane.showInputDialog(null, "Ce joueur s'est déjà fait dérobé ! ", "Choix incorrect ", JOptionPane.QUESTION_MESSAGE);
 									
+									}
 								}
-							
-						
+							} 
+						}
 					}
-				}
-			}
 		}else 
 
+			{ 
 			if(game.nbPlayers==4) {
-				if(nbCardOffer>5) {
+					if(nbCardOffer>5) {
 					while(game.listOffer.containsKey(choiceVictime)==false || game.listOffer.get(choiceVictime).size()<2 || choiceVictime==null || game.getIsPlaying().getPseudo().equals(choiceVictime)) {
 		
 						choiceVictime = JOptionPane.showInputDialog(null, "Choix incorrect ", "erreur", JOptionPane.QUESTION_MESSAGE);
 										
 					}
 				}else
-					if(nbCardOffer==5) {
+					{ if(nbCardOffer==5) {
 						if(game.getIsPlaying().getOffer().size()==2) {
 							while(game.listOffer.containsKey(choiceVictime)==false || game.listOffer.get(choiceVictime).size()<2 || choiceVictime==null) {
 								choiceVictime = JOptionPane.showInputDialog(null, "Choix incorrect", "erreur", JOptionPane.QUESTION_MESSAGE);
@@ -160,8 +164,11 @@ import vue.Regles;
 										}
 									}
 								}
-		p.stealCard(choiceVictime, choiceCardVictime, game);
+							}
+						}
 		game.setVictime(choiceVictime);
+		p.stealCard(choiceVictime, choiceCardVictime, game);
+	
 		
 	}
 	
