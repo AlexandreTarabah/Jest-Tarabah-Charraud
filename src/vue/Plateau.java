@@ -191,7 +191,7 @@ public class Plateau extends JPanel implements Observer{
 
 
 
-<<<<<<< HEAD
+
 	public void actualiserStealCards(Player joueur, String choiceCardVictime,Game g) {
 		
 	if(joueur instanceof BotDown || joueur instanceof BotHard ) {
@@ -207,27 +207,11 @@ public class Plateau extends JPanel implements Observer{
 				}
 				this.revalidate();
 				this.repaint();
-=======
-	public void actualiserStealCards(Player joueur, String choiceCardVictime) {
 
-		if(joueur instanceof BotDown || joueur instanceof BotHard ) {
-			ListIterator<PlayerPanel> iPj = this.pp.listIterator();
-			while (iPj.hasNext()){
-				PlayerPanel j = iPj.next();
-				if (j.getNomJoueur() == joueur.getPseudo()){
-					if(joueur.getStolenCard().equals("down")) {
-						j.getJeu().remove(0);
-					}
-					else {
-						j.getJeu().remove(1);
-					}
-					this.revalidate();
-					this.repaint();
->>>>>>> branch 'master' of https://github.com/AlexandreTarabah/Jest-Tarabah-Charraud
 				}	
 			}
 		}
-<<<<<<< HEAD
+
 	else
 	{
 		ListIterator<PlayerPanel> iPj = this.pp.listIterator();
@@ -242,22 +226,7 @@ public class Plateau extends JPanel implements Observer{
 				}
 				this.revalidate();
 				this.repaint();
-=======
-		else
-		{
-			ListIterator<PlayerPanel> iPj = this.pp.listIterator();
-			while (iPj.hasNext()){
-				PlayerPanel j = iPj.next();
-				if (j.getNomJoueur() == joueur.getPseudo()){
-					if(choiceCardVictime.equals("down")) {
-						j.getJeu().remove(0);
-					}
-					else {
-						j.getJeu().remove(1);
-					}
-					this.revalidate();
-					this.repaint();
->>>>>>> branch 'master' of https://github.com/AlexandreTarabah/Jest-Tarabah-Charraud
+
 				}
 			}
 		}
