@@ -238,16 +238,17 @@ public class Game extends Observable implements Runnable {
 
 					p.upsideDown(choice,this);
 					this.notifyObservers("actualiserUpsideDown");
-
+					
 				}
 				else
 				{
 
 					this.notifyObservers("upsideDown");
+					this.notifyObservers("actualiserUpsideDown");
 
 				}
 			}
-
+			
 
 
 			this.determinateFirstPlayer();
