@@ -228,8 +228,8 @@ public class Game extends Observable implements Runnable {
 		{
 			this.distribute(); // distribuer les cartes 
 			// UPSIDE DOWN DE CHAQUE JOUEUR		
-			Iterator<Player> it = players.iterator();
 			this.notifyObservers("actualiserPlateau");
+			Iterator<Player> it = players.iterator();
 			while(it.hasNext()) {
 				Player p = it.next();
 				isPlaying=p;
@@ -275,7 +275,6 @@ public class Game extends Observable implements Runnable {
 
 			this.mainCollectCards();
 
-			this.notifyObservers("actualiserPlateau");
 			// On ramasse les cartes et on les rebalance dans le jeu pour recommencer 
 			for(int i=0;i<this.nbPlayers;i++) {
 				this.players.get(i).getHand().clear();

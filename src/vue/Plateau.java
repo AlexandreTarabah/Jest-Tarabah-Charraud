@@ -184,18 +184,18 @@ public class Plateau extends JPanel implements Observer{
 
 
 
-	public void actualiserStealCards(Player joueur, String choiceCardVictime) {
+	public void actualiserStealCards(Player joueur, String choiceCardVictime,Game g) {
 		
 	if(joueur instanceof BotDown || joueur instanceof BotHard ) {
 		ListIterator<PlayerPanel> iPj = this.pp.listIterator();
 		while (iPj.hasNext()){
 			PlayerPanel j = iPj.next();
-			if (j.getNomJoueur() == game.getVictime()){
+			if (j.getNomJoueur().equals(g.getVictime())){
 				if(joueur.getStolenCard().equals("down")) {
-					j.getJeu().remove(0);
+					j.getJeu().remove(1);
 				}
 				else {
-					j.getJeu().remove(1);
+					j.getJeu().remove(0);
 				}
 				this.revalidate();
 				this.repaint();
@@ -207,12 +207,12 @@ public class Plateau extends JPanel implements Observer{
 		ListIterator<PlayerPanel> iPj = this.pp.listIterator();
 		while (iPj.hasNext()){
 			PlayerPanel j = iPj.next();
-			if (j.getNomJoueur() == game.getVictime()){
+			if (j.getNomJoueur().equals(g.getVictime())){
 				if(choiceCardVictime.equals("down")) {
-					j.getJeu().remove(0);
+					j.getJeu().remove(1);
 				}
 				else {
-					j.getJeu().remove(1);
+					j.getJeu().remove(0);
 				}
 				this.revalidate();
 				this.repaint();
@@ -227,7 +227,7 @@ public class Plateau extends JPanel implements Observer{
 			ListIterator<PlayerPanel> iPj = this.pp.listIterator();
 			while (iPj.hasNext()){
 				PlayerPanel j = iPj.next();
-				if (j.getNomJoueur() == joueur.getPseudo()){
+				if (j.getNomJoueur().equals(joueur.getPseudo())){
 					try {
 						j.getJeu().remove(0);
 						this.revalidate();
@@ -247,7 +247,7 @@ public class Plateau extends JPanel implements Observer{
 			ListIterator<PlayerPanel> iPj = this.pp.listIterator();
 			while (iPj.hasNext()){
 				PlayerPanel j = iPj.next();
-				if (j.getNomJoueur() == joueur.getPseudo()){
+				if (j.getNomJoueur().equals(joueur.getPseudo())){
 					try {
 						j.getJeu().remove(reponseUD);
 						this.revalidate();
@@ -324,7 +324,7 @@ public class Plateau extends JPanel implements Observer{
 		try {
 			String choiceCardVictime = choixFait.toString();
 			controleur.methodeStealCard(choiceVictime,choiceCardVictime, game.getIsPlaying(),game);
-			this.actualiserStealCards(game.getIsPlaying(),choiceCardVictime);
+			this.actualiserStealCards(game.getIsPlaying(),choiceCardVictime,game);
 		}catch(Exception e) {
 			JOptionPane.showMessageDialog(null, "Veuillez Rentrer un joueur");
 		}
@@ -367,7 +367,7 @@ public class Plateau extends JPanel implements Observer{
 		}
 		//hm
 		if(arg=="actualiserStealCards") {
-			this.actualiserStealCards(game.getIsPlaying(),null);
+			this.actualiserStealCards(game.getIsPlaying(),null,game);
 		}
 
 			if(arg == "actualiserUpsideDown") {

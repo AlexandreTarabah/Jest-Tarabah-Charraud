@@ -117,6 +117,23 @@ import vue.Regles;
 									
 				}
 			}
+				else {
+					if(nbCardOffer==4) {
+						if(game.getIsPlaying().getOffer().size()==2) {
+							while(game.listOffer.containsKey(choiceVictime)==false || game.listOffer.get(choiceVictime).size()<2 || choiceVictime==null) {
+								choiceVictime = JOptionPane.showInputDialog(null, "Choix incorrect ", "erreur", JOptionPane.QUESTION_MESSAGE);
+								
+							}}else
+								if(game.getIsPlaying().getOffer().size()<2) {
+									while(game.listOffer.containsKey(choiceVictime)==false || game.listOffer.get(choiceVictime).size()<2 || choiceVictime==null || game.getIsPlaying().getPseudo().equals(choiceVictime)) {
+										choiceVictime = JOptionPane.showInputDialog(null, "Choix incorrect ", "erreur", JOptionPane.QUESTION_MESSAGE);
+									
+								}
+							
+						
+					}
+				}
+			}
 		}else 
 
 			if(game.nbPlayers==4) {
@@ -126,8 +143,23 @@ import vue.Regles;
 						choiceVictime = JOptionPane.showInputDialog(null, "Choix incorrect ", "erreur", JOptionPane.QUESTION_MESSAGE);
 										
 					}
-				}
-			}
+				}else
+					if(nbCardOffer==5) {
+						if(game.getIsPlaying().getOffer().size()==2) {
+							while(game.listOffer.containsKey(choiceVictime)==false || game.listOffer.get(choiceVictime).size()<2 || choiceVictime==null) {
+								choiceVictime = JOptionPane.showInputDialog(null, "Choix incorrect ", "erreur", JOptionPane.QUESTION_MESSAGE);
+								
+							}
+							}else {
+								if(game.getIsPlaying().getOffer().size()<2) {
+									while(game.listOffer.containsKey(choiceVictime)==false || game.listOffer.get(choiceVictime).size()<2 || choiceVictime==null || game.getIsPlaying().getPseudo().equals(choiceVictime)) {
+										choiceVictime = JOptionPane.showInputDialog(null, "Choix incorrect ", "erreur", JOptionPane.QUESTION_MESSAGE);
+									
+												}	
+											}				
+										}
+									}
+								}
 		p.stealCard(choiceVictime, choiceCardVictime, game);
 		game.setVictime(choiceVictime);
 		
