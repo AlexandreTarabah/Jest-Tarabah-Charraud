@@ -29,11 +29,11 @@ public class Home extends JFrame{
 	    
 	    Font font = new Font("Courier", Font.BOLD, 15);
 	    
-		this.nouvellegame = new JButton("Nouvelle game");
+		this.nouvellegame = new JButton("Nouvelle partie");
 		this.nouvellegame.setFont(font);
 		this.nouvellegame.setActionCommand("nouvellegame");
 		
-		this.regles = new JButton("Regles du jeu");
+		this.regles = new JButton("Règles du JEST");
 		this.regles.setFont(font);
 		this.regles.setActionCommand("reglesdujeu");
 		

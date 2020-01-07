@@ -23,14 +23,14 @@ public class Regles extends JPanel{
 	public Regles(){
 		super();
 		this.frame = new JFrame();
-		this.frame.setTitle("REGLES DU JEST");
+		this.frame.setTitle("RÈGLES DU JEST");
 		this.frame.setSize(1000, 800);
 		this.frame.setLocationRelativeTo(null);               
 		this.frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
 	    this.setLayout(new BorderLayout());
 	    
-	    this.retour = new JButton("Retour au menu principal");
+	    this.retour = new JButton("Menu principal");
 	    this.retour.setActionCommand("retour");
 	    this.retour.setFont(font);
 	    

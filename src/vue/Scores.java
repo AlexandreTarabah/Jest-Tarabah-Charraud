@@ -19,12 +19,12 @@ public class Scores extends JFrame {
 	public Scores(Game g) {
 		super();
 
-		setTitle("SCORES");
+		setTitle("TABLEAU DES SCORES");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.setLocationRelativeTo(null); 
 		this.setSize(500, 500);
 
-		String[] entetes = {"Pseudo", "Scores"};
+		String[] entetes = {"Pseudo des Joueurs", "Score"};
 
 		JTable tableau = new JTable(g.scores, entetes);
 		

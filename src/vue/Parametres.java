@@ -39,7 +39,7 @@ public class Parametres extends JFrame{
 
 	public Parametres(){
 		super();
-		this.setTitle("Parametres de jeu");
+		this.setTitle("Paramètres de jeu");
 		this.setSize(1000, 800);
 		this.setLocationRelativeTo(null);               
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -58,11 +58,11 @@ public class Parametres extends JFrame{
 
 		extensionGroup = new ButtonGroup();
 
-		active = new JRadioButton("active");
+		active = new JRadioButton("Active");
 		getActive().setFont(font);
 		getActive().setOpaque(false);
 
-		inactive = new JRadioButton("inactive");
+		inactive = new JRadioButton("Inactive");
 		getInactive().setFont(font);
 		getInactive().setOpaque(false);
 
@@ -83,7 +83,7 @@ public class Parametres extends JFrame{
 		botDown.setFont(font);
 		botDown.setOpaque(false);
 
-		botHard = new JRadioButton("Moyen");
+		botHard = new JRadioButton("Difficile");
 		botHard.setFont(font);
 		botHard.setOpaque(false);
 
@@ -98,7 +98,7 @@ public class Parametres extends JFrame{
 		lVariante.setFont(font);
 		lVariante.setForeground(Color.WHITE) ;
 
-		lDifficulty = new JLabel("Difficulte : ");
+		lDifficulty = new JLabel("Difficulté : ");
 		lDifficulty.setFont(font);
 		lDifficulty.setForeground(Color.WHITE) ;
 
@@ -106,7 +106,7 @@ public class Parametres extends JFrame{
 		lNbrVirtual.setFont(font);
 		lNbrVirtual.setForeground(Color.WHITE) ;
 
-		lNbrReal = new JLabel("Joueurs Reels : ");
+		lNbrReal = new JLabel("Joueurs Réels : ");
 		lNbrReal.setFont(font);
 		lNbrReal.setForeground(Color.WHITE) ;
 
