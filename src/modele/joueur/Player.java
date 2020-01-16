@@ -7,6 +7,27 @@ import java.util.LinkedList;
 import java.util.Map;
 import java.util.Map.Entry;
 
+/**
+ * <b>Player est la classe représentant un joueur de la partie de JEST.</b>
+ * <p>
+ * Un joueur est caractérisé par les informations suivantes :
+ * <ul>
+ * <li>L'objet joueur qui dis qui joue</li>
+ * <li>Un pseudo, qui est demandé en début de partie.</li>
+ * <li>un boolean isAThief;</li>
+ * * <li>un String stolenCard qui détermine la carte qui va etre volée</li>
+ * * <li> boolean HasStolen qui détermine si il a déja volé</li>
+ * * <li>un objet jest qui est son jest</li>
+ * <li>Son nombre de point nbPoint</li>
+ * <li>Son nombre de carte dans l'offre nbCardOffer</li>
+ * <li> le pseudo de sa victime choiceVictime</li>
+ </ul>
+ * </p>
+ * <p>
+ * De plus, un Joueur a une offre (list) et une main(list).
+ * </p>
+ */
+
 public class Player 
 {
 	private Player isPlaying;
@@ -35,7 +56,17 @@ public class Player
 
 	protected String choiceVictimeBot;
 
-	//j'instancie l'objet offre, qui est aussi une collection de carte, dans le constructeur player ici 
+	/**
+	 * Dans le constructeur du joueur on met a jour : 
+	 * <bu>
+	 * <li> son pseudo </li>
+	 * <li> son offre </li>
+	 * <li> on instancie son jest</li>
+	 * <li>on ajoute le joueur a la liste de joueur @see {@link Game#players} </li>
+	 * <li>On ajoute le joueur a la hashmap ForMainPlay (pseudo, player) @see {@link Game#ForMainPlay} </li>
+	 * @param pseudo
+	 * @param g
+	 */
 
 	public Player (String pseudo, Game g) 
 	{
@@ -47,7 +78,14 @@ public class Player
 
 	}
 
-
+/**
+ * La méthode stealCard qui permet au joueur de volé une carte au joueur rentré en paramètre 
+ * On prend la carte dans l'offre du joueur Victime et on l'ajoute au jest du joueur qui joue
+ * On détermine ensuite la prochaine victime selon l'algorithme de recherche qui détermine le prochain joueur selon les règles du jeu et le nombre de joueur 
+ * @param choiceVictime
+ * @param choiceCardVictime
+ * @param g
+ */
 
 	public void stealCard(String choiceVictime,String choiceCardVictime, Game g) {
 		nbCardOffer=0;
@@ -118,7 +156,10 @@ public class Player
 
 
 
-
+/**
+ *retourne la main du joueur 
+ * @return hand
+ */
 
 
 	public LinkedList<Card> getHand() {
@@ -132,25 +173,27 @@ public class Player
 
 
 
-	// la c'est la méthode pour 
+	/**
+	 * Méthode qui permet au joueur de retourné la carte de son choix 
+	 * Son choix est matérialisé par numC qui représente le choix du joueur  
+	 * En fonction de son choix, place dans l'offre la carte choisi avec la clé down et l'autre avec up 
+	 * @param choice 
+	 * @param g
+	 */
 	public void upsideDown(int choice, Game g) 
 	{		this.isPlaying=this;
 
 	int numC =0;
-	numC =choice + 1; // demande au joueur de rentrer un numéro entre 1 et 2
+	numC =choice + 1; 
 
 
-	((Map<String, Card>) offer).put("down", this.hand.get(numC-1)); // -1 car le tableau commence à l'indice 0, je caste l'offer  
-	((Map<String, Card>) offer).put("up", this.hand.get(numC%2)); // avec le modulo 2 on obtient la case manquante, je caste l'offer
+	((Map<String, Card>) offer).put("down", this.hand.get(numC-1));   
+	((Map<String, Card>) offer).put("up", this.hand.get(numC%2)); 
 
-	/* et la on affiche le pseudo du player en paramètre, avec get(Down) et la value de la carte, et la couleur
-	 */
-
-	g.listOffer.put(this.getPseudo(), this.getOffer()); // on ajoute l'offre du player a la listOffer.
+	
+	g.listOffer.put(this.getPseudo(), this.getOffer());
 
 
-	/* et la on affiche le pseudo du player en paramètre, avec get(Down) et la value de la carte, et la couleur
-	 */
 
 
 
@@ -158,7 +201,10 @@ public class Player
 
 
 
-
+/**
+ * 
+ * @return le jest
+ */
 
 
 	public Jest getJest()
@@ -168,7 +214,9 @@ public class Player
 
 
 
-
+/**
+ * @return le pseudo du joueur
+ */
 
 
 	public String getPseudo() {
@@ -177,7 +225,10 @@ public class Player
 
 
 
-
+/**
+ * met à jour le pseudo du joueur
+ * @param pseudo
+ */
 
 
 	public void setPseudo(String pseudo) {
@@ -186,7 +237,10 @@ public class Player
 
 
 
-
+/**
+ * 
+ * @return le nombre de point 
+ */
 
 
 	public int getNbPoint() {
@@ -195,24 +249,20 @@ public class Player
 
 
 
-
-
-
-	public void setNbPoint(int nbPoint) {
-		this.nbPoint = nbPoint;
-	}
-
-
-
-
-
+/**
+ * 
+ * @return l'offre du joueur 
+ */
 
 	public HashMap<String, Card> getOffer() {
 		return offer;
 	}
 
 
-
+/**
+ * modifie l'offre du joueur 
+ * @param offer
+ */
 
 
 
@@ -220,39 +270,64 @@ public class Player
 		this.offer = offer;
 	}
 
+	/**
+	 * 
+	 * @return la carte choisit pour être volée 
+	 */
 
 	public String getStolenCard() {
 		return stolenCard;
 	}
 
-
+/**
+ * 
+ * @return si le joueur a déja volé 
+ */
 
 	public boolean isHasStolen() {
 		return HasStolen;
 	}
 
-
+/**
+ * 
+ * @return le joueur entrain de jouer
+ */
 	public Player getIsPlaying() {
 		return isPlaying;
 	}
 
-
+/**
+ * Met a jour le statut "a volé" du joueur
+ * @param hasStolen
+ */
 
 	public void setHasStolen(boolean hasStolen) {
 		HasStolen = hasStolen;
 	}
+	
+	/**
+	 * 
+	 * @return le nombre de carte dans l'offre du joueur
+	 */
 
 	public int getNbCardOffer() {
 		return nbCardOffer;
 	}
 
-
+/**
+ * 
+ * @return le choix de victime
+ */
 
 	public String getChoiceVictime() {
 		// TODO Auto-generated method stub
 		return choiceVictime;
 	}
 
+	/**
+	 * 
+	 * @return le choix de la victime, choix du bot 
+	 */
 
 
 	public String getChoiceVictimeBot() {
