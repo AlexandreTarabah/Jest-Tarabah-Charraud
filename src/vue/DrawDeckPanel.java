@@ -11,13 +11,17 @@ import javax.swing.JPanel;
 
 public class DrawDeckPanel extends JPanel{
 
-	/**
+	/**Correspond au drawdeck sous forme graphique 
+	 * il est définit par une liste d'image : les cartes du drawdeck 
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
 	
 	private LinkedList<Image> cartes;
 	
+	/**
+	 * on créé les cartes (liste d'image) et on génere les cartes @see DrawdeckPanel#genererCartes()
+	 */
 	public DrawDeckPanel(){
 		super();
 		this.setLayout(new BorderLayout());
@@ -26,7 +30,11 @@ public class DrawDeckPanel extends JPanel{
 		this.genererCartes();
 	}
 	
-	
+	/**
+	 * cette méthode permet de d'assigner a la liste d'image la bonne image,
+	  pour qu'elle être dessinée ensuite dans la méthode drawComponent @see CardPanel#drawComponent()
+	  * Les fichiers correspondant à chacunes des cartes sont dans un dossier img 
+	 */
 	
 	public void genererCartes(){
 		try {
@@ -89,11 +97,18 @@ public class DrawDeckPanel extends JPanel{
 		}
 	}
 	
-	
+	/**
+	 * 
+	 * @return la liste d'image : les cartes 
+	 */
 	public LinkedList<Image> getCartes() {
 		return cartes;
 	}
 
+	/**
+	 * permet de modifier la liste de cartes 
+	 * @param cartes
+	 */
 	public void setCartes(LinkedList<Image> cartes) {
 		this.cartes = cartes;
 	}
