@@ -5,42 +5,85 @@ import java.util.Map.Entry;
 import modele.carte.Card;
 import modele.game.Game;
 
+/**
+ * BotHard représente un Bot, qui choisit la meilleure carte  
+ * Le BotHard a les mêmes caractéristiques que Player 
+ * 
+ * Le Bot est caractérisé par : 
+ * <ul>
+ * <li> un boolean isBot</li>
+ * <li> Un String stolenCard qui peut-etre Up ou Down </i>
+ * </ul>
+ * 
+ * De plus, BotDown extends la classe Player puisque le Bot est un Joueur avec ses propres méthodes. 
+ * 
+ * 
+ */
+
 public class BotHard extends Player implements Difficulty {
+	/** 
+	 * la caractéristique du Bot : c'est un bot donc isBot = true; Cette caractéristique ne se modifie pas 
+	 */
 	boolean isBot=true;
+	/**
+	 * Indique quelle carte est selectionnée par le Bot
+	 * Ce String prend 2 valeurs : up ou down 
+	 * @see BotHard#upsideDown(int, Game)
+	 */
 	String stolenCard;
 
+	/** 
+	 * Constructeur du Bot hérité de Player
+	 * @param pseudo
+	 * @param g
+	 */
+	
 	public BotHard(String pseudo,Game g) {
 		super(pseudo, g);
-		// TODO Auto-generated constructor stub
+		
 	}
-
-
+	/**
+	 * Méthode upsideDown 
+	 * @param choice
+	 * @param g 
+	 * 
+	 * Cette méthode permet de retourner une carte dans la main du Bot 
+	 * Ainsi, on définit son offre 
+	 */
+	
 	@Override
 	public void upsideDown(int choice,Game g) {
-		int numC = 1 ; // demande au joueur de rentrer un numéro entre 1 et 2
+		int numC = 1 ; 
 
 		try {
 			Thread.sleep(1000);
 			System.out.println(numC);
 		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 
 
 
-		((Map<String, Card>) offer).put("down", this.hand.get(numC-1)); // -1 car le tableau commence à l'indice 0, je caste l'offer  
-		((Map<String, Card>) offer).put("up", this.hand.get(numC%2)); // avec le modulo 2 on obtient la case manquante, je caste l'offer
+		((Map<String, Card>) offer).put("down", this.hand.get(numC-1));   
+		((Map<String, Card>) offer).put("up", this.hand.get(numC%2));
 		System.out.println(this.getPseudo()  + " a caché " + this.offer.get("down").getValue() + " de " + this.offer.get("down").getColor()+"\n");
-		/* et la on affiche le pseudo du player en paramètre, avec get(Down) et la value de la carte, et la couleur
-		 */
 
-		g.listOffer.put(this.getPseudo(), this.getOffer()); // on ajoute l'offre du player a la listOffer.
+		g.listOffer.put(this.getPseudo(), this.getOffer());
 
 	}
 
 
-
+	/**
+	 * Méthode stealCard qui permet au Bot de choisir une Carte 
+	 * @param choiceVictime
+	 * @param choiceCardVictime
+	 * @param g
+	 * 
+	 * En fonction du nombre de joueur dans le jeu, on fait tourner un algorithme qui détermine le bon joueur à volé selon les règles.
+	 * On change l'attribut victime @see Game#setVictime() selon le choix déterminé 
+	 * On définit ensuite le pseudo de la prochaine victime en fonction du nombre de joueur :
+	 * 
+	 */
 
 	public void stealCard(String choiceVictime,String choiceCardVictime, Game g)
 	{
@@ -57,7 +100,6 @@ public class BotHard extends Player implements Difficulty {
 		try {
 			Thread.sleep(100);
 		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		int i=0;
@@ -104,7 +146,7 @@ public class BotHard extends Player implements Difficulty {
 		try {
 			Thread.sleep(1000);
 		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
+		
 			e.printStackTrace();
 		}
 
@@ -133,13 +175,12 @@ public class BotHard extends Player implements Difficulty {
 			stolenCard = "down";
 		}
 		this.jest.jestCards.add(g.listOffer.get(g.getVictime()).get(stolenCard));
-		g.listOffer.get(g.getVictime()).remove(stolenCard);// méthode AddJest() implementé dans Jest.
+		g.listOffer.get(g.getVictime()).remove(stolenCard);
 
 		this.HasStolen=true; 
 		this.choiceVictimeBot = g.getVictime();
 
-		if(g.getForMainPlay().get(g.getVictime()).HasStolen==true) { // Dans le cas ou le joueur vole le voleur précédent, on fixe la prochaine victime au joueur qui a l'offre complete. 
-
+		if(g.getForMainPlay().get(g.getVictime()).HasStolen==true) {
 
 			if(g.nbPlayers==3) {
 				for (HashMap.Entry<String,Player> mapentry : g.getForMainPlay().entrySet()) {
@@ -178,6 +219,12 @@ public class BotHard extends Player implements Difficulty {
 
 		}
 	
+	
+	/**
+	 * Retourne l'attribut StolenCard
+	 * @return stolenCard; 
+	 * 
+	 */
 	public String getStolenCard() {
 		return stolenCard;
 	}

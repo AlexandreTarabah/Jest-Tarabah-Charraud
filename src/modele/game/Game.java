@@ -104,16 +104,20 @@ public class Game extends Observable implements Runnable {
 					g.trophyCards[i] = g.drawdeck.takeCards();
 				}
 			}
-			else
-				if(g.nbPlayers==4)
+			else if(g.nbPlayers==4)
 			{
 				trophyCards[0]=g.drawdeck.takeCards();
 			}	
 		}
+		else if(extension==true) 
+		{
+			if(g.nbPlayers==4) 
+			{
+				trophyCards[0]=g.drawdeck.takeCards();
+			}
+		}
+		
 	}
-
-
-
 
 
 	public void mainCollectCards()
@@ -634,6 +638,3 @@ public class Game extends Observable implements Runnable {
 	}
 
 }
-
-
-// ARMAGEDDON

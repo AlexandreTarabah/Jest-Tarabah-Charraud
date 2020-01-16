@@ -31,4 +31,3 @@ public class Lanceur {
 		parametres.setListener(controleur);
 	}
 }
-//push
