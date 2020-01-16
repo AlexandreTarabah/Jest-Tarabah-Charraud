@@ -10,9 +10,9 @@ import modele.game.Game;
 /**
  * Cette classe représente le drawdeck de la partie 
  * il est caractérisé par : 
- * <bu>
+ * <ul>
  * <li> son nombre de carte interne (sa taille) </li>
- * </bu>
+ * </ul>
  * il comporte une liste de carte drawdeck @see Drawdeck#drawdeck
  * @author zorro
  *

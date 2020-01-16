@@ -58,12 +58,13 @@ public class Player
 
 	/**
 	 * Dans le constructeur du joueur on met a jour : 
-	 * <bu>
+	 * <ul>
 	 * <li> son pseudo </li>
 	 * <li> son offre </li>
 	 * <li> on instancie son jest</li>
 	 * <li>on ajoute le joueur a la liste de joueur @see {@link Game#players} </li>
 	 * <li>On ajoute le joueur a la hashmap ForMainPlay (pseudo, player) @see {@link Game#ForMainPlay} </li>
+	 * </ul>
 	 * @param pseudo
 	 * @param g
 	 */
