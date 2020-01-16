@@ -7,6 +7,16 @@ import modele.carte.Joker;
 import modele.carte.Value;
 import modele.carte.Color;
 import modele.game.Game;
+/**
+ * Cette classe représente le drawdeck de la partie 
+ * il est caractérisé par : 
+ * <bu>
+ * <li> son nombre de carte interne (sa taille) </li>
+ * </bu>
+ * il comporte une liste de carte drawdeck @see Drawdeck#drawdeck
+ * @author zorro
+ *
+ */
 
 public class DrawDeck {
 
@@ -16,7 +26,9 @@ public class DrawDeck {
 	private ArrayList<Card> drawdeck = new ArrayList<Card>();
 
 
-	// j'ai pu simplifié le mélange des cartes avec shuffle directement implementé dans le java, Collections.shuffle et je mélange les cartes 
+ /**
+  * La méthode shuffle() permet de mélanger les cartes grâce à Collections.shuffle(o)
+  */
 
 	public void shuffle() {
 
@@ -24,13 +36,13 @@ public class DrawDeck {
 	}
 
 
-
-	public void revealTrophies() {
-	}
-
-
-	// la je créé le drawdeck qui est une liste de cartes.
-	// 
+	/**
+	 * Constructeur du Drawdeck 
+	 * On instancie le drawdeck selon les valeurs et les couleurs des énumérations de carte @see Card
+	 * on instancie aussi le joker 
+	 * Si l'extension n'est pas activée, on retire la famille de 6 pour avoir un jeu sans extension
+	 * @param g
+	 */
 
 
 	public DrawDeck(Game g) {
@@ -61,19 +73,26 @@ public class DrawDeck {
 				{drawdeck.remove(i);}
 			}
 		}
-		// Si tu ajoutes le Joker ici, soit tu l'ajoutes après les removes, soit tu changes la position des removes pour que ça corresponde
 
 	} 
 
-	public Card takeCards() { // méthode pour prendre une carte.
+	/**
+	 * Méthode qui permet de prendre une carte à une position aléatoire 
+	 * @return la carte choisie 
+	 */
+	public Card takeCards() {
 		nbCardDD=drawdeck.size();
 		int position = (int) ((int) Math.round(DrawDeck.nbCardDD-1)*Math.random());
 		return drawdeck.remove(position);
 	}
 
 
-
-	public void collectCards(Player player) {  // ici on collecte les cartes pour les rebalancer dans le DD, sauf si DDsize<3 
+/**
+ * // ici on collecte les cartes pour les remettre dans le Drawdeck, sauf si DDsize=0, alors on place les cartes dans le jest des joueurs respectifs 
+ * Si l'offre est null pour la clé up alors on add au drawdeck la clé down et vice-versa 
+ * @param player
+ */
+	public void collectCards(Player player) { 
 
 		if(drawdeck.size()!=0) {
 
@@ -95,6 +114,10 @@ public class DrawDeck {
 
 
 
+	/**
+	 * 
+	 * @return si le drawdeck est vide 
+	 */
 
 
 	public boolean isEmpty()
@@ -102,7 +125,10 @@ public class DrawDeck {
 		return drawdeck.isEmpty(); 
 	}
 
-
+/**
+ * 
+ * @return la taille du drawdeck
+ */
 
 	public int getSize() {
 		// TODO Auto-generated method stub
