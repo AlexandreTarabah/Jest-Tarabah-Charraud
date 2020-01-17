@@ -7,17 +7,31 @@ import javax.swing.JFrame;
 
 import controleur.Controleur;
 
-
+/**
+ *Cette classe représente l'affichage graphique du menu principal 
+ *Cette classe possède : 
+ *<ul>
+ * <li> un HomePanel hp</li>
+ * <li> un bouton nouvellegame </li>
+ * <li> un bouton regles </li>
+ * <li> un bouton quitter </li>
+ * </ul>
+ * 
+ *
+ *
+ */
 public class Home extends JFrame{
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
 	
 	private HomePanel hp;
 	private JButton nouvellegame;
 	private JButton regles;
 	private JButton quitter;
+	
+	/**
+	 * Constructeur de l'acceuil : 
+	 * on met a jour le titre, la taille de la fenetre, et on instancie sur une grille les boutons 
+	 */
 	
 	public Home(){
 		this.setTitle("JEU DU JEST");
@@ -61,6 +75,10 @@ public class Home extends JFrame{
 	    this.setVisible(true);
 	}
 
+	/**
+	 * Met en place les listener en lien avec controleur
+	 * @param controleur
+	 */
 	public void setListener(Controleur controleur) {
 		nouvellegame.addActionListener(controleur) ;
 		regles.addActionListener(controleur) ;

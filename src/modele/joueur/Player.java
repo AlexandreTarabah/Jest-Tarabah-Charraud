@@ -15,15 +15,14 @@ import java.util.Map.Entry;
  * <li>L'objet joueur qui dis qui joue</li>
  * <li>Un pseudo, qui est demandé en début de partie.</li>
  * <li>un boolean isAThief;</li>
- * * <li>un String stolenCard qui détermine la carte qui va etre volée</li>
- * * <li> boolean HasStolen qui détermine si il a déja volé</li>
- * * <li>un objet jest qui est son jest</li>
+ * <li>un String stolenCard qui détermine la carte qui va etre volée</li>
+ * <li> boolean HasStolen qui détermine si il a déja volé</li>
+ * <li>un objet jest qui est son jest</li>
  * <li>Son nombre de point nbPoint</li>
  * <li>Son nombre de carte dans l'offre nbCardOffer</li>
  * <li> le pseudo de sa victime choiceVictime</li>
  </ul>
- * </p>
- * <p>
+ * 
  * De plus, un Joueur a une offre (list) et une main(list).
  * </p>
  */
@@ -99,17 +98,15 @@ public class Player
 
 
 		g.setVictime(choiceVictime);
-		this.choiceVictime=choiceVictime; // set la victime à mettre à jour visuellement et non dans la séquenciation
-
+		this.choiceVictime=choiceVictime;
 		String stolenCard = choiceCardVictime;
 
 
 		this.jest.jestCards.add(g.listOffer.get(g.getVictime()).get(stolenCard));
-		g.listOffer.get(g.getVictime()).remove(stolenCard);// méthode AddJest() implementé dans Jest.
-
+		g.listOffer.get(g.getVictime()).remove(stolenCard);
 		this.HasStolen=true; 
 
-		if(g.getForMainPlay().get(g.getVictime()).HasStolen==true) { // Dans le cas ou le joueur vole le voleur précédent, on fixe la prochaine victime au joueur qui a l'offre complete. 
+		if(g.getForMainPlay().get(g.getVictime()).HasStolen==true) {
 
 
 			if(g.nbPlayers==3) {
@@ -325,7 +322,6 @@ public class Player
  */
 
 	public String getChoiceVictime() {
-		// TODO Auto-generated method stub
 		return choiceVictime;
 	}
 
@@ -336,7 +332,6 @@ public class Player
 
 
 	public String getChoiceVictimeBot() {
-		// TODO Auto-generated method stub
 		return choiceVictimeBot;
 	}
 

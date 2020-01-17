@@ -13,10 +13,21 @@ import modele.carte.*;
 import modele.joueur.*;
 import modele.game.Game;
 
+/**
+ * Cette classe représente le plateau : C'est la que se déroule une partie.
+ * Le plateau implemente Observer : C'est lui qui observe le déroulement du jeu 
+ * Le plateau contient : 
+ * <ul>
+ * <li> sa partie game </li>
+ * <li> Son controleur </li>
+ * <li> Sa frame </li>
+ * <li> son DrawDeck</li>
+ * <li> Une arrayList de PlayerPanel </li>
+ *</ul>
+ * 
+ *
+ */
 public class Plateau extends JPanel implements Observer{
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
 
 	private Game game;
@@ -26,7 +37,11 @@ public class Plateau extends JPanel implements Observer{
 	private DrawDeckPanel deck;
 	private ArrayList<PlayerPanel> pp = new ArrayList<PlayerPanel>();
 
-
+/**
+ * Le constructeur du Plateau qui initialise la fenetre du plateau 
+ * @param p
+ * @param c
+ */
 	public Plateau(Game p, Controleur c){
 		super();
 
@@ -44,12 +59,13 @@ public class Plateau extends JPanel implements Observer{
 		this.frame.setContentPane(this);
 
 	}
-
-
-	public void afficherPiles(){
-		this.deck = new DrawDeckPanel();
-		this.frame.setContentPane(this);
-	}
+	
+	/**
+	 * Méthode qui permet d'afficher les joueurs sur le plateau 
+	 * En fonction du nombre du joueur, on place les playerPanel sur l'écran 
+	 *
+	 * @param nbrJoueurs
+	 */
 
 	public void afficherJoueurs(int nbrJoueurs){
 		ListIterator<Player> iJoueurs = game.players.listIterator();
@@ -77,7 +93,12 @@ public class Plateau extends JPanel implements Observer{
 		this.frame.setContentPane(this);
 	}
 
-
+/**
+ * Cette Méthode permet d'afficher les Cartes du joueur : 
+ * On fait correspondre le playerPanel avec le bon joueur et on affiche les cartes qu'ils possèdent dans sa main 
+ * Pour cela, on utilise la méthode prendreCarte @see {@link PlayerPanel#prendreCarte(Image)} et verifierCarte @see {@link Plateau#verifierCarte(Card)}
+ * @param joueur
+ */
 	public void afficherCartes(Player joueur){
 		ListIterator<PlayerPanel> iPj = this.pp.listIterator();
 		while (iPj.hasNext()){
@@ -92,7 +113,13 @@ public class Plateau extends JPanel implements Observer{
 		}
 	}
 
-
+/**
+ * Cette méthode permet d'associer une carte de la main du joueur a une image du drawdeck, selon les valeurs de la carte
+ * On retourne ensuite l'image correspondante à la carte rentrée en paramètre 
+ * Cette méthode est utilisée pour @see {@link Plateau#afficherCartes(Player)}
+ * @param c
+ * @return
+ */
 	public Image verifierCarte(Card c){
 
 		Image carte = null;
@@ -190,7 +217,15 @@ public class Plateau extends JPanel implements Observer{
 	}
 
 
-
+/**
+ * Cette méthode permet d'actualiser la main du joueur qui se fait volé
+ * En fonction des paramètres rentrés, on retire du jeu (Cartes affichés a l'écran) la carte correspondant au choix du joueur qui vole la carte.
+ * Cette méthode est séparée en deux, selon si le @param joueur est un joueur réél ou un bot, car la variable choice est différente selon les objets.
+ * @param joueur
+ * @param choiceCardVictime
+ * @param choiceVictime
+ * @param g
+ */
 
 	public void actualiserStealCards(Player joueur, String choiceCardVictime,String choiceVictime,Game g) {
 		
@@ -232,7 +267,13 @@ public class Plateau extends JPanel implements Observer{
 		}
 	}
 
-
+/**
+ * Cette méthode permet de retourner sur l'écran la carte choisie par le joueur : 
+ * Pour cela, en fonction du paramètre @param reponseUD, on remplace la carte choisie par une image de Dos de carte. 
+ * Si le @param joueur est un bot, alors on retourne la premiere carte car le bot choisie toujours la première carte à retourner
+ * @param joueur
+ * @param reponseUD
+ */
 	public void actualiserUpsideDown(Player joueur, int reponseUD) {
 		if(joueur instanceof BotDown || joueur instanceof BotHard ) {
 			ListIterator<PlayerPanel> iPj = this.pp.listIterator();
@@ -245,7 +286,6 @@ public class Plateau extends JPanel implements Observer{
 						this.repaint();
 						j.getJeu().add(ImageIO.read(new File("img/Dos.jpg")));
 					} catch (IOException e) {
-						// TODO Auto-generated catch block
 						e.printStackTrace();
 					}
 					this.revalidate();
@@ -265,7 +305,6 @@ public class Plateau extends JPanel implements Observer{
 						this.repaint();
 						j.getJeu().add(ImageIO.read(new File("img/Dos.jpg")));
 					} catch (IOException e) {
-						// TODO Auto-generated catch block
 						e.printStackTrace();
 					}
 					this.revalidate();
@@ -278,7 +317,11 @@ public class Plateau extends JPanel implements Observer{
 
 
 
-
+/**
+ * Cette méthode permet de réinitialiser l'affichage des cartes sur le plateau 
+ * On itère sur les PlayerPanel, et on vide les liste "jeu" pour qu'elles soient vides
+ * @param joueur
+ */
 
 
 	public void supprimerJeu(Player joueur){
@@ -291,6 +334,11 @@ public class Plateau extends JPanel implements Observer{
 			}
 		}
 	}
+	/**
+	 * Cette méthode permet de mettre à jour le plateau :
+	 * en itérant sur la liste de joueur, on supprime le jeu via la méthode supprimerJeu @see {@link Plateau#supprimerJeu(Player)}
+	 * ainsi que la méthode afficherCartes @see {@link Plateau#afficherCartes(Player)}
+	 */
 
 	public void actualiserPlateau()
 	{
@@ -306,19 +354,24 @@ public class Plateau extends JPanel implements Observer{
 	}
 
 
-
+/**
+ * Cette méthode permet à la fin de la partie de créé la fenêtre des scores et de l'afficher sur l'écran 
+ * 
+ */
 	public void afficherScores()
 	{
 		this.frame.setVisible(false);
 
 		Scores scores = new Scores(this.game);
-		scores.setVisible(true) ;
+		scores.setVisible(true);
 
 
 
 	}
 
-
+/**
+ * permet d'initialiser le fond vert de l'écran 
+ */
 
 	public void paintComponent(Graphics g){
 		try {
@@ -328,7 +381,13 @@ public class Plateau extends JPanel implements Observer{
 			e.printStackTrace();
 		}
 	}
-
+/**
+ * Cette méthode permet d'ouvrir les boites de dialogue pour communiquer avec le joueur : 
+ * On demande de rentrer le nom de la victime puis la carte a volé 
+ * On appelle ensuite le contrôleur pour vérifier les valeurs et la méthode actualiser stealCards pour mettre à jour le plateau 
+ * @param g
+ * @param p
+ */
 	public void stealCards(Game g,Player p) {
 		String choiceVictime = JOptionPane.showInputDialog(null,game.getIsPlaying().getPseudo() + " rentrez le nom de votre victime : ", "Input",JOptionPane.INFORMATION_MESSAGE);
 		Object[] choixList = { "down", "up" };
@@ -339,6 +398,12 @@ public class Plateau extends JPanel implements Observer{
 		
 
 	}
+	
+	/**
+	 * méthode update implémentée dans le pattern Observable/Observer
+	 * en fonction de l'argument rentrée, on appelle la bonne méthode du plateau 
+	 * Si l'argument est "upsideDown", alors on ouvre la boite de dialogue correspondant pour le choix des cartes 
+	 */
 
 	public void update(Observable o, Object arg) {
 
@@ -346,9 +411,7 @@ public class Plateau extends JPanel implements Observer{
 		{
 			this.afficherJoueurs(game.players.size());
 		}
-		if (arg == "piles"){
-			this.afficherPiles();
-		}
+		
 
 
 		if(arg=="upsideDown") {
@@ -366,15 +429,13 @@ public class Plateau extends JPanel implements Observer{
 
 			this.actualiserUpsideDown(game.getIsPlaying(), reponseUD);
 
-			// this.actualiserMain(reponseUD);
-
 		}
 
 		if(arg=="stealCards") {
 
 			this.stealCards(game,game.getIsPlaying());
 		}
-		//hm
+		
 		if(arg=="actualiserStealCards") {
 			this.actualiserStealCards(game.getIsPlaying(),null,game.getIsPlaying().getChoiceVictime(),game);
 		}

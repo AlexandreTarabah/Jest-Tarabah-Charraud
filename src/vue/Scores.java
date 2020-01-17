@@ -9,13 +9,20 @@ import javax.swing.JTable;
 
 import modele.game.Game;
 
-
+/**
+ * Cette classe permet d'afficher les scores à la fin de la partie 
+ * 
+ *
+ */
 public class Scores extends JFrame {
-	/**
-	 * 
-	 */
+
+	
 	private static final long serialVersionUID = 1L;
 
+	/**
+	 * Constructeur qui permet de créé la fenetre des scores d'afficher une nouvelle table des scores 
+	 * @param g
+	 */
 	public Scores(Game g) {
 		super();
 

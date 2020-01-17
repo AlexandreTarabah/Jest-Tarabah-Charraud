@@ -83,14 +83,14 @@ public class Jest {
 		if (trophy instanceof TrophyHighest) 
 		{
 			trophy.visitJest(this, trophy.getColor());
-			// TODO Auto-generated catch block
+			
 
 		}
 
 		else if (trophy instanceof TrophyLowest) 
 		{
 			trophy.visitJest(this, trophy.getColor());
-			// TODO Auto-generated catch block
+			
 
 		}
 
@@ -98,7 +98,7 @@ public class Jest {
 		{
 			trophy.visitJest(this, trophy.getValue());
 			trophy.bigColor(this, trophy.getValue());
-			// TODO Auto-generated catch block
+		
 		}
 
 		else if (trophy instanceof TrophyBestJest) 
@@ -106,7 +106,7 @@ public class Jest {
 			trophy.visitJest(this);
 			trophy.bigColor(this);
 			trophy.bigValue(this);
-			// TODO Auto-generated catch block
+			
 		}
 
 		else if (trophy instanceof TrophyBestJestNoJoke) 
@@ -114,13 +114,12 @@ public class Jest {
 			trophy.visitJest(this);
 			trophy.bigColor(this);
 			trophy.bigValue(this);
-			// TODO Auto-generated catch block
 		}
 
 		else if (trophy instanceof TrophyJoker) 
 		{
 			trophy.visitJest(this);
-			// TODO Auto-generated catch block
+			
 		}
 
 	}
@@ -158,7 +157,6 @@ public class Jest {
 			while(itr.hasNext()) 
 			{ 
 				Entry<Integer, Integer> entry = itr.next();
-				// parcourrons la map (contient un joueur) qui est candidat au trophy
 				Iterator<Entry<Player, Entry<Integer, Integer>>> itrP = majPlayer.entrySet().iterator();
 
 				while(itrP.hasNext())
@@ -322,7 +320,6 @@ public class Jest {
 		{
 			Entry<Player, Integer> entry = itr.next();
 			Entry<Player, Integer> entry1 = itr1.next();
-			// parcourrons la map (contient un joueur) qui est candidat au trophy
 			Iterator<Entry<Player, Entry<Player, Integer>>> itrV = bestJestValue.entrySet().iterator();
 			Iterator<Entry<Player, Entry<Player, Integer>>> itrC = bestJestColor.entrySet().iterator();
 

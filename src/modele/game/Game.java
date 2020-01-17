@@ -75,7 +75,11 @@ public class Game extends Observable implements Runnable {
 
 
 	public ArrayList<Player> players = new ArrayList<Player>();
+<<<<<<< HEAD
 
+=======
+	
+>>>>>>> branch 'master' of https://github.com/AlexandreTarabah/Jest-Tarabah-Charraud
 	public ArrayList<String> scoresTransition = new ArrayList<String>();
 
 	private ArrayList<Observer> listObserver = new ArrayList<Observer>();

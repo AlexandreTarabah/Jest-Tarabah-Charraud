@@ -6,17 +6,27 @@ import java.io.IOException ;
 
 import javax.imageio.ImageIO ;
 import javax.swing.JPanel ;
-
+/**
+ *Cette classe représente le contenu du menu d'acceuil 
+ *Cette classe permet principalement de définir le contenu du menu d'acceuil 
+ * 
+ *
+ *
+ */
 public class HomePanel extends JPanel{
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
-
+/**
+ * le constructeur du menu qui hérite de JPanel 
+ */
 	public HomePanel(){
 		super();
 	}
 	
+	
+	/**
+	 * Méthode paintComponent qui permet de peindre le panel, mettre a jour les images, les textes etc.. 
+	 * @param g 
+	 */
 	public void paintComponent(Graphics g){
 	    try {
 	      Image img = ImageIO.read(new File("img/JEST_Home.png"));

@@ -9,14 +9,23 @@ import java.io.IOException;
 import javax.imageio.ImageIO;
 import javax.swing.JPanel;
 
+/**
+ * 
+ * Classe représentant le panel associé a la classe Parametres 
+ *
+ */
 public class ParametresPanel extends JPanel{
 
 	private static final long serialVersionUID = 1L;
-
+/**
+ * Le constructeur de la classe héritant de JPanel
+ */
 	public ParametresPanel(){
 		super();
 	}
-
+/**
+ * Méthode qui permet de mettre a jour le fond de la fenetre avec fond-vert, et les auteurs
+ */
 	public void paintComponent(Graphics g){
 		try {
 			Image img = ImageIO.read(new File("img/fond-grunge-vert.jpg"));

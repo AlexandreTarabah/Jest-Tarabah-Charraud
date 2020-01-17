@@ -14,8 +14,18 @@ import vue.Parametres;
 import vue.Plateau;
 import vue.Regles;
 
+/**
+ * Classe controleur qui fait du pattern MVC (modele-vue-controleur)
+ * Cette classe contient : 
+ * <ul>
+ * <li> Sa partie game </li>
+ * <li> son menu home </li>
+ * <li> ses parametres </li>
+ * <li> ses regles </li>
+ * <li> son plateau </li>
+ * </ul>
+ */
 
-/* On implŽmente ActionListener qui permet de traiter les ŽvŽnements du bouton */
  public class Controleur implements ActionListener {
 
 	 private Game game;
@@ -24,6 +34,9 @@ import vue.Regles;
 	 private Regles regles;
 	 private Plateau plateau;
 
+	 /**
+	  * Le constructeur qui met a null tous les composants 
+	  */
 	 public Controleur() {
 		 game = null;
 		 home = null;
@@ -32,12 +45,18 @@ import vue.Regles;
 		 plateau = null;
 	 }
 
-	 /* Permettra de connaitre le modŽle */
+	
 	 public void setModele(Game game) {
 		 this.game = game ;
 	 }
 
-	 /* Permettra de connaitre la vue */
+	 /**
+	  * Met à jour la vue en fonction des paramètres (home, parametres, regles et plateau) 
+	  * @param home
+	  * @param p
+	  * @param r
+	  * @param pl
+	  */
 	 public void setVue(Home home, Parametres p, Regles r, Plateau pl) {
 		 this.home = home ;
 		 this.parametres = p;
@@ -45,7 +64,12 @@ import vue.Regles;
 		 this.plateau = pl;
 	 }
 	 
-	 /* C'est ici que l'on traite l'action rŽcupŽrŽ : implŽmentation due ˆ l'interface ActionListener */
+	 /**
+	  * C'est ici qu'on traite l'action sur les composants de la fenetre : 
+	  * en fonction de ActionCommand, on active ou désactive des fenetres sur l'écran
+	  * Quand l'action commande est "jouer" on ouvre des boites de dialogues si les valeurs rentrées sont pas correctes
+	  * Si tout est validé, on lance le thread 
+	  */
 	 public void actionPerformed(ActionEvent e) {
 		 if (e.getActionCommand() == "nouvellegame"){
 			 parametres.setVisible(true);
@@ -88,7 +112,11 @@ import vue.Regles;
 	 }
 
 	
-	
+	/**
+	 * Cette méthode permet d'appeler la méthode upsideDown du joueur si les valeurs sont vérifiées 
+	 * @param reponseUD
+	 * @param player
+	 */
 
 	public void methodecontrolupsideDown( int reponseUD,  Player player) {
 		player.upsideDown(reponseUD, game);
@@ -97,7 +125,15 @@ import vue.Regles;
 
 
 
-
+/**
+ * Cette méthode effectue toute la vérification des valeurs rentrées pour stealCards.
+ * Si les choix ne sont pas corrects (Main incomplète, ou victime = null, ou la victime n'existe pas) 
+ * On appelle ensuite la méthode stealCards pour du joueur avec les paramètres vérifiés 
+ * @param choiceVictime correspond au choix de la victime
+ * @param choiceCardVictime correspond au choix de la carte a volé ("up", "down")
+ * @param p le joueur
+ * @param g la partie 
+ */
 
 	public void methodeStealCard(String choiceVictime, String choiceCardVictime,Player p,Game g) {
 	
