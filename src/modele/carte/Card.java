@@ -1,14 +1,16 @@
 package modele.carte;
 
-
-//carotte
+/**
+ * Cette classe correspond à une carte, elle permet de générer une carte en fonction de sa Value et de sa Couleur.
+ * De plus, Elle instancie pour chaque carte son trophée 
+ * 
+ * Elle est liée au enum Color et Value
+ */
 
 public class Card 
 {
 
-	private boolean ace;
-
-	private boolean faceUp;
+	
 
 	Color color ;
 
@@ -18,11 +20,21 @@ public class Card
 
 	public Trophy trophy ;
 	
+	/**
+	 * Le constructeur sans paramètres 
+	 */
+	
 	public Card()
 	{
 		
 	}
 
+	/**
+	 * Le constructeur avec paramètres : 
+	 * @param value qui correspond à la valeur de la carte 
+	 * @param color qui correspond à la couleur de la carte 7
+	 * En fonction des paramètres on instancie la bonne carte et son trophée
+	 */
 
 	public Card (Value value, Color color) {
 		this.color=color;

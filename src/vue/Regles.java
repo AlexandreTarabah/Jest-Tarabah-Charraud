@@ -8,18 +8,26 @@ import javax.swing.*;
 import javax.swing.text.rtf.RTFEditorKit;
 
 import controleur.Controleur;
-
+/**
+ * Cette classe représente les regles, elle contient principalement le document rtf des règles du JEST 
+ * Elle contient : 
+ * <ul>
+ * <li>Un bouton retour </li>
+ * <li> la frame </li>
+ *</ul>
+ *
+ */
 public class Regles extends JPanel{
-
-	/**
-	 * 
-	 */
+	
 	private static final long serialVersionUID = 1L;
 	
 	private JButton retour;
 	private JFrame frame;
 	private Font font = new Font("Courier", Font.BOLD, 15);
 	
+	/**
+	 * Constructeur qui permet de mettre à jour le titre de la frame, la taille, les boutons et le document RTF qui s'affiche 
+	 */
 	public Regles(){
 		super();
 		this.frame = new JFrame();

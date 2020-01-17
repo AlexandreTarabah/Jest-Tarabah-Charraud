@@ -47,9 +47,7 @@ public class Game extends Observable implements Runnable {
 
 
 	public ArrayList<Player> players = new ArrayList<Player>();
-
-	public ArrayList<String> upsideChoice = new ArrayList<String>() ; 
-
+	
 	public ArrayList<String> scoresTransition = new ArrayList<String>();
 
 	private ArrayList<Observer> listObserver = new ArrayList<Observer>();
@@ -568,10 +566,6 @@ public class Game extends Observable implements Runnable {
 	}
 
 
-	public ArrayList<String> getUpsideChoice() {
-		// TODO Auto-generated method stub
-		return upsideChoice;
-	}
 	public int getNbCardOffer() {
 		return nbCardOffer;
 	}

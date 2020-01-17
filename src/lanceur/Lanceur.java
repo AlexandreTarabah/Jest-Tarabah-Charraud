@@ -8,7 +8,21 @@ import vue.Parametres;
 import vue.Plateau;
 import vue.Regles;
 
-
+/**
+ *Cette classe regroupe le "lanceur" : c'est ici qu'on lance la partie :  
+ *Cette classe permet d'instancier et de mettre sur écoute tous les composants principaux des fenetres graphiques à savoir : 
+ *<ul>
+ *<li> controleur </li>
+ *<li> game </li>
+ *<li> home </li>
+ *<li> regle </li>
+ *<li> parametres </li>
+ *<li> plateau </li>
+ *</ul>
+ *
+ *On met ensuite sur écoute tous les composants grâce a la méthode .setListener
+ *
+ */
 public class Lanceur {
 	public static void main(String[] args) {
 		try {

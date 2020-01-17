@@ -1,5 +1,10 @@
 package modele.carte;
-
+/**
+ * Cette énumération correspond aux valeurs possibles des cartes : 
+ * A chaque valeur, on associe un string (sa valeur en chaine de caractère) et sa valeur en int 
+ * 
+ *
+ */
 public enum Value {
 	
 	un("un",1),
@@ -14,7 +19,11 @@ public enum Value {
 	private String str =" ";
 	private int cardValue;
 	
-	//constructeur 
+	/**
+	 * constructeur qui associe la bonne valeur et le string correspondant
+	 * @param str
+	 * @param value
+	 */
 	Value(String str, int value){
 		this.str=str;
 		this.cardValue=value;

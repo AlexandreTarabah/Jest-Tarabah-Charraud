@@ -26,8 +26,7 @@ public class TrophyMajority extends Trophy
 	{
 		int majority = 0 ;
 
-		Iterator<Card> itJC = jest.jestCards.iterator() ; // Entrance dans le
-		// jest du joueur
+		Iterator<Card> itJC = jest.jestCards.iterator(); 
 
 		while(itJC.hasNext())
 		{

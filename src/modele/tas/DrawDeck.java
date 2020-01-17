@@ -66,7 +66,7 @@ public class DrawDeck {
 
 			}
 		}
-		if(g.getExtension()==false) { // Si on joue sans extension, on retire les 6 du jeu
+		if(g.getExtension()==false) {
 			int verif6=6;
 			for(int i=0; i<drawdeck.size();i++) {
 				if(verif6==drawdeck.get(i).getValue().getCardValue())
@@ -88,7 +88,7 @@ public class DrawDeck {
 
 
 /**
- * // ici on collecte les cartes pour les remettre dans le Drawdeck, sauf si DDsize=0, alors on place les cartes dans le jest des joueurs respectifs 
+ * Cette méthode permet de collecter les cartes pour les remettre dans le Drawdeck, sauf si DDsize=0, alors on place les cartes dans le jest des joueurs respectifs 
  * Si l'offre est null pour la clé up alors on add au drawdeck la clé down et vice-versa 
  * @param player
  */
@@ -131,7 +131,6 @@ public class DrawDeck {
  */
 
 	public int getSize() {
-		// TODO Auto-generated method stub
 		return drawdeck.size();
 	}
 

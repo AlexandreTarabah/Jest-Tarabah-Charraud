@@ -30,8 +30,7 @@ public class TrophyLowest extends Trophy
 		
 		int lowestOrdinal = 5 ;
 
-		Iterator<Card> itJC = jest.jestCards.iterator() ; // Entrance dans le
-		// jest du joueur
+		Iterator<Card> itJC = jest.jestCards.iterator();
 
 		while(itJC.hasNext())
 		{

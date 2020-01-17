@@ -37,8 +37,7 @@ public class TrophyHighest extends Trophy
 
 		int highestOrdinal = 0 ;
 
-		Iterator<Card> itJC = jest.jestCards.iterator() ; // Entrance dans le
-		// jest du joueur
+		Iterator<Card> itJC = jest.jestCards.iterator();
 
 		while(itJC.hasNext())
 		{

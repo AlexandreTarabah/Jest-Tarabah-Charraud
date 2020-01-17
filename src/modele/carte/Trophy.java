@@ -51,7 +51,6 @@ public class Trophy
 	public Trophy() 
 	{
 	}
-	// TODO Auto-generated constructor stub
 
 	/**
 	 * Constructeur de Trophy (spécifique à TrophyHighest/Lowest)
@@ -76,9 +75,8 @@ public class Trophy
 	 * @see {@link TrophyBestJest} {@link TrophyBestJestNoJoke} {@link TrophyJoker} 
 	 * @param jest
 	 */
+	
 	public void visitJest(Jest jest) {
-		// TODO Auto-generated method stub
-
 	}
 
 
@@ -90,7 +88,6 @@ public class Trophy
 	 */
 	public void visitJest(Jest jest, Color color) 
 	{
-		// TODO Auto-generated method stub
 	}
 
 	/**Méthode visitJest
@@ -101,7 +98,6 @@ public class Trophy
 	 */
 	public void visitJest(Jest jest, Value value) 
 	{
-		// TODO Auto-generated method stub
 	}
 
 	/**Méthode bigColor
@@ -113,8 +109,7 @@ public class Trophy
 	 */
 	public void bigColor(Jest jest, Value value)
 	{
-		Iterator<Card> itJC = jest.jestCards.iterator() ; // Entrance dans le
-		// jest du joueur
+		Iterator<Card> itJC = jest.jestCards.iterator();
 
 		int bigCoeff = 0 ;
 
@@ -141,8 +136,7 @@ public class Trophy
 	 */
 	public void bigColor(Jest jest)
 	{
-		Iterator<Card> itJC = jest.jestCards.iterator() ; // Entrance dans le
-		// jest du joueur
+		Iterator<Card> itJC = jest.jestCards.iterator() ;
 
 		int bigCoeff = 0 ;
 
@@ -172,8 +166,7 @@ public class Trophy
 	 */
 	public void bigValue(Jest jest)
 	{
-		Iterator<Card> itJC = jest.jestCards.iterator() ; // Entrance dans le
-		// jest du joueur
+		Iterator<Card> itJC = jest.jestCards.iterator();
 
 		int bigValue = 0 ;
 

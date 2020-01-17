@@ -6,11 +6,21 @@ import javax.swing.*;
 
 import controleur.Controleur;
 import modele.game.Game;
+/**
+ * 
+ * Classe représentant la fenètre des paramètres
+ * Cette classe contient : 
+ * <ul>
+ * <li>un bouton de validation</li>
+ * <li> des radiosButton pour les choix a effectué</li>
+ * <li>des ButtonsGroup pour regrouper les boutons sur l'interface </li>
+ * <li>Des panels liés au reste des composants</li>
+ * <li> son panel parametrePanel</li>
+ *</ul>
+ */
 
 public class Parametres extends JFrame{
-	/**
-	 * 
-	 */
+
 	private static final long serialVersionUID = 1L;
 
 	private JButton validation;
@@ -36,7 +46,14 @@ public class Parametres extends JFrame{
 	private JLabel lNbrVirtual;
 	private JLabel lNbrReal;
 	private ParametresPanel parp;
-
+/**
+ * le constructeur, où on met a jour les composants de la fenetre dont : 
+ * <ul>
+ * <li> titre de la fenetre</li>
+ * <li> la taille de la fenetre </li>
+ * <li> les panels associés au choix dans la fenetre </li>
+ * <li> les groupes de boutons et de choix qui sont regroupés pour faciliter l'affichage au sein d'une grille puis réparti sur la fenetre
+ */
 	public Parametres(){
 		super();
 		this.setTitle("Paramètres de jeu");
@@ -172,6 +189,10 @@ public class Parametres extends JFrame{
 
 		this.setContentPane(parp);
 	}
+	/**
+	 * Méthode qui permet de retourner la difficulté en fonction du choix 
+	 * @return difficulty
+	 */
 
 	public int getDifficulte(){
 		int difficulty = 0;
@@ -211,14 +232,17 @@ public class Parametres extends JFrame{
 	}
 
 	public JRadioButton getActive() {
-		// TODO Auto-generated method stub
+		
 		return active;
 	}
 	
 	public JRadioButton getInactive() {
-		// TODO Auto-generated method stub
+		
 		return inactive;
 	}
+	/** 
+	 * @return le boolean extension 
+	 */
 
 	public boolean getExtension(){
 		boolean extension = false ;
