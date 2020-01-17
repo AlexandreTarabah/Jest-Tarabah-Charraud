@@ -13,7 +13,6 @@ import modele.joueur.Player;
  * <li> Son card panel pour afficher ses cartes </li>
  * <li> Son jeu, une arrayList d'image </li>
  * </ul>
- * 
  */
 public class PlayerPanel extends JPanel{
 

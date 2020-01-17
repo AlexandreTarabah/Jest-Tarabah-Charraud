@@ -16,7 +16,6 @@ import controleur.Controleur;
  * <li> un bouton regles </li>
  * <li> un bouton quitter </li>
  * </ul>
- * 
  *
  *
  */

@@ -13,7 +13,6 @@ public class TrophyJoker extends Trophy {
 	 * Constructeur de TrophyJoker
 	 */
 	public TrophyJoker() {
-		// TODO Auto-generated constructor stub
 	}
 
 	/**

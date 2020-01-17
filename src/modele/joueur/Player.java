@@ -9,7 +9,7 @@ import java.util.Map.Entry;
 
 /**
  * <b>Player est la classe représentant un joueur de la partie de JEST.</b>
- * <p>
+ * 
  * Un joueur est caractérisé par les informations suivantes :
  * <ul>
  * <li>L'objet joueur qui dis qui joue</li>
@@ -24,7 +24,7 @@ import java.util.Map.Entry;
  </ul>
  * 
  * De plus, un Joueur a une offre (list) et une main(list).
- * </p>
+ * 
  */
 
 public class Player 

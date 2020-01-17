@@ -44,10 +44,11 @@ public class BotHard extends Player implements Difficulty {
 	}
 	/**
 	 * Méthode upsideDown 
+	 *  Cette méthode permet de retourner une carte dans la main du Bot 
+	 * Ainsi, on définit son offre
 	 * @param choice
 	 * @param g 
-	 * Cette méthode permet de retourner une carte dans la main du Bot 
-	 * Ainsi, on définit son offre 
+	 * 
 	 */
 	
 	@Override
@@ -74,13 +75,14 @@ public class BotHard extends Player implements Difficulty {
 
 	/**
 	 * Méthode stealCard qui permet au Bot de choisir une Carte 
+	 * En fonction du nombre de joueur dans le jeu, on fait tourner un algorithme qui détermine le bon joueur à volé selon les règles.
+	 * On change l'attribut victime @see Game#setVictime() selon le choix déterminé 
+	 * On définit ensuite le pseudo de la prochaine victime en fonction du nombre de joueur :
 	 * @param choiceVictime
 	 * @param choiceCardVictime
 	 * @param g
 	 * 
-	 * En fonction du nombre de joueur dans le jeu, on fait tourner un algorithme qui détermine le bon joueur à volé selon les règles.
-	 * On change l'attribut victime @see Game#setVictime() selon le choix déterminé 
-	 * On définit ensuite le pseudo de la prochaine victime en fonction du nombre de joueur :
+	 * 
 	 * 
 	 */
 

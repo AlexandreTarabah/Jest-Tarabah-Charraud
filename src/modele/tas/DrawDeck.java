@@ -14,7 +14,7 @@ import modele.game.Game;
  * <li> son nombre de carte interne (sa taille) </li>
  * </ul>
  * il comporte une liste de carte drawdeck @see Drawdeck#drawdeck
- * @author zorro
+ * 
  *
  */
 
