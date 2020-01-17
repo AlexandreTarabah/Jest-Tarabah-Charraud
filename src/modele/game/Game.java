@@ -23,6 +23,36 @@ import java.util.Observable;
 import java.util.Observer;
 
 
+/**
+ * <p>
+ * La classe Game représente la partie. En cela, elle est composée de joueurs (réels ou virtuels), de leurs 
+ * cartes respectives, d'un drawDeck et de trophées. Ses méthodes lui permettent de séquencier le jeu correctement.
+ * @see {@link Game#run()}
+ * </p>
+ * Elle est caractérisée par : 
+ * <ul>
+ * <li> nbPlayers, le nombre de joueurs réels et virtuels dans cette partie </li>
+ * <li> nbBots, le nombre de joueurs virtuels dans cette partie </li>
+ * <li> nbRealPlayers, le nombre de joueurs réels dans cette partie </li>
+ * <li> difficulty, égale à 1 si "facile" 2 si "difficile </li>
+ * <li> nbCardOffer, comptabilisant le nombre de cartes total faisant partie d'une offre </li>
+ * <li> currentPlay, booléen vrai lorsque la partie a été initialisée, autorisant la distribution des cartes </li>
+ * <li> extension, booléen vrai lorsque l'on veut jouer avec l'extension </li>
+ * <li> variante, booléen vrai lorsque l'on veut jouer avec la variante </li>
+ * <li> victime, un string prenant le pseudo de la "victime" ou le joueur dérobé</li>
+ * <li> isPlaying, un attrbut de type Player instancié comme le joueur étant en train de jouer </li>
+ * <li> trophyCards, un tableau de cartees contenant les cartes désignées comme Trophy pour la partie en cours </li>
+ * <li> drawDeck, instancié comme un attribut DrawDeck représentant le drawDeck de la partie </li>
+ * <li> scores, un tableau de deux dimensions prenant le pseudo (en colonne 1) 
+ * et le nombre de points (en colonne 2) du joueur </li>
+ * <li> players, une ArrayList des joueurs de la partie </li>
+ * <li> scoresTransition, ArrayList contenant succesivement un pseudo de joueur et son nombre de 
+ * points (casté en string) </li>
+ * <li> lisOffer, une HashMap contenant le pseudo du joueur et son offre associée </li>
+ * <li> winner, une HashMap contenant les pseudos et les nombres de points des Joueurs en fin de partie </li>
+ * <li> ForMainPlay, une HashMap contenant les pseudos des joueurs et les joueurs </li>
+ * </ul>
+ */
 public class Game extends Observable implements Runnable {
 
 
@@ -35,25 +65,20 @@ public class Game extends Observable implements Runnable {
 	public boolean extension = false;
 	boolean variante = false;
 
-
-	private String[] tabPseudo;
 	private  String victime;
 
 
 	private Player isPlaying;
 	Card[] trophyCards = new Card[2] ;
 	private DrawDeck drawdeck;
-	public Object [][] scores ;
+	public Object [][] scores;
 
 
 	public ArrayList<Player> players = new ArrayList<Player>();
 
-	public ArrayList<String> upsideChoice = new ArrayList<String>() ; 
-
 	public ArrayList<String> scoresTransition = new ArrayList<String>();
 
 	private ArrayList<Observer> listObserver = new ArrayList<Observer>();
-
 
 	public  HashMap<String, HashMap<String, Card>> listOffer= new HashMap<>();
 
@@ -63,10 +88,16 @@ public class Game extends Observable implements Runnable {
 
 	// La c'est la distribution des cartes, ou finalement j'invoque la méthode takecards et donc le joueur prend 2 cartes, et créé son offer
 
+	/**
+	 * Constructeur de Game
+	 */
 	public Game() {
 
 	}
 
+	/**
+	 * permet de distribuer les cartes aux joueurs (2 par joueurs)
+	 */
 	public void distribute() {
 
 		this.currentPlay=true;
@@ -93,6 +124,10 @@ public class Game extends Observable implements Runnable {
 	}
 
 
+	/**
+	 * choisit aléatoirement deux cartes de la partie pour trophées (sauf si on choisit de jouer à 3 avec l'extension)
+	 * @param g
+	 */
 	public void createTrophies(Game g) { // On instancie les trophées a partir du DrawDeckn en fonction des parametres 
 
 		if(extension==false) 
@@ -120,6 +155,9 @@ public class Game extends Observable implements Runnable {
 	}
 
 
+	/**
+	 * ramsse les cartes restantes, non volées, et les place dans le drawdeck
+	 */
 	public void mainCollectCards()
 	{
 		for(int i=0; i <players.size();i++)
@@ -129,7 +167,14 @@ public class Game extends Observable implements Runnable {
 	}
 
 
-	public String determinateFirstPlayer() { // Code  pour comparer dans countJest, dans cette méthode, et dans stealCards
+	/**
+	 * Détermine le joueur commencant le tour.
+	 * On part du principe que dans le cas général le joueur volé devient victime. Ainsi, le statut de 
+	 * "victime" est transmis de joueurs en joueurs se volant les uns les autres.
+	 * De ce fait, on initialise le premier joueur en tant que victime.
+	 * @return victime qui prend ici le pseudo du joueur commencant le tour 
+	 */
+	public String determinateFirstPlayer() { 
 		int highestCardValue = 0;
 		int highestColorValue = 0;
 		for (Iterator<Player> it = this.players.iterator(); it.hasNext();) 
@@ -151,9 +196,6 @@ public class Game extends Observable implements Runnable {
 				}
 
 			}
-
-
-
 		}
 
 		return victime;
@@ -161,6 +203,14 @@ public class Game extends Observable implements Runnable {
 
 
 
+	/**
+	 * comme son nom l'indique la méthode initialise les paramètres essentiels de la partie
+	 * @param d
+	 * @param nb
+	 * @param nrp
+	 * @param v
+	 * @param e
+	 */
 	public void reglerParametres(int d, int nb, int nrp, boolean v, boolean e){
 		this.difficulty = d;
 		this.nbBots = nb;
@@ -174,6 +224,10 @@ public class Game extends Observable implements Runnable {
 	}
 
 
+	/**
+	 * comme son nom l'indique la méthode demande au joueur de choisir le nombre de joueurs virtuels et reels et cela
+	 * via des boîtes de dialogue (JOptionPane)
+	 */
 	public void determinerNombreJoueurs(){
 		if (this.difficulty==1) {
 			for (int i=0;i<this.nbBots;i++){
@@ -200,6 +254,12 @@ public class Game extends Observable implements Runnable {
 	}
 
 
+	/**
+	 * détermine le joueur ayant le nombre de points le plus élevé de la partie et son
+	 * nombre de points
+	 * @return maxValueInMap soit une entrée contenant le joueur ayant le nombre de points le plus élevé de la partie et son
+	 * nombre de points
+	 */
 	public Integer winnerDetermination() {
 
 		int maxValueInMap=(Collections.max(winner.values()));  // retourne la valeur max de la hashmap winner
@@ -216,11 +276,18 @@ public class Game extends Observable implements Runnable {
 
 
 
+	/**
+	 * séquencie tous les tours de la partie en appelant succesivement : 
+	 * <ul>
+	 * <li>{@link Game#distribute()}</li>
+	 * <li>{@link Game#upsideDown()}</li>
+	 * <li>{@link Game#determinateFirstPlayer()}</li>
+	 * <li>{@link Game#mainCollectCards()}</li>
+	 * </ul>
+	 * Régulièrement des notifications sont envoyées au JPanel plateau pour update la view.
+	 */
 	public void playRounds() 
 	{
-		this.notifyObservers("piles");
-
-
 
 		int choice=0;
 		String choiceVictime="";
@@ -229,7 +296,7 @@ public class Game extends Observable implements Runnable {
 
 
 
-		while(this.drawdeck.getSize() != 0) // On repète le processus jusqu'a temps qu'on ait plu de carte
+		while(this.drawdeck.getSize() != 0) // On répète le processus jusqu'a temps qu'on ait plu de carte
 		{
 			this.distribute(); // distribuer les cartes 
 			// UPSIDE DOWN DE CHAQUE JOUEUR		
@@ -287,11 +354,14 @@ public class Game extends Observable implements Runnable {
 			}
 		}
 	}
-//yep
 
 
 
-
+	/**
+	 * Attribue les trophées selon le design pattern visiteur entre jest et trophy.
+	 * Selon les instances filles de Trophy dans le tableau TrophyCards les Trophées sont distribuées
+	 * en respectant les conditions qui sont ^propres à leur type.
+	 */
 	public void giveTrophy() {
 		ArrayList<Player> p = this.players ;
 		Card[] t = this.trophyCards;
@@ -485,6 +555,11 @@ public class Game extends Observable implements Runnable {
 
 
 
+	/**
+	 * Décompte les points des joueurs en respectant les règles (selon version : "Classique" ou "Red power !").
+	 * Suite au décompte on instancie le tableau scores qui sera réutilisé par modele.vue.Scores pour créer la
+	 * JTable affichant les scores.
+	 */
 	public void countPoints() {
 		for (int i = 0 ; i < this.players.size(); i ++)
 		{	
@@ -534,6 +609,19 @@ public class Game extends Observable implements Runnable {
 
 
 
+	/**
+	 * <p>
+	 * Permet de lancer la partie lorsque le thread est lancé par le {@link modele.controleur.Controleur#actionPerformed}.
+	 * </p>
+	 * Appelle successivement :
+	 * <ul>
+	 * <li> {@link Game#createTrophies} </li>
+	 * <li> {@link Game#playRounds} </li>
+	 * <li> {@link Game#giveTrophy} </li>
+	 * <li> {@link Game#countPoints} </li>
+	 * <li> {@link Game#winnerDetermination} </li>
+	 * </ul>
+	 */
 	public void run() {
 
 		this.listOffer = new HashMap<>();
@@ -568,15 +656,9 @@ public class Game extends Observable implements Runnable {
 	}
 
 
-	public ArrayList<String> getUpsideChoice() {
-		// TODO Auto-generated method stub
-		return upsideChoice;
-	}
 	public int getNbCardOffer() {
 		return nbCardOffer;
 	}
-
-
 
 	public  HashMap<String, Integer> getWinner() {
 		// TODO Auto-generated method stub
@@ -607,31 +689,29 @@ public class Game extends Observable implements Runnable {
 
 	}
 
-	public Object[] getTabPseudo() {
-		return tabPseudo;
-	}
-
-	public void setTabPseudo(String[] tabPseudo) {
-		this.tabPseudo = tabPseudo;
-	}
-
 	public HashMap<String, Player> getForMainPlay() {
 		return ForMainPlay;
 	}
 
-
-
-
+	/**
+	 *	Ajoute un observeur à la liste des observateurs de la partie (généralement des JPanel)
+	 */
 	public void addObserver(Observer obs) {
 		this.listObserver.add(obs);
 	}
 
+	/**
+	 *	Notifie un observeur / le met à jour
+	 */
 	public void notifyObservers(Object arg) {
 		for (Observer obs : listObserver){
 			obs.update(this, arg);
 		}
 	}
 
+	/**
+	 *	Supprime un observeur à la liste des observateurs de la partie (généralement des JPanel)
+	 */
 	public void deleteObserver(Observer o) {
 		listObserver.remove(o);
 	}

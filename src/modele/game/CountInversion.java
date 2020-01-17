@@ -11,12 +11,27 @@ import modele.carte.Card;
 import modele.carte.Value;
 import modele.tas.Jest;
 
+/**
+ * La classe CountInversion effectue le décompte selon la variante du jeu inversant le rôle des couleurs de la version
+ * classique plus concrètement :
+ * <ul>
+ * <li> les coeurs prennent le rôle des piques et vice versa </li>
+ * <li> les carreaux prennent le rôle des trèfles et vice versa </li>
+ * </ul>
+ * Cette inversion de rôle est répercutée sur l'intégralité des règles et leurs interactions.
+ */
 public class CountInversion implements Count {
 
+	/**
+	 * Constructeur de CountInversion
+	 */
 	public CountInversion()
 	{
 	}
 
+	/**
+	 * Redéfinition de visitJest. Toutes les règles sont spécifiées au dessus des méthodes de calcul correspondantes.
+	 */
 	public int visitJest(Jest jest)
 	{
 		Integer jestValue = 0 ; 

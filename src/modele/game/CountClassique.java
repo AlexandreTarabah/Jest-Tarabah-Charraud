@@ -11,12 +11,22 @@ import modele.carte.Card;
 import modele.carte.Value;
 import modele.tas.Jest;
 
+/**
+ * La classe CountClassique effectue le décompte selon les règles classiques du jeu.
+ *
+ */
 public class CountClassique implements Count {
 
+	/**
+	 * Constructeur de CountClassique 
+	 */
 	public CountClassique()
 	{
 	}
 
+	/**
+	 * Redéfinition de visitJest. Toutes les règles sont spécifiées au dessus des méthodes de calcul correspondantes.
+	 */
 	public int visitJest(Jest jest)
 	{
 		Integer jestValue = 0 ; 

@@ -36,6 +36,7 @@ public class CardPanel extends JPanel {
  * <li> le jeu qui correspond à la liste rentrée en paramètre </li>
  * <li> l'état de visibilité des cartes a true </li>
  * <li> setOpaque puis setLayout pour un affichage optimal </li>
+ * </ul>
  * @param j
  */
 	public CardPanel(LinkedList<Image> j){

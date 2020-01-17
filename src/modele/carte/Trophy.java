@@ -15,7 +15,7 @@ import modele.tas.Jest;
  * <ul>
  * <li> une Value value pour les Trophy sélectifs sur les valeurs des cartes @see {@link Card#Card()} </li>
  * <li> une Color color instanciée pour les Trophy sélectifs sur les couleurs des cartes @see {@link Card#Card()} </li>
- * <li> un attribut highCandidate associé à TrophyHighest @see {@link TrophHighest} </li>
+ * <li> un attribut highCandidate associé à TrophyHighest @see {@link TrophyHighest} </li>
  * <li> un attribut lowCandidate associé à TrophyLowest @see {@link TrophyLowest} </li>
  * <li> un attribut majCandidate associé à TrophyMajority @see {@link TrophyMajority} </li>
  * <li> un attribut jokerCandidate associé à TrophyJoker @see {@link TrophyJoker} </li>
