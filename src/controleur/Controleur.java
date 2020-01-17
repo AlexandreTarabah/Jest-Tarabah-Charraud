@@ -149,7 +149,7 @@ import vue.Regles;
 			if(nbCardOffer>4) {
 				while(game.listOffer.containsKey(choiceVictime)==false || game.listOffer.get(choiceVictime).size()<2 || choiceVictime==null || game.getIsPlaying().getPseudo().equals(choiceVictime)) {
 					
-					choiceVictime = JOptionPane.showInputDialog(null, "Ce joueur s'est déjà fait dérobé ! ", "Choix incorrect ", JOptionPane.QUESTION_MESSAGE);
+					choiceVictime = JOptionPane.showInputDialog(null,"Choix incorrect", "Choix incorrect ", JOptionPane.QUESTION_MESSAGE);
 									
 				}
 			}
@@ -158,7 +158,7 @@ import vue.Regles;
 					if(nbCardOffer==4) {
 							if(game.getIsPlaying().getOffer().size()==2) {
 							while(game.listOffer.containsKey(choiceVictime)==false || game.listOffer.get(choiceVictime).size()<2 || choiceVictime==null) {
-								choiceVictime = JOptionPane.showInputDialog(null, "Ce joueur s'est déjà fait dérobé ! ", "Choix incorrect ", JOptionPane.QUESTION_MESSAGE);
+								choiceVictime = JOptionPane.showInputDialog(null,"Choix incorrect ", "Choix incorrect ", JOptionPane.QUESTION_MESSAGE);
 								
 							}
 							}else
@@ -166,7 +166,7 @@ import vue.Regles;
 								if(game.getIsPlaying().getOffer().size()<2) {
 								
 									while(game.listOffer.containsKey(choiceVictime)==false || game.listOffer.get(choiceVictime).size()<2 || choiceVictime==null || game.getIsPlaying().getPseudo().equals(choiceVictime)) {
-										choiceVictime = JOptionPane.showInputDialog(null, "Ce joueur s'est déjà fait dérobé ! ", "Choix incorrect ", JOptionPane.QUESTION_MESSAGE);
+										choiceVictime = JOptionPane.showInputDialog(null, "Choix incorrect", "Choix incorrect ", JOptionPane.QUESTION_MESSAGE);
 									
 									}
 								}
