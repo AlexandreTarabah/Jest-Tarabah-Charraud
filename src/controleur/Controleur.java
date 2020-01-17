@@ -13,6 +13,7 @@ import vue.Home;
 import vue.Parametres;
 import vue.Plateau;
 import vue.Regles;
+import musique.SonWav ;
 
 /**
  * Classe controleur qui fait du pattern MVC (modele-vue-controleur)
@@ -105,6 +106,7 @@ import vue.Regles;
 				 plateau.getFrame().setVisible(true);
 				 game.reglerParametres(parametres.getDifficulte(), parametres.getNbrVirtuels(), parametres.getNbrReels(),  parametres.getVariante(),  parametres.getExtension());
 				 Thread manche = new Thread(game);
+				 new SonWav("file/Mozart_12 Variations_In_C_K.265.wav");
 				 manche.start();
 			 }
 		 }
