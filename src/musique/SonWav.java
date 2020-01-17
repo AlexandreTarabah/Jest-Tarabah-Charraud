@@ -2,49 +2,41 @@ package musique ;
 import java.net.*;
 import java.applet.AudioClip;
 
+/**
+ * Cette classe joue un fichier wav donnant au jeu une musique de fond.
+ * SonWav se caractérise par  :
+ * <ul>
+ * <li> AD, un AudioClip </li>
+ * <li> fichierSon, le classpath du fichier wav </li>
+ * </ul>
+ */
+public class SonWav extends java.applet.Applet implements Runnable {
 
-public class SonWav extends java.applet.Applet {
+	private static final long serialVersionUID = 1L;
+	AudioClip AD;
+	String fichierSon ;
 
 	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 1L;
-	public boolean play=true;
-	AudioClip AD;
-
-
-
-	/**************************************************************************************************
-	 * joue un son fichierSon 
+	 * Constructeur de SonWav
+	 * @param fichierSon
 	 */
 	public SonWav(final String fichierSon) {
 
-		try{
-			new Thread(new Runnable() {
 
-				public void run() {
+		this.fichierSon = fichierSon ; 
 
-
-					URL adrFichierSon = getClass().getResource(fichierSon);
-
-					AD = newAudioClip(adrFichierSon);
-					AD.play(); 
-
-
-				}
-
-			}).start();
-
-
-
-			Thread.sleep(5000); //pause pour lire entierement le wav 5 secondes
-		}
-
-		catch(Exception ex) {   
-			System.out.println("Impossible de lire le fichier son !");
-		}
 	}
 
+	/**
+	 * Joue le fichier wav placé dans le package musique
+	 */
+	public void run() {
 
+
+		AD = newAudioClip(getClass().getResource(fichierSon));
+		AD.play(); 
+
+
+	}
 
 }

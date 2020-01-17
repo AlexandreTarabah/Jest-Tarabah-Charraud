@@ -3,6 +3,7 @@ import javax.swing.UIManager;
 
 import controleur.Controleur;
 import modele.game.Game;
+import musique.SonWav;
 import vue.Home;
 import vue.Parametres;
 import vue.Plateau;
@@ -37,7 +38,9 @@ public class Lanceur {
 		Regles regles = new Regles();
 		Parametres parametres = new Parametres();
 		Plateau plateau = new Plateau(game, controleur);
-
+		SonWav musique = new SonWav("mozart.wav") ; 
+		
+		controleur.setMusique(musique);
 		controleur.setModele(game);
 		controleur.setVue(home, parametres, regles, plateau);
 		home.setListener(controleur);
