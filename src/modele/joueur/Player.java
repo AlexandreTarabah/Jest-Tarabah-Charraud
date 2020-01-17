@@ -246,6 +246,10 @@ public class Player
 	public int getNbPoint() {
 		return nbPoint;
 	}
+	
+	public void setNbPoint(int nbPoint) {
+		this.nbPoint=  nbPoint;
+	}
 
 
 

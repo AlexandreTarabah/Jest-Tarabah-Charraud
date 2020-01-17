@@ -6,32 +6,29 @@ import modele.tas.Jest;
 
 
 /**
- * Trophyhighest est une classe fille de Trophy
- * @see Trophy
- * 
- * @author Yosh
- * @version 4.0
- * 
+ * TrophyHighest définit visitJest afin de trouver la carte de plus forte valeur de la couleur spécifiée. 
+ *
  */
-
-
 public class TrophyHighest extends Trophy
 
 
 {
 
 
+	/**
+	 * Constructeur de TrophyHighest
+	 * @param color
+	 */
 	public TrophyHighest(Color color) 
 	{
 		super(color) ;
 	}
 
-	/**
-	 * Redéfinit la méthode visitJest de Trophy
-	 * @see Trophy
-	 * 
-	 * @since 3.0*/
 	
+	/**
+	 * Redéfinition de visitJest @see {@link Trophy#visitJest(Jest)}
+	 * Attribue la carte de plus forte valeur de la couleur spécifiée à l'attribut (Card) highest @see Trophy 
+	 */
 	public void visitJest(Jest jest, Color color)
 	{
 

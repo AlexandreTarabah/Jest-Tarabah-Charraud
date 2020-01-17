@@ -12,7 +12,7 @@ import modele.game.Game;
  * Le Bot est caractérisé par : 
  * <ul>
  * <li> un boolean isBot</li>
- * <li> Un String stolenCard qui peut-etre Up ou Down </i>
+ * <li> Un String stolenCard qui peut-etre Up ou Down </li>
  * </ul>
  * 
  * De plus, BotDown extends la classe Player puisque le Bot est un Joueur avec ses propres méthodes. 
@@ -46,7 +46,6 @@ public class BotHard extends Player implements Difficulty {
 	 * Méthode upsideDown 
 	 * @param choice
 	 * @param g 
-	 * 
 	 * Cette méthode permet de retourner une carte dans la main du Bot 
 	 * Ainsi, on définit son offre 
 	 */

@@ -4,15 +4,22 @@ import java.util.Iterator;
 
 import modele.tas.Jest;
 
+/**
+ * TrophyBestJestNoJoke définit visitJest afin de calculer le total des points du Jest d'un joueur ne possédant pas le Joker 
+ * en se basant sur la valeur de ses cartes. @see {@link modele.game.Game#giveTrophy} 
+ *
+ */
 public class TrophyBestJestNoJoke extends Trophy {
-	public TrophyBestJestNoJoke() {
+	
+	/**
+	 * Constructeur de TrophyBestJestNoJoke
+	 */
+	public TrophyBestJestNoJoke() {}
 
-		// TODO Auto-generated constructor stub
-	}
-
-	public void bestJestNoJoke() {
-	}
-
+	/**
+	 * Redéfinition de visitJest @see {@link Trophy#visitJest(Jest)}
+	 * Attribue la somme des valeurs des cartes dans le jest à l'attribut bestJest @see Trophy 
+	 */
 	public void visitJest(Jest jest) 
 	{
 		int bestJest = 0 ;

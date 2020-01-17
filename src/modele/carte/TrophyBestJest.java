@@ -4,13 +4,23 @@ import java.util.Iterator;
 
 import modele.tas.Jest;
 
+/**
+ * TrophyBestJest définit visitJest afin de calculer le total des points du Jest d'un joueur en se basant sur la valeur de ses cartes.
+ *
+ */
 public class TrophyBestJest extends Trophy {
-	public TrophyBestJest() {
+	
+	/**
+	 * Constructeur de TrophyBestJest
+	 */
+	public TrophyBestJest() {}
 
-		super();
-	}
 
-
+	/**
+	 * Redéfinition de visitJest @see {@link Trophy#visitJest(Jest)}
+	 * Attribue la somme des valeurs des cartes dans le jest à l'attribut bestJest @see Trophy 
+	 *
+	 */
 	public void visitJest(Jest jest) 
 	{
 		int bestJest = 0 ;

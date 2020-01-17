@@ -4,15 +4,22 @@ import java.util.Iterator;
 
 import modele.tas.Jest;
 
+/**
+ * TrophyMajority définit visitJest afin de vérifier si le joker se trouve dans le jest du joueur. 
+ */
 public class TrophyJoker extends Trophy {
 
+	/**
+	 * Constructeur de TrophyJoker
+	 */
 	public TrophyJoker() {
 		// TODO Auto-generated constructor stub
 	}
 
-	public void joker() {
-	}
-
+	/**
+	 * Redéfinition de visitJest @see {@link Trophy#visitJest(Jest)}
+	 * jokeDetecter passe à 1 si le joker se trouve dans le jest du joueur @see Trophy
+	 */
 	public void visitJest(Jest jest) 
 	{
 
@@ -28,7 +35,7 @@ public class TrophyJoker extends Trophy {
 				break ;
 			}
 		}
-		
+
 		super.jokerCandidate = jokeDetecter ;
 	}
 

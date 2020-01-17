@@ -26,29 +26,58 @@ import modele.carte.Trophy;
 import java.util.Map.Entry;
 import java.util.Set;
 
+
 /**
- * Cette classe objectualise le Jest d'un joueur.
- * Les cartes gagnées au cours des manches s'y accumulent dans une liste jestCards.
- * @author Alex, Yosh
- * @version 4.0*/
-
-
+ * <p>
+ * La classe Jest représente comme son nom l'indique le Jest des joueurs qui se concrétise
+ * en une agrégation de cartes codées par une ArrayList<Card>.
+ * </p> 
+ * <p>
+ * La classe fait également partie du  design pattern visiteur avec la classe Trophy @see Trophy. Elle joue le rôle
+ * du visité et possède donc une méthode acceptTrophy adéquate.
+ * @see Jest#acceptTrophy(Trophy) 
+ * Par souci d'"objectualisation" de la méthode main, la classe possède une nuée de méthodes string qui font écho 
+ * à la visite des jests par un trophée et comparent le retour de la visite aux visites précédentes.
+ * Si la comparaison s'avère gagnante pour le jest pour le trophée en jeu elle renvoie des
+ * félicitations (string) au joueur, lui précisant pourquoi il gagne et son jest mis à jour avec le trophée remporté.
+ * @see Jest#winBestJest(Player, Card, Map, Map, Map, Map, Map, Entry)
+ * </p>
+ * <p>
+ * Enfin, la méthode acceptCount lui permet de faire le décompte des points d'un joueur en question donc
+ * de son jest.
+ * @see Jest#acceptCount(Count, Player, Game, int)
+ * </p>
+ * 
+ *
+ */
 public class Jest {
-
-	int bestJest;
 
 	public List<Card> jestCards = new ArrayList<Card>();
 
+	/**
+	 * Constructeur du Jest.
+	 */
 	public Jest() {
 	}
 
 	/**
-	 * Le Jest invite le Trophy d'une trophyCards à déterminer son éligibilité
+	 * Méthode acceptTrophy
+	 * <p>
+	 * "Accepte la visite d'un Trophy", c'est-à-dire qu'elle appelle la méthode visitJest de
+	 * l'instance de Trophy fille en argument. 
+	 * Cette dernière effectuera le calcul attendu déterminant la valeur du Jest du joueur 
+	 * pour un Trophy particulier.
+	 * </p>
+	 * <p>
+	 * Dans certains cas (TrophyMajority, TrophyBestJestNoJoke, TrophyBestJest), il est également 
+	 * appelé les méthodes BigColor et BigValue de Trophy @see {@link Trophy#bigColor(Jest)}, 
+	 * {@link Trophy#bigColor(Jest, modele.carte.Value)}, {@link Trophy#bigValue(Jest)}.
+	 * Ces méthodes permettent de justifier l'attribution des trophées
+	 * lors des situations d'égalité en première approche. (cf règles du Jest)
+	 * </p> 
+	 * @param trophy
 	 * 
-	 * @param trophy 
-	 * 				Le trophy d'une trophyCard
 	 */
-
 	public void acceptTrophy(Trophy trophy) 
 	{
 		if (trophy instanceof TrophyHighest) 
@@ -96,6 +125,15 @@ public class Jest {
 
 	}
 
+	/**Methode winMajority
+	 * appelée dans la méthode giveTrophy @see Game#giveTrophy lors de l'attribution d'un TrophyMajority.
+	 * @param p
+	 * @param t
+	 * @param majCandidates
+	 * @param majPlayer
+	 * @param myEntry
+	 * @return renvoie des félicitations (string) au joueur, lui précisant pourquoi il gagne et son jest mis à jour avec le trophée remporté.
+	 */
 	public String winMajority(Player p, Card t, Map<Integer,Integer> majCandidates, Map<Player,Entry<Integer, Integer>> majPlayer,
 			Map.Entry<Integer,Integer> myEntry)
 	{
@@ -156,6 +194,15 @@ public class Jest {
 		return win ;
 	}
 
+	/**Méthode winHighest
+	 * appelée dans la méthode giveTrophy @see Game#giveTrophy lors de l'attribution d'un TrophyHighest.
+	 * @param p
+	 * @param t
+	 * @param highCandidates
+	 * @param valueComparator
+	 * @param sortedHighCandidates
+	 * @return renvoie des félicitations (string) au joueur, lui précisant pourquoi il gagne et son jest mis à jour avec le trophée remporté.
+	 */
 	public String winHighest(Player p, Card t, Map<Player,Integer> highCandidates, Comparator<Integer> valueComparator,
 			Map<Player, Integer> sortedHighCandidates)
 	{
@@ -194,6 +241,15 @@ public class Jest {
 
 	}
 
+	/** Méthode winLowest
+	 * appelée dans la méthode giveTrophy @see Game#giveTrophy lors de l'attribution d'un TrophyLowest.
+	 * @param p
+	 * @param t
+	 * @param lowCandidates
+	 * @param valueComparator
+	 * @param sortedLowCandidates
+	 * @return renvoie des félicitations (string) au joueur, lui précisant pourquoi il gagne et son jest mis à jour avec le trophée remporté.
+	 */
 	public String winLowest(Player p, Card t, Map<Player,Integer> lowCandidates, Comparator<Integer> valueComparator,
 			Map<Player, Integer> sortedLowCandidates)
 	{
@@ -230,6 +286,19 @@ public class Jest {
 
 	}
 
+	/**Méthode winBestJest
+	 * appelée dans la méthode giveTrophy @see Game#giveTrophy lors de l'attribution d'un TrophyBestJest ou TrophyBestJestNoJoke
+	 * (le joueur possédant le Joker est déterminé en amont dans la méthode giveTrophy @see Game#giveTrophy).
+	 * @param p
+	 * @param t
+	 * @param bestJestCandidates
+	 * @param bestJestCandidates1
+	 * @param bestJestValue
+	 * @param bestJestColor
+	 * @param bestJestPlayer
+	 * @param myEntry
+	 * @return renvoie des félicitations (string) au joueur, lui précisant pourquoi il gagne et son jest mis à jour avec le trophée remporté.
+	 */
 	public String winBestJest(Player p, Card t, Map<Player,Integer> bestJestCandidates, Map<Player, Integer> bestJestCandidates1, 
 			Map<Player,Entry<Player, Integer>> bestJestValue, Map<Player, Entry<Player, Integer>> bestJestColor, Map<Player, Integer> bestJestPlayer, 
 			Entry<Player, Integer> myEntry)
@@ -290,7 +359,7 @@ public class Jest {
 						bestJestPlayer.clear();
 						bestJestPlayer.put(p, jestValue) ;
 					}
-					
+
 					else if(entryV.getValue().getValue() == entry.getValue() && playerOnList != entry.getKey())
 					{
 						if(entryC.getValue().getValue() < entry1.getValue())
@@ -320,6 +389,12 @@ public class Jest {
 
 	}
 
+	/**Méthode winJoker
+	 * appelée dans la méthode giveTrophy @see Game#giveTrophy lors de l'attribution d'un TrophyJoker.
+	 * @param p
+	 * @param t
+	 * @return renvoie des félicitations (string) au joueur, lui précisant pourquoi il gagne et son jest mis à jour avec le trophée remporté.
+	 */
 	public String winJoker(Player p, Card t)
 	{
 		if(t.getTrophy().jokerCandidate == 1)
@@ -342,9 +417,18 @@ public class Jest {
 	}
 
 
+	/**Méthode acceptCount 
+	 * appelée dans la méthode countPoints @see Game#countpoints lors de l'attribution du décompte
+	 * des points en fin de jeu. Ajoute successivement à l'ArrayList scoresTransition le pseudo du joueur puis son
+	 * nombre de points.
+	 * @param count
+	 * @param p
+	 * @param g
+	 * @param i
+	 */
 	public void acceptCount(Count count, Player p, Game g, int i) 
 
-	{ // A revoir avec Strategy ou visitor
+	{ 
 
 		System.out.println("\nJoueur "+ p.getPseudo() + " effectuons le décompte de vos points ! \n"
 				+ "Rappelons les cartes de votre jest : " + p.getJest().jestCards);
