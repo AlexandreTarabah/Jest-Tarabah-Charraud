@@ -86,8 +86,6 @@ public class Game extends Observable implements Runnable {
 
 	public HashMap<String,Player> ForMainPlay = new HashMap<String,Player>() ;
 
-	// La c'est la distribution des cartes, ou finalement j'invoque la méthode takecards et donc le joueur prend 2 cartes, et créé son offer
-
 	/**
 	 * Constructeur de Game
 	 */
@@ -106,7 +104,7 @@ public class Game extends Observable implements Runnable {
 		{		
 
 
-			// Supposons qu'on distribue les cartes une à une
+			
 			{
 				for (Iterator<Player> it = players.iterator(); it.hasNext();) 
 				{
@@ -115,8 +113,7 @@ public class Game extends Observable implements Runnable {
 						p.getHand().add(i, drawdeck.takeCards());
 					}
 					isPlaying=p;
-					; // place une carte en position i dans la
-					// main du joueur (qui est un tableau)
+					; 
 
 				}
 			}
@@ -128,8 +125,7 @@ public class Game extends Observable implements Runnable {
 	 * choisit aléatoirement deux cartes de la partie pour trophées (sauf si on choisit de jouer à 3 avec l'extension)
 	 * @param g
 	 */
-	public void createTrophies(Game g) { // On instancie les trophées a partir du DrawDeckn en fonction des parametres 
-
+	public void createTrophies(Game g) {
 		if(extension==false) 
 		{
 			if(g.nbPlayers==3)
@@ -162,7 +158,7 @@ public class Game extends Observable implements Runnable {
 	{
 		for(int i=0; i <players.size();i++)
 		{
-			drawdeck.collectCards(players.get(i)); // on rebalance les cartes restantes dans le drawdeck.
+			drawdeck.collectCards(players.get(i));
 		}
 	}
 
@@ -262,10 +258,10 @@ public class Game extends Observable implements Runnable {
 	 */
 	public Integer winnerDetermination() {
 
-		int maxValueInMap=(Collections.max(winner.values()));  // retourne la valeur max de la hashmap winner
+		int maxValueInMap=(Collections.max(winner.values()));  
 		for (Entry<String, Integer> entry : winner.entrySet()) {  
 			if (entry.getValue()==maxValueInMap) {
-				maxValueInMap=entry.getValue(); // détermine a quelle clé cela appartient pour afficher le gagnant 
+				maxValueInMap=entry.getValue();
 			}
 
 		}
@@ -296,10 +292,9 @@ public class Game extends Observable implements Runnable {
 
 
 
-		while(this.drawdeck.getSize() != 0) // On répète le processus jusqu'a temps qu'on ait plu de carte
+		while(this.drawdeck.getSize() != 0)
 		{
-			this.distribute(); // distribuer les cartes 
-			// UPSIDE DOWN DE CHAQUE JOUEUR		
+			this.distribute(); 
 			this.notifyObservers("actualiserPlateau");
 			Iterator<Player> it = players.iterator();
 			while(it.hasNext()) {
@@ -330,9 +325,9 @@ public class Game extends Observable implements Runnable {
 
 			for(int j =0; j<nbPlayers;j++) {
 				isPlaying=this.ForMainPlay.get(victime);
-				if(this.ForMainPlay.get(victime) instanceof BotDown || this.ForMainPlay.get(victime) instanceof BotHard) {// le reste suit selon la méthode stealCard(input)
+				if(this.ForMainPlay.get(victime) instanceof BotDown || this.ForMainPlay.get(victime) instanceof BotHard) {
 					this.ForMainPlay.get(victime).stealCard(choiceVictime,choiceStolenCard, this);
-					this.notifyObservers("actualiserStealCards");// Les manip de chaque joueur pendant le tour 
+					this.notifyObservers("actualiserStealCards");
 				}else
 					this.notifyObservers("stealCards");
 			}
@@ -347,7 +342,6 @@ public class Game extends Observable implements Runnable {
 
 			this.mainCollectCards();
 
-			// On ramasse les cartes et on les rebalance dans le jeu pour recommencer 
 			for(int i=0;i<this.nbPlayers;i++) {
 				this.players.get(i).getHand().clear();
 				this.players.get(i).getOffer().clear();
@@ -366,7 +360,7 @@ public class Game extends Observable implements Runnable {
 		ArrayList<Player> p = this.players ;
 		Card[] t = this.trophyCards;
 
-		if(t[0] != null && t[1] != null) { // Si y'a l'extension et 3 joueurs y'a pas de trophées ducoup on passe.
+		if(t[0] != null && t[1] != null) {
 
 			Comparator<Integer> valueComparator = new Comparator<Integer>() {
 				@Override
@@ -375,9 +369,9 @@ public class Game extends Observable implements Runnable {
 				}
 			};
 
-			for(int j = 0 ; j < t.length ; j ++) // parcourt les trophies
+			for(int j = 0 ; j < t.length ; j ++)
 			{
-				if(t[j].getTrophy() instanceof TrophyHighest) // si c'est des trophyHighest
+				if(t[j].getTrophy() instanceof TrophyHighest) 
 				{
 
 					Map<Player,Integer> highCandidates = new HashMap<Player, Integer>();
@@ -385,7 +379,7 @@ public class Game extends Observable implements Runnable {
 					Map<Player, Integer> sortedHighCandidates = new TreeMap<Player, Integer>(mapComparator);
 					String result = "" ;
 
-					for(int i = 0 ; i < p.size() ; i ++) // parcourt les joueurs
+					for(int i = 0 ; i < p.size() ; i ++)
 					{
 						Jest jest = p.get(i).getJest();
 						jest.acceptTrophy(t[j].getTrophy());
@@ -402,7 +396,7 @@ public class Game extends Observable implements Runnable {
 
 				}
 
-				else if(t[j].getTrophy() instanceof TrophyLowest) // si c'est des trophyHighest
+				else if(t[j].getTrophy() instanceof TrophyLowest)
 				{
 
 					Map<Player,Integer> lowCandidates = new HashMap<Player, Integer>();
@@ -410,7 +404,7 @@ public class Game extends Observable implements Runnable {
 					Map<Player, Integer> sortedLowCandidates = new TreeMap<Player, Integer>(mapComparator);
 					String result = "" ;
 
-					for(int i = 0 ; i < p.size() ; i ++) // parcourt les joueurs
+					for(int i = 0 ; i < p.size() ; i ++)
 					{
 						Jest jest = p.get(i).getJest() ;
 						jest.acceptTrophy(t[j].getTrophy()) ;
@@ -427,7 +421,7 @@ public class Game extends Observable implements Runnable {
 
 				}
 
-				else if(t[j].getTrophy() instanceof TrophyMajority) // si c'est des trophyHighest
+				else if(t[j].getTrophy() instanceof TrophyMajority)
 				{
 
 					Map<Integer,Integer> majCandidates = new HashMap<Integer, Integer>();
@@ -436,7 +430,7 @@ public class Game extends Observable implements Runnable {
 					majPlayer.put(players.get(1), myEntry) ;
 					String result = "" ;
 
-					for(int i = 0 ; i < p.size() ; i ++) // parcourt les joueurs
+					for(int i = 0 ; i < p.size() ; i ++)
 					{
 						Jest jest = p.get(i).getJest() ;
 						jest.acceptTrophy(t[j].getTrophy()) ;
@@ -444,14 +438,13 @@ public class Game extends Observable implements Runnable {
 						result = jest.winMajority(p.get(i), t[j], majCandidates, majPlayer, myEntry) ;	
 
 					}
-					// Instruction ci dessous marche car on a qu un seul élément On est sur par la conversion en array de le retouver
 					((Player) majPlayer.keySet().toArray()[0]).getJest().jestCards.add(t[j]);
 
 					System.out.println(result+ " et " + t[j]) ;
 
 				}
 
-				else if(t[j].getTrophy() instanceof TrophyBestJest) // si c'est des trophyHighest
+				else if(t[j].getTrophy() instanceof TrophyBestJest)
 				{
 					Map<Player,Integer> bestJestCandidates = new HashMap<Player, Integer>();
 					Map<Player,Integer> bestJestCandidates1 = new HashMap<Player, Integer>();
@@ -464,7 +457,7 @@ public class Game extends Observable implements Runnable {
 					bestJestPlayer.put(players.get(1), 0);
 					String result = "" ; 
 
-					for(int i = 0 ; i < p.size() ; i ++) // parcourt les joueurs
+					for(int i = 0 ; i < p.size() ; i ++) 
 					{
 						Jest jest = p.get(i).getJest() ;
 						jest.acceptTrophy(t[j].getTrophy()) ;
@@ -475,7 +468,7 @@ public class Game extends Observable implements Runnable {
 					System.out.println(result+ " et " + t[j]) ;
 				}
 
-				else if(t[j].getTrophy() instanceof TrophyBestJestNoJoke) // si c'est des trophyHighest
+				else if(t[j].getTrophy() instanceof TrophyBestJestNoJoke)
 				{
 					Map<Player,Integer> bestJestCandidates = new HashMap<Player, Integer>();
 					Map<Player,Integer> bestJestCandidates1 = new HashMap<Player, Integer>();
@@ -490,7 +483,7 @@ public class Game extends Observable implements Runnable {
 
 					int jokeDetecter = 0 ;
 
-					for(int i = 0 ; i < p.size() ; i ++) // parcourt les joueurs
+					for(int i = 0 ; i < p.size() ; i ++)
 					{
 						Jest jest = p.get(i).getJest() ;
 
@@ -529,7 +522,7 @@ public class Game extends Observable implements Runnable {
 
 				}
 
-				else if(t[j].getTrophy() instanceof TrophyJoker) // si c'est des trophyHighest
+				else if(t[j].getTrophy() instanceof TrophyJoker)
 				{
 					String result = "";
 
@@ -645,13 +638,12 @@ public class Game extends Observable implements Runnable {
 
 
 	public  int getNbPlayers() {
-		// TODO Auto-generated method stub
+		
 		return nbPlayers;
 	}
 
 
 	public boolean getExtension() {
-		// TODO Auto-generated method stub
 		return extension;
 	}
 
@@ -661,18 +653,15 @@ public class Game extends Observable implements Runnable {
 	}
 
 	public  HashMap<String, Integer> getWinner() {
-		// TODO Auto-generated method stub
 		return winner;
 	}
 
 	public  Object[][] getScores() {
-		// TODO Auto-generated method stub
 		return scores;
 	}
 
 
 	public String getVictime() {
-		// TODO Auto-generated method stub
 		return victime;
 	}
 
@@ -703,6 +692,7 @@ public class Game extends Observable implements Runnable {
 	/**
 	 *	Notifie un observeur / le met à jour
 	 */
+	
 	public void notifyObservers(Object arg) {
 		for (Observer obs : listObserver){
 			obs.update(this, arg);
@@ -712,6 +702,7 @@ public class Game extends Observable implements Runnable {
 	/**
 	 *	Supprime un observeur à la liste des observateurs de la partie (généralement des JPanel)
 	 */
+	
 	public void deleteObserver(Observer o) {
 		listObserver.remove(o);
 	}
