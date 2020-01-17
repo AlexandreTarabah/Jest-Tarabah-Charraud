@@ -53,6 +53,7 @@ public class Plateau extends JPanel implements Observer{
 		this.frame.setSize(1500, 1000);
 		this.frame.setLocationRelativeTo(null);               
 		this.frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		this.deck = new DrawDeckPanel();
 
 		this.setLayout(null);
 
@@ -368,6 +369,10 @@ public class Plateau extends JPanel implements Observer{
 
 
 	}
+	
+	public void afficherPiles(){
+		this.frame.setContentPane(this);
+	}
 
 /**
  * permet d'initialiser le fond vert de l'écran 
@@ -450,6 +455,10 @@ public class Plateau extends JPanel implements Observer{
 
 		if(arg=="scores") {
 			this.afficherScores();
+		}
+		
+		if (arg == "piles"){
+			this.afficherPiles();
 		}
 
 

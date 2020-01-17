@@ -40,7 +40,7 @@ public class Lanceur {
 		Plateau plateau = new Plateau(game, controleur);
 		SonWav musique = new SonWav("mozart.wav") ; 
 		
-		controleur.setMusique(musique);
+		controleur.setMusique(musique) ;
 		controleur.setModele(game);
 		controleur.setVue(home, parametres, regles, plateau);
 		home.setListener(controleur);

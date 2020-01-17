@@ -289,7 +289,7 @@ public class Game extends Observable implements Runnable {
 		String choiceVictime="";
 		String choiceStolenCard="";
 
-
+		this.notifyObservers("piles");
 
 
 		while(this.drawdeck.getSize() != 0)
