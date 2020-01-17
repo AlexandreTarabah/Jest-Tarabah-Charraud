@@ -80,7 +80,8 @@ public class Trophy
 	}
 
 
-	/**Méthode visitJest
+	/**
+	 * Méthode visitJest
 	 * définit dans les classes filles TrophyHighest/Lowest
 	 * @see {@link TrophyHighest} {@link TrophyLowest}
 	 * @param jest

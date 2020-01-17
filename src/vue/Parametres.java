@@ -52,7 +52,8 @@ public class Parametres extends JFrame{
  * <li> titre de la fenetre</li>
  * <li> la taille de la fenetre </li>
  * <li> les panels associés au choix dans la fenetre </li>
- * <li> les groupes de boutons et de choix qui sont regroupés pour faciliter l'affichage au sein d'une grille puis réparti sur la fenetre
+ * <li> les groupes de boutons et de choix qui sont regroupés pour faciliter l'affichage au sein d'une grille puis réparti sur la fenetre</li>
+ * </ul>
  */
 	public Parametres(){
 		super();
