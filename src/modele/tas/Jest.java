@@ -30,14 +30,10 @@ import java.util.Set;
 /**
  * <p>
  * La classe Jest représente comme son nom l'indique le Jest des joueurs qui se concrétise
-<<<<<<< HEAD
- * en une agrégation de cartes codées par une ArrayList.
-=======
- * en une agrégation de cartes codées par une ArrayList(Card)
->>>>>>> branch 'master' of https://github.com/AlexandreTarabah/Jest-Tarabah-Charraud
+ * en une agrégation de cartes codées par une ArrayList(Card).
  * </p> 
  * <p>
- * La classe fait également partie du  design pattern visiteur avec la classe Trophy @see Trophy. Elle joue le rôle
+ * La classe fait également partie du  design pattern visiteur avec la classe Trophy @see modele.carte.Trophy . Elle joue le rôle
  * du visité et possède donc une méthode acceptTrophy adéquate.
  * @see Jest#acceptTrophy(Trophy) 
  * Par souci d'"objectualisation" de la méthode main, la classe possède une nuée de méthodes string qui font écho 
